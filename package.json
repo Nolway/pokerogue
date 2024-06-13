@@ -14,6 +14,7 @@
 		"test:silent": "vitest run --silent",
 		"eslint": "eslint --fix .",
 		"eslint-ci": "eslint .",
+		"typecheck": "tsc --noEmit",
 		"docs": "typedoc"
 	},
 	"devDependencies": {
