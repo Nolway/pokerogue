@@ -1,5 +1,6 @@
 import i18next from "i18next";
 import { MoneyFormat } from "#enums/money-format";
+import { EnumType } from "typescript";
 
 export const MissingTextureKey = "__MISSING";
 
@@ -98,27 +99,27 @@ export function randIntRange(min: integer, max: integer): integer {
   return randInt(max - min, min);
 }
 
-export function randItem<T>(items: T[]): T {
+export function randItem<T>(items: T[]): T | undefined {
   return items.length === 1
     ? items[0]
     : items[randInt(items.length)];
 }
 
-export function randSeedItem<T>(items: T[]): T {
+export function randSeedItem<T>(items: T[]): T | undefined {
   return items.length === 1
     ? items[0]
     : Phaser.Math.RND.pick(items);
 }
 
-export function randSeedWeightedItem<T>(items: T[]): T {
+export function randSeedWeightedItem<T>(items: T[]): T | undefined {
   return items.length === 1
     ? items[0]
     : Phaser.Math.RND.weightedPick(items);
 }
 
-export function randSeedEasedWeightedItem<T>(items: T[], easingFunction: string = "Sine.easeIn"): T {
+export function randSeedEasedWeightedItem<T>(items: T[], easingFunction: string = "Sine.easeIn"): T | undefined {
   if (!items.length) {
-    return null;
+    return undefined;
   }
   if (items.length === 1) {
     return items[0];
@@ -172,9 +173,13 @@ export function binToDec(input: string): integer {
   let decimalNum = 0;
 
   for (let i = 0; i < input.length; i++) {
-    binary.push(input[i]);
-    place.push(Math.pow(2, i));
-    decimalNum += place[i] * parseInt(binary[i]);
+    const char = input[i];
+    if (char) {
+      binary.push(char);
+      const newPlace = Math.pow(2, i);
+      place.push();
+      decimalNum += newPlace * parseInt(char);
+    }
   }
 
   return decimalNum;
@@ -266,11 +271,11 @@ export function formatStat(stat: integer, forHp: boolean = false): string {
   return formatLargeNumber(stat, forHp ? 100000 : 1000000);
 }
 
-export function getEnumKeys(enumType): string[] {
+export function getEnumKeys(enumType: Record<number, unknown>): string[] {
   return Object.values(enumType).filter(v => isNaN(parseInt(v.toString()))).map(v => v.toString());
 }
 
-export function getEnumValues(enumType): integer[] {
+export function getEnumValues(enumType: Record<number, unknown>): integer[] {
   return Object.values(enumType).filter(v => !isNaN(parseInt(v.toString()))).map(v => parseInt(v.toString()));
 }
 
@@ -502,7 +507,7 @@ export function deepCopy(values: object): object {
  * @param input - The string to be converted.
  * @returns The converted string with words capitalized and separated by underscores.
  */
-export function reverseValueToKeySetting(input) {
+export function reverseValueToKeySetting(input: string) {
   // Split the input string into an array of words
   const words = input.split(" ");
   // Capitalize the first letter of each word and convert the rest to lowercase
