@@ -1,14 +1,14 @@
 import BattleScene, { bypassLogin } from "../battle-scene";
-import { TextStyle, addTextObject } from "./text";
-import { Mode } from "./ui";
 import * as Utils from "../utils";
-import { addWindow } from "./ui-theme";
-import MessageUiHandler from "./message-ui-handler";
-import { OptionSelectConfig, OptionSelectItem } from "./abstact-option-select-ui-handler";
 import { Tutorial, handleTutorial } from "../tutorial";
 import { updateUserInfo } from "../account";
 import i18next from "../plugins/i18n";
-import {Button} from "#enums/buttons";
+import { TextStyle, addTextObject } from "./text";
+import { Mode } from "./ui";
+import { addWindow } from "./ui-theme";
+import MessageUiHandler from "./message-ui-handler";
+import { OptionSelectConfig, OptionSelectItem } from "./abstact-option-select-ui-handler";
+import { Button } from "#enums/buttons";
 import { GameDataType } from "#enums/game-data-type";
 
 export enum MenuOptions {
@@ -46,10 +46,10 @@ export default class MenuUiHandler extends MessageUiHandler {
   constructor(scene: BattleScene, mode?: Mode) {
     super(scene, mode);
 
-    this.ignoredMenuOptions = !bypassLogin
-      ? [ ]
-      : [ MenuOptions.LOG_OUT ];
-    this.menuOptions = Utils.getEnumKeys(MenuOptions).map(m => parseInt(MenuOptions[m]) as MenuOptions).filter(m => !this.ignoredMenuOptions.includes(m));
+    this.ignoredMenuOptions = !bypassLogin ? [] : [MenuOptions.LOG_OUT];
+    this.menuOptions = Object.keys(MenuOptions)
+      .map((m) => parseInt(MenuOptions[m]) as MenuOptions)
+      .filter((m) => !this.ignoredMenuOptions.includes(m));
   }
 
   setup() {
@@ -57,16 +57,37 @@ export default class MenuUiHandler extends MessageUiHandler {
 
     this.menuContainer = this.scene.add.container(1, -(this.scene.game.canvas.height / 6) + 1);
 
-    this.menuContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.scene.game.canvas.width / 6, this.scene.game.canvas.height / 6), Phaser.Geom.Rectangle.Contains);
+    this.menuContainer.setInteractive(
+      new Phaser.Geom.Rectangle(
+        0,
+        0,
+        this.scene.game.canvas.width / 6,
+        this.scene.game.canvas.height / 6
+      ),
+      Phaser.Geom.Rectangle.Contains
+    );
 
     const menuMessageText = addTextObject(this.scene, 8, 8, "", TextStyle.WINDOW, { maxLines: 2 });
     menuMessageText.setWordWrapWidth(1224);
     menuMessageText.setOrigin(0, 0);
 
-    this.optionSelectText = addTextObject(this.scene, 0, 0, this.menuOptions.map(o => `${i18next.t(`menuUiHandler:${MenuOptions[o]}`)}`).join("\n"), TextStyle.WINDOW, { maxLines: this.menuOptions.length });
+    this.optionSelectText = addTextObject(
+      this.scene,
+      0,
+      0,
+      this.menuOptions.map((o) => `${i18next.t(`menuUiHandler:${MenuOptions[o]}`)}`).join("\n"),
+      TextStyle.WINDOW,
+      { maxLines: this.menuOptions.length }
+    );
     this.optionSelectText.setLineSpacing(12);
 
-    this.menuBg = addWindow(this.scene, (this.scene.game.canvas.width / 6) - (this.optionSelectText.displayWidth + 25), 0, this.optionSelectText.displayWidth + 23, (this.scene.game.canvas.height / 6) - 2);
+    this.menuBg = addWindow(
+      this.scene,
+      this.scene.game.canvas.width / 6 - (this.optionSelectText.displayWidth + 25),
+      0,
+      this.optionSelectText.displayWidth + 23,
+      this.scene.game.canvas.height / 6 - 2
+    );
     this.menuBg.setOrigin(0, 0);
 
     this.optionSelectText.setPositionRelative(this.menuBg, 14, 6);
@@ -93,28 +114,39 @@ export default class MenuUiHandler extends MessageUiHandler {
 
     const manageDataOptions = [];
 
-    const confirmSlot = (message: string, slotFilter: (i: integer) => boolean, callback: (i: integer) => void) => {
+    const confirmSlot = (
+      message: string,
+      slotFilter: (i: integer) => boolean,
+      callback: (i: integer) => void
+    ) => {
       ui.revertMode();
       ui.showText(message, null, () => {
         const config: OptionSelectConfig = {
-          options: new Array(5).fill(null).map((_, i) => i).filter(slotFilter).map(i => {
-            return {
-              label: i18next.t("menuUiHandler:slot", {slotNumber: i+1}),
-              handler: () => {
-                callback(i);
-                ui.revertMode();
-                ui.showText(null, 0);
-                return true;
+          options: new Array(5)
+            .fill(null)
+            .map((_, i) => i)
+            .filter(slotFilter)
+            .map((i) => {
+              return {
+                label: i18next.t("menuUiHandler:slot", { slotNumber: i + 1 }),
+                handler: () => {
+                  callback(i);
+                  ui.revertMode();
+                  ui.showText(null, 0);
+                  return true;
+                }
+              };
+            })
+            .concat([
+              {
+                label: i18next.t("menuUiHandler:cancel"),
+                handler: () => {
+                  ui.revertMode();
+                  ui.showText(null, 0);
+                  return true;
+                }
               }
-            };
-          }).concat([{
-            label: i18next.t("menuUiHandler:cancel"),
-            handler: () => {
-              ui.revertMode();
-              ui.showText(null, 0);
-              return true;
-            }
-          }]),
+            ]),
           xOffset: 98
         };
         ui.setOverlayMode(Mode.MENU_OPTION_SELECT, config);
@@ -125,7 +157,11 @@ export default class MenuUiHandler extends MessageUiHandler {
       manageDataOptions.push({
         label: i18next.t("menuUiHandler:importSession"),
         handler: () => {
-          confirmSlot(i18next.t("menuUiHandler:importSlotSelect"), () => true, slotId => this.scene.gameData.importData(GameDataType.SESSION, slotId));
+          confirmSlot(
+            i18next.t("menuUiHandler:importSlotSelect"),
+            () => true,
+            (slotId) => this.scene.gameData.importData(GameDataType.SESSION, slotId)
+          );
           return true;
         },
         keepOpen: true
@@ -138,15 +174,18 @@ export default class MenuUiHandler extends MessageUiHandler {
         Promise.all(
           new Array(5).fill(null).map((_, i) => {
             const slotId = i;
-            return this.scene.gameData.getSession(slotId).then(data => {
+            return this.scene.gameData.getSession(slotId).then((data) => {
               if (data) {
                 dataSlots.push(slotId);
               }
             });
-          })).then(() => {
-          confirmSlot(i18next.t("menuUiHandler:exportSlotSelect"),
-            i => dataSlots.indexOf(i) > -1,
-            slotId => this.scene.gameData.tryExportData(GameDataType.SESSION, slotId));
+          })
+        ).then(() => {
+          confirmSlot(
+            i18next.t("menuUiHandler:exportSlotSelect"),
+            (i) => dataSlots.indexOf(i) > -1,
+            (slotId) => this.scene.gameData.tryExportData(GameDataType.SESSION, slotId)
+          );
         });
         return true;
       },
@@ -306,13 +345,24 @@ export default class MenuUiHandler extends MessageUiHandler {
           success = true;
           if (this.scene.currentBattle.turn > 1) {
             ui.showText(i18next.t("menuUiHandler:losingProgressionWarning"), null, () => {
-              ui.setOverlayMode(Mode.CONFIRM, () => this.scene.gameData.saveAll(this.scene, true, true, true, true).then(() => this.scene.reset(true)), () => {
-                ui.revertMode();
-                ui.showText(null, 0);
-              }, false, -98);
+              ui.setOverlayMode(
+                Mode.CONFIRM,
+                () =>
+                  this.scene.gameData
+                    .saveAll(this.scene, true, true, true, true)
+                    .then(() => this.scene.reset(true)),
+                () => {
+                  ui.revertMode();
+                  ui.showText(null, 0);
+                },
+                false,
+                -98
+              );
             });
           } else {
-            this.scene.gameData.saveAll(this.scene, true, true, true, true).then(() => this.scene.reset(true));
+            this.scene.gameData
+              .saveAll(this.scene, true, true, true, true)
+              .then(() => this.scene.reset(true));
           }
         } else {
           error = true;
@@ -321,7 +371,7 @@ export default class MenuUiHandler extends MessageUiHandler {
       case MenuOptions.LOG_OUT:
         success = true;
         const doLogout = () => {
-          Utils.apiFetch("account/logout", true).then(res => {
+          Utils.apiFetch("account/logout", true).then((res) => {
             if (!res.ok) {
               console.error(`Log out failed (${res.status}: ${res.statusText})`);
             }
@@ -331,10 +381,16 @@ export default class MenuUiHandler extends MessageUiHandler {
         };
         if (this.scene.currentBattle) {
           ui.showText(i18next.t("menuUiHandler:losingProgressionWarning"), null, () => {
-            ui.setOverlayMode(Mode.CONFIRM, doLogout, () => {
-              ui.revertMode();
-              ui.showText(null, 0);
-            }, false, -98);
+            ui.setOverlayMode(
+              Mode.CONFIRM,
+              doLogout,
+              () => {
+                ui.revertMode();
+                ui.showText(null, 0);
+              },
+              false,
+              -98
+            );
           });
         } else {
           doLogout();
@@ -343,7 +399,7 @@ export default class MenuUiHandler extends MessageUiHandler {
       }
     } else if (button === Button.CANCEL) {
       success = true;
-      ui.revertMode().then(result => {
+      ui.revertMode().then((result) => {
         if (!result) {
           ui.setMode(Mode.MESSAGE);
         }
@@ -376,7 +432,14 @@ export default class MenuUiHandler extends MessageUiHandler {
     return success || error;
   }
 
-  showText(text: string, delay?: number, callback?: Function, callbackDelay?: number, prompt?: boolean, promptDelay?: number): void {
+  showText(
+    text: string,
+    delay?: number,
+    callback?: Function,
+    callbackDelay?: number,
+    prompt?: boolean,
+    promptDelay?: number
+  ): void {
     this.menuMessageBoxContainer.setVisible(!!text);
 
     super.showText(text, delay, callback, callbackDelay, prompt, promptDelay);

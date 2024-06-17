@@ -1,16 +1,16 @@
-import { Mode } from "#app/ui/ui";
 import i18next from "i18next";
 import BattleScene from "../../battle-scene";
 import { hasTouchscreen } from "../../touch-controls";
 import { updateWindowType } from "../../ui/ui-theme";
 import { CandyUpgradeNotificationChangedEvent } from "../../events/battle-scene";
+import { Mode } from "#app/ui/ui";
 import SettingsUiHandler from "#app/ui/settings/settings-ui-handler";
 import { EaseType } from "#enums/ease-type";
 import { MoneyFormat } from "#enums/money-format";
 import { PlayerGender } from "#enums/player-gender";
 
 const MUTE = "Mute";
-const VOLUME_OPTIONS = new Array(11).fill(null).map((_, i) => i ? (i * 10).toString() : MUTE);
+const VOLUME_OPTIONS = new Array(11).fill(null).map((_, i) => (i ? (i * 10).toString() : MUTE));
 const OFF_ON = ["Off", "On"];
 const AUTO_DISABLED = ["Auto", "Disabled"];
 
@@ -24,12 +24,12 @@ export enum SettingType {
 }
 
 export interface Setting {
-  key: string
-  label: string
-  options: Array<string>
-  default: number
-  type: SettingType
-  requireReload?: boolean
+  key: string;
+  label: string;
+  options: Array<string>;
+  default: number;
+  type: SettingType;
+  requireReload?: boolean;
 }
 
 /**
@@ -238,7 +238,7 @@ export const Setting: Array<Setting> = [
     options: OFF_ON,
     default: 1,
     type: SettingType.DISPLAY,
-    requireReload: true,
+    requireReload: true
   },
   {
     key: SettingKeys.Time_Of_Day_Animation,
@@ -313,7 +313,7 @@ export const Setting: Array<Setting> = [
  * @returns index or -1 if doesn't exist
  */
 export function settingIndex(key: string) {
-  return Setting.findIndex(s => s.key === key);
+  return Setting.findIndex((s) => s.key === key);
 }
 
 /**
@@ -321,7 +321,7 @@ export function settingIndex(key: string) {
  * @param scene current BattleScene
  */
 export function resetSettings(scene: BattleScene) {
-  Setting.forEach(s => setSetting(scene, s.key, s.default));
+  Setting.forEach((s) => setSetting(scene, s.key, s.default));
 }
 
 /**
@@ -333,7 +333,7 @@ export function resetSettings(scene: BattleScene) {
  */
 export function setSetting(scene: BattleScene, setting: string, value: integer): boolean {
   const index: number = settingIndex(setting);
-  if ( index === -1) {
+  if (index === -1) {
     return false;
   }
   switch (Setting[index].key) {
@@ -419,7 +419,8 @@ export function setSetting(scene: BattleScene, setting: string, value: integer):
     scene.showTimeOfDayWidget = Setting[index].options[value] === "On";
     break;
   case SettingKeys.Time_Of_Day_Animation:
-    scene.timeOfDayAnimation = Setting[index].options[value] === "Bounce" ? EaseType.BOUNCE : EaseType.BACK;
+    scene.timeOfDayAnimation =
+        Setting[index].options[value] === "Bounce" ? EaseType.BOUNCE : EaseType.BACK;
     break;
   case SettingKeys.Show_Stats_on_Level_Up:
     scene.showLevelUpStats = Setting[index].options[value] === "On";
@@ -440,7 +441,9 @@ export function setSetting(scene: BattleScene, setting: string, value: integer):
     if (scene.gameData) {
       const female = Setting[index].options[value] === "Girl";
       scene.gameData.gender = female ? PlayerGender.FEMALE : PlayerGender.MALE;
-      scene.trainer.setTexture(scene.trainer.texture.key.replace(female ? "m" : "f", female ? "f" : "m"));
+      scene.trainer.setTexture(
+        scene.trainer.texture.key.replace(female ? "m" : "f", female ? "f" : "m")
+      );
     } else {
       return false;
     }

@@ -1,11 +1,11 @@
 import { SimpleTranslationEntries } from "#app/plugins/i18n";
 
 export const challenges: SimpleTranslationEntries = {
-  "title": "Herausforderungsmodifikatoren",
-  "confirm_start": "Mit diesen Modifikatoren fortfahren?",
+  title: "Herausforderungsmodifikatoren",
+  confirm_start: "Mit diesen Modifikatoren fortfahren?",
   "singleGeneration.name": "Mono-Generation",
   "singleGeneration.value.0": "Aus",
-  "singleGeneration.desc.0":  "Du kannst nur Pokémon aus der gewählten Generation verwenden.",
+  "singleGeneration.desc.0": "Du kannst nur Pokémon aus der gewählten Generation verwenden.",
   "singleGeneration.value.1": "Generation 1",
   "singleGeneration.desc.1": "Du kannst nur Pokémon aus der ersten Generation verwenden.",
   "singleGeneration.value.2": "Generation 2",
@@ -63,5 +63,4 @@ export const challenges: SimpleTranslationEntries = {
   "singleType.desc.17": "Du kannst nur Pokémon des Typs Unlicht verwenden.",
   "singleType.value.18": "Fee",
   "singleType.desc.18": "Du kannst nur Pokémon des Typs Fee verwenden."
-
 } as const;

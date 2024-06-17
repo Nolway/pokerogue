@@ -1,9 +1,9 @@
 import { SimpleTranslationEntries } from "#app/plugins/i18n";
 
 export const challenges: SimpleTranslationEntries = {
-  "title": "챌린지 조건 설정",
-  "points": "Bad Ideas",
-  "confirm_start": "이 조건으로 챌린지를 진행하시겠습니까?",
+  title: "챌린지 조건 설정",
+  points: "Bad Ideas",
+  confirm_start: "이 조건으로 챌린지를 진행하시겠습니까?",
   "singleGeneration.name": "단일 세대",
   "singleGeneration.value.0": "설정 안함",
   "singleGeneration.desc.0": "선택한 세대의 포켓몬만 사용할 수 있습니다.",
@@ -63,5 +63,5 @@ export const challenges: SimpleTranslationEntries = {
   "singleType.value.17": "악",
   "singleType.desc.17": "악 타입의 포켓몬만 사용할 수 있습니다.",
   "singleType.value.18": "페어리",
-  "singleType.desc.18": "페어리 타입의 포켓몬만 사용할 수 있습니다.",
+  "singleType.desc.18": "페어리 타입의 포켓몬만 사용할 수 있습니다."
 } as const;

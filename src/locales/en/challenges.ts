@@ -1,9 +1,9 @@
 import { SimpleTranslationEntries } from "#app/plugins/i18n";
 
 export const challenges: SimpleTranslationEntries = {
-  "title": "Challenge Modifiers",
-  "start": "Start",
-  "illegalEvolution": "{{pokemon}} changed into an ineligble pokemon\nfor this challenge!",
+  title: "Challenge Modifiers",
+  start: "Start",
+  illegalEvolution: "{{pokemon}} changed into an ineligble pokemon\nfor this challenge!",
   "singleGeneration.name": "Mono Gen",
   "singleGeneration.value.0": "Off",
   "singleGeneration.desc.0": "You can only use pokemon from the chosen generation.",
@@ -63,5 +63,5 @@ export const challenges: SimpleTranslationEntries = {
   "singleType.value.17": "Dark",
   "singleType.desc.17": "You can only use pokemon with the Dark type.",
   "singleType.value.18": "Fairy",
-  "singleType.desc.18": "You can only use pokemon with the Fairy type.",
+  "singleType.desc.18": "You can only use pokemon with the Fairy type."
 } as const;

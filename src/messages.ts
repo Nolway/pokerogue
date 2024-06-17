@@ -1,6 +1,6 @@
-import { BattleSpec } from "#enums/battle-spec";
 import Pokemon from "./field/pokemon";
 import i18next from "./plugins/i18n";
+import { BattleSpec } from "#enums/battle-spec";
 
 /**
  * Builds a message by concatenating the Pokemon name with its potential affix and the given text
@@ -24,10 +24,10 @@ export function getPokemonNameWithAffix(pokemon: Pokemon): string {
     return !pokemon.isPlayer()
       ? pokemon.hasTrainer()
         ? i18next.t("battle:foePokemonWithAffix", {
-          pokemonName: pokemon.name,
+          pokemonName: pokemon.name
         })
         : i18next.t("battle:wildPokemonWithAffix", {
-          pokemonName: pokemon.name,
+          pokemonName: pokemon.name
         })
       : pokemon.name;
   case BattleSpec.FINAL_BOSS:

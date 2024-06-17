@@ -1,9 +1,9 @@
 import BattleScene from "#app/battle-scene";
-import {Mode} from "#app/ui/ui";
-import {InputsIcons} from "#app/ui/settings/abstract-control-settings-ui-handler.js";
-import {addTextObject, setTextStyle, TextStyle} from "#app/ui/text";
-import {addWindow} from "#app/ui/ui-theme";
-import {Button} from "#enums/buttons";
+import { Mode } from "#app/ui/ui";
+import { InputsIcons } from "#app/ui/settings/abstract-control-settings-ui-handler.js";
+import { addTextObject, setTextStyle, TextStyle } from "#app/ui/text";
+import { addWindow } from "#app/ui/ui-theme";
+import { Button } from "#enums/buttons";
 
 const LEFT = "LEFT";
 const RIGHT = "RIGHT";
@@ -30,7 +30,7 @@ export class NavigationManager {
       Mode.SETTINGS_DISPLAY,
       Mode.SETTINGS_AUDIO,
       Mode.SETTINGS_GAMEPAD,
-      Mode.SETTINGS_KEYBOARD,
+      Mode.SETTINGS_KEYBOARD
     ];
     this.labels = ["General", "Display", "Audio", "Gamepad", "Keyboard"];
   }
@@ -88,7 +88,6 @@ export class NavigationManager {
       instance.updateIcons();
     }
   }
-
 }
 
 export default class NavigationMenu extends Phaser.GameObjects.Container {
@@ -114,7 +113,7 @@ export default class NavigationMenu extends Phaser.GameObjects.Container {
    */
   setup() {
     const navigationManager = NavigationManager.getInstance();
-    const headerBg = addWindow(this.scene, 0, 0, (this.scene.game.canvas.width / 6) - 2, 24);
+    const headerBg = addWindow(this.scene, 0, 0, this.scene.game.canvas.width / 6 - 2, 24);
     headerBg.setOrigin(0, 0);
     this.add(headerBg);
     this.width = headerBg.width;
@@ -133,11 +132,11 @@ export default class NavigationMenu extends Phaser.GameObjects.Container {
     this.navigationIcons["BUTTON_CYCLE_SHINY"] = iconNextTab;
 
     let relative: Phaser.GameObjects.Sprite | Phaser.GameObjects.Text = iconPreviousTab;
-    let relativeWidth: number = iconPreviousTab.width*6;
+    let relativeWidth: number = iconPreviousTab.width * 6;
     for (const label of navigationManager.labels) {
       const labelText = addTextObject(this.scene, 0, 0, label, TextStyle.SETTINGS_LABEL);
       labelText.setOrigin(0, 0);
-      labelText.setPositionRelative(relative, 6 + relativeWidth/6, 0);
+      labelText.setPositionRelative(relative, 6 + relativeWidth / 6, 0);
       this.add(labelText);
       this.headerTitles.push(labelText);
       relative = labelText;
@@ -158,7 +157,11 @@ export default class NavigationMenu extends Phaser.GameObjects.Container {
     const posSelected = navigationManager.modes.indexOf(navigationManager.selectedMode);
 
     for (const [index, title] of this.headerTitles.entries()) {
-      setTextStyle(title, this.scene, index === posSelected ? TextStyle.SETTINGS_SELECTED : TextStyle.SETTINGS_LABEL);
+      setTextStyle(
+        title,
+        this.scene,
+        index === posSelected ? TextStyle.SETTINGS_SELECTED : TextStyle.SETTINGS_LABEL
+      );
     }
   }
 
@@ -167,8 +170,8 @@ export default class NavigationMenu extends Phaser.GameObjects.Container {
    */
   updateIcons() {
     const specialIcons = {
-      "BUTTON_HOME": "HOME.png",
-      "BUTTON_DELETE": "DEL.png",
+      BUTTON_HOME: "HOME.png",
+      BUTTON_DELETE: "DEL.png"
     };
     for (const settingName of Object.keys(this.navigationIcons)) {
       if (Object.keys(specialIcons).includes(settingName)) {
@@ -177,9 +180,9 @@ export default class NavigationMenu extends Phaser.GameObjects.Container {
         this.navigationIcons[settingName].alpha = 1;
         continue;
       }
-      const icon = this.scene.inputController?.getIconForLatestInputRecorded(settingName);
+      const icon = this.scene.inputController.getIconForLatestInputRecorded(settingName);
       if (icon) {
-        const type = this.scene.inputController?.getLastSourceType();
+        const type = this.scene.inputController.getLastSourceType();
         this.navigationIcons[settingName].setTexture(type);
         this.navigationIcons[settingName].setFrame(icon);
         this.navigationIcons[settingName].alpha = 1;

@@ -11,7 +11,7 @@ export enum SessionHistoryResult {
 export interface SessionHistory {
   seed: string;
   playTime: integer;
-  result: SessionHistoryResult,
+  result: SessionHistoryResult;
   gameMode: GameModes;
   party: PokemonData[];
   modifiers: PersistentModifierData[];

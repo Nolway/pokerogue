@@ -82,5 +82,5 @@ export const enConfig = {
   trainerNames: trainerNames,
   tutorial: tutorial,
   voucher: voucher,
-  weather: weather,
+  weather: weather
 };

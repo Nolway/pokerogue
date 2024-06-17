@@ -56,7 +56,7 @@ float hue2rgb(float f1, float f2, float hue) {
 
 vec3 rgb2hsl(vec3 color) {
 	vec3 hsl;
-	
+
 	float fmin = min(min(color.r, color.g), color.b);
 	float fmax = max(max(color.r, color.g), color.b);
 	float delta = fmax - fmin;
@@ -71,7 +71,7 @@ vec3 rgb2hsl(vec3 color) {
 			hsl.y = delta / (fmax + fmin);
 		else
 			hsl.y = delta / (2.0 - fmax - fmin);
-		
+
 		float deltaR = (((fmax - color.r) / 6.0) + (delta / 2.0)) / delta;
 		float deltaG = (((fmax - color.g) / 6.0) + (delta / 2.0)) / delta;
 		float deltaB = (((fmax - color.b) / 6.0) + (delta / 2.0)) / delta;
@@ -94,24 +94,24 @@ vec3 rgb2hsl(vec3 color) {
 
 vec3 hsl2rgb(vec3 hsl) {
 	vec3 rgb;
-	
+
 	if (hsl.y == 0.0)
 		rgb = vec3(hsl.z);
 	else {
 		float f2;
-		
+
 		if (hsl.z < 0.5)
 			f2 = hsl.z * (1.0 + hsl.y);
 		else
 			f2 = (hsl.z + hsl.y) - (hsl.y * hsl.z);
-			
+
 		float f1 = 2.0 * hsl.z - f2;
-		
+
 		rgb.r = hue2rgb(f1, f2, hsl.x + (1.0/3.0));
 		rgb.g = hue2rgb(f1, f2, hsl.x);
 		rgb.b = hue2rgb(f1, f2, hsl.x - (1.0/3.0));
 	}
-	
+
 	return rgb;
 }
 
@@ -208,19 +208,21 @@ void main() {
 
 export default class FieldSpritePipeline extends Phaser.Renderer.WebGL.Pipelines.MultiPipeline {
   constructor(game: Phaser.Game, config?: Phaser.Types.Renderer.WebGL.WebGLPipelineConfig) {
-    super(config || {
-      game: game,
-      name: "field-sprite",
-      fragShader: spriteFragShader,
-      vertShader: spriteVertShader
-    });
+    super(
+      config || {
+        game: game,
+        name: "field-sprite",
+        fragShader: spriteFragShader,
+        vertShader: spriteVertShader
+      }
+    );
   }
 
   onPreRender(): void {
     this.set1f("time", 0);
     this.set1i("ignoreTimeTint", 0);
     this.set1f("terrainColorRatio", 0);
-    this.set3fv("terrainColor", [ 0, 0, 0 ]);
+    this.set3fv("terrainColor", [0, 0, 0]);
   }
 
   onBind(gameObject: Phaser.GameObjects.GameObject): void {
@@ -230,19 +232,31 @@ export default class FieldSpritePipeline extends Phaser.Renderer.WebGL.Pipelines
     const scene = sprite.scene as BattleScene;
 
     const data = sprite.pipelineData;
-    const ignoreTimeTint = data["ignoreTimeTint"] as boolean;
-    const terrainColorRatio = data["terrainColorRatio"] as number || 0;
+    const ignoreTimeTint = "ignoreTimeTint" in data ? Boolean(data["ignoreTimeTint"]) : false;
+    const terrainColorRatio = "terrainColorRatio" in data ? Number(data["terrainColorRatio"]) : 0;
 
-    const time = scene.currentBattle?.waveIndex
+    const time = scene.currentBattle.waveIndex
       ? ((scene.currentBattle.waveIndex + scene.waveCycleOffset) % 40) / 40 // ((new Date().getSeconds() * 1000 + new Date().getMilliseconds()) % 10000) / 10000
       : Utils.getCurrentTime();
     this.set1f("time", time);
     this.set1i("ignoreTimeTint", ignoreTimeTint ? 1 : 0);
     this.set1i("isOutside", scene.arena.isOutside() ? 1 : 0);
-    this.set3fv("dayTint", scene.arena.getDayTint().map(c => c / 255));
-    this.set3fv("duskTint", scene.arena.getDuskTint().map(c => c / 255));
-    this.set3fv("nightTint", scene.arena.getNightTint().map(c => c / 255));
-    this.set3fv("terrainColor", getTerrainColor(scene.arena.terrain?.terrainType || TerrainType.NONE).map(c => c / 255));
+    this.set3fv(
+      "dayTint",
+      scene.arena.getDayTint().map((c) => c / 255)
+    );
+    this.set3fv(
+      "duskTint",
+      scene.arena.getDuskTint().map((c) => c / 255)
+    );
+    this.set3fv(
+      "nightTint",
+      scene.arena.getNightTint().map((c) => c / 255)
+    );
+    this.set3fv(
+      "terrainColor",
+      getTerrainColor(scene.arena.terrain?.terrainType || TerrainType.NONE).map((c) => c / 255)
+    );
     this.set1f("terrainColorRatio", terrainColorRatio);
   }
 

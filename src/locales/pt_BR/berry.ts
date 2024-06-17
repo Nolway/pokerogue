@@ -1,48 +1,48 @@
 import { BerryTranslationEntries } from "#app/plugins/i18n";
 
 export const berry: BerryTranslationEntries = {
-  "SITRUS": {
+  SITRUS: {
     name: "Fruta Sitrus",
-    effect: "Restaura 25% dos PS se os PS estiverem abaixo de 50%",
+    effect: "Restaura 25% dos PS se os PS estiverem abaixo de 50%"
   },
-  "LUM": {
+  LUM: {
     name: "Fruta Lum",
-    effect: "Cura qualquer mudança de estado ou confusão",
+    effect: "Cura qualquer mudança de estado ou confusão"
   },
-  "ENIGMA": {
+  ENIGMA: {
     name: "Fruta Enigma",
-    effect: "Restaura 25% dos PS se atingido por um golpe supereficaz",
+    effect: "Restaura 25% dos PS se atingido por um golpe supereficaz"
   },
-  "LIECHI": {
+  LIECHI: {
     name: "Fruta Liechi",
-    effect: "Aumenta o Ataque se os PS estiverem abaixo de 25%",
+    effect: "Aumenta o Ataque se os PS estiverem abaixo de 25%"
   },
-  "GANLON": {
+  GANLON: {
     name: "Fruta Ganlon",
-    effect: "Aumenta a Defesa se os PS estiverem abaixo de 25%",
+    effect: "Aumenta a Defesa se os PS estiverem abaixo de 25%"
   },
-  "PETAYA": {
+  PETAYA: {
     name: "Fruta Petaya",
-    effect: "Aumenta o Ataque Especial se os PS estiverem abaixo de 25%",
+    effect: "Aumenta o Ataque Especial se os PS estiverem abaixo de 25%"
   },
-  "APICOT": {
+  APICOT: {
     name: "Fruta Apicot",
-    effect: "Aumenta a Defesa Especial se os PS estiverem abaixo de 25%",
+    effect: "Aumenta a Defesa Especial se os PS estiverem abaixo de 25%"
   },
-  "SALAC": {
+  SALAC: {
     name: "Fruta Salac",
-    effect: "Aumenta a Velocidade se os PS estiverem abaixo de 25%",
+    effect: "Aumenta a Velocidade se os PS estiverem abaixo de 25%"
   },
-  "LANSAT": {
+  LANSAT: {
     name: "Fruta Lansat",
-    effect: "Aumenta a chance de acerto crítico se os PS estiverem abaixo de 25%",
+    effect: "Aumenta a chance de acerto crítico se os PS estiverem abaixo de 25%"
   },
-  "STARF": {
+  STARF: {
     name: "Fruta Starf",
-    effect: "Aumenta drasticamente um atributo aleatório se os PS estiverem abaixo de 25%",
+    effect: "Aumenta drasticamente um atributo aleatório se os PS estiverem abaixo de 25%"
   },
-  "LEPPA": {
+  LEPPA: {
     name: "Fruta Leppa",
-    effect: "Restaura 10 PP de um movimento se seus PP acabarem",
-  },
+    effect: "Restaura 10 PP de um movimento se seus PP acabarem"
+  }
 } as const;

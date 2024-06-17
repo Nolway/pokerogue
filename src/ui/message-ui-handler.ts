@@ -1,7 +1,7 @@
 import BattleScene from "../battle-scene";
+import * as Utils from "../utils";
 import AwaitableUiHandler from "./awaitable-ui-handler";
 import { Mode } from "./ui";
-import * as Utils from "../utils";
 
 export default abstract class MessageUiHandler extends AwaitableUiHandler {
   protected textTimer: Phaser.Time.TimerEvent;
@@ -17,15 +17,37 @@ export default abstract class MessageUiHandler extends AwaitableUiHandler {
     this.pendingPrompt = false;
   }
 
-  showText(text: string, delay?: integer, callback?: Function, callbackDelay?: integer, prompt?: boolean, promptDelay?: integer) {
+  showText(
+    text: string,
+    delay?: integer,
+    callback?: Function,
+    callbackDelay?: integer,
+    prompt?: boolean,
+    promptDelay?: integer
+  ) {
     this.showTextInternal(text, delay, callback, callbackDelay, prompt, promptDelay);
   }
 
-  showDialogue(text: string, name: string, delay?: integer, callback?: Function, callbackDelay?: integer, prompt?: boolean, promptDelay?: integer) {
+  showDialogue(
+    text: string,
+    name: string,
+    delay?: integer,
+    callback?: Function,
+    callbackDelay?: integer,
+    prompt?: boolean,
+    promptDelay?: integer
+  ) {
     this.showTextInternal(text, delay, callback, callbackDelay, prompt, promptDelay);
   }
 
-  private showTextInternal(text: string, delay: integer, callback: Function, callbackDelay: integer, prompt: boolean, promptDelay: integer) {
+  private showTextInternal(
+    text: string,
+    delay: integer,
+    callback: Function,
+    callbackDelay: integer,
+    prompt: boolean,
+    promptDelay: integer
+  ) {
     if (delay === null || delay === undefined) {
       delay = 20;
     }
@@ -46,7 +68,9 @@ export default abstract class MessageUiHandler extends AwaitableUiHandler {
         soundMap.set(actionMatch.index, actionMatch[2]);
         break;
       }
-      text = text.slice(0, actionMatch.index) + text.slice(actionMatch.index + actionMatch[2].length + 4);
+      text =
+        text.slice(0, actionMatch.index) +
+        text.slice(actionMatch.index + actionMatch[2].length + 4);
     }
 
     if (text) {

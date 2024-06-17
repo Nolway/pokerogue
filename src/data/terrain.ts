@@ -1,9 +1,8 @@
 import Pokemon from "../field/pokemon";
-import Move from "./move";
-import { Type } from "./type";
 import * as Utils from "../utils";
+import Move, { ProtectAttr } from "./move";
+import { Type } from "./type";
 import { IncrementMovePriorityAbAttr, applyAbAttrs } from "./ability";
-import { ProtectAttr } from "./move";
 import { BattlerIndex } from "#app/battle.js";
 
 export enum TerrainType {
@@ -59,7 +58,10 @@ export class Terrain {
       if (!move.hasAttr(ProtectAttr)) {
         const priority = new Utils.IntegerHolder(move.priority);
         applyAbAttrs(IncrementMovePriorityAbAttr, user, null, move, priority);
-        return priority.value > 0 && user.getOpponents().filter(o => targets.includes(o.getBattlerIndex())).length > 0;
+        return (
+          priority.value > 0 &&
+            user.getOpponents().filter((o) => targets.includes(o.getBattlerIndex())).length > 0
+        );
       }
     }
 
@@ -67,17 +69,17 @@ export class Terrain {
   }
 }
 
-export function getTerrainColor(terrainType: TerrainType): [ integer, integer, integer ] {
+export function getTerrainColor(terrainType: TerrainType): [integer, integer, integer] {
   switch (terrainType) {
   case TerrainType.MISTY:
-    return [ 232, 136, 200 ];
+    return [232, 136, 200];
   case TerrainType.ELECTRIC:
-    return [ 248, 248, 120 ];
+    return [248, 248, 120];
   case TerrainType.GRASSY:
-    return [ 120, 200, 80 ];
+    return [120, 200, 80];
   case TerrainType.PSYCHIC:
-    return [ 160, 64, 160 ];
+    return [160, 64, 160];
   }
 
-  return [ 0, 0, 0 ];
+  return [0, 0, 0];
 }

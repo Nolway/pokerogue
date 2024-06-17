@@ -3,7 +3,7 @@ import { TextStyle, addTextObject } from "./text";
 import { Mode } from "./ui";
 import UiHandler from "./ui-handler";
 import { addWindow } from "./ui-theme";
-import {Button} from "#enums/buttons";
+import { Button } from "#enums/buttons";
 import i18next from "#app/plugins/i18n.js";
 import { SelectStarterPhase, TitlePhase } from "#app/phases.js";
 import { Challenge } from "#app/data/challenge.js";
@@ -37,15 +37,32 @@ export default class GameChallengesUiHandler extends UiHandler {
   setup() {
     const ui = this.getUi();
 
-    this.challengesContainer = this.scene.add.container(1, -(this.scene.game.canvas.height / 6) + 1);
+    this.challengesContainer = this.scene.add.container(
+      1,
+      -(this.scene.game.canvas.height / 6) + 1
+    );
 
-    this.challengesContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.scene.game.canvas.width / 6, this.scene.game.canvas.height / 6), Phaser.Geom.Rectangle.Contains);
+    this.challengesContainer.setInteractive(
+      new Phaser.Geom.Rectangle(
+        0,
+        0,
+        this.scene.game.canvas.width / 6,
+        this.scene.game.canvas.height / 6
+      ),
+      Phaser.Geom.Rectangle.Contains
+    );
 
     // TODO: Change this back to /9 when adding in difficulty
-    const headerBg = addWindow(this.scene, 0, 0, (this.scene.game.canvas.width / 6), 24);
+    const headerBg = addWindow(this.scene, 0, 0, this.scene.game.canvas.width / 6, 24);
     headerBg.setOrigin(0, 0);
 
-    const headerText = addTextObject(this.scene, 0, 0, i18next.t("challenges:title"), TextStyle.SETTINGS_LABEL);
+    const headerText = addTextObject(
+      this.scene,
+      0,
+      0,
+      i18next.t("challenges:title"),
+      TextStyle.SETTINGS_LABEL
+    );
     headerText.setOrigin(0, 0);
     headerText.setPositionRelative(headerBg, 8, 4);
 
@@ -61,10 +78,22 @@ export default class GameChallengesUiHandler extends UiHandler {
     // difficultyName.setOrigin(0, 0);
     // difficultyName.setPositionRelative(difficultyBg, difficultyBg.width - difficultyName.displayWidth - 8, 4);
 
-    this.optionsBg = addWindow(this.scene, 0, headerBg.height, (this.scene.game.canvas.width / 9), (this.scene.game.canvas.height / 6) - headerBg.height - 2);
+    this.optionsBg = addWindow(
+      this.scene,
+      0,
+      headerBg.height,
+      this.scene.game.canvas.width / 9,
+      this.scene.game.canvas.height / 6 - headerBg.height - 2
+    );
     this.optionsBg.setOrigin(0, 0);
 
-    const descriptionBg = addWindow(this.scene, 0, headerBg.height, (this.scene.game.canvas.width / 18) - 2, (this.scene.game.canvas.height / 6) - headerBg.height - 26);
+    const descriptionBg = addWindow(
+      this.scene,
+      0,
+      headerBg.height,
+      this.scene.game.canvas.width / 18 - 2,
+      this.scene.game.canvas.height / 6 - headerBg.height - 26
+    );
     descriptionBg.setOrigin(0, 0);
     descriptionBg.setPositionRelative(this.optionsBg, this.optionsBg.width, 0);
 
@@ -77,11 +106,28 @@ export default class GameChallengesUiHandler extends UiHandler {
     startBg.setOrigin(0, 0);
     startBg.setPositionRelative(descriptionBg, 0, descriptionBg.height);
 
-    const startText = addTextObject(this.scene, 0, 0, i18next.t("challenges:start"), TextStyle.SETTINGS_LABEL);
+    const startText = addTextObject(
+      this.scene,
+      0,
+      0,
+      i18next.t("challenges:start"),
+      TextStyle.SETTINGS_LABEL
+    );
     startText.setOrigin(0, 0);
     startText.setPositionRelative(startBg, 8, 4);
 
-    this.startCursor = this.scene.add.nineslice(0, 0, "summary_moves_cursor", null, (this.scene.game.canvas.width / 18) - 10, 16, 1, 1, 1, 1);
+    this.startCursor = this.scene.add.nineslice(
+      0,
+      0,
+      "summary_moves_cursor",
+      null,
+      this.scene.game.canvas.width / 18 - 10,
+      16,
+      1,
+      1,
+      1,
+      1
+    );
     this.startCursor.setOrigin(0, 0);
     this.startCursor.setPositionRelative(startBg, 4, 4);
     this.startCursor.setVisible(false);
@@ -92,12 +138,24 @@ export default class GameChallengesUiHandler extends UiHandler {
     this.challengeValueLabels = [];
 
     for (let i = 0; i < 9; i++) {
-      this.challengeLabels[i] = addTextObject(this.scene, 8, 28 + i * 16, "", TextStyle.SETTINGS_LABEL);
+      this.challengeLabels[i] = addTextObject(
+        this.scene,
+        8,
+        28 + i * 16,
+        "",
+        TextStyle.SETTINGS_LABEL
+      );
       this.challengeLabels[i].setOrigin(0, 0);
 
       this.valuesContainer.add(this.challengeLabels[i]);
 
-      this.challengeValueLabels[i] = addTextObject(this.scene, 0, 28 + i * 16, "", TextStyle.SETTINGS_LABEL);
+      this.challengeValueLabels[i] = addTextObject(
+        this.scene,
+        0,
+        28 + i * 16,
+        "",
+        TextStyle.SETTINGS_LABEL
+      );
       this.challengeValueLabels[i].setPositionRelative(this.challengeLabels[i], 100, 0);
 
       this.valuesContainer.add(this.challengeValueLabels[i]);
@@ -124,7 +182,6 @@ export default class GameChallengesUiHandler extends UiHandler {
     this.challengesContainer.setVisible(false);
   }
 
-
   updateText(): void {
     if (this.scene.gameMode.challenges.length > 0) {
       this.descriptionText.text = this.getActiveChallenge().getDescription();
@@ -140,8 +197,10 @@ export default class GameChallengesUiHandler extends UiHandler {
       if (i + this.scrollCursor < this.scene.gameMode.challenges.length) {
         this.challengeLabels[i].setVisible(true);
         this.challengeValueLabels[i].setVisible(true);
-        this.challengeLabels[i].text = this.scene.gameMode.challenges[i + this.scrollCursor].getName();
-        this.challengeValueLabels[i].text = this.scene.gameMode.challenges[i + this.scrollCursor].getValue();
+        this.challengeLabels[i].text =
+          this.scene.gameMode.challenges[i + this.scrollCursor].getName();
+        this.challengeValueLabels[i].text =
+          this.scene.gameMode.challenges[i + this.scrollCursor].getValue();
         this.challengeLabels[i].updateText();
         this.challengeValueLabels[i].updateText();
       } else {
@@ -186,7 +245,7 @@ export default class GameChallengesUiHandler extends UiHandler {
     if (button === Button.CANCEL) {
       if (this.startCursor.visible) {
         this.startCursor.setVisible(false);
-        this.cursorObj?.setVisible(true);
+        this.cursorObj.setVisible(true);
       } else {
         this.scene.clearPhaseQueue();
         this.scene.pushPhase(new TitlePhase(this.scene));
@@ -195,8 +254,14 @@ export default class GameChallengesUiHandler extends UiHandler {
       success = true;
     } else if (button === Button.SUBMIT || button === Button.ACTION) {
       if (this.startCursor.visible) {
-        const totalDifficulty = this.scene.gameMode.challenges.reduce((v, c) => v + c.getDifficulty(), 0);
-        const totalMinDifficulty = this.scene.gameMode.challenges.reduce((v, c) => v + c.getMinDifficulty(), 0);
+        const totalDifficulty = this.scene.gameMode.challenges.reduce(
+          (v, c) => v + c.getDifficulty(),
+          0
+        );
+        const totalMinDifficulty = this.scene.gameMode.challenges.reduce(
+          (v, c) => v + c.getMinDifficulty(),
+          0
+        );
         if (totalDifficulty >= totalMinDifficulty) {
           this.scene.unshiftPhase(new SelectStarterPhase(this.scene));
           this.scene.getCurrentPhase().end();
@@ -206,7 +271,7 @@ export default class GameChallengesUiHandler extends UiHandler {
         }
       } else {
         this.startCursor.setVisible(true);
-        this.cursorObj?.setVisible(false);
+        this.cursorObj.setVisible(false);
         success = true;
       }
     } else {
@@ -215,13 +280,17 @@ export default class GameChallengesUiHandler extends UiHandler {
         if (this.cursor === 0) {
           if (this.scrollCursor === 0) {
             // When at the top of the menu and pressing UP, move to the bottommost item.
-            if (this.scene.gameMode.challenges.length > rowsToDisplay) { // If there are more than 9 challenges, scroll to the bottom
+            if (this.scene.gameMode.challenges.length > rowsToDisplay) {
+              // If there are more than 9 challenges, scroll to the bottom
               // First, set the cursor to the last visible element, preparing for the scroll to the end.
               const successA = this.setCursor(rowsToDisplay - 1);
               // Then, adjust the scroll to display the bottommost elements of the menu.
-              const successB = this.setScrollCursor(this.scene.gameMode.challenges.length - rowsToDisplay);
+              const successB = this.setScrollCursor(
+                this.scene.gameMode.challenges.length - rowsToDisplay
+              );
               success = successA && successB; // success is just there to play the little validation sound effect
-            } else { // If there are 9 or less challenges, just move to the bottom one
+            } else {
+              // If there are 9 or less challenges, just move to the bottom one
               success = this.setCursor(this.scene.gameMode.challenges.length - 1);
             }
           } else {
@@ -247,7 +316,10 @@ export default class GameChallengesUiHandler extends UiHandler {
             const successB = this.setScrollCursor(0);
             success = successA && successB; // success is just there to play the little validation sound effect
           }
-        } else if (this.scene.gameMode.challenges.length < rowsToDisplay && this.cursor === this.scene.gameMode.challenges.length - 1) {
+        } else if (
+          this.scene.gameMode.challenges.length < rowsToDisplay &&
+            this.cursor === this.scene.gameMode.challenges.length - 1
+        ) {
           // When at the bottom of a non-scrolling menu and pressing DOWN, move to the topmost item.
           success = this.setCursor(0);
         } else {
@@ -286,7 +358,18 @@ export default class GameChallengesUiHandler extends UiHandler {
     let ret = super.setCursor(cursor);
 
     if (!this.cursorObj) {
-      this.cursorObj = this.scene.add.nineslice(0, 0, "summary_moves_cursor", null, (this.scene.game.canvas.width / 9) - 10, 16, 1, 1, 1, 1);
+      this.cursorObj = this.scene.add.nineslice(
+        0,
+        0,
+        "summary_moves_cursor",
+        null,
+        this.scene.game.canvas.width / 9 - 10,
+        16,
+        1,
+        1,
+        1,
+        1
+      );
       this.cursorObj.setOrigin(0, 0);
       this.valuesContainer.add(this.cursorObj);
     }
@@ -294,7 +377,11 @@ export default class GameChallengesUiHandler extends UiHandler {
     ret ||= !this.cursorObj.visible;
     this.cursorObj.setVisible(true);
 
-    this.cursorObj.setPositionRelative(this.optionsBg, 4, 4 + (this.cursor + this.scrollCursor) * 16);
+    this.cursorObj.setPositionRelative(
+      this.optionsBg,
+      4,
+      4 + (this.cursor + this.scrollCursor) * 16
+    );
 
     return ret;
   }

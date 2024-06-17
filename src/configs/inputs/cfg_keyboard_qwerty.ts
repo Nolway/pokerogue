@@ -1,5 +1,5 @@
-import {Button} from "#enums/buttons";
-import {SettingKeyboard} from "#app/system/settings/settings-keyboard";
+import { Button } from "#enums/buttons";
+import { SettingKeyboard } from "#app/system/settings/settings-keyboard";
 
 const cfg_keyboard_qwerty = {
   padID: "default",
@@ -131,7 +131,6 @@ const cfg_keyboard_qwerty = {
     KEY_F11: "F11.png",
     KEY_F12: "F12.png",
 
-
     KEY_PAGE_DOWN: "PAGE_DOWN.png",
     KEY_PAGE_UP: "PAGE_UP.png",
 
@@ -199,7 +198,7 @@ const cfg_keyboard_qwerty = {
     [SettingKeyboard.Alt_Button_Cycle_Nature]: Button.CYCLE_NATURE,
     [SettingKeyboard.Alt_Button_Cycle_Variant]: Button.V,
     [SettingKeyboard.Alt_Button_Speed_Up]: Button.SPEED_UP,
-    [SettingKeyboard.Alt_Button_Slow_Down]: Button.SLOW_DOWN,
+    [SettingKeyboard.Alt_Button_Slow_Down]: Button.SLOW_DOWN
   },
   default: {
     KEY_ARROW_UP: SettingKeyboard.Button_Up,
@@ -286,8 +285,8 @@ const cfg_keyboard_qwerty = {
     "KEY_ARROW_LEFT",
     "KEY_ARROW_RIGHT",
     "KEY_DEL",
-    "KEY_HOME",
-  ]
+    "KEY_HOME"
+  ],
 };
 
 export default cfg_keyboard_qwerty;

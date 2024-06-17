@@ -620,5 +620,5 @@ export enum Abilities {
   /**{@link https://bulbapedia.bulbagarden.net/wiki/Teraform_Zero_(ability) | Source} */
   TERAFORM_ZERO,
   /**{@link https://bulbapedia.bulbagarden.net/wiki/Poison_Puppeteer_(ability) | Source} */
-  POISON_PUPPETEER,
+  POISON_PUPPETEER
 }

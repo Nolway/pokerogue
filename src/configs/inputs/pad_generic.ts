@@ -1,5 +1,5 @@
-import {SettingGamepad} from "../../system/settings/settings-gamepad";
-import {Button} from "#enums/buttons";
+import { SettingGamepad } from "../../system/settings/settings-gamepad";
+import { Button } from "#enums/buttons";
 
 /**
  * Generic pad mapping
@@ -41,7 +41,7 @@ const pad_generic = {
     LC_N: "UP.png",
     LC_S: "DOWN.png",
     LC_W: "LEFT.png",
-    LC_E: "RIGHT.png",
+    LC_E: "RIGHT.png"
   },
   settings: {
     [SettingGamepad.Button_Up]: Button.UP,
@@ -54,7 +54,7 @@ const pad_generic = {
     [SettingGamepad.Button_Cycle_Variant]: Button.V,
     [SettingGamepad.Button_Menu]: Button.MENU,
     [SettingGamepad.Button_Stats]: Button.STATS,
-    [SettingGamepad.Button_Cycle_Form]:  Button.CYCLE_FORM,
+    [SettingGamepad.Button_Cycle_Form]: Button.CYCLE_FORM,
     [SettingGamepad.Button_Cycle_Shiny]: Button.CYCLE_SHINY,
     [SettingGamepad.Button_Cycle_Gender]: Button.CYCLE_GENDER,
     [SettingGamepad.Button_Cycle_Ability]: Button.CYCLE_ABILITY,
@@ -79,12 +79,7 @@ const pad_generic = {
     LS: SettingGamepad.Button_Speed_Up,
     RS: SettingGamepad.Button_Slow_Down
   },
-  blacklist: [
-    "LC_N",
-    "LC_S",
-    "LC_W",
-    "LC_E",
-  ]
+  blacklist: ["LC_N", "LC_S", "LC_W", "LC_E"]
 };
 
 export default pad_generic;

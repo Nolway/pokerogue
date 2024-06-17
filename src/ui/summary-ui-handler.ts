@@ -1,29 +1,27 @@
+import { argbFromRgba } from "@material/material-color-utilities";
+import i18next from "i18next";
 import BattleScene, { starterColors } from "../battle-scene";
-import { Mode } from "./ui";
-import UiHandler from "./ui-handler";
 import * as Utils from "../utils";
 import { PlayerPokemon } from "../field/pokemon";
 import { getStarterValueFriendshipCap, speciesStarters } from "../data/pokemon-species";
-import { argbFromRgba } from "@material/material-color-utilities";
 import { Type, getTypeRgb } from "../data/type";
-import { TextStyle, addBBCodeTextObject, addTextObject, getBBCodeFrag } from "./text";
 import Move, { MoveCategory } from "../data/move";
 import { getPokeballAtlasKey } from "../data/pokeball";
 import { getGenderColor, getGenderSymbol } from "../data/gender";
 import { getLevelRelExp, getLevelTotalExp } from "../data/exp";
 import { Stat, getStatName } from "../data/pokemon-stat";
-import { PokemonHeldItemModifier } from "../modifier/modifier";
+import { PokemonHeldItemModifier, modifierSortFunc } from "../modifier/modifier";
 import { StatusEffect } from "../data/status-effect";
 import { getBiomeName } from "../data/biomes";
 import { Nature, getNatureStatMultiplier } from "../data/nature";
 import { loggedInUser } from "../account";
-import { Variant, getVariantTint } from "#app/data/variant";
-import {Button} from "#enums/buttons";
 import { Ability } from "../data/ability.js";
-import i18next from "i18next";
-import {modifierSortFunc} from "../modifier/modifier";
+import { TextStyle, addBBCodeTextObject, addTextObject, getBBCodeFrag } from "./text";
+import UiHandler from "./ui-handler";
+import { Mode } from "./ui";
+import { Button } from "#enums/buttons";
+import { Variant, getVariantTint } from "#app/data/variant";
 import { PlayerGender } from "#enums/player-gender";
-
 
 enum Page {
   PROFILE,
@@ -39,13 +37,13 @@ export enum SummaryUiMode {
 /** Holds all objects related to an ability for each iteration */
 interface abilityContainer {
   /** An image displaying the summary label */
-  labelImage: Phaser.GameObjects.Image,
+  labelImage: Phaser.GameObjects.Image;
   /** The ability object */
-  ability: Ability,
+  ability: Ability;
   /** The text object displaying the name of the ability */
-  nameText: Phaser.GameObjects.Text,
+  nameText: Phaser.GameObjects.Text;
   /** The text object displaying the description of the ability */
-  descriptionText: Phaser.GameObjects.Text,
+  descriptionText: Phaser.GameObjects.Text;
 }
 
 export default class SummaryUiHandler extends UiHandler {
@@ -118,7 +116,7 @@ export default class SummaryUiHandler extends UiHandler {
     summaryBg.setOrigin(0, 1);
     this.summaryContainer.add(summaryBg);
 
-    this.tabSprite = this.scene.add.sprite(134, (-summaryBg.displayHeight) + 16, "summary_tabs_1");
+    this.tabSprite = this.scene.add.sprite(134, -summaryBg.displayHeight + 16, "summary_tabs_1");
     this.tabSprite.setOrigin(1, 1);
     this.summaryContainer.add(this.tabSprite);
 
@@ -135,7 +133,12 @@ export default class SummaryUiHandler extends UiHandler {
     this.numberText.setOrigin(0, 1);
     this.summaryContainer.add(this.numberText);
 
-    this.pokemonSprite = this.scene.initPokemonSprite(this.scene.add.sprite(56, -106, "pkmn__sub"), null, false, true);
+    this.pokemonSprite = this.scene.initPokemonSprite(
+      this.scene.add.sprite(56, -106, "pkmn__sub"),
+      null,
+      false,
+      true
+    );
     this.summaryContainer.add(this.pokemonSprite);
 
     this.nameText = addTextObject(this.scene, 6, -54, "", TextStyle.SUMMARY);
@@ -146,14 +149,20 @@ export default class SummaryUiHandler extends UiHandler {
     this.splicedIcon.setVisible(false);
     this.splicedIcon.setOrigin(0, 0);
     this.splicedIcon.setScale(0.75);
-    this.splicedIcon.setInteractive(new Phaser.Geom.Rectangle(0, 0, 12, 15), Phaser.Geom.Rectangle.Contains);
+    this.splicedIcon.setInteractive(
+      new Phaser.Geom.Rectangle(0, 0, 12, 15),
+      Phaser.Geom.Rectangle.Contains
+    );
     this.summaryContainer.add(this.splicedIcon);
 
     this.shinyIcon = this.scene.add.image(0, -54, "shiny_star");
     this.shinyIcon.setVisible(false);
     this.shinyIcon.setOrigin(0, 0);
     this.shinyIcon.setScale(0.75);
-    this.shinyIcon.setInteractive(new Phaser.Geom.Rectangle(0, 0, 12, 15), Phaser.Geom.Rectangle.Contains);
+    this.shinyIcon.setInteractive(
+      new Phaser.Geom.Rectangle(0, 0, 12, 15),
+      Phaser.Geom.Rectangle.Contains
+    );
     this.summaryContainer.add(this.shinyIcon);
 
     this.fusionShinyIcon = this.scene.add.image(0, 0, "shiny_star_2");
@@ -176,12 +185,17 @@ export default class SummaryUiHandler extends UiHandler {
 
     this.candyShadow = this.scene.add.sprite(13, -140, "candy");
     this.candyShadow.setTint(0x000000);
-    this.candyShadow.setAlpha(0.50);
+    this.candyShadow.setAlpha(0.5);
     this.candyShadow.setScale(0.8);
-    this.candyShadow.setInteractive(new Phaser.Geom.Rectangle(0, 0, 16, 16), Phaser.Geom.Rectangle.Contains);
+    this.candyShadow.setInteractive(
+      new Phaser.Geom.Rectangle(0, 0, 16, 16),
+      Phaser.Geom.Rectangle.Contains
+    );
     this.summaryContainer.add(this.candyShadow);
 
-    this.candyCountText = addTextObject(this.scene, 20, -146, "x0", TextStyle.WINDOW_ALT, { fontSize: "76px" });
+    this.candyCountText = addTextObject(this.scene, 20, -146, "x0", TextStyle.WINDOW_ALT, {
+      fontSize: "76px"
+    });
     this.candyCountText.setOrigin(0, 0);
     this.summaryContainer.add(this.candyCountText);
 
@@ -227,7 +241,13 @@ export default class SummaryUiHandler extends UiHandler {
     moveEffectBg.setOrigin(0, 0);
     this.moveEffectContainer.add(moveEffectBg);
 
-    const moveEffectLabels = addTextObject(this.scene, 8, 12, "Power\nAccuracy\nCategory", TextStyle.SUMMARY);
+    const moveEffectLabels = addTextObject(
+      this.scene,
+      8,
+      12,
+      "Power\nAccuracy\nCategory",
+      TextStyle.SUMMARY
+    );
     moveEffectLabels.setLineSpacing(9);
     moveEffectLabels.setOrigin(0, 0);
 
@@ -254,7 +274,9 @@ export default class SummaryUiHandler extends UiHandler {
     this.summaryContainer.add((this.summaryPageContainer = this.scene.add.container(106, 0)));
     this.summaryPageContainer.add(getSummaryPageBg());
     this.summaryPageContainer.setVisible(false);
-    this.summaryContainer.add((this.summaryPageTransitionContainer = this.scene.add.container(106, 0)));
+    this.summaryContainer.add(
+      (this.summaryPageTransitionContainer = this.scene.add.container(106, 0))
+    );
     this.summaryPageTransitionContainer.add(getSummaryPageBg());
     this.summaryPageTransitionContainer.setVisible(false);
   }
@@ -270,7 +292,7 @@ export default class SummaryUiHandler extends UiHandler {
     super.show(args);
 
     this.pokemon = args[0] as PlayerPokemon;
-    this.summaryUiMode = args.length > 1 ? args[1] as SummaryUiMode : SummaryUiMode.DEFAULT;
+    this.summaryUiMode = args.length > 1 ? (args[1] as SummaryUiMode) : SummaryUiMode.DEFAULT;
 
     this.scene.ui.bringToTop(this.summaryContainer);
 
@@ -284,8 +306,12 @@ export default class SummaryUiHandler extends UiHandler {
     this.candyOverlay.setTint(argbFromRgba(Utils.rgbHexToRgba(colorScheme[1])));
 
     this.numberText.setText(Utils.padInt(this.pokemon.species.speciesId, 4));
-    this.numberText.setColor(this.getTextColor(!this.pokemon.isShiny() ? TextStyle.SUMMARY : TextStyle.SUMMARY_GOLD));
-    this.numberText.setShadowColor(this.getTextColor(!this.pokemon.isShiny() ? TextStyle.SUMMARY : TextStyle.SUMMARY_GOLD, true));
+    this.numberText.setColor(
+      this.getTextColor(!this.pokemon.isShiny() ? TextStyle.SUMMARY : TextStyle.SUMMARY_GOLD)
+    );
+    this.numberText.setShadowColor(
+      this.getTextColor(!this.pokemon.isShiny() ? TextStyle.SUMMARY : TextStyle.SUMMARY_GOLD, true)
+    );
 
     this.pokemonSprite.play(this.pokemon.getSpriteKey(true));
     this.pokemonSprite.setPipelineData("teraColor", getTypeRgb(this.pokemon.getTeraType()));
@@ -293,9 +319,9 @@ export default class SummaryUiHandler extends UiHandler {
     this.pokemonSprite.setPipelineData("spriteKey", this.pokemon.getSpriteKey());
     this.pokemonSprite.setPipelineData("shiny", this.pokemon.shiny);
     this.pokemonSprite.setPipelineData("variant", this.pokemon.variant);
-    [ "spriteColors", "fusionSpriteColors" ].map(k => {
+    ["spriteColors", "fusionSpriteColors"].map((k) => {
       delete this.pokemonSprite.pipelineData[`${k}Base`];
-      if (this.pokemon.summonData?.speciesForm) {
+      if (this.pokemon.summonData.speciesForm) {
         k += "Base";
       }
       this.pokemonSprite.pipelineData[k] = this.pokemon.getSprite().pipelineData[k];
@@ -309,46 +335,77 @@ export default class SummaryUiHandler extends UiHandler {
     this.splicedIcon.setPositionRelative(this.nameText, this.nameText.displayWidth + 2, 3);
     this.splicedIcon.setVisible(isFusion);
     if (this.splicedIcon.visible) {
-      this.splicedIcon.on("pointerover", () => (this.scene as BattleScene).ui.showTooltip(null, `${this.pokemon.species.getName(this.pokemon.formIndex)}/${this.pokemon.fusionSpecies.getName(this.pokemon.fusionFormIndex)}`, true));
-      this.splicedIcon.on("pointerout", () => (this.scene as BattleScene).ui.hideTooltip());
+      this.splicedIcon.on("pointerover", () =>
+        this.scene.ui.showTooltip(
+          null,
+          `${this.pokemon.species.getName(this.pokemon.formIndex)}/${this.pokemon.fusionSpecies.getName(this.pokemon.fusionFormIndex)}`,
+          true
+        )
+      );
+      this.splicedIcon.on("pointerout", () => this.scene.ui.hideTooltip());
     }
 
-    if (this.scene.gameData.starterData[this.pokemon.species.getRootSpeciesId()].classicWinCount > 0 && this.scene.gameData.starterData[this.pokemon.species.getRootSpeciesId(true)].classicWinCount > 0) {
+    if (
+      this.scene.gameData.starterData[this.pokemon.species.getRootSpeciesId()].classicWinCount >
+        0 &&
+      this.scene.gameData.starterData[this.pokemon.species.getRootSpeciesId(true)].classicWinCount >
+        0
+    ) {
       this.championRibbon.setVisible(true);
     } else {
       this.championRibbon.setVisible(false);
     }
 
-    let currentFriendship = this.scene.gameData.starterData[this.pokemon.species.getRootSpeciesId()].friendship;
+    let currentFriendship =
+      this.scene.gameData.starterData[this.pokemon.species.getRootSpeciesId()].friendship;
     if (!currentFriendship || currentFriendship === undefined) {
       currentFriendship = 0;
     }
 
-    const friendshipCap = getStarterValueFriendshipCap(speciesStarters[this.pokemon.species.getRootSpeciesId()]);
-    const candyCropY = 16 - (16 * (currentFriendship / friendshipCap));
+    const friendshipCap = getStarterValueFriendshipCap(
+      speciesStarters[this.pokemon.species.getRootSpeciesId()]
+    );
+    const candyCropY = 16 - 16 * (currentFriendship / friendshipCap);
 
     if (this.candyShadow.visible) {
-      this.candyShadow.on("pointerover", () => (this.scene as BattleScene).ui.showTooltip(null, `${currentFriendship}/${friendshipCap}`, true));
-      this.candyShadow.on("pointerout", () => (this.scene as BattleScene).ui.hideTooltip());
+      this.candyShadow.on("pointerover", () =>
+        this.scene.ui.showTooltip(null, `${currentFriendship}/${friendshipCap}`, true)
+      );
+      this.candyShadow.on("pointerout", () => this.scene.ui.hideTooltip());
     }
 
-    this.candyCountText.setText(`x${this.scene.gameData.starterData[this.pokemon.species.getRootSpeciesId()].candyCount}`);
+    this.candyCountText.setText(
+      `x${this.scene.gameData.starterData[this.pokemon.species.getRootSpeciesId()].candyCount}`
+    );
 
-    this.candyShadow.setCrop(0,0,16, candyCropY);
+    this.candyShadow.setCrop(0, 0, 16, candyCropY);
 
     const doubleShiny = isFusion && this.pokemon.shiny && this.pokemon.fusionShiny;
     const baseVariant = !doubleShiny ? this.pokemon.getVariant() : this.pokemon.variant;
 
-    this.shinyIcon.setPositionRelative(this.nameText, this.nameText.displayWidth + (this.splicedIcon.visible ? this.splicedIcon.displayWidth + 1 : 0) + 1, 3);
+    this.shinyIcon.setPositionRelative(
+      this.nameText,
+      this.nameText.displayWidth +
+        (this.splicedIcon.visible ? this.splicedIcon.displayWidth + 1 : 0) +
+        1,
+      3
+    );
     this.shinyIcon.setTexture(`shiny_star${doubleShiny ? "_1" : ""}`);
     this.shinyIcon.setVisible(this.pokemon.isShiny());
     this.shinyIcon.setTint(getVariantTint(baseVariant));
     if (this.shinyIcon.visible) {
-      const shinyDescriptor = doubleShiny || baseVariant ?
-        `${baseVariant === 2 ? "Epic" : baseVariant === 1 ? "Rare" : "Common"}${doubleShiny ? `/${this.pokemon.fusionVariant === 2 ? "Epic" : this.pokemon.fusionVariant === 1 ? "Rare" : "Common"}` : ""}`
-        : "";
-      this.shinyIcon.on("pointerover", () => (this.scene as BattleScene).ui.showTooltip(null, `Shiny${shinyDescriptor ? ` (${shinyDescriptor})` : ""}`, true));
-      this.shinyIcon.on("pointerout", () => (this.scene as BattleScene).ui.hideTooltip());
+      const shinyDescriptor =
+        doubleShiny || baseVariant
+          ? `${baseVariant === 2 ? "Epic" : baseVariant === 1 ? "Rare" : "Common"}${doubleShiny ? `/${this.pokemon.fusionVariant === 2 ? "Epic" : this.pokemon.fusionVariant === 1 ? "Rare" : "Common"}` : ""}`
+          : "";
+      this.shinyIcon.on("pointerover", () =>
+        this.scene.ui.showTooltip(
+          null,
+          `Shiny${shinyDescriptor ? ` (${shinyDescriptor})` : ""}`,
+          true
+        )
+      );
+      this.shinyIcon.on("pointerout", () => this.scene.ui.hideTooltip());
     }
 
     this.fusionShinyIcon.setPosition(this.shinyIcon.x, this.shinyIcon.y);
@@ -365,7 +422,7 @@ export default class SummaryUiHandler extends UiHandler {
 
     switch (this.summaryUiMode) {
     case SummaryUiMode.DEFAULT:
-      const page = args.length < 2 ? Page.PROFILE : args[2] as Page;
+      const page = args.length < 2 ? Page.PROFILE : (args[2] as Page);
       this.hideMoveEffect(true);
       this.setCursor(page);
       break;
@@ -383,7 +440,9 @@ export default class SummaryUiHandler extends UiHandler {
 
     if (this.pokemon.status || this.pokemon.pokerus) {
       this.showStatus(!fromSummary);
-      this.status.setFrame(this.pokemon.status ? StatusEffect[this.pokemon.status.effect].toLowerCase() : "pokerus");
+      this.status.setFrame(
+        this.pokemon.status ? StatusEffect[this.pokemon.status.effect].toLowerCase() : "pokerus"
+      );
     } else {
       this.hideStatus(!fromSummary);
     }
@@ -413,11 +472,12 @@ export default class SummaryUiHandler extends UiHandler {
             } else {
               if (this.selectedMoveIndex !== this.moveCursor) {
                 const tempMove = this.pokemon.moveset[this.selectedMoveIndex];
-                this.pokemon.moveset[this.selectedMoveIndex] = this.pokemon.moveset[this.moveCursor];
+                this.pokemon.moveset[this.selectedMoveIndex] =
+                  this.pokemon.moveset[this.moveCursor];
                 this.pokemon.moveset[this.moveCursor] = tempMove;
 
-                const selectedMoveRow = this.moveRowsContainer.getAt(this.selectedMoveIndex) as Phaser.GameObjects.Container;
-                const switchMoveRow = this.moveRowsContainer.getAt(this.moveCursor) as Phaser.GameObjects.Container;
+                const selectedMoveRow = this.moveRowsContainer.getAt(this.selectedMoveIndex);
+                const switchMoveRow = this.moveRowsContainer.getAt(this.moveCursor);
 
                 this.moveRowsContainer.moveTo(selectedMoveRow, this.moveCursor);
                 this.moveRowsContainer.moveTo(switchMoveRow, this.selectedMoveIndex);
@@ -474,11 +534,15 @@ export default class SummaryUiHandler extends UiHandler {
           // if we're on the PROFILE page and this pokemon has a passive unlocked..
           // Since abilities are displayed by default, all we need to do is toggle visibility on all elements to show passives
           this.abilityContainer.nameText.setVisible(!this.abilityContainer.descriptionText.visible);
-          this.abilityContainer.descriptionText.setVisible(!this.abilityContainer.descriptionText.visible);
+          this.abilityContainer.descriptionText.setVisible(
+            !this.abilityContainer.descriptionText.visible
+          );
           this.abilityContainer.labelImage.setVisible(!this.abilityContainer.labelImage.visible);
 
           this.passiveContainer.nameText.setVisible(!this.passiveContainer.descriptionText.visible);
-          this.passiveContainer.descriptionText.setVisible(!this.passiveContainer.descriptionText.visible);
+          this.passiveContainer.descriptionText.setVisible(
+            !this.passiveContainer.descriptionText.visible
+          );
           this.passiveContainer.labelImage.setVisible(!this.passiveContainer.labelImage.visible);
         }
       } else if (button === Button.CANCEL) {
@@ -489,7 +553,7 @@ export default class SummaryUiHandler extends UiHandler {
         }
         success = true;
       } else {
-        const pages = Utils.getEnumValues(Page);
+        const pages = Object.values(Page);
         switch (button) {
         case Button.UP:
         case Button.DOWN:
@@ -502,7 +566,7 @@ export default class SummaryUiHandler extends UiHandler {
           if ((isDown && partyMemberIndex < party.length - 1) || (!isDown && partyMemberIndex)) {
             const page = this.cursor;
             this.clear();
-            this.show([ party[partyMemberIndex + (isDown ? 1 : -1)], this.summaryUiMode, page ]);
+            this.show([party[partyMemberIndex + (isDown ? 1 : -1)], this.summaryUiMode, page]);
           }
           break;
         case Button.LEFT:
@@ -542,14 +606,16 @@ export default class SummaryUiHandler extends UiHandler {
       if (selectedMove) {
         this.moveDescriptionText.setY(84);
         this.movePowerText.setText(selectedMove.power >= 0 ? selectedMove.power.toString() : "---");
-        this.moveAccuracyText.setText(selectedMove.accuracy >= 0 ? selectedMove.accuracy.toString() : "---");
+        this.moveAccuracyText.setText(
+          selectedMove.accuracy >= 0 ? selectedMove.accuracy.toString() : "---"
+        );
         this.moveCategoryIcon.setFrame(MoveCategory[selectedMove.category].toLowerCase());
         this.showMoveEffect();
       } else {
         this.hideMoveEffect();
       }
 
-      this.moveDescriptionText.setText(selectedMove?.effect || "");
+      this.moveDescriptionText.setText(selectedMove.effect || "");
       const moveDescriptionLineCount = Math.floor(this.moveDescriptionText.displayHeight / 14.83);
 
       if (this.descriptionScrollTween) {
@@ -595,7 +661,12 @@ export default class SummaryUiHandler extends UiHandler {
       });
       if (this.selectedMoveIndex > -1) {
         if (!this.selectedMoveCursorObj) {
-          this.selectedMoveCursorObj = this.scene.add.sprite(-2, 0, "summary_moves_cursor", "select");
+          this.selectedMoveCursorObj = this.scene.add.sprite(
+            -2,
+            0,
+            "summary_moves_cursor",
+            "select"
+          );
           this.selectedMoveCursorObj.setOrigin(0, 1);
           this.movesContainer.add(this.selectedMoveCursorObj);
           this.movesContainer.moveBelow(this.selectedMoveCursorObj, this.moveCursorObj);
@@ -615,7 +686,10 @@ export default class SummaryUiHandler extends UiHandler {
 
         if (this.summaryPageContainer.visible) {
           this.transitioning = true;
-          this.populatePageContainer(this.summaryPageTransitionContainer, forward ? cursor : cursor + 1);
+          this.populatePageContainer(
+            this.summaryPageTransitionContainer,
+            forward ? cursor : cursor + 1
+          );
           if (forward) {
             this.summaryPageTransitionContainer.x += 214;
           } else {
@@ -628,7 +702,7 @@ export default class SummaryUiHandler extends UiHandler {
             onComplete: () => {
               if (forward) {
                 this.populatePageContainer(this.summaryPageContainer);
-                if (this.cursor===Page.MOVES) {
+                if (this.cursor === Page.MOVES) {
                   this.moveCursorObj = null;
                   this.showMoveSelect();
                   this.showMoveEffect();
@@ -664,7 +738,7 @@ export default class SummaryUiHandler extends UiHandler {
       });
       pageContainer.removeBetween(1, undefined, true);
     }
-    const pageBg =  (pageContainer.getAt(0) as Phaser.GameObjects.Sprite);
+    const pageBg = pageContainer.getAt(0);
     pageBg.setTexture(this.getPageKey(page));
 
     if (this.descriptionScrollTween) {
@@ -681,12 +755,25 @@ export default class SummaryUiHandler extends UiHandler {
       trainerLabel.setOrigin(0, 0);
       profileContainer.add(trainerLabel);
 
-      const trainerText = addTextObject(this.scene, 25, 12, loggedInUser?.username || "Unknown",
-        this.scene.gameData.gender === PlayerGender.FEMALE ? TextStyle.SUMMARY_PINK : TextStyle.SUMMARY_BLUE);
+      const trainerText = addTextObject(
+        this.scene,
+        25,
+        12,
+        loggedInUser.username || "Unknown",
+        this.scene.gameData.gender === PlayerGender.FEMALE
+          ? TextStyle.SUMMARY_PINK
+          : TextStyle.SUMMARY_BLUE
+      );
       trainerText.setOrigin(0, 0);
       profileContainer.add(trainerText);
 
-      const trainerIdText = addTextObject(this.scene, 174, 12, this.scene.gameData.trainerId.toString(), TextStyle.SUMMARY_ALT);
+      const trainerIdText = addTextObject(
+        this.scene,
+        174,
+        12,
+        this.scene.gameData.trainerId.toString(),
+        TextStyle.SUMMARY_ALT
+      );
       trainerIdText.setOrigin(0, 0);
       profileContainer.add(trainerIdText);
 
@@ -697,7 +784,13 @@ export default class SummaryUiHandler extends UiHandler {
       const getTypeIcon = (index: integer, type: Type, tera: boolean = false) => {
         const xCoord = 39 + 34 * index;
         const typeIcon = !tera
-          ? this.scene.add.sprite(xCoord, 42, `types${Utils.verifyLang(i18next.resolvedLanguage) ? `_${i18next.resolvedLanguage}` : ""}`, Type[type].toLowerCase())          : this.scene.add.sprite(xCoord, 42, "type_tera");
+          ? this.scene.add.sprite(
+            xCoord,
+            42,
+            `types${Utils.verifyLang(i18next.resolvedLanguage) ? `_${i18next.resolvedLanguage}` : ""}`,
+            Type[type].toLowerCase()
+          )
+          : this.scene.add.sprite(xCoord, 42, "type_tera");
         if (tera) {
           typeIcon.setScale(0.5);
           const typeRgb = getTypeRgb(type);
@@ -721,9 +814,15 @@ export default class SummaryUiHandler extends UiHandler {
         luckLabelText.setOrigin(0, 0);
         profileContainer.add(luckLabelText);
 
-        const luckText = addTextObject(this.scene, 141 + luckLabelText.displayWidth + 2, 28, this.pokemon.getLuck().toString(), TextStyle.SUMMARY);
+        const luckText = addTextObject(
+          this.scene,
+          141 + luckLabelText.displayWidth + 2,
+          28,
+          this.pokemon.getLuck().toString(),
+          TextStyle.SUMMARY
+        );
         luckText.setOrigin(0, 0);
-        luckText.setTint(getVariantTint((Math.min(this.pokemon.getLuck() - 1, 2)) as Variant));
+        luckText.setTint(getVariantTint(Math.min(this.pokemon.getLuck() - 1, 2) as Variant));
         profileContainer.add(luckText);
       }
 
@@ -731,7 +830,8 @@ export default class SummaryUiHandler extends UiHandler {
         labelImage: this.scene.add.image(0, 0, "summary_profile_ability"),
         ability: this.pokemon.getAbility(true),
         nameText: null,
-        descriptionText: null};
+        descriptionText: null
+      };
 
       const allAbilityInfo = [this.abilityContainer]; // Creates an array to iterate through
       // Only add to the array and set up displaying a passive if it's unlocked
@@ -740,35 +840,55 @@ export default class SummaryUiHandler extends UiHandler {
           labelImage: this.scene.add.image(0, 0, "summary_profile_passive"),
           ability: this.pokemon.getPassiveAbility(),
           nameText: null,
-          descriptionText: null};
+          descriptionText: null
+        };
         allAbilityInfo.push(this.passiveContainer);
 
         // Sets up the pixel button prompt image
-        this.abilityPrompt = this.scene.add.image(0, 0, !this.scene.inputController?.gamepadSupport ? "summary_profile_prompt_z" : "summary_profile_prompt_a");
+        this.abilityPrompt = this.scene.add.image(
+          0,
+          0,
+          !this.scene.inputController.gamepadSupport
+            ? "summary_profile_prompt_z"
+            : "summary_profile_prompt_a"
+        );
         this.abilityPrompt.setPosition(8, 43);
         this.abilityPrompt.setVisible(true);
         this.abilityPrompt.setOrigin(0, 0);
         profileContainer.add(this.abilityPrompt);
       }
 
-      allAbilityInfo.forEach(abilityInfo => {
+      allAbilityInfo.forEach((abilityInfo) => {
         abilityInfo.labelImage.setPosition(17, 43);
         abilityInfo.labelImage.setVisible(true);
         abilityInfo.labelImage.setOrigin(0, 0);
         profileContainer.add(abilityInfo.labelImage);
 
-        abilityInfo.nameText = addTextObject(this.scene, 7, 66, abilityInfo.ability.name, TextStyle.SUMMARY_ALT);
+        abilityInfo.nameText = addTextObject(
+          this.scene,
+          7,
+          66,
+          abilityInfo.ability.name,
+          TextStyle.SUMMARY_ALT
+        );
         abilityInfo.nameText.setOrigin(0, 1);
         profileContainer.add(abilityInfo.nameText);
 
-        abilityInfo.descriptionText = addTextObject(this.scene, 7, 69, abilityInfo.ability.description, TextStyle.WINDOW_ALT, { wordWrap: { width: 1224 } });
+        abilityInfo.descriptionText = addTextObject(
+          this.scene,
+          7,
+          69,
+          abilityInfo.ability.description,
+          TextStyle.WINDOW_ALT,
+          { wordWrap: { width: 1224 } }
+        );
         abilityInfo.descriptionText.setOrigin(0, 0);
         profileContainer.add(abilityInfo.descriptionText);
 
         // Sets up the mask that hides the description text to give an illusion of scrolling
         const descriptionTextMaskRect = this.scene.make.graphics({});
         descriptionTextMaskRect.setScale(6);
-        descriptionTextMaskRect.fillStyle(0xFFFFFF);
+        descriptionTextMaskRect.fillStyle(0xffffff);
         descriptionTextMaskRect.beginPath();
         descriptionTextMaskRect.fillRect(110, 90.5, 206, 31);
 
@@ -776,7 +896,9 @@ export default class SummaryUiHandler extends UiHandler {
 
         abilityInfo.descriptionText.setMask(abilityDescriptionTextMask);
 
-        const abilityDescriptionLineCount = Math.floor(abilityInfo.descriptionText.displayHeight / 14.83);
+        const abilityDescriptionLineCount = Math.floor(
+          abilityInfo.descriptionText.displayHeight / 14.83
+        );
 
         // Animates the description text moving upwards
         if (abilityDescriptionLineCount > 2) {
@@ -792,9 +914,9 @@ export default class SummaryUiHandler extends UiHandler {
         }
       });
       // Turn off visibility of passive info by default
-      this.passiveContainer?.labelImage.setVisible(false);
-      this.passiveContainer?.nameText.setVisible(false);
-      this.passiveContainer?.descriptionText.setVisible(false);
+      this.passiveContainer.labelImage.setVisible(false);
+      this.passiveContainer.nameText.setVisible(false);
+      this.passiveContainer.descriptionText.setVisible(false);
 
       const memoString = `${getBBCodeFrag(Utils.toReadableString(Nature[this.pokemon.getNature()]), TextStyle.SUMMARY_RED)}${getBBCodeFrag(" nature,", TextStyle.WINDOW_ALT)}\n${getBBCodeFrag(`${this.pokemon.metBiome === -1 ? "apparently " : ""}met at Lv`, TextStyle.WINDOW_ALT)}${getBBCodeFrag(this.pokemon.metLevel.toString(), TextStyle.SUMMARY_RED)}${getBBCodeFrag(",", TextStyle.WINDOW_ALT)}\n${getBBCodeFrag(getBiomeName(this.pokemon.metBiome), TextStyle.SUMMARY_RED)}${getBBCodeFrag(".", TextStyle.WINDOW_ALT)}`;
 
@@ -806,33 +928,51 @@ export default class SummaryUiHandler extends UiHandler {
       const statsContainer = this.scene.add.container(0, -pageBg.height);
       pageContainer.add(statsContainer);
 
-      const stats = Utils.getEnumValues(Stat) as Stat[];
+      const stats = Object.values(Stat) as Stat[];
 
       stats.forEach((stat, s) => {
-        const statName = stat !== Stat.HP
-          ? getStatName(stat)
-          : "HP";
+        const statName = stat !== Stat.HP ? getStatName(stat) : "HP";
         const rowIndex = s % 3;
         const colIndex = Math.floor(s / 3);
 
         const natureStatMultiplier = getNatureStatMultiplier(this.pokemon.getNature(), s);
 
-        const statLabel = addTextObject(this.scene, 27 + 115 * colIndex + (colIndex === 1 ?  5 : 0), 56 + 16 * rowIndex, statName, natureStatMultiplier === 1 ? TextStyle.SUMMARY : natureStatMultiplier > 1 ? TextStyle.SUMMARY_PINK : TextStyle.SUMMARY_BLUE);
+        const statLabel = addTextObject(
+          this.scene,
+          27 + 115 * colIndex + (colIndex === 1 ? 5 : 0),
+          56 + 16 * rowIndex,
+          statName,
+          natureStatMultiplier === 1
+            ? TextStyle.SUMMARY
+            : natureStatMultiplier > 1
+              ? TextStyle.SUMMARY_PINK
+              : TextStyle.SUMMARY_BLUE
+        );
         statLabel.setOrigin(0.5, 0);
         statsContainer.add(statLabel);
 
-        const statValueText = stat !== Stat.HP
-          ? Utils.formatStat(this.pokemon.stats[s])
-          : `${Utils.formatStat(this.pokemon.hp, true)}/${Utils.formatStat(this.pokemon.getMaxHp(), true)}`;
+        const statValueText =
+            stat !== Stat.HP
+              ? Utils.formatStat(this.pokemon.stats[s])
+              : `${Utils.formatStat(this.pokemon.hp, true)}/${Utils.formatStat(this.pokemon.getMaxHp(), true)}`;
 
-        const statValue = addTextObject(this.scene, 120 + 88 * colIndex, 56 + 16 * rowIndex, statValueText, TextStyle.WINDOW_ALT);
+        const statValue = addTextObject(
+          this.scene,
+          120 + 88 * colIndex,
+          56 + 16 * rowIndex,
+          statValueText,
+          TextStyle.WINDOW_ALT
+        );
         statValue.setOrigin(1, 0);
         statsContainer.add(statValue);
       });
 
-      const itemModifiers = (this.scene.findModifiers(m => m instanceof PokemonHeldItemModifier
-          && (m as PokemonHeldItemModifier).pokemonId === this.pokemon.id, true) as PokemonHeldItemModifier[])
-        .sort(modifierSortFunc);
+      const itemModifiers = (
+          this.scene.findModifiers(
+            (m) => m instanceof PokemonHeldItemModifier && m.pokemonId === this.pokemon.id,
+            true
+          ) as PokemonHeldItemModifier[]
+      ).sort(modifierSortFunc);
 
       itemModifiers.forEach((item, i) => {
         const icon = item.getIcon(this.scene, true);
@@ -840,13 +980,19 @@ export default class SummaryUiHandler extends UiHandler {
         icon.setPosition((i % 17) * 12 + 3, 14 * Math.floor(i / 17) + 15);
         statsContainer.add(icon);
 
-        icon.setInteractive(new Phaser.Geom.Rectangle(0, 0, 32, 32), Phaser.Geom.Rectangle.Contains);
-        icon.on("pointerover", () => (this.scene as BattleScene).ui.showTooltip(item.type.name, item.type.getDescription(this.scene), true));
-        icon.on("pointerout", () => (this.scene as BattleScene).ui.hideTooltip());
+        icon.setInteractive(
+          new Phaser.Geom.Rectangle(0, 0, 32, 32),
+          Phaser.Geom.Rectangle.Contains
+        );
+        icon.on("pointerover", () =>
+          this.scene.ui.showTooltip(item.type.name, item.type.getDescription(this.scene), true)
+        );
+        icon.on("pointerout", () => this.scene.ui.hideTooltip());
       });
 
       const relLvExp = getLevelRelExp(this.pokemon.level + 1, this.pokemon.species.growthRate);
-      const expRatio = this.pokemon.level < this.scene.getMaxExpLevel() ? this.pokemon.levelExp / relLvExp : 0;
+      const expRatio =
+          this.pokemon.level < this.scene.getMaxExpLevel() ? this.pokemon.levelExp / relLvExp : 0;
 
       const expLabel = addTextObject(this.scene, 6, 112, "EXP. Points", TextStyle.SUMMARY);
       expLabel.setOrigin(0, 0);
@@ -856,14 +1002,28 @@ export default class SummaryUiHandler extends UiHandler {
       nextLvExpLabel.setOrigin(0, 0);
       statsContainer.add(nextLvExpLabel);
 
-      const expText = addTextObject(this.scene, 208, 112, this.pokemon.exp.toString(), TextStyle.WINDOW_ALT);
+      const expText = addTextObject(
+        this.scene,
+        208,
+        112,
+        this.pokemon.exp.toString(),
+        TextStyle.WINDOW_ALT
+      );
       expText.setOrigin(1, 0);
       statsContainer.add(expText);
 
-      const nextLvExp = this.pokemon.level < this.scene.getMaxExpLevel()
-        ? getLevelTotalExp(this.pokemon.level + 1, this.pokemon.species.growthRate) - this.pokemon.exp
-        : 0;
-      const nextLvExpText = addTextObject(this.scene, 208, 128, nextLvExp.toString(), TextStyle.WINDOW_ALT);
+      const nextLvExp =
+          this.pokemon.level < this.scene.getMaxExpLevel()
+            ? getLevelTotalExp(this.pokemon.level + 1, this.pokemon.species.growthRate) -
+              this.pokemon.exp
+            : 0;
+      const nextLvExpText = addTextObject(
+        this.scene,
+        208,
+        128,
+        nextLvExp.toString(),
+        TextStyle.WINDOW_ALT
+      );
       nextLvExpText.setOrigin(1, 0);
       statsContainer.add(nextLvExpText);
 
@@ -873,9 +1033,14 @@ export default class SummaryUiHandler extends UiHandler {
 
       const expMaskRect = this.scene.make.graphics({});
       expMaskRect.setScale(6);
-      expMaskRect.fillStyle(0xFFFFFF);
+      expMaskRect.fillStyle(0xffffff);
       expMaskRect.beginPath();
-      expMaskRect.fillRect(140 + pageContainer.x, 145 + pageContainer.y + 21, Math.floor(expRatio * 64), 3);
+      expMaskRect.fillRect(
+        140 + pageContainer.x,
+        145 + pageContainer.y + 21,
+        Math.floor(expRatio * 64),
+        3
+      );
 
       const expMask = expMaskRect.createGeometryMask();
 
@@ -893,14 +1058,26 @@ export default class SummaryUiHandler extends UiHandler {
       extraRowOverlay.setOrigin(0, 1);
       this.extraMoveRowContainer.add(extraRowOverlay);
 
-      const extraRowText = addTextObject(this.scene, 35, 0, this.summaryUiMode === SummaryUiMode.LEARN_MOVE ? this.newMove.name : "Cancel",
-        this.summaryUiMode === SummaryUiMode.LEARN_MOVE ? TextStyle.SUMMARY_PINK : TextStyle.SUMMARY);
+      const extraRowText = addTextObject(
+        this.scene,
+        35,
+        0,
+        this.summaryUiMode === SummaryUiMode.LEARN_MOVE ? this.newMove.name : "Cancel",
+        this.summaryUiMode === SummaryUiMode.LEARN_MOVE
+          ? TextStyle.SUMMARY_PINK
+          : TextStyle.SUMMARY
+      );
       extraRowText.setOrigin(0, 1);
       this.extraMoveRowContainer.add(extraRowText);
 
       if (this.summaryUiMode === SummaryUiMode.LEARN_MOVE) {
         this.extraMoveRowContainer.setVisible(true);
-        const newMoveTypeIcon = this.scene.add.sprite(0, 0, `types${Utils.verifyLang(i18next.resolvedLanguage) ? `_${i18next.resolvedLanguage}` : ""}`, Type[this.newMove.type].toLowerCase());
+        const newMoveTypeIcon = this.scene.add.sprite(
+          0,
+          0,
+          `types${Utils.verifyLang(i18next.resolvedLanguage) ? `_${i18next.resolvedLanguage}` : ""}`,
+          Type[this.newMove.type].toLowerCase()
+        );
         newMoveTypeIcon.setOrigin(0, 1);
         this.extraMoveRowContainer.add(newMoveTypeIcon);
 
@@ -923,11 +1100,23 @@ export default class SummaryUiHandler extends UiHandler {
         this.moveRowsContainer.add(moveRowContainer);
 
         if (move) {
-          const typeIcon = this.scene.add.sprite(0, 0, `types${Utils.verifyLang(i18next.resolvedLanguage) ? `_${i18next.resolvedLanguage}` : ""}`, Type[move.getMove().type].toLowerCase());          typeIcon.setOrigin(0, 1);
+          const typeIcon = this.scene.add.sprite(
+            0,
+            0,
+            `types${Utils.verifyLang(i18next.resolvedLanguage) ? `_${i18next.resolvedLanguage}` : ""}`,
+            Type[move.getMove().type].toLowerCase()
+          );
+          typeIcon.setOrigin(0, 1);
           moveRowContainer.add(typeIcon);
         }
 
-        const moveText = addTextObject(this.scene, 35, 0, move ? move.getName() : "-", TextStyle.SUMMARY);
+        const moveText = addTextObject(
+          this.scene,
+          35,
+          0,
+          move ? move.getName() : "-",
+          TextStyle.SUMMARY
+        );
         moveText.setOrigin(0, 1);
         moveRowContainer.add(moveText);
 
@@ -947,12 +1136,14 @@ export default class SummaryUiHandler extends UiHandler {
         moveRowContainer.add(ppText);
       }
 
-      this.moveDescriptionText = addTextObject(this.scene, 2, 84, "", TextStyle.WINDOW_ALT, { wordWrap: { width: 1212 } });
+      this.moveDescriptionText = addTextObject(this.scene, 2, 84, "", TextStyle.WINDOW_ALT, {
+        wordWrap: { width: 1212 }
+      });
       this.movesContainer.add(this.moveDescriptionText);
 
       const moveDescriptionTextMaskRect = this.scene.make.graphics({});
       moveDescriptionTextMaskRect.setScale(6);
-      moveDescriptionTextMaskRect.fillStyle(0xFFFFFF);
+      moveDescriptionTextMaskRect.fillStyle(0xffffff);
       moveDescriptionTextMaskRect.beginPath();
       moveDescriptionTextMaskRect.fillRect(112, 130, 202, 46);
 

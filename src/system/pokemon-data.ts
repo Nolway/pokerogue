@@ -7,8 +7,8 @@ import { getPokemonSpecies } from "../data/pokemon-species";
 import { Status } from "../data/status-effect";
 import Pokemon, { EnemyPokemon, PokemonMove, PokemonSummonData } from "../field/pokemon";
 import { TrainerSlot } from "../data/trainer-config";
-import { Variant } from "#app/data/variant";
 import { loadBattlerTag } from "../data/battler-tags";
+import { Variant } from "#app/data/variant";
 import { Biome } from "#enums/biome";
 import { Moves } from "#enums/moves";
 import { Species } from "#enums/species";
@@ -58,7 +58,10 @@ export default class PokemonData {
     this.id = source.id;
     this.player = sourcePokemon ? sourcePokemon.isPlayer() : source.player;
     this.species = sourcePokemon ? sourcePokemon.species.speciesId : source.species;
-    this.formIndex = Math.max(Math.min(source.formIndex, getPokemonSpecies(this.species).forms.length - 1), 0);
+    this.formIndex = Math.max(
+      Math.min(source.formIndex, getPokemonSpecies(this.species).forms.length - 1),
+      0
+    );
     this.abilityIndex = source.abilityIndex;
     this.passive = source.passive;
     this.shiny = source.shiny;
@@ -75,27 +78,39 @@ export default class PokemonData {
     }
     this.stats = source.stats;
     this.ivs = source.ivs;
-    this.nature = source.nature !== undefined ? source.nature : 0 as Nature;
+    this.nature = source.nature !== undefined ? source.nature : (0 as Nature);
     this.natureOverride = source.natureOverride !== undefined ? source.natureOverride : -1;
-    this.friendship = source.friendship !== undefined ? source.friendship : getPokemonSpecies(this.species).baseFriendship;
+    this.friendship =
+      source.friendship !== undefined
+        ? source.friendship
+        : getPokemonSpecies(this.species).baseFriendship;
     this.metLevel = source.metLevel || 5;
     this.metBiome = source.metBiome !== undefined ? source.metBiome : -1;
-    this.luck = source.luck !== undefined ? source.luck : (source.shiny ? (source.variant + 1) : 0);
+    this.luck = source.luck !== undefined ? source.luck : source.shiny ? source.variant + 1 : 0;
     if (!forHistory) {
       this.pauseEvolutions = !!source.pauseEvolutions;
     }
     this.pokerus = !!source.pokerus;
 
-    this.fusionSpecies = sourcePokemon ? sourcePokemon.fusionSpecies?.speciesId : source.fusionSpecies;
+    this.fusionSpecies = sourcePokemon
+      ? sourcePokemon.fusionSpecies.speciesId
+      : source.fusionSpecies;
     this.fusionFormIndex = source.fusionFormIndex;
     this.fusionAbilityIndex = source.fusionAbilityIndex;
     this.fusionShiny = source.fusionShiny;
     this.fusionVariant = source.fusionVariant;
     this.fusionGender = source.fusionGender;
-    this.fusionLuck = source.fusionLuck !== undefined ? source.fusionLuck : (source.fusionShiny ? source.fusionVariant + 1 : 0);
+    this.fusionLuck =
+      source.fusionLuck !== undefined
+        ? source.fusionLuck
+        : source.fusionShiny
+          ? source.fusionVariant + 1
+          : 0;
 
     if (!forHistory) {
-      this.boss = (source instanceof EnemyPokemon && !!source.bossSegments) || (!this.player && !!source.boss);
+      this.boss =
+        (source instanceof EnemyPokemon && !!source.bossSegments) ||
+        (!this.player && !!source.boss);
     }
 
     if (sourcePokemon) {
@@ -107,7 +122,11 @@ export default class PokemonData {
         }
       }
     } else {
-      this.moveset = (source.moveset || [ new PokemonMove(Moves.TACKLE), new PokemonMove(Moves.GROWL) ]).filter(m => m).map((m: any) => new PokemonMove(m.moveId, m.ppUsed, m.ppUp));
+      this.moveset = (
+        source.moveset || [new PokemonMove(Moves.TACKLE), new PokemonMove(Moves.GROWL)]
+      )
+        .filter((m) => m)
+        .map((m: any) => new PokemonMove(m.moveId, m.ppUsed, m.ppUp));
       if (!forHistory) {
         this.status = source.status
           ? new Status(source.status.effect, source.status.turnCount, source.status.cureTurn)
@@ -124,11 +143,11 @@ export default class PokemonData {
         this.summonData.abilitiesApplied = source.summonData.abilitiesApplied;
 
         this.summonData.ability = source.summonData.ability;
-        this.summonData.moveset = source.summonData.moveset?.map(m => PokemonMove.loadMove(m));
+        this.summonData.moveset = source.summonData.moveset?.map((m) => PokemonMove.loadMove(m));
         this.summonData.types = source.summonData.types;
 
         if (source.summonData.tags) {
-          this.summonData.tags = source.summonData.tags?.map(t => loadBattlerTag(t));
+          this.summonData.tags = source.summonData.tags?.map((t) => loadBattlerTag(t));
         } else {
           this.summonData.tags = [];
         }
@@ -136,11 +155,37 @@ export default class PokemonData {
     }
   }
 
-  toPokemon(scene: BattleScene, battleType?: BattleType, partyMemberIndex: integer = 0, double: boolean = false): Pokemon {
+  toPokemon(
+    scene: BattleScene,
+    battleType?: BattleType,
+    partyMemberIndex: integer = 0,
+    double: boolean = false
+  ): Pokemon {
     const species = getPokemonSpecies(this.species);
     const ret: Pokemon = this.player
-      ? scene.addPlayerPokemon(species, this.level, this.abilityIndex, this.formIndex, this.gender, this.shiny, this.variant, this.ivs, this.nature, this)
-      : scene.addEnemyPokemon(species, this.level, battleType === BattleType.TRAINER ? !double || !(partyMemberIndex % 2) ? TrainerSlot.TRAINER : TrainerSlot.TRAINER_PARTNER : TrainerSlot.NONE, this.boss, this);
+      ? scene.addPlayerPokemon(
+        species,
+        this.level,
+        this.abilityIndex,
+        this.formIndex,
+        this.gender,
+        this.shiny,
+        this.variant,
+        this.ivs,
+        this.nature,
+        this
+      )
+      : scene.addEnemyPokemon(
+        species,
+        this.level,
+        battleType === BattleType.TRAINER
+          ? !double || !(partyMemberIndex % 2)
+            ? TrainerSlot.TRAINER
+            : TrainerSlot.TRAINER_PARTNER
+          : TrainerSlot.NONE,
+        this.boss,
+        this
+      );
     if (this.summonData) {
       ret.primeSummonData(this.summonData);
     }

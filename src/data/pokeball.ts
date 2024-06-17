@@ -86,7 +86,14 @@ export function getPokeballTintColor(type: PokeballType): number {
   }
 }
 
-export function doPokeballBounceAnim(scene: BattleScene, pokeball: Phaser.GameObjects.Sprite, y1: number, y2: number, baseBounceDuration: integer, callback: Function) {
+export function doPokeballBounceAnim(
+  scene: BattleScene,
+  pokeball: Phaser.GameObjects.Sprite,
+  y1: number,
+  y2: number,
+  baseBounceDuration: integer,
+  callback: Function
+) {
   let bouncePower = 1;
   let bounceYOffset = y1;
   let bounceY = y2;

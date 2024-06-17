@@ -1,13 +1,13 @@
+import BBCodeText from "phaser3-rex-plugins/plugins/bbcodetext";
 import BattleScene from "../battle-scene";
+import * as Utils from "../utils";
+import { getStatName, Stat } from "../data/pokemon-stat";
+import i18next from "../plugins/i18n";
 import { addBBCodeTextObject, addTextObject, getTextColor, TextStyle } from "./text";
 import { Mode } from "./ui";
-import * as Utils from "../utils";
 import MessageUiHandler from "./message-ui-handler";
-import { getStatName, Stat } from "../data/pokemon-stat";
 import { addWindow } from "./ui-theme";
-import BBCodeText from "phaser3-rex-plugins/plugins/bbcodetext";
-import {Button} from "#enums/buttons";
-import i18next from "../plugins/i18n";
+import { Button } from "#enums/buttons";
 
 export default class BattleMessageUiHandler extends MessageUiHandler {
   private levelUpStatsContainer: Phaser.GameObjects.Container;
@@ -76,7 +76,18 @@ export default class BattleMessageUiHandler extends MessageUiHandler {
     this.nameBoxContainer = this.scene.add.container(0, -16);
     this.nameBoxContainer.setVisible(false);
 
-    this.nameBox = this.scene.add.nineslice(0, 0, "namebox", this.scene.windowType, 72, 16, 8, 8, 5, 5);
+    this.nameBox = this.scene.add.nineslice(
+      0,
+      0,
+      "namebox",
+      this.scene.windowType,
+      72,
+      16,
+      8,
+      8,
+      5,
+      5
+    );
     this.nameBox.setOrigin(0, 0);
 
     this.nameText = addTextObject(this.scene, 8, 0, "Rival", TextStyle.MESSAGE, { maxLines: 1 });
@@ -98,28 +109,55 @@ export default class BattleMessageUiHandler extends MessageUiHandler {
 
     this.levelUpStatsContainer = levelUpStatsContainer;
 
-    const levelUpStatsLabelsContent = addTextObject(this.scene, (this.scene.game.canvas.width / 6) - 73, -94, "", TextStyle.WINDOW, { maxLines: 6 });
+    const levelUpStatsLabelsContent = addTextObject(
+      this.scene,
+      this.scene.game.canvas.width / 6 - 73,
+      -94,
+      "",
+      TextStyle.WINDOW,
+      { maxLines: 6 }
+    );
     let levelUpStatsLabelText = "";
 
-    const stats = Utils.getEnumValues(Stat);
+    const stats = Object.values(Stat);
     for (const s of stats) {
       levelUpStatsLabelText += `${getStatName(s)}\n`;
     }
     levelUpStatsLabelsContent.text = levelUpStatsLabelText;
     levelUpStatsLabelsContent.x -= levelUpStatsLabelsContent.displayWidth;
 
-    const levelUpStatsBg = addWindow(this.scene, (this.scene.game.canvas.width / 6), -100, 80 + levelUpStatsLabelsContent.displayWidth, 100);
+    const levelUpStatsBg = addWindow(
+      this.scene,
+      this.scene.game.canvas.width / 6,
+      -100,
+      80 + levelUpStatsLabelsContent.displayWidth,
+      100
+    );
     levelUpStatsBg.setOrigin(1, 0);
     levelUpStatsContainer.add(levelUpStatsBg);
 
     levelUpStatsContainer.add(levelUpStatsLabelsContent);
 
-    const levelUpStatsIncrContent = addTextObject(this.scene, (this.scene.game.canvas.width / 6) - 50, -94, "+\n+\n+\n+\n+\n+", TextStyle.WINDOW, { maxLines: 6 });
+    const levelUpStatsIncrContent = addTextObject(
+      this.scene,
+      this.scene.game.canvas.width / 6 - 50,
+      -94,
+      "+\n+\n+\n+\n+\n+",
+      TextStyle.WINDOW,
+      { maxLines: 6 }
+    );
     levelUpStatsContainer.add(levelUpStatsIncrContent);
 
     this.levelUpStatsIncrContent = levelUpStatsIncrContent;
 
-    const levelUpStatsValuesContent = addBBCodeTextObject(this.scene, (this.scene.game.canvas.width / 6) - 7, -94, "", TextStyle.WINDOW, { maxLines: 6 , lineSpacing: 5});
+    const levelUpStatsValuesContent = addBBCodeTextObject(
+      this.scene,
+      this.scene.game.canvas.width / 6 - 7,
+      -94,
+      "",
+      TextStyle.WINDOW,
+      { maxLines: 6, lineSpacing: 5 }
+    );
     levelUpStatsValuesContent.setOrigin(1, 0);
     levelUpStatsValuesContent.setAlign("right");
     levelUpStatsContainer.add(levelUpStatsValuesContent);
@@ -156,24 +194,43 @@ export default class BattleMessageUiHandler extends MessageUiHandler {
     super.clear();
   }
 
-  showText(text: string, delay?: integer, callback?: Function, callbackDelay?: integer, prompt?: boolean, promptDelay?: integer) {
+  showText(
+    text: string,
+    delay?: integer,
+    callback?: Function,
+    callbackDelay?: integer,
+    prompt?: boolean,
+    promptDelay?: integer
+  ) {
     this.hideNameText();
     super.showText(text, delay, callback, callbackDelay, prompt, promptDelay);
   }
 
-  showDialogue(text: string, name: string, delay?: integer, callback?: Function, callbackDelay?: integer, prompt?: boolean, promptDelay?: integer) {
+  showDialogue(
+    text: string,
+    name: string,
+    delay?: integer,
+    callback?: Function,
+    callbackDelay?: integer,
+    prompt?: boolean,
+    promptDelay?: integer
+  ) {
     this.showNameText(name);
     super.showDialogue(text, name, delay, callback, callbackDelay, prompt, promptDelay);
   }
 
-  promptLevelUpStats(partyMemberIndex: integer, prevStats: integer[], showTotals: boolean): Promise<void> {
-    return new Promise(resolve => {
+  promptLevelUpStats(
+    partyMemberIndex: integer,
+    prevStats: integer[],
+    showTotals: boolean
+  ): Promise<void> {
+    return new Promise((resolve) => {
       if (!this.scene.showLevelUpStats) {
         return resolve();
       }
-      const newStats = (this.scene as BattleScene).getParty()[partyMemberIndex].stats;
+      const newStats = this.scene.getParty()[partyMemberIndex].stats;
       let levelUpStatsValuesText = "";
-      const stats = Utils.getEnumValues(Stat);
+      const stats = Object.values(Stat);
       for (const s of stats) {
         levelUpStatsValuesText += `${showTotals ? newStats[s] : newStats[s] - prevStats[s]}\n`;
       }
@@ -193,17 +250,17 @@ export default class BattleMessageUiHandler extends MessageUiHandler {
   }
 
   promptIvs(pokemonId: integer, ivs: integer[], shownIvsCount: integer): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.scene.executeWithSeedOffset(() => {
         let levelUpStatsValuesText = "";
-        const stats = Utils.getEnumValues(Stat);
+        const stats = Object.values(Stat);
         let shownStats: Stat[] = [];
         if (shownIvsCount < 6) {
           const statsPool = stats.slice(0);
           for (let i = 0; i < shownIvsCount; i++) {
             let shownStat: Stat;
             let highestIv = -1;
-            statsPool.map(s => {
+            statsPool.map((s) => {
               if (ivs[s] > highestIv) {
                 shownStat = s as Stat;
                 highestIv = ivs[s];
@@ -233,7 +290,7 @@ export default class BattleMessageUiHandler extends MessageUiHandler {
   getIvDescriptor(value: integer, typeIv: integer, pokemonId: integer): string {
     const starterSpecies = this.scene.getPokemonById(pokemonId).species.getRootSpeciesId(true);
     const starterIvs: number[] = this.scene.gameData.dexData[starterSpecies].ivs;
-    const uiTheme = (this.scene as BattleScene).uiTheme; // Assuming uiTheme is accessible
+    const uiTheme = this.scene.uiTheme; // Assuming uiTheme is accessible
 
     // Function to wrap text in color based on comparison
     const coloredText = (text: string, isBetter: boolean) => {
@@ -246,13 +303,22 @@ export default class BattleMessageUiHandler extends MessageUiHandler {
       return coloredText(i18next.t("battleMessageUiHandler:ivBest"), value > starterIvs[typeIv]);
     }
     if (value === 30) {
-      return coloredText(i18next.t("battleMessageUiHandler:ivFantastic"), value > starterIvs[typeIv]);
+      return coloredText(
+        i18next.t("battleMessageUiHandler:ivFantastic"),
+        value > starterIvs[typeIv]
+      );
     }
     if (value > 20) {
-      return coloredText(i18next.t("battleMessageUiHandler:ivVeryGood"), value > starterIvs[typeIv]);
+      return coloredText(
+        i18next.t("battleMessageUiHandler:ivVeryGood"),
+        value > starterIvs[typeIv]
+      );
     }
     if (value > 10) {
-      return coloredText(i18next.t("battleMessageUiHandler:ivPrettyGood"), value > starterIvs[typeIv]);
+      return coloredText(
+        i18next.t("battleMessageUiHandler:ivPrettyGood"),
+        value > starterIvs[typeIv]
+      );
     }
     if (value > 0) {
       return coloredText(i18next.t("battleMessageUiHandler:ivDecent"), value > starterIvs[typeIv]);

@@ -1,13 +1,11 @@
-import {expect, describe, it, beforeAll} from "vitest";
+import { expect, describe, it, beforeAll } from "vitest";
+import Phaser from "phaser";
 import { randomString, padInt } from "./utils";
 
-import Phaser from "phaser";
-
 describe("utils", () => {
-
   beforeAll(() => {
     new Phaser.Game({
-      type: Phaser.HEADLESS,
+      type: Phaser.HEADLESS
     });
   });
   describe("randomString", () => {

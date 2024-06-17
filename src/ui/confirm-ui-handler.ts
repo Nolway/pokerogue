@@ -1,11 +1,12 @@
-import BattleScene from "../battle-scene";
-import AbstractOptionSelectUiHandler, { OptionSelectConfig } from "./abstact-option-select-ui-handler";
-import { Mode } from "./ui";
 import i18next from "i18next";
-import {Button} from "#enums/buttons";
+import BattleScene from "../battle-scene";
+import AbstractOptionSelectUiHandler, {
+  OptionSelectConfig
+} from "./abstact-option-select-ui-handler";
+import { Mode } from "./ui";
+import { Button } from "#enums/buttons";
 
 export default class ConfirmUiHandler extends AbstractOptionSelectUiHandler {
-
   public static readonly windowWidth: integer = 48;
 
   private switchCheck: boolean;
@@ -38,17 +39,20 @@ export default class ConfirmUiHandler extends AbstractOptionSelectUiHandler {
             }
           }
         ],
-        delay: args.length >= 6 && args[5] !== null ? args[5] as integer : 0
+        delay: args.length >= 6 && args[5] !== null ? (args[5] as integer) : 0
       };
 
-      super.show([ config ]);
+      super.show([config]);
 
-      this.switchCheck = args.length >= 3 && args[2] !== null && args[2] as boolean;
+      this.switchCheck = args.length >= 3 && args[2] !== null && (args[2] as boolean);
 
-      const xOffset = (args.length >= 4 && args[3] !== null ? args[3] as number : 0);
-      const yOffset = (args.length >= 5 && args[4] !== null ? args[4] as number : 0);
+      const xOffset = args.length >= 4 && args[3] !== null ? (args[3] as number) : 0;
+      const yOffset = args.length >= 5 && args[4] !== null ? (args[4] as number) : 0;
 
-      this.optionSelectContainer.setPosition((this.scene.game.canvas.width / 6) - 1 + xOffset, -48 + yOffset);
+      this.optionSelectContainer.setPosition(
+        this.scene.game.canvas.width / 6 - 1 + xOffset,
+        -48 + yOffset
+      );
 
       this.setCursor(this.switchCheck ? this.switchCheckCursor : 0);
 

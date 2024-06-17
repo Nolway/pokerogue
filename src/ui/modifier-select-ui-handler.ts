@@ -1,15 +1,19 @@
 import BattleScene from "../battle-scene";
-import { getPlayerShopModifierTypeOptionsForWave, ModifierTypeOption, TmModifierType } from "../modifier/modifier-type";
+import {
+  getPlayerShopModifierTypeOptionsForWave,
+  ModifierTypeOption,
+  TmModifierType
+} from "../modifier/modifier-type";
 import { getPokeballAtlasKey, PokeballType } from "../data/pokeball";
+import { LockModifierTiersModifier, PokemonHeldItemModifier } from "../modifier/modifier";
+import { handleTutorial, Tutorial } from "../tutorial";
+import { allMoves } from "../data/move";
 import { addTextObject, getModifierTierTextTint, getTextColor, TextStyle } from "./text";
 import AwaitableUiHandler from "./awaitable-ui-handler";
 import { Mode } from "./ui";
-import { LockModifierTiersModifier, PokemonHeldItemModifier } from "../modifier/modifier";
-import { handleTutorial, Tutorial } from "../tutorial";
-import {Button} from "#enums/buttons";
 import MoveInfoOverlay from "./move-info-overlay";
-import { allMoves } from "../data/move";
 import * as Utils from "./../utils";
+import { Button } from "#enums/buttons";
 
 export const SHOP_OPTIONS_ROW_LIMIT = 6;
 
@@ -21,8 +25,8 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
   private checkButtonContainer: Phaser.GameObjects.Container;
   private rerollCostText: Phaser.GameObjects.Text;
   private lockRarityButtonText: Phaser.GameObjects.Text;
-  private moveInfoOverlay : MoveInfoOverlay;
-  private moveInfoOverlayActive : boolean = false;
+  private moveInfoOverlay: MoveInfoOverlay;
+  private moveInfoOverlayActive: boolean = false;
 
   private rowCursor: integer = 0;
   private player: boolean;
@@ -46,7 +50,10 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
     this.modifierContainer = this.scene.add.container(0, 0);
     ui.add(this.modifierContainer);
 
-    this.transferButtonContainer = this.scene.add.container((this.scene.game.canvas.width / 6) - 71, -64);
+    this.transferButtonContainer = this.scene.add.container(
+      this.scene.game.canvas.width / 6 - 71,
+      -64
+    );
     this.transferButtonContainer.setName("container-transfer-btn");
     this.transferButtonContainer.setVisible(false);
     ui.add(this.transferButtonContainer);
@@ -56,7 +63,7 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
     transferButtonText.setOrigin(1, 0);
     this.transferButtonContainer.add(transferButtonText);
 
-    this.checkButtonContainer = this.scene.add.container((this.scene.game.canvas.width / 6) - 1, -64);
+    this.checkButtonContainer = this.scene.add.container(this.scene.game.canvas.width / 6 - 1, -64);
     this.checkButtonContainer.setName("container-use-btn");
     this.checkButtonContainer.setVisible(false);
     ui.add(this.checkButtonContainer);
@@ -98,8 +105,8 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
       onSide: true,
       right: true,
       x: 1,
-      y: -MoveInfoOverlay.getHeight(overlayScale, true) -1,
-      width: (this.scene.game.canvas.width / 6) - 2,
+      y: -MoveInfoOverlay.getHeight(overlayScale, true) - 1,
+      width: this.scene.game.canvas.width / 6 - 2
     });
     ui.add(this.moveInfoOverlay);
     // register the overlay to receive toggle events
@@ -116,7 +123,12 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
       return false;
     }
 
-    if (args.length !== 4 || !(args[1] instanceof Array) || !args[1].length || !(args[2] instanceof Function)) {
+    if (
+      args.length !== 4 ||
+      !(args[1] instanceof Array) ||
+      !args[1].length ||
+      !(args[2] instanceof Function)
+    ) {
       return false;
     }
 
@@ -126,8 +138,14 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
 
     this.player = args[0];
 
-    const partyHasHeldItem = this.player && !!this.scene.findModifiers(m => m instanceof PokemonHeldItemModifier && (m as PokemonHeldItemModifier).getTransferrable(true)).length;
-    const canLockRarities = !!this.scene.findModifier(m => m instanceof LockModifierTiersModifier);
+    const partyHasHeldItem =
+      this.player &&
+      !!this.scene.findModifiers(
+        (m) => m instanceof PokemonHeldItemModifier && m.getTransferrable(true)
+      ).length;
+    const canLockRarities = !!this.scene.findModifier(
+      (m) => m instanceof LockModifierTiersModifier
+    );
 
     this.transferButtonContainer.setVisible(false);
     this.transferButtonContainer.setAlpha(0);
@@ -141,7 +159,11 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
     this.lockRarityButtonContainer.setVisible(false);
     this.lockRarityButtonContainer.setAlpha(0);
 
-    this.rerollButtonContainer.setPositionRelative(this.lockRarityButtonContainer, 0, canLockRarities ? -12 : 0);
+    this.rerollButtonContainer.setPositionRelative(
+      this.lockRarityButtonContainer,
+      0,
+      canLockRarities ? -12 : 0
+    );
 
     this.rerollCost = args[3] as integer;
 
@@ -149,13 +171,21 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
 
     const typeOptions = args[1] as ModifierTypeOption[];
     const shopTypeOptions = !this.scene.gameMode.hasNoShop
-      ? getPlayerShopModifierTypeOptionsForWave(this.scene.currentBattle.waveIndex, this.scene.getWaveMoneyAmount(1))
+      ? getPlayerShopModifierTypeOptionsForWave(
+        this.scene.currentBattle.waveIndex,
+        this.scene.getWaveMoneyAmount(1)
+      )
       : [];
     const optionsYOffset = shopTypeOptions.length >= SHOP_OPTIONS_ROW_LIMIT ? -8 : -24;
 
     for (let m = 0; m < typeOptions.length; m++) {
-      const sliceWidth = (this.scene.game.canvas.width / 6) / (typeOptions.length + 2);
-      const option = new ModifierOption(this.scene, sliceWidth * (m + 1) + (sliceWidth * 0.5), -this.scene.game.canvas.height / 12 + optionsYOffset, typeOptions[m]);
+      const sliceWidth = this.scene.game.canvas.width / 6 / (typeOptions.length + 2);
+      const option = new ModifierOption(
+        this.scene,
+        sliceWidth * (m + 1) + sliceWidth * 0.5,
+        -this.scene.game.canvas.height / 12 + optionsYOffset,
+        typeOptions[m]
+      );
       option.setScale(0.5);
       this.scene.add.existing(option);
       this.modifierContainer.add(option);
@@ -165,9 +195,20 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
     for (let m = 0; m < shopTypeOptions.length; m++) {
       const row = m < SHOP_OPTIONS_ROW_LIMIT ? 0 : 1;
       const col = m < SHOP_OPTIONS_ROW_LIMIT ? m : m - SHOP_OPTIONS_ROW_LIMIT;
-      const rowOptions = shopTypeOptions.slice(row ? SHOP_OPTIONS_ROW_LIMIT : 0, row ? undefined : SHOP_OPTIONS_ROW_LIMIT);
-      const sliceWidth = (this.scene.game.canvas.width / SHOP_OPTIONS_ROW_LIMIT) / (rowOptions.length + 2);
-      const option = new ModifierOption(this.scene, sliceWidth * (col + 1) + (sliceWidth * 0.5), ((-this.scene.game.canvas.height / 12) - (this.scene.game.canvas.height / 32) - (40 - (28 * row - 1))), shopTypeOptions[m]);
+      const rowOptions = shopTypeOptions.slice(
+        row ? SHOP_OPTIONS_ROW_LIMIT : 0,
+        row ? undefined : SHOP_OPTIONS_ROW_LIMIT
+      );
+      const sliceWidth =
+        this.scene.game.canvas.width / SHOP_OPTIONS_ROW_LIMIT / (rowOptions.length + 2);
+      const option = new ModifierOption(
+        this.scene,
+        sliceWidth * (col + 1) + sliceWidth * 0.5,
+        -this.scene.game.canvas.height / 12 -
+          this.scene.game.canvas.height / 32 -
+          (40 - (28 * row - 1)),
+        shopTypeOptions[m]
+      );
       option.setScale(0.375);
       this.scene.add.existing(option);
       this.modifierContainer.add(option);
@@ -178,7 +219,9 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
       this.shopOptionsRows[row].push(option);
     }
 
-    const maxUpgradeCount = typeOptions.map(to => to.upgradeCount).reduce((max, current) => Math.max(current, max), 0);
+    const maxUpgradeCount = typeOptions
+      .map((to) => to.upgradeCount)
+      .reduce((max, current) => Math.max(current, max), 0);
 
     this.scene.showFieldOverlay(750);
     this.scene.updateAndShowText(750);
@@ -189,12 +232,15 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
     this.scene.tweens.addCounter({
       ease: "Sine.easeIn",
       duration: 1250,
-      onUpdate: t => {
+      onUpdate: (t) => {
         const value = t.getValue();
         const index = Math.floor(value * typeOptions.length);
         if (index > i && index <= typeOptions.length) {
           const option = this.options[i];
-          option?.show(Math.floor((1 - value) * 1250) * 0.325 + 2000 * maxUpgradeCount, -(maxUpgradeCount - typeOptions[i].upgradeCount));
+          option?.show(
+            Math.floor((1 - value) * 1250) * 0.325 + 2000 * maxUpgradeCount,
+            -(maxUpgradeCount - typeOptions[i].upgradeCount)
+          );
           i++;
         }
       }
@@ -225,7 +271,11 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
       this.lockRarityButtonContainer.setVisible(canLockRarities);
 
       this.scene.tweens.add({
-        targets: [ this.rerollButtonContainer, this.lockRarityButtonContainer, this.checkButtonContainer ],
+        targets: [
+          this.rerollButtonContainer,
+          this.lockRarityButtonContainer,
+          this.checkButtonContainer
+        ],
         alpha: 1,
         duration: 250
       });
@@ -363,18 +413,29 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
       this.modifierContainer.add(this.cursorObj);
     }
 
-    const options = (this.rowCursor === 1 ? this.options : this.shopOptionsRows[this.shopOptionsRows.length - (this.rowCursor - 1)]);
+    const options =
+      this.rowCursor === 1
+        ? this.options
+        : this.shopOptionsRows[this.shopOptionsRows.length - (this.rowCursor - 1)];
 
     this.cursorObj.setScale(this.rowCursor === 1 ? 2 : this.rowCursor >= 2 ? 1.5 : 1);
 
     // the modifier selection has been updated, always hide the overlay
     this.moveInfoOverlay.clear();
     if (this.rowCursor) {
-      const sliceWidth = (this.scene.game.canvas.width / 6) / (options.length + 2);
+      const sliceWidth = this.scene.game.canvas.width / 6 / (options.length + 2);
       if (this.rowCursor < 2) {
-        this.cursorObj.setPosition(sliceWidth * (cursor + 1) + (sliceWidth * 0.5) - 20, (-this.scene.game.canvas.height / 12) - (this.shopOptionsRows.length > 1 ? 6 : 22));
+        this.cursorObj.setPosition(
+          sliceWidth * (cursor + 1) + sliceWidth * 0.5 - 20,
+          -this.scene.game.canvas.height / 12 - (this.shopOptionsRows.length > 1 ? 6 : 22)
+        );
       } else {
-        this.cursorObj.setPosition(sliceWidth * (cursor + 1) + (sliceWidth * 0.5) - 16, (-this.scene.game.canvas.height / 12 - this.scene.game.canvas.height / 32) - (-16 + 28 * (this.rowCursor - (this.shopOptionsRows.length - 1))));
+        this.cursorObj.setPosition(
+          sliceWidth * (cursor + 1) + sliceWidth * 0.5 - 16,
+          -this.scene.game.canvas.height / 12 -
+            this.scene.game.canvas.height / 32 -
+            (-16 + 28 * (this.rowCursor - (this.shopOptionsRows.length - 1)))
+        );
       }
 
       const type = options[this.cursor].modifierTypeOption.type;
@@ -387,10 +448,10 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
       this.cursorObj.setPosition(6, this.lockRarityButtonContainer.visible ? -72 : -60);
       ui.showText("Spend money to reroll your item options.");
     } else if (cursor === 1) {
-      this.cursorObj.setPosition((this.scene.game.canvas.width / 6) - 120, -60);
+      this.cursorObj.setPosition(this.scene.game.canvas.width / 6 - 120, -60);
       ui.showText("Transfer a held item from one Pokémon to another.");
     } else if (cursor === 2) {
-      this.cursorObj.setPosition((this.scene.game.canvas.width / 6) - 60, -60);
+      this.cursorObj.setPosition(this.scene.game.canvas.width / 6 - 60, -60);
       ui.showText("Check your team or use a form changing item.");
     } else {
       this.cursorObj.setPosition(6, -60);
@@ -405,7 +466,10 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
 
     if (rowCursor !== lastRowCursor) {
       this.rowCursor = rowCursor;
-      let newCursor = Math.round(this.cursor / Math.max(this.getRowItems(lastRowCursor) - 1, 1) * (this.getRowItems(rowCursor) - 1));
+      let newCursor = Math.round(
+        (this.cursor / Math.max(this.getRowItems(lastRowCursor) - 1, 1)) *
+          (this.getRowItems(rowCursor) - 1)
+      );
       if (rowCursor === 0) {
         if (newCursor === 0 && !this.rerollButtonContainer.visible) {
           newCursor = 1;
@@ -452,8 +516,12 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
     const formattedMoney = Utils.formatMoney(this.scene.moneyFormat, this.rerollCost);
 
     this.rerollCostText.setText(`₽${formattedMoney}`);
-    this.rerollCostText.setColor(this.getTextColor(canReroll ? TextStyle.MONEY : TextStyle.PARTY_RED));
-    this.rerollCostText.setShadowColor(this.getTextColor(canReroll ? TextStyle.MONEY : TextStyle.PARTY_RED, true));
+    this.rerollCostText.setColor(
+      this.getTextColor(canReroll ? TextStyle.MONEY : TextStyle.PARTY_RED)
+    );
+    this.rerollCostText.setShadowColor(
+      this.getTextColor(canReroll ? TextStyle.MONEY : TextStyle.PARTY_RED, true)
+    );
   }
 
   updateLockRaritiesText(): void {
@@ -484,10 +552,15 @@ export default class ModifierSelectUiHandler extends AwaitableUiHandler {
       scale: 0.01,
       duration: 250,
       ease: "Cubic.easeIn",
-      onComplete: () => options.forEach(o => o.destroy())
+      onComplete: () => options.forEach((o) => o.destroy())
     });
 
-    [ this.rerollButtonContainer, this.checkButtonContainer, this.transferButtonContainer, this.lockRarityButtonContainer ].forEach(container => {
+    [
+      this.rerollButtonContainer,
+      this.checkButtonContainer,
+      this.transferButtonContainer,
+      this.lockRarityButtonContainer
+    ].forEach((container) => {
       if (container.visible) {
         this.scene.tweens.add({
           targets: container,
@@ -535,7 +608,12 @@ class ModifierOption extends Phaser.GameObjects.Container {
   setup() {
     if (!this.modifierTypeOption.cost) {
       const getPb = (): Phaser.GameObjects.Sprite => {
-        const pb = this.scene.add.sprite(0, -182, "pb", this.getPbAtlasKey(-this.modifierTypeOption.upgradeCount));
+        const pb = this.scene.add.sprite(
+          0,
+          -182,
+          "pb",
+          this.getPbAtlasKey(-this.modifierTypeOption.upgradeCount)
+        );
         pb.setScale(2);
         return pb;
       };
@@ -567,14 +645,23 @@ class ModifierOption extends Phaser.GameObjects.Container {
       this.itemContainer.add(this.itemTint);
     }
 
-    this.itemText = addTextObject(this.scene, 0, 35, this.modifierTypeOption.type.name, TextStyle.PARTY, { align: "center" });
+    this.itemText = addTextObject(
+      this.scene,
+      0,
+      35,
+      this.modifierTypeOption.type.name,
+      TextStyle.PARTY,
+      { align: "center" }
+    );
     this.itemText.setOrigin(0.5, 0);
     this.itemText.setAlpha(0);
     this.itemText.setTint(getModifierTierTextTint(this.modifierTypeOption.type.tier));
     this.add(this.itemText);
 
     if (this.modifierTypeOption.cost) {
-      this.itemCostText = addTextObject(this.scene, 0, 45, "", TextStyle.MONEY, { align: "center" });
+      this.itemCostText = addTextObject(this.scene, 0, 45, "", TextStyle.MONEY, {
+        align: "center"
+      });
 
       this.itemCostText.setOrigin(0.5, 0);
       this.itemCostText.setAlpha(0);
@@ -602,7 +689,7 @@ class ModifierOption extends Phaser.GameObjects.Container {
         to: 0,
         duration: 1250,
         ease: "Bounce.Out",
-        onUpdate: t => {
+        onUpdate: (t) => {
           if (!this.scene) {
             return;
           }
@@ -619,31 +706,38 @@ class ModifierOption extends Phaser.GameObjects.Container {
 
       for (let u = 0; u < this.modifierTypeOption.upgradeCount; u++) {
         const upgradeIndex = u;
-        this.scene.time.delayedCall(remainingDuration - 2000 * (this.modifierTypeOption.upgradeCount - (upgradeIndex + 1 + upgradeCountOffset)), () => {
-          (this.scene as BattleScene).playSound("upgrade", { rate: 1 + 0.25 * upgradeIndex });
-          this.pbTint.setPosition(this.pb.x, this.pb.y);
-          this.pbTint.setTintFill(0xFFFFFF);
-          this.pbTint.setAlpha(0);
-          this.pbTint.setVisible(true);
-          this.scene.tweens.add({
-            targets: this.pbTint,
-            alpha: 1,
-            duration: 1000,
-            ease: "Sine.easeIn",
-            onComplete: () => {
-              this.pb.setTexture("pb", this.getPbAtlasKey(-this.modifierTypeOption.upgradeCount + (upgradeIndex + 1)));
-              this.scene.tweens.add({
-                targets: this.pbTint,
-                alpha: 0,
-                duration: 750,
-                ease: "Sine.easeOut",
-                onComplete: () => {
-                  this.pbTint.setVisible(false);
-                }
-              });
-            }
-          });
-        });
+        this.scene.time.delayedCall(
+          remainingDuration -
+            2000 * (this.modifierTypeOption.upgradeCount - (upgradeIndex + 1 + upgradeCountOffset)),
+          () => {
+            (this.scene as BattleScene).playSound("upgrade", { rate: 1 + 0.25 * upgradeIndex });
+            this.pbTint.setPosition(this.pb.x, this.pb.y);
+            this.pbTint.setTintFill(0xffffff);
+            this.pbTint.setAlpha(0);
+            this.pbTint.setVisible(true);
+            this.scene.tweens.add({
+              targets: this.pbTint,
+              alpha: 1,
+              duration: 1000,
+              ease: "Sine.easeIn",
+              onComplete: () => {
+                this.pb.setTexture(
+                  "pb",
+                  this.getPbAtlasKey(-this.modifierTypeOption.upgradeCount + (upgradeIndex + 1))
+                );
+                this.scene.tweens.add({
+                  targets: this.pbTint,
+                  alpha: 0,
+                  duration: 750,
+                  ease: "Sine.easeOut",
+                  onComplete: () => {
+                    this.pbTint.setVisible(false);
+                  }
+                });
+              }
+            });
+          }
+        );
       }
     }
 
@@ -702,12 +796,13 @@ class ModifierOption extends Phaser.GameObjects.Container {
   }
 
   getPbAtlasKey(tierOffset: integer = 0) {
-    return getPokeballAtlasKey((this.modifierTypeOption.type.tier + tierOffset) as integer as PokeballType);
+    return getPokeballAtlasKey((this.modifierTypeOption.type.tier + tierOffset) as PokeballType);
   }
 
   updateCostText(): void {
     const scene = this.scene as BattleScene;
-    const textStyle = this.modifierTypeOption.cost <= scene.money ? TextStyle.MONEY : TextStyle.PARTY_RED;
+    const textStyle =
+      this.modifierTypeOption.cost <= scene.money ? TextStyle.MONEY : TextStyle.PARTY_RED;
 
     const formattedMoney = Utils.formatMoney(scene.moneyFormat, this.modifierTypeOption.cost);
 

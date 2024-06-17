@@ -2,7 +2,12 @@ import BattleScene from "../battle-scene";
 import { PokeballType } from "../data/pokeball";
 import * as Utils from "../utils";
 
-export function addPokeballOpenParticles(scene: BattleScene, x: number, y: number, pokeballType: PokeballType): void {
+export function addPokeballOpenParticles(
+  scene: BattleScene,
+  x: number,
+  y: number,
+  pokeballType: PokeballType
+): void {
   switch (pokeballType) {
   case PokeballType.POKEBALL:
     doDefaultPbOpenParticles(scene, x, y, 48);
@@ -23,8 +28,12 @@ export function addPokeballOpenParticles(scene: BattleScene, x: number, y: numbe
 }
 
 function doDefaultPbOpenParticles(scene: BattleScene, x: number, y: number, radius: number) {
-  const pbOpenParticlesFrameNames = scene.anims.generateFrameNames("pb_particles", { start: 0, end: 3, suffix: ".png" });
-  if (!(scene.anims.exists("pb_open_particle"))) {
+  const pbOpenParticlesFrameNames = scene.anims.generateFrameNames("pb_particles", {
+    start: 0,
+    end: 3,
+    suffix: ".png"
+  });
+  if (!scene.anims.exists("pb_open_particle")) {
     scene.anims.create({
       key: "pb_open_particle",
       frames: pbOpenParticlesFrameNames,
@@ -37,7 +46,10 @@ function doDefaultPbOpenParticles(scene: BattleScene, x: number, y: number, radi
     const particle = scene.add.sprite(x, y, "pb_open_particle");
     scene.field.add(particle);
     const angle = index * 45;
-    const [ xCoord, yCoord ] = [ radius * Math.cos(angle * Math.PI / 180), radius * Math.sin(angle * Math.PI / 180) ];
+    const [xCoord, yCoord] = [
+      radius * Math.cos((angle * Math.PI) / 180),
+      radius * Math.sin((angle * Math.PI) / 180)
+    ];
     scene.tweens.add({
       targets: particle,
       x: x + xCoord,
@@ -109,7 +121,16 @@ function doMbOpenParticles(scene: BattleScene, x: number, y: number) {
   }
 }
 
-function doFanOutParticle(scene: BattleScene, trigIndex: integer, x: integer, y: integer, xSpeed: integer, ySpeed: integer, angle: integer, frameIndex: integer): Phaser.GameObjects.Image {
+function doFanOutParticle(
+  scene: BattleScene,
+  trigIndex: integer,
+  x: integer,
+  y: integer,
+  xSpeed: integer,
+  ySpeed: integer,
+  angle: integer,
+  frameIndex: integer
+): Phaser.GameObjects.Image {
   let f = 0;
 
   const particle = scene.add.image(x, y, "pb_particles", `${frameIndex}.png`);
@@ -121,7 +142,7 @@ function doFanOutParticle(scene: BattleScene, trigIndex: integer, x: integer, y:
     }
     particle.x = x + sin(trigIndex, f * xSpeed);
     particle.y = y + cos(trigIndex, f * ySpeed);
-    trigIndex = (trigIndex + angle);
+    trigIndex = trigIndex + angle;
     f++;
   };
 
@@ -136,7 +157,10 @@ function doFanOutParticle(scene: BattleScene, trigIndex: integer, x: integer, y:
   return particle;
 }
 
-export function addPokeballCaptureStars(scene: BattleScene, pokeball: Phaser.GameObjects.Sprite): void {
+export function addPokeballCaptureStars(
+  scene: BattleScene,
+  pokeball: Phaser.GameObjects.Sprite
+): void {
   const addParticle = () => {
     const particle = scene.add.sprite(pokeball.x, pokeball.y, "pb_particles", "4.png");
     particle.setOrigin(pokeball.originX, pokeball.originY);

@@ -1,48 +1,48 @@
 import { BerryTranslationEntries } from "#app/plugins/i18n";
 
 export const berry: BerryTranslationEntries = {
-  "SITRUS": {
+  SITRUS: {
     name: "Baccacedro",
-    effect: "Restituisce il 25% dei PS se i PS sono sotto il 50%",
+    effect: "Restituisce il 25% dei PS se i PS sono sotto il 50%"
   },
-  "LUM": {
+  LUM: {
     name: "Baccaprugna",
-    effect: "Se tenuta da un Pokémon risolve qualsiasi problema di stato",
+    effect: "Se tenuta da un Pokémon risolve qualsiasi problema di stato"
   },
-  "ENIGMA": {
+  ENIGMA: {
     name: "Baccaenigma",
-    effect: "Restituisce il 25% dei PS se viene colpito da una mossa superefficace",
+    effect: "Restituisce il 25% dei PS se viene colpito da una mossa superefficace"
   },
-  "LIECHI": {
+  LIECHI: {
     name: "Baccalici",
-    effect: "Aumenta l'Attacco se i PS sono sotto il 25%",
+    effect: "Aumenta l'Attacco se i PS sono sotto il 25%"
   },
-  "GANLON": {
+  GANLON: {
     name: "Baccalongan",
-    effect: "Aumenta la Difesa se i PS sono sotto il 25%",
+    effect: "Aumenta la Difesa se i PS sono sotto il 25%"
   },
-  "PETAYA": {
+  PETAYA: {
     name: "Baccapitaya",
-    effect: "Aumenta l'Attacco Speciale se i PS sono sotto il 25%",
+    effect: "Aumenta l'Attacco Speciale se i PS sono sotto il 25%"
   },
-  "APICOT": {
+  APICOT: {
     name: "Baccacocca",
-    effect: "Aumenta la Difesa Speciale se i PS sono sotto il 25%",
+    effect: "Aumenta la Difesa Speciale se i PS sono sotto il 25%"
   },
-  "SALAC": {
+  SALAC: {
     name: "Baccasalak",
-    effect: "Aumenta la Velocità se i PS sono sotto il 25%",
+    effect: "Aumenta la Velocità se i PS sono sotto il 25%"
   },
-  "LANSAT": {
+  LANSAT: {
     name: "Baccalangsa",
-    effect: "Aumenta la probabilità di Colpo Critico se i PS sono sotto il 25%",
+    effect: "Aumenta la probabilità di Colpo Critico se i PS sono sotto il 25%"
   },
-  "STARF": {
+  STARF: {
     name: "Baccambola",
-    effect: "Aumenta drasticamente una statistica casuale se i PS sono sotto il 25%",
+    effect: "Aumenta drasticamente una statistica casuale se i PS sono sotto il 25%"
   },
-  "LEPPA": {
+  LEPPA: {
     name: "Baccamela",
-    effect: "Ripristina 10 PP a una mossa se i suoi PP raggiungono lo 0",
-  },
+    effect: "Ripristina 10 PP a una mossa se i suoi PP raggiungono lo 0"
+  }
 } as const;

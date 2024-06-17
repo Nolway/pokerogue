@@ -22,10 +22,9 @@
 		"rootDir": "./src",
 		"baseUrl": "./src",
 		"paths": {
-			"#enums/*": ["./enums/*.ts"],
 			"#app/*": ["*.ts"],
 			"#app": ["."],
-			"#test/*": ["./test/*.ts"]
+			"#tests/*": ["./tests/*.ts"]
 		},
 		"outDir": "./build",
 		"noEmit": true

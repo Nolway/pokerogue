@@ -1,48 +1,48 @@
 import { BerryTranslationEntries } from "#app/plugins/i18n";
 
 export const berry: BerryTranslationEntries = {
-  "SITRUS": {
+  SITRUS: {
     name: "Sitrus Berry",
-    effect: "Restores 25% HP if HP is below 50%",
+    effect: "Restores 25% HP if HP is below 50%"
   },
-  "LUM": {
+  LUM: {
     name: "Lum Berry",
-    effect: "Cures any non-volatile status condition and confusion",
+    effect: "Cures any non-volatile status condition and confusion"
   },
-  "ENIGMA": {
+  ENIGMA: {
     name: "Enigma Berry",
-    effect: "Restores 25% HP if hit by a super effective move",
+    effect: "Restores 25% HP if hit by a super effective move"
   },
-  "LIECHI": {
+  LIECHI: {
     name: "Liechi Berry",
-    effect: "Raises Attack if HP is below 25%",
+    effect: "Raises Attack if HP is below 25%"
   },
-  "GANLON": {
+  GANLON: {
     name: "Ganlon Berry",
-    effect: "Raises Defense if HP is below 25%",
+    effect: "Raises Defense if HP is below 25%"
   },
-  "PETAYA": {
+  PETAYA: {
     name: "Petaya Berry",
-    effect: "Raises Sp. Atk if HP is below 25%",
+    effect: "Raises Sp. Atk if HP is below 25%"
   },
-  "APICOT": {
+  APICOT: {
     name: "Apicot Berry",
-    effect: "Raises Sp. Def if HP is below 25%",
+    effect: "Raises Sp. Def if HP is below 25%"
   },
-  "SALAC": {
+  SALAC: {
     name: "Salac Berry",
-    effect: "Raises Speed if HP is below 25%",
+    effect: "Raises Speed if HP is below 25%"
   },
-  "LANSAT": {
+  LANSAT: {
     name: "Lansat Berry",
-    effect: "Raises critical hit ratio if HP is below 25%",
+    effect: "Raises critical hit ratio if HP is below 25%"
   },
-  "STARF": {
+  STARF: {
     name: "Starf Berry",
-    effect: "Sharply raises a random stat if HP is below 25%",
+    effect: "Sharply raises a random stat if HP is below 25%"
   },
-  "LEPPA": {
+  LEPPA: {
     name: "Leppa Berry",
-    effect: "Restores 10 PP to a move if its PP reaches 0",
-  },
+    effect: "Restores 10 PP to a move if its PP reaches 0"
+  }
 } as const;

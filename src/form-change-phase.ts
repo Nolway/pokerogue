@@ -7,16 +7,21 @@ import { EndEvolutionPhase, EvolutionPhase } from "./evolution-phase";
 import Pokemon, { EnemyPokemon, PlayerPokemon } from "./field/pokemon";
 import { Mode } from "./ui/ui";
 import PartyUiHandler from "./ui/party-ui-handler";
-import { BattleSpec } from "#enums/battle-spec";
 import { BattlePhase, MovePhase, PokemonHealPhase } from "./phases";
 import { getTypeRgb } from "./data/type";
+import { BattleSpec } from "#app/enums/battle-spec";
 
 export class FormChangePhase extends EvolutionPhase {
   private formChange: SpeciesFormChange;
   private modal: boolean;
 
-  constructor(scene: BattleScene, pokemon: PlayerPokemon, formChange: SpeciesFormChange, modal: boolean) {
-    super(scene, pokemon, null, 0);
+  constructor(
+    scene: BattleScene,
+    pokemon: PlayerPokemon,
+    formChange: SpeciesFormChange,
+    modal: boolean
+  ) {
+    super(scene, pokemon, undefined, 0);
 
     this.formChange = formChange;
     this.modal = modal;
@@ -36,16 +41,15 @@ export class FormChangePhase extends EvolutionPhase {
   doEvolution(): void {
     const preName = this.pokemon.name;
 
-    this.pokemon.getPossibleForm(this.formChange).then(transformedPokemon => {
-
-      [ this.pokemonEvoSprite, this.pokemonEvoTintSprite ].map(sprite => {
+    this.pokemon.getPossibleForm(this.formChange).then((transformedPokemon) => {
+      [this.pokemonEvoSprite, this.pokemonEvoTintSprite].map((sprite) => {
         sprite.play(transformedPokemon.getSpriteKey(true));
         sprite.setPipelineData("ignoreTimeTint", true);
         sprite.setPipelineData("spriteKey", transformedPokemon.getSpriteKey());
         sprite.setPipelineData("shiny", transformedPokemon.shiny);
         sprite.setPipelineData("variant", transformedPokemon.variant);
-        [ "spriteColors", "fusionSpriteColors" ].map(k => {
-          if (transformedPokemon.summonData?.speciesForm) {
+        ["spriteColors", "fusionSpriteColors"].map((k) => {
+          if (transformedPokemon.summonData.speciesForm) {
             k += "Base";
           }
           sprite.pipelineData[k] = transformedPokemon.getSprite().pipelineData[k];
@@ -75,7 +79,7 @@ export class FormChangePhase extends EvolutionPhase {
               from: 0,
               to: 1,
               duration: 2000,
-              onUpdate: t => {
+              onUpdate: (t) => {
                 this.pokemonTintSprite.setAlpha(t.getValue());
               },
               onComplete: () => {
@@ -86,7 +90,7 @@ export class FormChangePhase extends EvolutionPhase {
                   this.scene.time.delayedCall(1000, () => {
                     this.pokemonEvoTintSprite.setScale(0.25);
                     this.pokemonEvoTintSprite.setVisible(true);
-                    this.doCycle(1, 1).then(_success => {
+                    this.doCycle(1, 1).then((_success) => {
                       this.scene.playSound("sparkle");
                       this.pokemonEvoSprite.setVisible(true);
                       this.doCircleInward();
@@ -107,7 +111,7 @@ export class FormChangePhase extends EvolutionPhase {
                               this.evolutionBgOverlay.setAlpha(1);
                               this.evolutionBg.setVisible(false);
                               this.scene.tweens.add({
-                                targets: [ this.evolutionOverlay, this.pokemonEvoTintSprite ],
+                                targets: [this.evolutionOverlay, this.pokemonEvoTintSprite],
                                 alpha: 0,
                                 duration: 2000,
                                 delay: 150,
@@ -122,20 +126,48 @@ export class FormChangePhase extends EvolutionPhase {
                                         this.pokemon.cry();
                                         this.scene.time.delayedCall(1250, () => {
                                           let playEvolutionFanfare = false;
-                                          if (this.formChange.formKey.indexOf(SpeciesFormKey.MEGA) > -1) {
+                                          if (
+                                            this.formChange.formKey.indexOf(SpeciesFormKey.MEGA) >
+                                            -1
+                                          ) {
                                             this.scene.validateAchv(achvs.MEGA_EVOLVE);
                                             playEvolutionFanfare = true;
-                                          } else if (this.formChange.formKey.indexOf(SpeciesFormKey.GIGANTAMAX) > -1 || this.formChange.formKey.indexOf(SpeciesFormKey.ETERNAMAX) > -1) {
+                                          } else if (
+                                            this.formChange.formKey.indexOf(
+                                              SpeciesFormKey.GIGANTAMAX
+                                            ) > -1 ||
+                                            this.formChange.formKey.indexOf(
+                                              SpeciesFormKey.ETERNAMAX
+                                            ) > -1
+                                          ) {
                                             this.scene.validateAchv(achvs.GIGANTAMAX);
                                             playEvolutionFanfare = true;
                                           }
 
                                           const delay = playEvolutionFanfare ? 4000 : 1750;
-                                          this.scene.playSoundWithoutBgm(playEvolutionFanfare ? "evolution_fanfare" : "minor_fanfare");
+                                          this.scene.playSoundWithoutBgm(
+                                            playEvolutionFanfare
+                                              ? "evolution_fanfare"
+                                              : "minor_fanfare"
+                                          );
 
                                           transformedPokemon.destroy();
-                                          this.scene.ui.showText(getSpeciesFormChangeMessage(this.pokemon, this.formChange, preName), null, () => this.end(), null, true, Utils.fixedInt(delay));
-                                          this.scene.time.delayedCall(Utils.fixedInt(delay + 250), () => this.scene.playBgm());
+                                          this.scene.ui.showText(
+                                            getSpeciesFormChangeMessage(
+                                              this.pokemon,
+                                              this.formChange,
+                                              preName
+                                            ),
+                                            null,
+                                            () => this.end(),
+                                            null,
+                                            true,
+                                            Utils.fixedInt(delay)
+                                          );
+                                          this.scene.time.delayedCall(
+                                            Utils.fixedInt(delay + 250),
+                                            () => this.scene.playBgm()
+                                          );
                                         });
                                       });
                                     }
@@ -187,7 +219,10 @@ export class QuietFormChangePhase extends BattlePhase {
   start(): void {
     super.start();
 
-    if (this.pokemon.formIndex === this.pokemon.species.forms.findIndex(f => f.formKey === this.formChange.formKey)) {
+    if (
+      this.pokemon.formIndex ===
+      this.pokemon.species.forms.findIndex((f) => f.formKey === this.formChange.formKey)
+    ) {
       return this.end();
     }
 
@@ -195,18 +230,32 @@ export class QuietFormChangePhase extends BattlePhase {
 
     if (!this.pokemon.isOnField()) {
       this.pokemon.changeForm(this.formChange).then(() => {
-        this.scene.ui.showText(getSpeciesFormChangeMessage(this.pokemon, this.formChange, preName), null, () => this.end(), 1500);
+        this.scene.ui.showText(
+          getSpeciesFormChangeMessage(this.pokemon, this.formChange, preName),
+          null,
+          () => this.end(),
+          1500
+        );
       });
       return;
     }
 
     const getPokemonSprite = () => {
-      const sprite = this.scene.addPokemonSprite(this.pokemon, this.pokemon.x + this.pokemon.getSprite().x, this.pokemon.y + this.pokemon.getSprite().y, "pkmn__sub");
+      const sprite = this.scene.addPokemonSprite(
+        this.pokemon,
+        this.pokemon.x + this.pokemon.getSprite().x,
+        this.pokemon.y + this.pokemon.getSprite().y,
+        "pkmn__sub"
+      );
       sprite.setOrigin(0.5, 1);
       sprite.play(this.pokemon.getBattleSpriteKey()).stop();
-      sprite.setPipeline(this.scene.spritePipeline, { tone: [ 0.0, 0.0, 0.0, 0.0 ], hasShadow: false, teraColor: getTypeRgb(this.pokemon.getTeraType()) });
-      [ "spriteColors", "fusionSpriteColors" ].map(k => {
-        if (this.pokemon.summonData?.speciesForm) {
+      sprite.setPipeline(this.scene.spritePipeline, {
+        tone: [0.0, 0.0, 0.0, 0.0],
+        hasShadow: false,
+        teraColor: getTypeRgb(this.pokemon.getTeraType())
+      });
+      ["spriteColors", "fusionSpriteColors"].map((k) => {
+        if (this.pokemon.summonData.speciesForm) {
           k += "Base";
         }
         sprite.pipelineData[k] = this.pokemon.getSprite().pipelineData[k];
@@ -215,7 +264,7 @@ export class QuietFormChangePhase extends BattlePhase {
       return sprite;
     };
 
-    const [ pokemonTintSprite, pokemonFormTintSprite ] = [ getPokemonSprite(), getPokemonSprite() ];
+    const [pokemonTintSprite, pokemonFormTintSprite] = [getPokemonSprite(), getPokemonSprite()];
 
     this.pokemon.getSprite().on("animationupdate", (_anim, frame) => {
       if (frame.textureKey === pokemonTintSprite.texture.key) {
@@ -226,9 +275,9 @@ export class QuietFormChangePhase extends BattlePhase {
     });
 
     pokemonTintSprite.setAlpha(0);
-    pokemonTintSprite.setTintFill(0xFFFFFF);
+    pokemonTintSprite.setTintFill(0xffffff);
     pokemonFormTintSprite.setVisible(false);
-    pokemonFormTintSprite.setTintFill(0xFFFFFF);
+    pokemonFormTintSprite.setTintFill(0xffffff);
 
     this.scene.playSound("PRSFX- Transform");
 
@@ -267,7 +316,12 @@ export class QuietFormChangePhase extends BattlePhase {
                 duration: 1000,
                 onComplete: () => {
                   pokemonTintSprite.setVisible(false);
-                  this.scene.ui.showText(getSpeciesFormChangeMessage(this.pokemon, this.formChange, preName), null, () => this.end(), 1500);
+                  this.scene.ui.showText(
+                    getSpeciesFormChangeMessage(this.pokemon, this.formChange, preName),
+                    null,
+                    () => this.end(),
+                    1500
+                  );
                 }
               });
             }
@@ -278,17 +332,33 @@ export class QuietFormChangePhase extends BattlePhase {
   }
 
   end(): void {
-    if (this.pokemon.scene.currentBattle.battleSpec === BattleSpec.FINAL_BOSS && this.pokemon instanceof EnemyPokemon) {
+    if (
+      this.pokemon.scene.currentBattle.battleSpec === BattleSpec.FINAL_BOSS &&
+      this.pokemon instanceof EnemyPokemon
+    ) {
       this.scene.playBgm();
-      this.pokemon.summonData.battleStats = [ 0, 0, 0, 0, 0, 0, 0 ];
-      this.scene.unshiftPhase(new PokemonHealPhase(this.scene, this.pokemon.getBattlerIndex(), this.pokemon.getMaxHp(), null, false, false, false, true));
+      this.pokemon.summonData.battleStats = [0, 0, 0, 0, 0, 0, 0];
+      this.scene.unshiftPhase(
+        new PokemonHealPhase(
+          this.scene,
+          this.pokemon.getBattlerIndex(),
+          this.pokemon.getMaxHp(),
+          null,
+          false,
+          false,
+          false,
+          true
+        )
+      );
       this.pokemon.findAndRemoveTags(() => true);
       this.pokemon.bossSegments = 5;
       this.pokemon.bossSegmentIndex = 4;
       this.pokemon.initBattleInfo();
       this.pokemon.cry();
 
-      const movePhase = this.scene.findPhase(p => p instanceof MovePhase && p.pokemon === this.pokemon) as MovePhase;
+      const movePhase = this.scene.findPhase(
+        (p) => p instanceof MovePhase && p.pokemon === this.pokemon
+      ) as MovePhase;
       if (movePhase) {
         movePhase.cancel();
       }

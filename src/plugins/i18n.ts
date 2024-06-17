@@ -12,96 +12,75 @@ import { ptBrConfig } from "#app/locales/pt_BR/config.js";
 import { zhCnConfig } from "#app/locales/zh_CN/config.js";
 import { zhTwConfig } from "#app/locales/zh_TW/config.js";
 
-export interface SimpleTranslationEntries {
-  [key: string]: string
-}
+export type SimpleTranslationEntries = Record<string, string>;
 
 export interface MoveTranslationEntry {
-  name: string,
-  effect: string
+  name: string;
+  effect: string;
 }
 
-export interface MoveTranslationEntries {
-  [key: string]: MoveTranslationEntry
-}
+export type MoveTranslationEntries = Record<string, MoveTranslationEntry>;
 
 export interface AbilityTranslationEntry {
-  name: string,
-  description: string
+  name: string;
+  description: string;
 }
 
-export interface AbilityTranslationEntries {
-  [key: string]: AbilityTranslationEntry
-}
+export type AbilityTranslationEntries = Record<string, AbilityTranslationEntry>;
 
 export interface ModifierTypeTranslationEntry {
-  name?: string,
-  description?: string,
-  extra?: SimpleTranslationEntries
+  name?: string;
+  description?: string;
+  extra?: SimpleTranslationEntries;
 }
 
 export interface ModifierTypeTranslationEntries {
-  ModifierType: { [key: string]: ModifierTypeTranslationEntry },
-  AttackTypeBoosterItem: SimpleTranslationEntries,
-  TempBattleStatBoosterItem: SimpleTranslationEntries,
-  TempBattleStatBoosterStatName: SimpleTranslationEntries,
-  BaseStatBoosterItem: SimpleTranslationEntries,
-  EvolutionItem: SimpleTranslationEntries,
-  FormChangeItem: SimpleTranslationEntries,
+  ModifierType: Record<string, ModifierTypeTranslationEntry>;
+  AttackTypeBoosterItem: SimpleTranslationEntries;
+  TempBattleStatBoosterItem: SimpleTranslationEntries;
+  TempBattleStatBoosterStatName: SimpleTranslationEntries;
+  BaseStatBoosterItem: SimpleTranslationEntries;
+  EvolutionItem: SimpleTranslationEntries;
+  FormChangeItem: SimpleTranslationEntries;
 }
 export interface PokemonInfoTranslationEntries {
-  Stat: SimpleTranslationEntries,
-  Type: SimpleTranslationEntries,
+  Stat: SimpleTranslationEntries;
+  Type: SimpleTranslationEntries;
 }
 
 export interface BerryTranslationEntry {
-  name: string,
-  effect: string,
+  name: string;
+  effect: string;
 }
 
-export interface BerryTranslationEntries {
-  [key: string]: BerryTranslationEntry
-}
+export type BerryTranslationEntries = Record<string, BerryTranslationEntry>;
 
 export interface AchievementTranslationEntry {
-  name?: string,
-  description?: string,
+  name?: string;
+  description?: string;
 }
 
-export interface AchievementTranslationEntries {
-  [key: string]: AchievementTranslationEntry;
-}
+export type AchievementTranslationEntries = Record<string, AchievementTranslationEntry>;
 
-export interface DialogueTranslationEntry {
-  [key: number]: string;
-}
+export type DialogueTranslationEntry = Record<number, string>;
 
-export interface DialogueTranslationCategory {
-  [category: string]: DialogueTranslationEntry;
-}
+export type DialogueTranslationCategory = Record<string, DialogueTranslationEntry>;
 
-export interface DialogueTranslationEntries {
-  [trainertype: string]: DialogueTranslationCategory;
-}
-
-
-export interface Localizable {
-  localize(): void;
-}
+export type DialogueTranslationEntries = Record<string, DialogueTranslationCategory>;
 
 const fonts = [
-  new FontFace("emerald", "url(./fonts/PokePT_Wansung.ttf)", { unicodeRange: "U+AC00-D7AC"}),
+  new FontFace("emerald", "url(./fonts/PokePT_Wansung.ttf)", { unicodeRange: "U+AC00-D7AC" }),
   Object.assign(
-    new FontFace("pkmnems", "url(./fonts/PokePT_Wansung.ttf)", { unicodeRange: "U+AC00-D7AC"}),
+    new FontFace("pkmnems", "url(./fonts/PokePT_Wansung.ttf)", { unicodeRange: "U+AC00-D7AC" }),
     { sizeAdjust: "133%" }
-  ),
+  )
 ];
 
 async function initFonts() {
-  const results = await Promise.allSettled(fonts.map(font => font.load()));
+  const results = await Promise.allSettled(fonts.map((font) => font.load()));
   for (const result of results) {
     if (result.status === "fulfilled") {
-      document.fonts?.add(result.value);
+      document.fonts.add(result.value);
     } else {
       console.error(result.reason);
     }
@@ -143,7 +122,7 @@ export async function initI18n(): Promise<void> {
     },
     debug: true,
     interpolation: {
-      escapeValue: false,
+      escapeValue: false
     },
     resources: {
       en: {
@@ -172,9 +151,9 @@ export async function initI18n(): Promise<void> {
       },
       ko: {
         ...koConfig
-      },
+      }
     },
-    postProcess: ["korean-postposition"],
+    postProcess: ["korean-postposition"]
   });
 
   await initFonts();
@@ -240,4 +219,3 @@ export function getIsInitialized(): boolean {
 }
 
 let isInitialized = false;
-

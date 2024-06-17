@@ -1,26 +1,31 @@
 import i18next from "i18next";
 import { MoneyFormat } from "#enums/money-format";
-import { EnumType } from "typescript";
 
 export const MissingTextureKey = "__MISSING";
 
 export function toReadableString(str: string): string {
-  return str.replace(/\_/g, " ").split(" ").map(s => `${s.slice(0, 1)}${s.slice(1).toLowerCase()}`).join(" ");
+  return str
+    .replace(/\_/g, " ")
+    .split(" ")
+    .map((s) => `${s.slice(0, 1)}${s.slice(1).toLowerCase()}`)
+    .join(" ");
 }
 
-export function randomString(length: integer, seeded: boolean = false) {
+export function randomString(length: number, seeded: boolean = false): string {
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
 
   for (let i = 0; i < length; i++) {
-    const randomIndex = seeded ? randSeedInt(characters.length) : Math.floor(Math.random() * characters.length);
+    const randomIndex = seeded
+      ? randSeedInt(characters.length)
+      : Math.floor(Math.random() * characters.length);
     result += characters[randomIndex];
   }
 
   return result;
 }
 
-export function shiftCharCodes(str: string, shiftCount: integer) {
+export function shiftCharCodes(str: string, shiftCount: number): string {
   if (!shiftCount) {
     shiftCount = 0;
   }
@@ -36,7 +41,7 @@ export function shiftCharCodes(str: string, shiftCount: integer) {
   return newStr;
 }
 
-export function clampInt(value: integer, min: integer, max: integer): integer {
+export function clampInt(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
 }
 
@@ -60,7 +65,7 @@ export function randSeedGauss(stdev: number, mean: number = 0): number {
   return z * stdev + mean;
 }
 
-export function padInt(value: integer, length: integer, padWith?: string): string {
+export function padInt(value: number, length: number, padWith?: string): string {
   if (!padWith) {
     padWith = "0";
   }
@@ -72,52 +77,49 @@ export function padInt(value: integer, length: integer, padWith?: string): strin
 }
 
 /**
-* Returns a random integer between min and min + range
-* @param range The amount of possible numbers
-* @param min The starting number
-*/
-export function randInt(range: integer, min: integer = 0): integer {
+ * Returns a random number between min and min + range
+ * @param range The amount of possible numbers
+ * @param min The starting number
+ */
+export function randInt(range: number, min: number = 0): number {
   if (range === 1) {
     return min;
   }
   return Math.floor(Math.random() * range) + min;
 }
 
-export function randSeedInt(range: integer, min: integer = 0): integer {
+export function randSeedInt(range: number, min: number = 0): number {
   if (range <= 1) {
     return min;
   }
-  return Phaser.Math.RND.integerInRange(min, (range - 1) + min);
+  return Phaser.Math.RND.integerInRange(min, range - 1 + min);
 }
 
 /**
-* Returns a random integer between min and max (non-inclusive)
-* @param min The lowest number
-* @param max The highest number
-*/
-export function randIntRange(min: integer, max: integer): integer {
+ * Returns a random number between min and max (non-inclusive)
+ * @param min The lowest number
+ * @param max The highest number
+ */
+export function randIntRange(min: number, max: number): number {
   return randInt(max - min, min);
 }
 
 export function randItem<T>(items: T[]): T | undefined {
-  return items.length === 1
-    ? items[0]
-    : items[randInt(items.length)];
+  return items.length === 1 ? items[0] : items[randInt(items.length)];
 }
 
 export function randSeedItem<T>(items: T[]): T | undefined {
-  return items.length === 1
-    ? items[0]
-    : Phaser.Math.RND.pick(items);
+  return items.length === 1 ? items[0] : Phaser.Math.RND.pick(items);
 }
 
 export function randSeedWeightedItem<T>(items: T[]): T | undefined {
-  return items.length === 1
-    ? items[0]
-    : Phaser.Math.RND.weightedPick(items);
+  return items.length === 1 ? items[0] : Phaser.Math.RND.weightedPick(items);
 }
 
-export function randSeedEasedWeightedItem<T>(items: T[], easingFunction: string = "Sine.easeIn"): T | undefined {
+export function randSeedEasedWeightedItem<T>(
+  items: T[],
+  easingFunction: string = "Sine.easeIn"
+): T | undefined {
   if (!items.length) {
     return undefined;
   }
@@ -141,33 +143,38 @@ export function randSeedShuffle<T>(items: T[]): T[] {
   const newArray = items.slice(0);
   for (let i = items.length - 1; i > 0; i--) {
     const j = Phaser.Math.RND.integerInRange(0, i);
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    const firstItem = newArray[i];
+    const secondItem = newArray[j];
+
+    if (firstItem && secondItem) {
+      [newArray[i], newArray[j]] = [secondItem, firstItem];
+    }
   }
   return newArray;
 }
 
-export function getFrameMs(frameCount: integer): integer {
+export function getFrameMs(frameCount: number): number {
   return Math.floor((1 / 60) * 1000 * frameCount);
 }
 
 export function getCurrentTime(): number {
   const date = new Date();
-  return (((date.getHours() * 60 + date.getMinutes()) / 1440) + 0.675) % 1;
+  return ((date.getHours() * 60 + date.getMinutes()) / 1440 + 0.675) % 1;
 }
 
 const secondsInHour = 3600;
 
-export function getPlayTimeString(totalSeconds: integer): string {
+export function getPlayTimeString(totalSeconds: number): string {
   const days = `${Math.floor(totalSeconds / (secondsInHour * 24))}`;
-  const hours = `${Math.floor(totalSeconds % (secondsInHour * 24) / secondsInHour)}`;
-  const minutes = `${Math.floor(totalSeconds % secondsInHour / 60)}`;
+  const hours = `${Math.floor((totalSeconds % (secondsInHour * 24)) / secondsInHour)}`;
+  const minutes = `${Math.floor((totalSeconds % secondsInHour) / 60)}`;
   const seconds = `${Math.floor(totalSeconds % 60)}`;
 
   return `${days.padStart(2, "0")}:${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}:${seconds.padStart(2, "0")}`;
 }
 
-export function binToDec(input: string): integer {
-  const place: integer[] = [];
+export function binToDec(input: string): number {
+  const place: number[] = [];
   const binary: string[] = [];
 
   let decimalNum = 0;
@@ -185,7 +192,7 @@ export function binToDec(input: string): integer {
   return decimalNum;
 }
 
-export function decToBin(input: integer): string {
+export function decToBin(input: number): string {
   let bin = "";
   let intNum = input;
   while (intNum > 0) {
@@ -196,7 +203,7 @@ export function decToBin(input: integer): string {
   return bin;
 }
 
-export function getIvsFromId(id: integer): integer[] {
+export function getIvsFromId(id: number): number[] {
   return [
     binToDec(decToBin(id).substring(0, 5)),
     binToDec(decToBin(id).substring(5, 10)),
@@ -207,7 +214,7 @@ export function getIvsFromId(id: integer): integer[] {
   ];
 }
 
-export function formatLargeNumber(count: integer, threshold: integer): string {
+export function formatLargeNumber(count: number, threshold: number): string {
   if (count < threshold) {
     return count.toString();
   }
@@ -241,7 +248,20 @@ export function formatLargeNumber(count: integer, threshold: integer): string {
 }
 
 // Abbreviations from 10^0 to 10^33
-const AbbreviationsLargeNumber: string[] = ["", "K", "M", "B", "t", "q", "Q", "s", "S", "o", "n", "d"];
+const AbbreviationsLargeNumber: string[] = [
+  "",
+  "K",
+  "M",
+  "B",
+  "t",
+  "q",
+  "Q",
+  "s",
+  "S",
+  "o",
+  "n",
+  "d"
+];
 
 export function formatFancyLargeNumber(number: number, rounded: number = 3): string {
   let exponent: number;
@@ -257,7 +277,7 @@ export function formatFancyLargeNumber(number: number, rounded: number = 3): str
     number /= Math.pow(1000, exponent);
   }
 
-  return `${(exponent === 0) || number % 1 === 0 ? number : number.toFixed(rounded)}${AbbreviationsLargeNumber[exponent]}`;
+  return `${exponent === 0 || number % 1 === 0 ? number : number.toFixed(rounded)}${AbbreviationsLargeNumber[exponent]}`;
 }
 
 export function formatMoney(format: MoneyFormat, amount: number) {
@@ -267,30 +287,25 @@ export function formatMoney(format: MoneyFormat, amount: number) {
   return amount.toLocaleString();
 }
 
-export function formatStat(stat: integer, forHp: boolean = false): string {
+export function formatStat(stat: number, forHp: boolean = false): string {
   return formatLargeNumber(stat, forHp ? 100000 : 1000000);
 }
 
-export function getEnumKeys(enumType: Record<number, unknown>): string[] {
-  return Object.values(enumType).filter(v => isNaN(parseInt(v.toString()))).map(v => v.toString());
-}
-
-export function getEnumValues(enumType: Record<number, unknown>): integer[] {
-  return Object.values(enumType).filter(v => !isNaN(parseInt(v.toString()))).map(v => parseInt(v.toString()));
-}
-
-export function executeIf<T>(condition: boolean, promiseFunc: () => Promise<T>): Promise<T> {
-  return condition ? promiseFunc() : new Promise<T>(resolve => resolve(null));
+export function executeIf<T>(condition: boolean, promiseFunc: () => Promise<T | null>): Promise<T | null> {
+  return condition ? promiseFunc() : new Promise<null>((resolve) => resolve(null));
 }
 
 export const sessionIdKey = "pokerogue_sessionId";
 // Check if the current hostname is 'localhost' or an IP address, and ensure a port is specified
-export const isLocal = (
-  (window.location.hostname === "localhost" ||
-   /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/.test(window.location.hostname)) &&
-  window.location.port !== "") || window.location.hostname === "";
+export const isLocal =
+  ((window.location.hostname === "localhost" ||
+    /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/.test(window.location.hostname)) &&
+    window.location.port !== "") ||
+  window.location.hostname === "";
 
-export const localServerUrl = import.meta.env.VITE_SERVER_URL ?? `http://${window.location.hostname}:${window.location.port+1}`;
+export const localServerUrl =
+  import.meta.env.VITE_SERVER_URL ??
+  `http://${window.location.hostname}:${window.location.port + 1}`;
 
 // Set the server URL based on whether it's local or not
 export const serverUrl = isLocal ? localServerUrl : "";
@@ -300,7 +315,7 @@ export let isLocalServerConnected = true;
 
 export function setCookie(cName: string, cValue: string): void {
   const expiration = new Date();
-  expiration.setTime(new Date().getTime() + 3600000 * 24 * 30 * 3/*7*/);
+  expiration.setTime(new Date().getTime() + 3600000 * 24 * 30 * 3 /*7*/);
   document.cookie = `${cName}=${cValue};Secure;SameSite=Strict;Path=/;Expires=${expiration.toUTCString()}`;
 }
 
@@ -309,6 +324,11 @@ export function getCookie(cName: string): string {
   const ca = document.cookie.split(";");
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i];
+
+    if (!c) {
+      return "";
+    }
+
     while (c.charAt(0) === " ") {
       c = c.substring(1);
     }
@@ -326,44 +346,53 @@ export function getCookie(cName: string): string {
  */
 export function localPing() {
   if (isLocal) {
-    apiFetch("game/titlestats")
-      .then(resolved => isLocalServerConnected = true,
-        rejected => isLocalServerConnected = false
-      );
+    apiFetch("game/titlestats").then(
+      (resolved) => (isLocalServerConnected = true),
+      (rejected) => (isLocalServerConnected = false)
+    );
   }
 }
 
 export function apiFetch(path: string, authed: boolean = false): Promise<Response> {
-  return (isLocal && isLocalServerConnected) || !isLocal ? new Promise((resolve, reject) => {
-    const request = {};
-    if (authed) {
-      const sId = getCookie(sessionIdKey);
-      if (sId) {
-        request["headers"] = { "Authorization": sId };
+  return (isLocal && isLocalServerConnected) || !isLocal
+    ? new Promise((resolve, reject) => {
+      const request: { headers?: { Authorization?: string } } = {};
+      if (authed) {
+        const sId = getCookie(sessionIdKey);
+        if (sId) {
+          request["headers"] = { Authorization: sId };
+        }
       }
-    }
-    fetch(`${apiUrl}/${path}`, request)
-      .then(response => resolve(response))
-      .catch(err => reject(err));
-  }) : new Promise(() => {});
+      fetch(`${apiUrl}/${path}`, request)
+        .then((response) => resolve(response))
+        .catch((err) => reject(err));
+    })
+    : new Promise(() => {});
 }
 
-export function apiPost(path: string, data?: any, contentType: string = "application/json", authed: boolean = false): Promise<Response> {
-  return (isLocal && isLocalServerConnected) || !isLocal ? new Promise((resolve, reject) => {
-    const headers = {
-      "Accept": contentType,
-      "Content-Type": contentType,
-    };
-    if (authed) {
-      const sId = getCookie(sessionIdKey);
-      if (sId) {
-        headers["Authorization"] = sId;
+export function apiPost(
+  path: string,
+  data?: any,
+  contentType: string = "application/json",
+  authed: boolean = false
+): Promise<Response> {
+  return (isLocal && isLocalServerConnected) || !isLocal
+    ? new Promise((resolve, reject) => {
+      const headers: Record<string, string> = {
+        Accept: contentType,
+        "Content-Type": contentType
+      };
+      if (authed) {
+        const sId = getCookie(sessionIdKey);
+        if (sId) {
+          headers["Authorization"] = sId;
+        }
       }
-    }
-    fetch(`${apiUrl}/${path}`, { method: "POST", headers: headers, body: data })
-      .then(response => resolve(response))
-      .catch(err => reject(err));
-  }) : new Promise(() => {});
+      fetch(`${apiUrl}/${path}`, { method: "POST", headers: headers, body: data })
+        .then((response) => resolve(response))
+        .catch((err) => reject(err));
+    })
+    : new Promise(() => {});
 }
 
 export class BooleanHolder {
@@ -382,27 +411,27 @@ export class NumberHolder {
   }
 }
 
-export class IntegerHolder extends NumberHolder {
-  constructor(value: integer) {
+export class numberHolder extends NumberHolder {
+  constructor(value: number) {
     super(value);
   }
 }
 
-export class FixedInt extends IntegerHolder {
-  constructor(value: integer) {
+export class FixedInt extends numberHolder {
+  constructor(value: number) {
     super(value);
   }
 }
 
-export function fixedInt(value: integer): integer {
-  return new FixedInt(value) as unknown as integer;
+export function fixedInt(value: number): number {
+  return new FixedInt(value) as unknown as number;
 }
 
-export function rgbToHsv(r: integer, g: integer, b: integer) {
+export function rgbToHsv(r: number, g: number, b: number) {
   const v = Math.max(r, g, b);
   const c = v - Math.min(r, g, b);
-  const h = c && ((v === r) ? (g - b) / c : ((v === g) ? 2 + (b - r) / c : 4 + (r - g) / c));
-  return [ 60 * (h < 0 ? h + 6 : h), v && c / v, v];
+  const h = c && (v === r ? (g - b) / c : v === g ? 2 + (b - r) / c : 4 + (r - g) / c);
+  return [60 * (h < 0 ? h + 6 : h), v && c / v, v];
 }
 
 /**
@@ -410,28 +439,33 @@ export function rgbToHsv(r: integer, g: integer, b: integer) {
  * @param {Array} rgb1 First RGB color in array
  * @param {Array} rgb2 Second RGB color in array
  */
-export function deltaRgb(rgb1: integer[], rgb2: integer[]): integer {
-  const [ r1, g1, b1 ] = rgb1;
-  const [ r2, g2, b2 ] = rgb2;
+export function deltaRgb(rgb1: [number, number, number], rgb2: [number, number, number]): number {
+  const [r1, g1, b1] = rgb1;
+  const [r2, g2, b2] = rgb2;
   const drp2 = Math.pow(r1 - r2, 2);
   const dgp2 = Math.pow(g1 - g2, 2);
   const dbp2 = Math.pow(b1 - b2, 2);
   const t = (r1 + r2) / 2;
 
-  return Math.ceil(Math.sqrt(2 * drp2 + 4 * dgp2 + 3 * dbp2 + t * (drp2 - dbp2) / 256));
+  return Math.ceil(Math.sqrt(2 * drp2 + 4 * dgp2 + 3 * dbp2 + (t * (drp2 - dbp2)) / 256));
 }
 
 export function rgbHexToRgba(hex: string) {
   const color = hex.match(/^([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i);
+
+  if (!color) {
+    return { r: 0, g: 0, b: 0, a: 0 };
+  }
+
   return {
-    r: parseInt(color[1], 16),
-    g: parseInt(color[2], 16),
-    b: parseInt(color[3], 16),
+    r: parseInt(color[1] ?? "", 16),
+    g: parseInt(color[2] ?? "", 16),
+    b: parseInt(color[3] ?? "", 16),
     a: 255
   };
 }
 
-export function rgbaToInt(rgba: integer[]): integer {
+export function rgbaToInt(rgba: [number, number, number, number]): number {
   return (rgba[0] << 24) + (rgba[1] << 16) + (rgba[2] << 8) + rgba[3];
 }
 
@@ -467,11 +501,12 @@ export function verifyLang(lang?: string): boolean {
  * @param container container with game objects inside it
  */
 export function printContainerList(container: Phaser.GameObjects.Container): void {
-  console.log(container.list.map(go => {
-    return {type: go.type, name: go.name};
-  }));
+  console.log(
+    container.list.map((go) => {
+      return { type: go.type, name: go.name };
+    })
+  );
 }
-
 
 /**
  * Truncate a string to a specified maximum length and add an ellipsis if it exceeds that length.
@@ -480,7 +515,7 @@ export function printContainerList(container: Phaser.GameObjects.Container): voi
  * @param maxLength - The maximum length of the truncated string, defaults to 10.
  * @returns The truncated string with an ellipsis if it was longer than maxLength.
  */
-export function truncateString(str: String, maxLength: number = 10) {
+export function truncateString(str: string, maxLength: number = 10): string {
   // Check if the string length exceeds the maximum length
   if (str.length > maxLength) {
     // Truncate the string and add an ellipsis
@@ -491,29 +526,18 @@ export function truncateString(str: String, maxLength: number = 10) {
 }
 
 /**
- * Perform a deep copy of an object.
- *
- * @param values - The object to be deep copied.
- * @returns A new object that is a deep copy of the input.
- */
-export function deepCopy(values: object): object {
-  // Convert the object to a JSON string and parse it back to an object to perform a deep copy
-  return JSON.parse(JSON.stringify(values));
-}
-
-/**
  * Convert a space-separated string into a capitalized and underscored string.
  *
  * @param input - The string to be converted.
  * @returns The converted string with words capitalized and separated by underscores.
  */
-export function reverseValueToKeySetting(input: string) {
+export function reverseValueToKeySetting(input: string): string {
   // Split the input string into an array of words
   const words = input.split(" ");
   // Capitalize the first letter of each word and convert the rest to lowercase
-  const capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+  const capitalizedWords = words.map(
+    (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+  );
   // Join the capitalized words with underscores and return the result
   return capitalizedWords.join("_");
 }
-
-

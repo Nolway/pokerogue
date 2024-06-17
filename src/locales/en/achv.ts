@@ -2,268 +2,268 @@ import { AchievementTranslationEntries } from "#app/plugins/i18n.js";
 
 // Achievement translations for the when the player character is male
 export const PGMachv: AchievementTranslationEntries = {
-  "Achievements": {
-    name: "Achievements",
+  Achievements: {
+    name: "Achievements"
   },
-  "Locked": {
-    name: "Locked",
+  Locked: {
+    name: "Locked"
   },
 
-  "MoneyAchv": {
-    description: "Accumulate a total of ₽{{moneyAmount}}",
+  MoneyAchv: {
+    description: "Accumulate a total of ₽{{moneyAmount}}"
   },
   "10K_MONEY": {
-    name: "Money Haver",
+    name: "Money Haver"
   },
   "100K_MONEY": {
-    name: "Rich",
+    name: "Rich"
   },
   "1M_MONEY": {
-    name: "Millionaire",
+    name: "Millionaire"
   },
   "10M_MONEY": {
-    name: "One Percenter",
+    name: "One Percenter"
   },
 
-  "DamageAchv": {
-    description: "Inflict {{damageAmount}} damage in one hit",
+  DamageAchv: {
+    description: "Inflict {{damageAmount}} damage in one hit"
   },
   "250_DMG": {
-    name: "Hard Hitter",
+    name: "Hard Hitter"
   },
   "1000_DMG": {
-    name: "Harder Hitter",
+    name: "Harder Hitter"
   },
   "2500_DMG": {
-    name: "That's a Lotta Damage!",
+    name: "That's a Lotta Damage!"
   },
   "10000_DMG": {
-    name: "One Punch Man",
+    name: "One Punch Man"
   },
 
-  "HealAchv": {
-    description: "Heal {{healAmount}} {{HP}} at once with a move, ability, or held item",
+  HealAchv: {
+    description: "Heal {{healAmount}} {{HP}} at once with a move, ability, or held item"
   },
   "250_HEAL": {
-    name: "Novice Healer",
+    name: "Novice Healer"
   },
   "1000_HEAL": {
-    name: "Big Healer",
+    name: "Big Healer"
   },
   "2500_HEAL": {
-    name: "Cleric",
+    name: "Cleric"
   },
   "10000_HEAL": {
-    name: "Recovery Master",
+    name: "Recovery Master"
   },
 
-  "LevelAchv": {
-    description: "Level up a Pokémon to Lv{{level}}",
+  LevelAchv: {
+    description: "Level up a Pokémon to Lv{{level}}"
   },
-  "LV_100": {
-    name: "But Wait, There's More!",
+  LV_100: {
+    name: "But Wait, There's More!"
   },
-  "LV_250": {
-    name: "Elite",
+  LV_250: {
+    name: "Elite"
   },
-  "LV_1000": {
-    name: "To Go Even Further Beyond",
+  LV_1000: {
+    name: "To Go Even Further Beyond"
   },
 
-  "RibbonAchv": {
-    description: "Accumulate a total of {{ribbonAmount}} Ribbons",
+  RibbonAchv: {
+    description: "Accumulate a total of {{ribbonAmount}} Ribbons"
   },
   "10_RIBBONS": {
-    name: "Pokémon League Champion",
+    name: "Pokémon League Champion"
   },
   "25_RIBBONS": {
-    name: "Great League Champion",
+    name: "Great League Champion"
   },
   "50_RIBBONS": {
-    name: "Ultra League Champion",
+    name: "Ultra League Champion"
   },
   "75_RIBBONS": {
-    name: "Rogue League Champion",
+    name: "Rogue League Champion"
   },
   "100_RIBBONS": {
-    name: "Master League Champion",
+    name: "Master League Champion"
   },
 
-  "TRANSFER_MAX_BATTLE_STAT": {
+  TRANSFER_MAX_BATTLE_STAT: {
     name: "Teamwork",
-    description: "Baton pass to another party member with at least one stat maxed out",
+    description: "Baton pass to another party member with at least one stat maxed out"
   },
-  "MAX_FRIENDSHIP": {
+  MAX_FRIENDSHIP: {
     name: "Friendmaxxing",
-    description: "Reach max friendship on a Pokémon",
+    description: "Reach max friendship on a Pokémon"
   },
-  "MEGA_EVOLVE": {
+  MEGA_EVOLVE: {
     name: "Megamorph",
-    description: "Mega evolve a Pokémon",
+    description: "Mega evolve a Pokémon"
   },
-  "GIGANTAMAX": {
+  GIGANTAMAX: {
     name: "Absolute Unit",
-    description: "Gigantamax a Pokémon",
+    description: "Gigantamax a Pokémon"
   },
-  "TERASTALLIZE": {
+  TERASTALLIZE: {
     name: "STAB Enthusiast",
-    description: "Terastallize a Pokémon",
+    description: "Terastallize a Pokémon"
   },
-  "STELLAR_TERASTALLIZE": {
+  STELLAR_TERASTALLIZE: {
     name: "The Hidden Type",
-    description: "Stellar Terastallize a Pokémon",
+    description: "Stellar Terastallize a Pokémon"
   },
-  "SPLICE": {
+  SPLICE: {
     name: "Infinite Fusion",
-    description: "Splice two Pokémon together with DNA Splicers",
+    description: "Splice two Pokémon together with DNA Splicers"
   },
-  "MINI_BLACK_HOLE": {
+  MINI_BLACK_HOLE: {
     name: "A Hole Lot of Items",
-    description: "Acquire a Mini Black Hole",
+    description: "Acquire a Mini Black Hole"
   },
-  "CATCH_MYTHICAL": {
+  CATCH_MYTHICAL: {
     name: "Mythical",
-    description: "Catch a mythical Pokémon",
+    description: "Catch a mythical Pokémon"
   },
-  "CATCH_SUB_LEGENDARY": {
+  CATCH_SUB_LEGENDARY: {
     name: "(Sub-)Legendary",
-    description: "Catch a sub-legendary Pokémon",
+    description: "Catch a sub-legendary Pokémon"
   },
-  "CATCH_LEGENDARY": {
+  CATCH_LEGENDARY: {
     name: "Legendary",
-    description: "Catch a legendary Pokémon",
+    description: "Catch a legendary Pokémon"
   },
-  "SEE_SHINY": {
+  SEE_SHINY: {
     name: "Shiny",
-    description: "Find a shiny Pokémon in the wild",
+    description: "Find a shiny Pokémon in the wild"
   },
-  "SHINY_PARTY": {
+  SHINY_PARTY: {
     name: "That's Dedication",
-    description: "Have a full party of shiny Pokémon",
+    description: "Have a full party of shiny Pokémon"
   },
-  "HATCH_MYTHICAL": {
+  HATCH_MYTHICAL: {
     name: "Mythical Egg",
-    description: "Hatch a mythical Pokémon from an egg",
+    description: "Hatch a mythical Pokémon from an egg"
   },
-  "HATCH_SUB_LEGENDARY": {
+  HATCH_SUB_LEGENDARY: {
     name: "Sub-Legendary Egg",
-    description: "Hatch a sub-legendary Pokémon from an egg",
+    description: "Hatch a sub-legendary Pokémon from an egg"
   },
-  "HATCH_LEGENDARY": {
+  HATCH_LEGENDARY: {
     name: "Legendary Egg",
-    description: "Hatch a legendary Pokémon from an egg",
+    description: "Hatch a legendary Pokémon from an egg"
   },
-  "HATCH_SHINY": {
+  HATCH_SHINY: {
     name: "Shiny Egg",
-    description: "Hatch a shiny Pokémon from an egg",
+    description: "Hatch a shiny Pokémon from an egg"
   },
-  "HIDDEN_ABILITY": {
+  HIDDEN_ABILITY: {
     name: "Hidden Potential",
-    description: "Catch a Pokémon with a hidden ability",
+    description: "Catch a Pokémon with a hidden ability"
   },
-  "PERFECT_IVS": {
+  PERFECT_IVS: {
     name: "Certificate of Authenticity",
-    description: "Get perfect IVs on a Pokémon",
+    description: "Get perfect IVs on a Pokémon"
   },
-  "CLASSIC_VICTORY": {
+  CLASSIC_VICTORY: {
     name: "Undefeated",
-    description: "Beat the game in classic mode",
+    description: "Beat the game in classic mode"
   },
 
-  "MONO_GEN_ONE": {
+  MONO_GEN_ONE: {
     name: "The Original Rival",
-    description: "Complete the generation one only challenge.",
+    description: "Complete the generation one only challenge."
   },
-  "MONO_GEN_TWO": {
+  MONO_GEN_TWO: {
     name: "Generation 1.5",
-    description: "Complete the generation two only challenge.",
+    description: "Complete the generation two only challenge."
   },
-  "MONO_GEN_THREE": {
+  MONO_GEN_THREE: {
     name: "Too much water?",
-    description: "Complete the generation three only challenge.",
+    description: "Complete the generation three only challenge."
   },
-  "MONO_GEN_FOUR": {
+  MONO_GEN_FOUR: {
     name: "Is she really the hardest?",
-    description: "Complete the generation four only challenge.",
+    description: "Complete the generation four only challenge."
   },
-  "MONO_GEN_FIVE": {
+  MONO_GEN_FIVE: {
     name: "All Original",
-    description: "Complete the generation five only challenge.",
+    description: "Complete the generation five only challenge."
   },
-  "MONO_GEN_SIX": {
+  MONO_GEN_SIX: {
     name: "Almost Royalty",
-    description: "Complete the generation six only challenge.",
+    description: "Complete the generation six only challenge."
   },
-  "MONO_GEN_SEVEN": {
+  MONO_GEN_SEVEN: {
     name: "Only Technically",
-    description: "Complete the generation seven only challenge.",
+    description: "Complete the generation seven only challenge."
   },
-  "MONO_GEN_EIGHT": {
+  MONO_GEN_EIGHT: {
     name: "A Champion Time!",
-    description: "Complete the generation eight only challenge.",
+    description: "Complete the generation eight only challenge."
   },
-  "MONO_GEN_NINE": {
+  MONO_GEN_NINE: {
     name: "She was going easy on you",
-    description: "Complete the generation nine only challenge.",
+    description: "Complete the generation nine only challenge."
   },
 
-  "MonoType": {
-    description: "Complete the {{type}} monotype challenge.",
+  MonoType: {
+    description: "Complete the {{type}} monotype challenge."
   },
-  "MONO_NORMAL": {
-    name: "Extra Ordinary",
+  MONO_NORMAL: {
+    name: "Extra Ordinary"
   },
-  "MONO_FIGHTING": {
-    name: "I Know Kung Fu",
+  MONO_FIGHTING: {
+    name: "I Know Kung Fu"
   },
-  "MONO_FLYING": {
-    name: "Angry Birds",
+  MONO_FLYING: {
+    name: "Angry Birds"
   },
-  "MONO_POISON": {
-    name: "Kanto's Favourite",
+  MONO_POISON: {
+    name: "Kanto's Favourite"
   },
-  "MONO_GROUND": {
-    name: "Forecast: Earthquakes",
+  MONO_GROUND: {
+    name: "Forecast: Earthquakes"
   },
-  "MONO_ROCK": {
-    name: "Brock Hard",
+  MONO_ROCK: {
+    name: "Brock Hard"
   },
-  "MONO_BUG": {
-    name: "You Like Jazz?",
+  MONO_BUG: {
+    name: "You Like Jazz?"
   },
-  "MONO_GHOST": {
-    name: "Who You Gonna Call?",
+  MONO_GHOST: {
+    name: "Who You Gonna Call?"
   },
-  "MONO_STEEL": {
-    name: "Iron Giant",
+  MONO_STEEL: {
+    name: "Iron Giant"
   },
-  "MONO_FIRE": {
-    name: "I Cast Fireball!",
+  MONO_FIRE: {
+    name: "I Cast Fireball!"
   },
-  "MONO_WATER": {
-    name: "When It Rains, It Pours",
+  MONO_WATER: {
+    name: "When It Rains, It Pours"
   },
-  "MONO_GRASS": {
-    name: "Can't Touch This",
+  MONO_GRASS: {
+    name: "Can't Touch This"
   },
-  "MONO_ELECTRIC": {
-    name: "Aim For The Horn!",
+  MONO_ELECTRIC: {
+    name: "Aim For The Horn!"
   },
-  "MONO_PSYCHIC": {
-    name: "Big Brain Energy",
+  MONO_PSYCHIC: {
+    name: "Big Brain Energy"
   },
-  "MONO_ICE": {
-    name: "Walking On Thin Ice",
+  MONO_ICE: {
+    name: "Walking On Thin Ice"
   },
-  "MONO_DRAGON": {
-    name: "Pseudo-Legend Club",
+  MONO_DRAGON: {
+    name: "Pseudo-Legend Club"
   },
-  "MONO_DARK": {
-    name: "It's Just A Phase",
+  MONO_DARK: {
+    name: "It's Just A Phase"
   },
-  "MONO_FAIRY": {
-    name: "Hey! Listen!",
-  },
+  MONO_FAIRY: {
+    name: "Hey! Listen!"
+  }
 } as const;
 
 // Achievement translations for the when the player character is female (it for now uses the same translations as the male version)

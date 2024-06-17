@@ -27,12 +27,18 @@ export class Status {
   }
 
   isPostTurn(): boolean {
-    return this.effect === StatusEffect.POISON || this.effect === StatusEffect.TOXIC || this.effect === StatusEffect.BURN;
+    return (
+      this.effect === StatusEffect.POISON ||
+      this.effect === StatusEffect.TOXIC ||
+      this.effect === StatusEffect.BURN
+    );
   }
 }
 
 export function getStatusEffectObtainText(statusEffect: StatusEffect, sourceText?: string): string {
-  const sourceClause = sourceText ? ` ${statusEffect !== StatusEffect.SLEEP ? "by" : "from"} ${sourceText}` : "";
+  const sourceClause = sourceText
+    ? ` ${statusEffect !== StatusEffect.SLEEP ? "by" : "from"} ${sourceText}`
+    : "";
   switch (statusEffect) {
   case StatusEffect.POISON:
     return `\nwas poisoned${sourceClause}!`;
@@ -137,18 +143,21 @@ export function getStatusEffectCatchRateMultiplier(statusEffect: StatusEffect): 
 }
 
 /**
-* Returns a random non-volatile StatusEffect
-*/
+ * Returns a random non-volatile StatusEffect
+ */
 export function generateRandomStatusEffect(): StatusEffect {
   return Utils.randIntRange(1, 6);
 }
 
 /**
-* Returns a random non-volatile StatusEffect between the two provided
-* @param statusEffectA The first StatusEffect
-* @param statusEffectA The second StatusEffect
-*/
-export function getRandomStatusEffect(statusEffectA: StatusEffect, statusEffectB: StatusEffect): StatusEffect {
+ * Returns a random non-volatile StatusEffect between the two provided
+ * @param statusEffectA The first StatusEffect
+ * @param statusEffectA The second StatusEffect
+ */
+export function getRandomStatusEffect(
+  statusEffectA: StatusEffect,
+  statusEffectB: StatusEffect
+): StatusEffect {
   if (statusEffectA === StatusEffect.NONE || statusEffectA === StatusEffect.FAINT) {
     return statusEffectB;
   }
@@ -160,18 +169,25 @@ export function getRandomStatusEffect(statusEffectA: StatusEffect, statusEffectB
 }
 
 /**
-* Returns a random non-volatile StatusEffect between the two provided
-* @param statusA The first Status
-* @param statusB The second Status
-*/
+ * Returns a random non-volatile StatusEffect between the two provided
+ * @param statusA The first Status
+ * @param statusB The second Status
+ */
 export function getRandomStatus(statusA: Status, statusB: Status): Status {
-  if (statusA === undefined || statusA.effect === StatusEffect.NONE || statusA.effect === StatusEffect.FAINT) {
+  if (
+    statusA === undefined ||
+    statusA.effect === StatusEffect.NONE ||
+    statusA.effect === StatusEffect.FAINT
+  ) {
     return statusB;
   }
-  if (statusB === undefined || statusB.effect === StatusEffect.NONE || statusB.effect === StatusEffect.FAINT) {
+  if (
+    statusB === undefined ||
+    statusB.effect === StatusEffect.NONE ||
+    statusB.effect === StatusEffect.FAINT
+  ) {
     return statusA;
   }
-
 
   return Utils.randIntRange(0, 2) ? statusA : statusB;
 }
@@ -180,7 +196,7 @@ export function getRandomStatus(statusA: Status, statusB: Status): Status {
  * Gets all non volatile status effects
  * @returns A list containing all non volatile status effects
  */
-export function getNonVolatileStatusEffects():Array<StatusEffect> {
+export function getNonVolatileStatusEffects(): Array<StatusEffect> {
   return [
     StatusEffect.POISON,
     StatusEffect.TOXIC,

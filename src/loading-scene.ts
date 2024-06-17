@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import { GachaType } from "./data/egg";
 import { trainerConfigs } from "./data/trainer-config";
 import { getBiomeHasProps } from "./field/arena";
@@ -7,19 +8,18 @@ import { WindowVariant, getWindowVariantSuffix } from "./ui/ui-theme";
 import { isMobile } from "./touch-controls";
 import * as Utils from "./utils";
 import { initI18n } from "./plugins/i18n";
-import {initPokemonPrevolutions} from "#app/data/pokemon-evolutions";
-import {initBiomes} from "#app/data/biomes";
-import {initEggMoves} from "#app/data/egg-moves";
-import {initPokemonForms} from "#app/data/pokemon-forms";
-import {initSpecies} from "#app/data/pokemon-species";
-import {initMoves} from "#app/data/move";
-import {initAbilities} from "#app/data/ability";
-import {initAchievements} from "#app/system/achv";
-import {initTrainerTypeDialogue} from "#app/data/dialogue";
 import { initChallenges } from "./data/challenge";
-import i18next from "i18next";
 import { initStatsKeys } from "./ui/game-stats-ui-handler";
 import { initVouchers } from "./system/voucher";
+import { initPokemonPrevolutions } from "#app/data/pokemon-evolutions";
+import { initBiomes } from "#app/data/biomes";
+import { initEggMoves } from "#app/data/egg-moves";
+import { initPokemonForms } from "#app/data/pokemon-forms";
+import { initSpecies } from "#app/data/pokemon-species";
+import { initMoves } from "#app/data/move";
+import { initAbilities } from "#app/data/ability";
+import { initAchievements } from "#app/system/achv";
+import { initTrainerTypeDialogue } from "#app/data/dialogue";
 import { Biome } from "#enums/biome";
 import { TrainerType } from "#enums/trainer-type";
 
@@ -49,7 +49,7 @@ export class LoadingScene extends SceneBase {
     this.loadImage("candy_overlay", "ui");
     this.loadImage("cursor", "ui");
     this.loadImage("cursor_reverse", "ui");
-    for (const wv of Utils.getEnumValues(WindowVariant)) {
+    for (const wv of Object.values(WindowVariant)) {
       for (let w = 1; w <= 5; w++) {
         this.loadImage(`window_${w}${getWindowVariantSuffix(wv)}`, "ui/windows");
       }
@@ -128,10 +128,10 @@ export class LoadingScene extends SceneBase {
     this.loadImage("summary_bg", "ui");
     this.loadImage("summary_overlay_shiny", "ui");
     this.loadImage("summary_profile", "ui");
-    this.loadImage("summary_profile_prompt_z", "ui");      // The pixel Z button prompt
-    this.loadImage("summary_profile_prompt_a", "ui");     // The pixel A button prompt
-    this.loadImage("summary_profile_ability", "ui");      // Pixel text 'ABILITY'
-    this.loadImage("summary_profile_passive", "ui");      // Pixel text 'PASSIVE'
+    this.loadImage("summary_profile_prompt_z", "ui"); // The pixel Z button prompt
+    this.loadImage("summary_profile_prompt_a", "ui"); // The pixel A button prompt
+    this.loadImage("summary_profile_ability", "ui"); // Pixel text 'ABILITY'
+    this.loadImage("summary_profile_passive", "ui"); // Pixel text 'PASSIVE'
     this.loadImage("summary_status", "ui");
     this.loadImage("summary_stats", "ui");
     this.loadImage("summary_stats_overlay_exp", "ui");
@@ -156,7 +156,7 @@ export class LoadingScene extends SceneBase {
 
     this.loadImage("default_bg", "arenas");
     // Load arena images
-    Utils.getEnumValues(Biome).map(bt => {
+    Object.values(Biome).map((bt) => {
       const btKey = Biome[bt].toLowerCase();
       const isBaseAnimated = btKey === "end";
       const baseAKey = `${btKey}_a`;
@@ -174,7 +174,7 @@ export class LoadingScene extends SceneBase {
       }
       if (getBiomeHasProps(bt)) {
         for (let p = 1; p <= 3; p++) {
-          const isPropAnimated = p === 3 && [ "power_plant", "end" ].find(b => b === btKey);
+          const isPropAnimated = p === 3 && ["power_plant", "end"].find((b) => b === btKey);
           const propKey = `${btKey}_b_${p}`;
           if (!isPropAnimated) {
             this.loadImage(propKey, "arenas");
@@ -194,7 +194,7 @@ export class LoadingScene extends SceneBase {
     this.loadAtlas("trainer_f_back", "trainer");
     this.loadAtlas("trainer_f_back_pb", "trainer");
 
-    Utils.getEnumValues(TrainerType).map(tt => {
+    Object.values(TrainerType).map((tt) => {
       const config = trainerConfigs[tt];
       this.loadAtlas(config.getSpriteKey(), "trainer");
       if (config.doubleOnly || config.hasDouble) {
@@ -236,7 +236,6 @@ export class LoadingScene extends SceneBase {
       this.loadAtlas("types", "");
     }
 
-
     this.loadAtlas("statuses", "");
     this.loadAtlas("categories", "");
 
@@ -245,7 +244,7 @@ export class LoadingScene extends SceneBase {
     this.loadAtlas("egg_icons", "egg");
     this.loadAtlas("egg_shard", "egg");
     this.loadAtlas("egg_lightrays", "egg");
-    Utils.getEnumKeys(GachaType).forEach(gt => {
+    Object.keys(GachaType).forEach((gt) => {
       const key = gt.toLowerCase();
       this.loadImage(`gacha_${key}`, "egg");
       this.loadAtlas(`gacha_underlay_${key}`, "egg");
@@ -326,7 +325,11 @@ export class LoadingScene extends SceneBase {
     this.loadBgm("evolution", "bw/evolution.mp3");
     this.loadBgm("evolution_fanfare", "bw/evolution_fanfare.mp3");
 
-    this.load.plugin("rextexteditplugin", "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js", true);
+    this.load.plugin(
+      "rextexteditplugin",
+      "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js",
+      true
+    );
 
     this.loadLoadingScreen();
 
@@ -380,8 +383,8 @@ export class LoadingScene extends SceneBase {
       text: "0%",
       style: {
         font: "72px emerald",
-        color: "#ffffff",
-      },
+        color: "#ffffff"
+      }
     });
     percentText.setOrigin(0.5, 0.5);
 
@@ -391,8 +394,8 @@ export class LoadingScene extends SceneBase {
       text: "",
       style: {
         font: "48px emerald",
-        color: "#ffffff",
-      },
+        color: "#ffffff"
+      }
     });
     assetText.setOrigin(0.5, 0.5);
 
@@ -402,8 +405,8 @@ export class LoadingScene extends SceneBase {
       text: i18next.t("menu:disclaimer"),
       style: {
         font: "72px emerald",
-        color: "#DA3838",
-      },
+        color: "#DA3838"
+      }
     });
     disclaimerText.setOrigin(0.5, 0.5);
 
@@ -415,14 +418,24 @@ export class LoadingScene extends SceneBase {
         font: "48px emerald",
         color: "#ffffff",
         align: "center"
-      },
+      }
     });
     disclaimerDescriptionText.setOrigin(0.5, 0.5);
 
-    loadingGraphics.push(bg, graphics, progressBar, progressBox, logo, percentText, assetText, disclaimerText, disclaimerDescriptionText);
+    loadingGraphics.push(
+      bg,
+      graphics,
+      progressBar,
+      progressBox,
+      logo,
+      percentText,
+      assetText,
+      disclaimerText,
+      disclaimerDescriptionText
+    );
 
     if (!mobile) {
-      loadingGraphics.map(g => g.setVisible(false));
+      loadingGraphics.map((g) => g.setVisible(false));
     }
 
     const intro = this.add.video(0, 0);
@@ -432,9 +445,9 @@ export class LoadingScene extends SceneBase {
         duration: 500,
         alpha: 0,
         ease: "Sine.easeIn",
-        onComplete: () => video.destroy(),
+        onComplete: () => video.destroy()
       });
-      loadingGraphics.forEach(g => g.setVisible(true));
+      loadingGraphics.forEach((g) => g.setVisible(true));
     });
     intro.setOrigin(0, 0);
     intro.setScale(3);
@@ -449,7 +462,7 @@ export class LoadingScene extends SceneBase {
       intro.play();
     });
 
-    this.load.on(this.LOAD_EVENTS.PROGRESS , (progress: number) => {
+    this.load.on(this.LOAD_EVENTS.PROGRESS, (progress: number) => {
       percentText.setText(`${Math.floor(progress * 100)}%`);
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 0.8);
@@ -474,7 +487,7 @@ export class LoadingScene extends SceneBase {
       }
     });
 
-    this.load.on(this.LOAD_EVENTS.COMPLETE, () => loadingGraphics.forEach(go => go.destroy()));
+    this.load.on(this.LOAD_EVENTS.COMPLETE, () => loadingGraphics.forEach((go) => go.destroy()));
   }
 
   get gameHeight() {

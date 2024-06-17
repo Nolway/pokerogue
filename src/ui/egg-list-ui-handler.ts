@@ -1,12 +1,17 @@
 import BattleScene from "../battle-scene";
+import {
+  Egg,
+  getEggGachaTypeDescriptor,
+  getEggHatchWavesMessage,
+  getEggDescriptor
+} from "../data/egg";
+import i18next from "../plugins/i18n";
 import { Mode } from "./ui";
 import PokemonIconAnimHandler, { PokemonIconAnimMode } from "./pokemon-icon-anim-handler";
 import { TextStyle, addTextObject } from "./text";
 import MessageUiHandler from "./message-ui-handler";
-import { Egg, getEggGachaTypeDescriptor, getEggHatchWavesMessage, getEggDescriptor } from "../data/egg";
 import { addWindow } from "./ui-theme";
-import {Button} from "#enums/buttons";
-import i18next from "../plugins/i18n";
+import { Button } from "#enums/buttons";
 
 export default class EggListUiHandler extends MessageUiHandler {
   private eggListContainer: Phaser.GameObjects.Container;
@@ -33,7 +38,13 @@ export default class EggListUiHandler extends MessageUiHandler {
     this.eggListContainer.setVisible(false);
     ui.add(this.eggListContainer);
 
-    const bgColor = this.scene.add.rectangle(0, 0, this.scene.game.canvas.width / 6, this.scene.game.canvas.height / 6, 0x006860);
+    const bgColor = this.scene.add.rectangle(
+      0,
+      0,
+      this.scene.game.canvas.width / 6,
+      this.scene.game.canvas.height / 6,
+      0x006860
+    );
     bgColor.setOrigin(0, 0);
     this.eggListContainer.add(bgColor);
 
@@ -74,7 +85,10 @@ export default class EggListUiHandler extends MessageUiHandler {
     this.eggSprite = this.scene.add.sprite(54, 37, "egg");
     this.eggListContainer.add(this.eggSprite);
 
-    this.eggListMessageBoxContainer = this.scene.add.container(0, this.scene.game.canvas.height / 6);
+    this.eggListMessageBoxContainer = this.scene.add.container(
+      0,
+      this.scene.game.canvas.height / 6
+    );
     this.eggListMessageBoxContainer.setVisible(false);
     this.eggListContainer.add(this.eggListMessageBoxContainer);
 
@@ -187,9 +201,15 @@ export default class EggListUiHandler extends MessageUiHandler {
       this.cursorObj.setPosition(114 + 18 * (cursor % 11), 10 + 18 * Math.floor(cursor / 11));
 
       if (lastCursor > -1) {
-        this.iconAnimHandler.addOrUpdate(this.eggListIconContainer.getAt(lastCursor) as Phaser.GameObjects.Sprite, PokemonIconAnimMode.NONE);
+        this.iconAnimHandler.addOrUpdate(
+          this.eggListIconContainer.getAt(lastCursor),
+          PokemonIconAnimMode.NONE
+        );
       }
-      this.iconAnimHandler.addOrUpdate(this.eggListIconContainer.getAt(cursor) as Phaser.GameObjects.Sprite, PokemonIconAnimMode.ACTIVE);
+      this.iconAnimHandler.addOrUpdate(
+        this.eggListIconContainer.getAt(cursor),
+        PokemonIconAnimMode.ACTIVE
+      );
 
       this.setEggDetails(this.scene.gameData.eggs[cursor]);
     }

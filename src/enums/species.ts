@@ -2162,5 +2162,5 @@ export enum Species {
   /**{@link https://bulbapedia.bulbagarden.net/wiki/Wooper_(Pokémon) | Source} */
   PALDEA_WOOPER = 8194,
   /**{@link https://bulbapedia.bulbagarden.net/wiki/Ursaluna_(Pokémon) | Source} */
-  BLOODMOON_URSALUNA = 8901,
+  BLOODMOON_URSALUNA = 8901
 }

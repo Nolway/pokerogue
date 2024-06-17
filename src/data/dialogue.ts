@@ -1,16 +1,14 @@
+import { trainerConfigs } from "./trainer-config";
 import { BattleSpec } from "#enums/battle-spec";
 import { TrainerType } from "#enums/trainer-type";
-import {trainerConfigs} from "./trainer-config";
 
 export interface TrainerTypeMessages {
-    encounter?: string | string[],
-    victory?: string | string[],
-    defeat?: string | string[]
+  encounter?: string | string[];
+  victory?: string | string[];
+  defeat?: string | string[];
 }
 
-export interface TrainerTypeDialogue {
-    [key: integer]: TrainerTypeMessages | Array<TrainerTypeMessages>
-}
+export type TrainerTypeDialogue = Record<integer, TrainerTypeMessages | Array<TrainerTypeMessages>>;
 
 export function getTrainerTypeDialogue(): TrainerTypeDialogue {
   return trainerTypeDialogue;
@@ -47,7 +45,7 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
         "dialogue:youngster.victory.10",
         "dialogue:youngster.victory.11",
         "dialogue:youngster.victory.12",
-        "dialogue:youngster.victory.13",
+        "dialogue:youngster.victory.13"
       ]
     },
     //LASS
@@ -81,34 +79,34 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       encounter: [
         "dialogue:breeder.encounter.1",
         "dialogue:breeder.encounter.2",
-        "dialogue:breeder.encounter.3",
+        "dialogue:breeder.encounter.3"
       ],
       victory: [
         "dialogue:breeder.victory.1",
         "dialogue:breeder.victory.2",
-        "dialogue:breeder.victory.3",
+        "dialogue:breeder.victory.3"
       ],
       defeat: [
         "dialogue:breeder.defeat.1",
         "dialogue:breeder.defeat.2",
-        "dialogue:breeder.defeat.3",
+        "dialogue:breeder.defeat.3"
       ]
     },
     {
       encounter: [
         "dialogue:breeder_female.encounter.1",
         "dialogue:breeder_female.encounter.2",
-        "dialogue:breeder_female.encounter.3",
+        "dialogue:breeder_female.encounter.3"
       ],
       victory: [
         "dialogue:breeder_female.victory.1",
         "dialogue:breeder_female.victory.2",
-        "dialogue:breeder_female.victory.3",
+        "dialogue:breeder_female.victory.3"
       ],
       defeat: [
         "dialogue:breeder_female.defeat.1",
         "dialogue:breeder_female.defeat.2",
-        "dialogue:breeder_female.defeat.3",
+        "dialogue:breeder_female.defeat.3"
       ]
     }
   ],
@@ -117,24 +115,24 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       encounter: [
         "dialogue:fisherman.encounter.1",
         "dialogue:fisherman.encounter.2",
-        "dialogue:fisherman.encounter.3",
+        "dialogue:fisherman.encounter.3"
       ],
       victory: [
         "dialogue:fisherman.victory.1",
         "dialogue:fisherman.victory.2",
-        "dialogue:fisherman.victory.3",
+        "dialogue:fisherman.victory.3"
       ]
     },
     {
       encounter: [
         "dialogue:fisherman_female.encounter.1",
         "dialogue:fisherman_female.encounter.2",
-        "dialogue:fisherman_female.encounter.3",
+        "dialogue:fisherman_female.encounter.3"
       ],
       victory: [
         "dialogue:fisherman_female.victory.1",
         "dialogue:fisherman_female.victory.2",
-        "dialogue:fisherman_female.victory.3",
+        "dialogue:fisherman_female.victory.3"
       ]
     }
   ],
@@ -143,12 +141,12 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       encounter: [
         "dialogue:swimmer.encounter.1",
         "dialogue:swimmer.encounter.2",
-        "dialogue:swimmer.encounter.3",
+        "dialogue:swimmer.encounter.3"
       ],
       victory: [
         "dialogue:swimmer.victory.1",
         "dialogue:swimmer.victory.2",
-        "dialogue:swimmer.victory.3",
+        "dialogue:swimmer.victory.3"
       ]
     }
   ],
@@ -158,13 +156,13 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
         "dialogue:backpacker.encounter.1",
         "dialogue:backpacker.encounter.2",
         "dialogue:backpacker.encounter.3",
-        "dialogue:backpacker.encounter.4",
+        "dialogue:backpacker.encounter.4"
       ],
       victory: [
         "dialogue:backpacker.victory.1",
         "dialogue:backpacker.victory.2",
         "dialogue:backpacker.victory.3",
-        "dialogue:backpacker.victory.4",
+        "dialogue:backpacker.victory.4"
       ]
     }
   ],
@@ -174,30 +172,26 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
         "dialogue:ace_trainer.encounter.1",
         "dialogue:ace_trainer.encounter.2",
         "dialogue:ace_trainer.encounter.3",
-        "dialogue:ace_trainer.encounter.4",
+        "dialogue:ace_trainer.encounter.4"
       ],
       victory: [
         "dialogue:ace_trainer.victory.1",
         "dialogue:ace_trainer.victory.2",
         "dialogue:ace_trainer.victory.3",
-        "dialogue:ace_trainer.victory.4",
+        "dialogue:ace_trainer.victory.4"
       ],
       defeat: [
         "dialogue:ace_trainer.defeat.1",
         "dialogue:ace_trainer.defeat.2",
         "dialogue:ace_trainer.defeat.3",
-        "dialogue:ace_trainer.defeat.4",
+        "dialogue:ace_trainer.defeat.4"
       ]
     }
   ],
   [TrainerType.PARASOL_LADY]: [
     {
-      encounter: [
-        "dialogue:parasol_lady.encounter.1",
-      ],
-      victory: [
-        "dialogue:parasol_lady.victory.1",
-      ]
+      encounter: ["dialogue:parasol_lady.encounter.1"],
+      victory: ["dialogue:parasol_lady.victory.1"]
     }
   ],
   [TrainerType.TWINS]: [
@@ -205,18 +199,10 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       encounter: [
         "dialogue:twins.encounter.1",
         "dialogue:twins.encounter.2",
-        "dialogue:twins.encounter.3",
+        "dialogue:twins.encounter.3"
       ],
-      victory: [
-        "dialogue:twins.victory.1",
-        "dialogue:twins.victory.2",
-        "dialogue:twins.victory.3",
-      ],
-      defeat: [
-        "dialogue:twins.defeat.1",
-        "dialogue:twins.defeat.2",
-        "dialogue:twins.defeat.3",
-      ],
+      victory: ["dialogue:twins.victory.1", "dialogue:twins.victory.2", "dialogue:twins.victory.3"],
+      defeat: ["dialogue:twins.defeat.1", "dialogue:twins.defeat.2", "dialogue:twins.defeat.3"]
     }
   ],
   [TrainerType.CYCLIST]: [
@@ -224,201 +210,113 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       encounter: [
         "dialogue:cyclist.encounter.1",
         "dialogue:cyclist.encounter.2",
-        "dialogue:cyclist.encounter.3",
+        "dialogue:cyclist.encounter.3"
       ],
       victory: [
         "dialogue:cyclist.victory.1",
         "dialogue:cyclist.victory.2",
-        "dialogue:cyclist.victory.3",
+        "dialogue:cyclist.victory.3"
       ]
     }
   ],
   [TrainerType.BLACK_BELT]: [
     {
-      encounter: [
-        "dialogue:black_belt.encounter.1",
-        "dialogue:black_belt.encounter.2",
-      ],
-      victory: [
-        "dialogue:black_belt.victory.1",
-        "dialogue:black_belt.victory.2",
-      ]
+      encounter: ["dialogue:black_belt.encounter.1", "dialogue:black_belt.encounter.2"],
+      victory: ["dialogue:black_belt.victory.1", "dialogue:black_belt.victory.2"]
     },
     //BATTLE GIRL
     {
-      encounter: [
-        "dialogue:battle_girl.encounter.1",
-      ],
-      victory: [
-        "dialogue:battle_girl.victory.1",
-      ]
+      encounter: ["dialogue:battle_girl.encounter.1"],
+      victory: ["dialogue:battle_girl.victory.1"]
     }
   ],
   [TrainerType.HIKER]: [
     {
-      encounter: [
-        "dialogue:hiker.encounter.1",
-        "dialogue:hiker.encounter.2",
-      ],
-      victory: [
-        "dialogue:hiker.victory.1",
-        "dialogue:hiker.victory.2",
-      ]
+      encounter: ["dialogue:hiker.encounter.1", "dialogue:hiker.encounter.2"],
+      victory: ["dialogue:hiker.victory.1", "dialogue:hiker.victory.2"]
     }
   ],
   [TrainerType.RANGER]: [
     {
-      encounter: [
-        "dialogue:ranger.encounter.1",
-        "dialogue:ranger.encounter.2",
-      ],
-      victory: [
-        "dialogue:ranger.victory.1",
-        "dialogue:ranger.victory.2",
-      ],
-      defeat: [
-        "dialogue:ranger.defeat.1",
-        "dialogue:ranger.defeat.2",
-      ]
+      encounter: ["dialogue:ranger.encounter.1", "dialogue:ranger.encounter.2"],
+      victory: ["dialogue:ranger.victory.1", "dialogue:ranger.victory.2"],
+      defeat: ["dialogue:ranger.defeat.1", "dialogue:ranger.defeat.2"]
     }
   ],
   [TrainerType.SCIENTIST]: [
     {
-      encounter: [
-        "dialogue:scientist.encounter.1",
-      ],
-      victory: [
-        "dialogue:scientist.victory.1",
-      ]
+      encounter: ["dialogue:scientist.encounter.1"],
+      victory: ["dialogue:scientist.victory.1"]
     }
   ],
   [TrainerType.SCHOOL_KID]: [
     {
-      encounter: [
-        "dialogue:school_kid.encounter.1",
-        "dialogue:school_kid.encounter.2",
-      ],
-      victory: [
-        "dialogue:school_kid.victory.1",
-        "dialogue:school_kid.victory.2",
-      ]
+      encounter: ["dialogue:school_kid.encounter.1", "dialogue:school_kid.encounter.2"],
+      victory: ["dialogue:school_kid.victory.1", "dialogue:school_kid.victory.2"]
     }
   ],
   [TrainerType.ARTIST]: [
     {
-      encounter: [
-        "dialogue:artist.encounter.1",
-      ],
-      victory: [
-        "dialogue:artist.victory.1",
-      ]
+      encounter: ["dialogue:artist.encounter.1"],
+      victory: ["dialogue:artist.victory.1"]
     }
   ],
   [TrainerType.GUITARIST]: [
     {
-      encounter: [
-        "dialogue:guitarist.encounter.1",
-      ],
-      victory: [
-        "dialogue:guitarist.victory.1",
-      ]
+      encounter: ["dialogue:guitarist.encounter.1"],
+      victory: ["dialogue:guitarist.victory.1"]
     }
   ],
   [TrainerType.WORKER]: [
     {
-      encounter: [
-        "dialogue:worker.encounter.1",
-      ],
-      victory: [
-        "dialogue:worker.victory.1",
-      ]
+      encounter: ["dialogue:worker.encounter.1"],
+      victory: ["dialogue:worker.victory.1"]
     },
     {
-      encounter: [
-        "dialogue:worker_female.encounter.1",
-      ],
-      victory: [
-        "dialogue:worker_female.victory.1",
-      ],
-      defeat: [
-        "dialogue:worker_female.defeat.1",
-      ]
+      encounter: ["dialogue:worker_female.encounter.1"],
+      victory: ["dialogue:worker_female.victory.1"],
+      defeat: ["dialogue:worker_female.defeat.1"]
     },
     {
-      encounter: [
-        "dialogue:worker_double.encounter.1",
-      ],
-      victory: [
-        "dialogue:worker_double.victory.1",
-      ]
-    },
+      encounter: ["dialogue:worker_double.encounter.1"],
+      victory: ["dialogue:worker_double.victory.1"]
+    }
   ],
   [TrainerType.HEX_MANIAC]: [
     {
-      encounter: [
-        "dialogue:hex_maniac.encounter.1",
-        "dialogue:hex_maniac.encounter.2",
-      ],
-      victory: [
-        "dialogue:hex_maniac.victory.1",
-        "dialogue:hex_maniac.victory.2",
-      ],
-      defeat: [
-        "dialogue:hex_maniac.defeat.1",
-        "dialogue:hex_maniac.defeat.2",
-      ]
+      encounter: ["dialogue:hex_maniac.encounter.1", "dialogue:hex_maniac.encounter.2"],
+      victory: ["dialogue:hex_maniac.victory.1", "dialogue:hex_maniac.victory.2"],
+      defeat: ["dialogue:hex_maniac.defeat.1", "dialogue:hex_maniac.defeat.2"]
     }
   ],
   [TrainerType.PSYCHIC]: [
     {
-      encounter: [
-        "dialogue:psychic.encounter.1",
-      ],
-      victory: [
-        "dialogue:psychic.victory.1",
-      ]
+      encounter: ["dialogue:psychic.encounter.1"],
+      victory: ["dialogue:psychic.victory.1"]
     }
   ],
   [TrainerType.OFFICER]: [
     {
-      encounter: [
-        "dialogue:officer.encounter.1",
-        "dialogue:officer.encounter.2",
-      ],
-      victory: [
-        "dialogue:officer.victory.1",
-        "dialogue:officer.victory.2",
-      ],
+      encounter: ["dialogue:officer.encounter.1", "dialogue:officer.encounter.2"],
+      victory: ["dialogue:officer.victory.1", "dialogue:officer.victory.2"]
     }
   ],
   [TrainerType.BEAUTY]: [
     {
-      encounter: [
-        "dialogue:beauty.encounter.1",
-      ],
-      victory: [
-        "dialogue:beauty.victory.1",
-      ]
+      encounter: ["dialogue:beauty.encounter.1"],
+      victory: ["dialogue:beauty.victory.1"]
     }
   ],
   [TrainerType.BAKER]: [
     {
-      encounter: [
-        "dialogue:baker.encounter.1",
-      ],
-      victory: [
-        "dialogue:baker.victory.1",
-      ]
+      encounter: ["dialogue:baker.encounter.1"],
+      victory: ["dialogue:baker.victory.1"]
     }
   ],
   [TrainerType.BIKER]: [
     {
-      encounter: [
-        "dialogue:biker.encounter.1",
-      ],
-      victory: [
-        "dialogue:biker.victory.1",
-      ]
+      encounter: ["dialogue:biker.encounter.1"],
+      victory: ["dialogue:biker.victory.1"]
     }
   ],
   [TrainerType.FIREBREATHER]: [
@@ -426,12 +324,12 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       encounter: [
         "dialogue:firebreather.encounter.1",
         "dialogue:firebreather.encounter.2",
-        "dialogue:firebreather.encounter.3",
+        "dialogue:firebreather.encounter.3"
       ],
       victory: [
         "dialogue:firebreather.victory.1",
         "dialogue:firebreather.victory.2",
-        "dialogue:firebreather.victory.3",
+        "dialogue:firebreather.victory.3"
       ]
     }
   ],
@@ -440,280 +338,168 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       encounter: [
         "dialogue:sailor.encounter.1",
         "dialogue:sailor.encounter.2",
-        "dialogue:sailor.encounter.3",
+        "dialogue:sailor.encounter.3"
       ],
       victory: [
         "dialogue:sailor.victory.1",
         "dialogue:sailor.victory.2",
-        "dialogue:sailor.victory.3",
+        "dialogue:sailor.victory.3"
       ]
     }
   ],
   [TrainerType.ROCKET_GRUNT]: [
     {
-      encounter: [
-        "dialogue:rocket_grunt.encounter.1"
-      ],
-      victory: [
-        "dialogue:rocket_grunt.victory.1"
-      ]
+      encounter: ["dialogue:rocket_grunt.encounter.1"],
+      victory: ["dialogue:rocket_grunt.victory.1"]
     }
   ],
   [TrainerType.MAGMA_GRUNT]: [
     {
-      encounter: [
-        "dialogue:magma_grunt.encounter.1"
-      ],
-      victory: [
-        "dialogue:magma_grunt.victory.1"
-      ]
+      encounter: ["dialogue:magma_grunt.encounter.1"],
+      victory: ["dialogue:magma_grunt.victory.1"]
     }
   ],
   [TrainerType.AQUA_GRUNT]: [
     {
-      encounter: [
-        "dialogue:aqua_grunt.encounter.1"
-      ],
-      victory: [
-        "dialogue:aqua_grunt.victory.1"
-      ]
+      encounter: ["dialogue:aqua_grunt.encounter.1"],
+      victory: ["dialogue:aqua_grunt.victory.1"]
     }
   ],
   [TrainerType.GALACTIC_GRUNT]: [
     {
-      encounter: [
-        "dialogue:galactic_grunt.encounter.1"
-      ],
-      victory: [
-        "dialogue:galactic_grunt.victory.1"
-      ]
+      encounter: ["dialogue:galactic_grunt.encounter.1"],
+      victory: ["dialogue:galactic_grunt.victory.1"]
     }
   ],
   [TrainerType.PLASMA_GRUNT]: [
     {
-      encounter: [
-        "dialogue:plasma_grunt.encounter.1"
-      ],
-      victory: [
-        "dialogue:plasma_grunt.victory.1"
-      ]
+      encounter: ["dialogue:plasma_grunt.encounter.1"],
+      victory: ["dialogue:plasma_grunt.victory.1"]
     }
   ],
   [TrainerType.FLARE_GRUNT]: [
     {
-      encounter: [
-        "dialogue:flare_grunt.encounter.1"
-      ],
-      victory: [
-        "dialogue:flare_grunt.victory.1"
-      ]
+      encounter: ["dialogue:flare_grunt.encounter.1"],
+      victory: ["dialogue:flare_grunt.victory.1"]
     }
   ],
   [TrainerType.ROCKET_BOSS_GIOVANNI_1]: [
     {
-      encounter: [
-        "dialogue:rocket_boss_giovanni_1.encounter.1"
-      ],
-      victory: [
-        "dialogue:rocket_boss_giovanni_1.victory.1"
-      ],
-      defeat: [
-        "dialogue:rocket_boss_giovanni_1.defeat.1"
-      ]
+      encounter: ["dialogue:rocket_boss_giovanni_1.encounter.1"],
+      victory: ["dialogue:rocket_boss_giovanni_1.victory.1"],
+      defeat: ["dialogue:rocket_boss_giovanni_1.defeat.1"]
     }
   ],
   [TrainerType.ROCKET_BOSS_GIOVANNI_2]: [
     {
-      encounter: [
-        "dialogue:rocket_boss_giovanni_2.encounter.1"
-      ],
-      victory: [
-        "dialogue:rocket_boss_giovanni_2.victory.1"
-      ],
-      defeat: [
-        "dialogue:rocket_boss_giovanni_2.defeat.1"
-      ]
+      encounter: ["dialogue:rocket_boss_giovanni_2.encounter.1"],
+      victory: ["dialogue:rocket_boss_giovanni_2.victory.1"],
+      defeat: ["dialogue:rocket_boss_giovanni_2.defeat.1"]
     }
   ],
   [TrainerType.MAXIE]: [
     {
-      encounter: [
-        "dialogue:magma_boss_maxie_1.encounter.1"
-      ],
-      victory: [
-        "dialogue:magma_boss_maxie_1.victory.1"
-      ],
-      defeat: [
-        "dialogue:magma_boss_maxie_1.defeat.1"
-      ]
+      encounter: ["dialogue:magma_boss_maxie_1.encounter.1"],
+      victory: ["dialogue:magma_boss_maxie_1.victory.1"],
+      defeat: ["dialogue:magma_boss_maxie_1.defeat.1"]
     }
   ],
   [TrainerType.MAXIE_2]: [
     {
-      encounter: [
-        "dialogue:magma_boss_maxie_2.encounter.1"
-      ],
-      victory: [
-        "dialogue:magma_boss_maxie_2.victory.1"
-      ],
-      defeat: [
-        "dialogue:magma_boss_maxie_2.defeat.1"
-      ]
+      encounter: ["dialogue:magma_boss_maxie_2.encounter.1"],
+      victory: ["dialogue:magma_boss_maxie_2.victory.1"],
+      defeat: ["dialogue:magma_boss_maxie_2.defeat.1"]
     }
   ],
   [TrainerType.ARCHIE]: [
     {
-      encounter: [
-        "dialogue:aqua_boss_archie_1.encounter.1"
-      ],
-      victory: [
-        "dialogue:aqua_boss_archie_1.victory.1"
-      ],
-      defeat: [
-        "dialogue:aqua_boss_archie_1.defeat.1"
-      ]
+      encounter: ["dialogue:aqua_boss_archie_1.encounter.1"],
+      victory: ["dialogue:aqua_boss_archie_1.victory.1"],
+      defeat: ["dialogue:aqua_boss_archie_1.defeat.1"]
     }
   ],
   [TrainerType.ARCHIE_2]: [
     {
-      encounter: [
-        "dialogue:aqua_boss_archie_2.encounter.1"
-      ],
-      victory: [
-        "dialogue:aqua_boss_archie_2.victory.1"
-      ],
-      defeat: [
-        "dialogue:aqua_boss_archie_2.defeat.1"
-      ]
+      encounter: ["dialogue:aqua_boss_archie_2.encounter.1"],
+      victory: ["dialogue:aqua_boss_archie_2.victory.1"],
+      defeat: ["dialogue:aqua_boss_archie_2.defeat.1"]
     }
   ],
   [TrainerType.CYRUS]: [
     {
-      encounter: [
-        "dialogue:galactic_boss_cyrus_1.encounter.1"
-      ],
-      victory: [
-        "dialogue:galactic_boss_cyrus_1.victory.1"
-      ],
-      defeat: [
-        "dialogue:galactic_boss_cyrus_1.defeat.1"
-      ]
+      encounter: ["dialogue:galactic_boss_cyrus_1.encounter.1"],
+      victory: ["dialogue:galactic_boss_cyrus_1.victory.1"],
+      defeat: ["dialogue:galactic_boss_cyrus_1.defeat.1"]
     }
   ],
   [TrainerType.CYRUS_2]: [
     {
-      encounter: [
-        "dialogue:galactic_boss_cyrus_2.encounter.1"
-      ],
-      victory: [
-        "dialogue:galactic_boss_cyrus_2.victory.1"
-      ],
-      defeat: [
-        "dialogue:galactic_boss_cyrus_2.defeat.1"
-      ]
+      encounter: ["dialogue:galactic_boss_cyrus_2.encounter.1"],
+      victory: ["dialogue:galactic_boss_cyrus_2.victory.1"],
+      defeat: ["dialogue:galactic_boss_cyrus_2.defeat.1"]
     }
   ],
   [TrainerType.GHETSIS]: [
     {
-      encounter: [
-        "dialogue:plasma_boss_ghetsis_1.encounter.1"
-      ],
-      victory: [
-        "dialogue:plasma_boss_ghetsis_1.victory.1"
-      ],
-      defeat: [
-        "dialogue:plasma_boss_ghetsis_1.defeat.1"
-      ]
+      encounter: ["dialogue:plasma_boss_ghetsis_1.encounter.1"],
+      victory: ["dialogue:plasma_boss_ghetsis_1.victory.1"],
+      defeat: ["dialogue:plasma_boss_ghetsis_1.defeat.1"]
     }
   ],
   [TrainerType.GHETSIS_2]: [
     {
-      encounter: [
-        "dialogue:plasma_boss_ghetsis_2.encounter.1"
-      ],
-      victory: [
-        "dialogue:plasma_boss_ghetsis_2.victory.1"
-      ],
-      defeat: [
-        "dialogue:plasma_boss_ghetsis_2.defeat.1"
-      ]
+      encounter: ["dialogue:plasma_boss_ghetsis_2.encounter.1"],
+      victory: ["dialogue:plasma_boss_ghetsis_2.victory.1"],
+      defeat: ["dialogue:plasma_boss_ghetsis_2.defeat.1"]
     }
   ],
   [TrainerType.LYSANDRE]: [
     {
-      encounter: [
-        "dialogue:flare_boss_lysandre_1.encounter.1"
-      ],
-      victory: [
-        "dialogue:flare_boss_lysandre_1.victory.1"
-      ],
-      defeat: [
-        "dialogue:flare_boss_lysandre_1.defeat.1"
-      ]
+      encounter: ["dialogue:flare_boss_lysandre_1.encounter.1"],
+      victory: ["dialogue:flare_boss_lysandre_1.victory.1"],
+      defeat: ["dialogue:flare_boss_lysandre_1.defeat.1"]
     }
   ],
   [TrainerType.LYSANDRE_2]: [
     {
-      encounter: [
-        "dialogue:flare_boss_lysandre_2.encounter.1"
-      ],
-      victory: [
-        "dialogue:flare_boss_lysandre_2.victory.1"
-      ],
-      defeat: [
-        "dialogue:flare_boss_lysandre_2.defeat.1"
-      ]
+      encounter: ["dialogue:flare_boss_lysandre_2.encounter.1"],
+      victory: ["dialogue:flare_boss_lysandre_2.victory.1"],
+      defeat: ["dialogue:flare_boss_lysandre_2.defeat.1"]
     }
   ],
   [TrainerType.BROCK]: {
     encounter: [
       "dialogue:brock.encounter.1",
       "dialogue:brock.encounter.2",
-      "dialogue:brock.encounter.3",
+      "dialogue:brock.encounter.3"
     ],
-    victory: [
-      "dialogue:brock.victory.1",
-      "dialogue:brock.victory.2",
-      "dialogue:brock.victory.3",
-    ],
-    defeat: [
-      "dialogue:brock.defeat.1",
-      "dialogue:brock.defeat.2",
-      "dialogue:brock.defeat.3",
-    ]
+    victory: ["dialogue:brock.victory.1", "dialogue:brock.victory.2", "dialogue:brock.victory.3"],
+    defeat: ["dialogue:brock.defeat.1", "dialogue:brock.defeat.2", "dialogue:brock.defeat.3"]
   },
   [TrainerType.MISTY]: {
     encounter: [
       "dialogue:misty.encounter.1",
       "dialogue:misty.encounter.2",
-      "dialogue:misty.encounter.3",
+      "dialogue:misty.encounter.3"
     ],
-    victory: [
-      "dialogue:misty.victory.1",
-      "dialogue:misty.victory.2",
-      "dialogue:misty.victory.3",
-    ],
-    defeat: [
-      "dialogue:misty.defeat.1",
-      "dialogue:misty.defeat.2",
-      "dialogue:misty.defeat.3",
-    ]
+    victory: ["dialogue:misty.victory.1", "dialogue:misty.victory.2", "dialogue:misty.victory.3"],
+    defeat: ["dialogue:misty.defeat.1", "dialogue:misty.defeat.2", "dialogue:misty.defeat.3"]
   },
   [TrainerType.LT_SURGE]: {
     encounter: [
       "dialogue:lt_surge.encounter.1",
       "dialogue:lt_surge.encounter.2",
-      "dialogue:lt_surge.encounter.3",
+      "dialogue:lt_surge.encounter.3"
     ],
     victory: [
       "dialogue:lt_surge.victory.1",
       "dialogue:lt_surge.victory.2",
-      "dialogue:lt_surge.victory.3",
+      "dialogue:lt_surge.victory.3"
     ],
     defeat: [
       "dialogue:lt_surge.defeat.1",
       "dialogue:lt_surge.defeat.2",
-      "dialogue:lt_surge.defeat.3",
+      "dialogue:lt_surge.defeat.3"
     ]
   },
   [TrainerType.ERIKA]: {
@@ -721,87 +507,75 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:erika.encounter.1",
       "dialogue:erika.encounter.2",
       "dialogue:erika.encounter.3",
-      "dialogue:erika.encounter.4",
+      "dialogue:erika.encounter.4"
     ],
     victory: [
       "dialogue:erika.victory.1",
       "dialogue:erika.victory.2",
       "dialogue:erika.victory.3",
-      "dialogue:erika.victory.4",
+      "dialogue:erika.victory.4"
     ],
     defeat: [
       "dialogue:erika.defeat.1",
       "dialogue:erika.defeat.2",
       "dialogue:erika.defeat.3",
-      "dialogue:erika.defeat.4",
+      "dialogue:erika.defeat.4"
     ]
   },
   [TrainerType.JANINE]: {
     encounter: [
       "dialogue:janine.encounter.1",
       "dialogue:janine.encounter.2",
-      "dialogue:janine.encounter.3",
+      "dialogue:janine.encounter.3"
     ],
     victory: [
       "dialogue:janine.victory.1",
       "dialogue:janine.victory.2",
-      "dialogue:janine.victory.3",
+      "dialogue:janine.victory.3"
     ],
-    defeat: [
-      "dialogue:janine.defeat.1",
-      "dialogue:janine.defeat.2",
-      "dialogue:janine.defeat.3",
-    ]
+    defeat: ["dialogue:janine.defeat.1", "dialogue:janine.defeat.2", "dialogue:janine.defeat.3"]
   },
   [TrainerType.SABRINA]: {
     encounter: [
       "dialogue:sabrina.encounter.1",
       "dialogue:sabrina.encounter.2",
-      "dialogue:sabrina.encounter.3",
+      "dialogue:sabrina.encounter.3"
     ],
     victory: [
       "dialogue:sabrina.victory.1",
       "dialogue:sabrina.victory.2",
-      "dialogue:sabrina.victory.3",
+      "dialogue:sabrina.victory.3"
     ],
-    defeat: [
-      "dialogue:sabrina.defeat.1",
-      "dialogue:sabrina.defeat.2",
-      "dialogue:sabrina.defeat.3",
-    ]
+    defeat: ["dialogue:sabrina.defeat.1", "dialogue:sabrina.defeat.2", "dialogue:sabrina.defeat.3"]
   },
   [TrainerType.BLAINE]: {
     encounter: [
       "dialogue:blaine.encounter.1",
       "dialogue:blaine.encounter.2",
-      "dialogue:blaine.encounter.3",
+      "dialogue:blaine.encounter.3"
     ],
     victory: [
       "dialogue:blaine.victory.1",
       "dialogue:blaine.victory.2",
-      "dialogue:blaine.victory.3",
+      "dialogue:blaine.victory.3"
     ],
-    defeat: [
-      "dialogue:blaine.defeat.1",
-      "dialogue:blaine.defeat.2",
-      "dialogue:blaine.defeat.3",
-    ]
+    defeat: ["dialogue:blaine.defeat.1", "dialogue:blaine.defeat.2", "dialogue:blaine.defeat.3"]
   },
   [TrainerType.GIOVANNI]: {
     encounter: [
       "dialogue:giovanni.encounter.1",
       "dialogue:giovanni.encounter.2",
-      "dialogue:giovanni.encounter.3",
+      "dialogue:giovanni.encounter.3"
     ],
     victory: [
       "dialogue:giovanni.victory.1",
       "dialogue:giovanni.victory.2",
-      "dialogue:giovanni.victory.3",
+      "dialogue:giovanni.victory.3"
     ],
     defeat: [
       "dialogue:giovanni.defeat.1",
       "dialogue:giovanni.defeat.2",
-      "dialogue:giovanni.defeat.3",
+      "dialogue:giovanni.defeat.3"
     ]
   },
   [TrainerType.ROXANNE]: {
@@ -815,11 +589,7 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:roxanne.victory.2",
       "dialogue:roxanne.victory.3"
     ],
-    defeat: [
-      "dialogue:roxanne.defeat.1",
-      "dialogue:roxanne.defeat.2",
-      "dialogue:roxanne.defeat.3"
-    ]
+    defeat: ["dialogue:roxanne.defeat.1", "dialogue:roxanne.defeat.2", "dialogue:roxanne.defeat.3"]
   },
   [TrainerType.BRAWLY]: {
     encounter: [
@@ -832,11 +602,7 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:brawly.victory.2",
       "dialogue:brawly.victory.3"
     ],
-    defeat: [
-      "dialogue:brawly.defeat.1",
-      "dialogue:brawly.defeat.2",
-      "dialogue:brawly.defeat.3"
-    ]
+    defeat: ["dialogue:brawly.defeat.1", "dialogue:brawly.defeat.2", "dialogue:brawly.defeat.3"]
   },
   [TrainerType.WATTSON]: {
     encounter: [
@@ -849,11 +615,7 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:wattson.victory.2",
       "dialogue:wattson.victory.3"
     ],
-    defeat: [
-      "dialogue:wattson.defeat.1",
-      "dialogue:wattson.defeat.2",
-      "dialogue:wattson.defeat.3"
-    ]
+    defeat: ["dialogue:wattson.defeat.1", "dialogue:wattson.defeat.2", "dialogue:wattson.defeat.3"]
   },
   [TrainerType.FLANNERY]: {
     encounter: [
@@ -883,11 +645,7 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:norman.victory.2",
       "dialogue:norman.victory.3"
     ],
-    defeat: [
-      "dialogue:norman.defeat.1",
-      "dialogue:norman.defeat.2",
-      "dialogue:norman.defeat.3"
-    ]
+    defeat: ["dialogue:norman.defeat.1", "dialogue:norman.defeat.2", "dialogue:norman.defeat.3"]
   },
   [TrainerType.WINONA]: {
     encounter: [
@@ -900,11 +658,7 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:winona.victory.2",
       "dialogue:winona.victory.3"
     ],
-    defeat: [
-      "dialogue:winona.defeat.1",
-      "dialogue:winona.defeat.2",
-      "dialogue:winona.defeat.3"
-    ]
+    defeat: ["dialogue:winona.defeat.1", "dialogue:winona.defeat.2", "dialogue:winona.defeat.3"]
   },
   [TrainerType.TATE]: {
     encounter: [
@@ -912,16 +666,8 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:tate.encounter.2",
       "dialogue:tate.encounter.3"
     ],
-    victory: [
-      "dialogue:tate.victory.1",
-      "dialogue:tate.victory.2",
-      "dialogue:tate.victory.3"
-    ],
-    defeat: [
-      "dialogue:tate.defeat.1",
-      "dialogue:tate.defeat.2",
-      "dialogue:tate.defeat.3"
-    ]
+    victory: ["dialogue:tate.victory.1", "dialogue:tate.victory.2", "dialogue:tate.victory.3"],
+    defeat: ["dialogue:tate.defeat.1", "dialogue:tate.defeat.2", "dialogue:tate.defeat.3"]
   },
   [TrainerType.LIZA]: {
     encounter: [
@@ -929,16 +675,8 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:liza.encounter.2",
       "dialogue:liza.encounter.3"
     ],
-    victory: [
-      "dialogue:liza.victory.1",
-      "dialogue:liza.victory.2",
-      "dialogue:liza.victory.3"
-    ],
-    defeat: [
-      "dialogue:liza.defeat.1",
-      "dialogue:liza.defeat.2",
-      "dialogue:liza.defeat.3"
-    ]
+    victory: ["dialogue:liza.victory.1", "dialogue:liza.victory.2", "dialogue:liza.victory.3"],
+    defeat: ["dialogue:liza.defeat.1", "dialogue:liza.defeat.2", "dialogue:liza.defeat.3"]
   },
   [TrainerType.JUAN]: {
     encounter: [
@@ -988,11 +726,7 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:falkner.victory.2",
       "dialogue:falkner.victory.3"
     ],
-    defeat: [
-      "dialogue:falkner.defeat.1",
-      "dialogue:falkner.defeat.2",
-      "dialogue:falkner.defeat.3"
-    ]
+    defeat: ["dialogue:falkner.defeat.1", "dialogue:falkner.defeat.2", "dialogue:falkner.defeat.3"]
   },
   [TrainerType.NESSA]: {
     encounter: [
@@ -1000,16 +734,8 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:nessa.encounter.2",
       "dialogue:nessa.encounter.3"
     ],
-    victory: [
-      "dialogue:nessa.victory.1",
-      "dialogue:nessa.victory.2",
-      "dialogue:nessa.victory.3"
-    ],
-    defeat: [
-      "dialogue:nessa.defeat.1",
-      "dialogue:nessa.defeat.2",
-      "dialogue:nessa.defeat.3"
-    ]
+    victory: ["dialogue:nessa.victory.1", "dialogue:nessa.victory.2", "dialogue:nessa.victory.3"],
+    defeat: ["dialogue:nessa.defeat.1", "dialogue:nessa.defeat.2", "dialogue:nessa.defeat.3"]
   },
   [TrainerType.MELONY]: {
     encounter: [
@@ -1022,11 +748,7 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:melony.victory.2",
       "dialogue:melony.victory.3"
     ],
-    defeat: [
-      "dialogue:melony.defeat.1",
-      "dialogue:melony.defeat.2",
-      "dialogue:melony.defeat.3"
-    ]
+    defeat: ["dialogue:melony.defeat.1", "dialogue:melony.defeat.2", "dialogue:melony.defeat.3"]
   },
   [TrainerType.MARLON]: {
     encounter: [
@@ -1039,11 +761,7 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:marlon.victory.2",
       "dialogue:marlon.victory.3"
     ],
-    defeat: [
-      "dialogue:marlon.defeat.1",
-      "dialogue:marlon.defeat.2",
-      "dialogue:marlon.defeat.3"
-    ]
+    defeat: ["dialogue:marlon.defeat.1", "dialogue:marlon.defeat.2", "dialogue:marlon.defeat.3"]
   },
   [TrainerType.SHAUNTAL]: {
     encounter: [
@@ -1073,11 +791,7 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:marshal.victory.2",
       "dialogue:marshal.victory.3"
     ],
-    defeat: [
-      "dialogue:marshal.defeat.1",
-      "dialogue:marshal.defeat.2",
-      "dialogue:marshal.defeat.3"
-    ]
+    defeat: ["dialogue:marshal.defeat.1", "dialogue:marshal.defeat.2", "dialogue:marshal.defeat.3"]
   },
   [TrainerType.CHEREN]: {
     encounter: [
@@ -1090,11 +804,7 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:cheren.victory.2",
       "dialogue:cheren.victory.3"
     ],
-    defeat: [
-      "dialogue:cheren.defeat.1",
-      "dialogue:cheren.defeat.2",
-      "dialogue:cheren.defeat.3"
-    ]
+    defeat: ["dialogue:cheren.defeat.1", "dialogue:cheren.defeat.2", "dialogue:cheren.defeat.3"]
   },
   [TrainerType.CHILI]: {
     encounter: [
@@ -1102,16 +812,8 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:chili.encounter.2",
       "dialogue:chili.encounter.3"
     ],
-    victory: [
-      "dialogue:chili.victory.1",
-      "dialogue:chili.victory.2",
-      "dialogue:chili.victory.3"
-    ],
-    defeat: [
-      "dialogue:chili.defeat.1",
-      "dialogue:chili.defeat.2",
-      "dialogue:chili.defeat.3"
-    ]
+    victory: ["dialogue:chili.victory.1", "dialogue:chili.victory.2", "dialogue:chili.victory.3"],
+    defeat: ["dialogue:chili.defeat.1", "dialogue:chili.defeat.2", "dialogue:chili.defeat.3"]
   },
   [TrainerType.CILAN]: {
     encounter: [
@@ -1119,16 +821,8 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:cilan.encounter.2",
       "dialogue:cilan.encounter.3"
     ],
-    victory: [
-      "dialogue:cilan.victory.1",
-      "dialogue:cilan.victory.2",
-      "dialogue:cilan.victory.3"
-    ],
-    defeat: [
-      "dialogue:cilan.defeat.1",
-      "dialogue:cilan.defeat.2",
-      "dialogue:cilan.defeat.3"
-    ]
+    victory: ["dialogue:cilan.victory.1", "dialogue:cilan.victory.2", "dialogue:cilan.victory.3"],
+    defeat: ["dialogue:cilan.defeat.1", "dialogue:cilan.defeat.2", "dialogue:cilan.defeat.3"]
   },
   [TrainerType.ROARK]: {
     encounter: [
@@ -1144,11 +838,7 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:roark.victory.4",
       "dialogue:roark.victory.5"
     ],
-    defeat: [
-      "dialogue:roark.defeat.1",
-      "dialogue:roark.defeat.2",
-      "dialogue:roark.defeat.3"
-    ]
+    defeat: ["dialogue:roark.defeat.1", "dialogue:roark.defeat.2", "dialogue:roark.defeat.3"]
   },
   [TrainerType.MORTY]: {
     encounter: [
@@ -1177,489 +867,219 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
     ]
   },
   [TrainerType.CRISPIN]: {
-    encounter: [
-      "dialogue:crispin.encounter.1",
-      "dialogue:crispin.encounter.2"
-    ],
-    victory: [
-      "dialogue:crispin.victory.1",
-      "dialogue:crispin.victory.2"
-    ],
-    defeat: [
-      "dialogue:crispin.defeat.1",
-      "dialogue:crispin.defeat.2"
-    ]
+    encounter: ["dialogue:crispin.encounter.1", "dialogue:crispin.encounter.2"],
+    victory: ["dialogue:crispin.victory.1", "dialogue:crispin.victory.2"],
+    defeat: ["dialogue:crispin.defeat.1", "dialogue:crispin.defeat.2"]
   },
   [TrainerType.AMARYS]: {
-    encounter: [
-      "dialogue:amarys.encounter.1"
-    ],
-    victory: [
-      "dialogue:amarys.victory.1"
-    ],
-    defeat: [
-      "dialogue:amarys.defeat.1"
-    ]
+    encounter: ["dialogue:amarys.encounter.1"],
+    victory: ["dialogue:amarys.victory.1"],
+    defeat: ["dialogue:amarys.defeat.1"]
   },
   [TrainerType.LACEY]: {
-    encounter: [
-      "dialogue:lacey.encounter.1"
-    ],
-    victory: [
-      "dialogue:lacey.victory.1"
-    ],
-    defeat: [
-      "dialogue:lacey.defeat.1"
-    ]
+    encounter: ["dialogue:lacey.encounter.1"],
+    victory: ["dialogue:lacey.victory.1"],
+    defeat: ["dialogue:lacey.defeat.1"]
   },
   [TrainerType.DRAYTON]: {
-    encounter: [
-      "dialogue:drayton.encounter.1"
-    ],
-    victory: [
-      "dialogue:drayton.victory.1"
-    ],
-    defeat: [
-      "dialogue:drayton.defeat.1"
-    ]
+    encounter: ["dialogue:drayton.encounter.1"],
+    victory: ["dialogue:drayton.victory.1"],
+    defeat: ["dialogue:drayton.defeat.1"]
   },
   [TrainerType.RAMOS]: {
-    encounter: [
-      "dialogue:ramos.encounter.1"
-    ],
-    victory: [
-      "dialogue:ramos.victory.1"
-    ],
-    defeat: [
-      "dialogue:ramos.defeat.1"
-    ]
+    encounter: ["dialogue:ramos.encounter.1"],
+    victory: ["dialogue:ramos.victory.1"],
+    defeat: ["dialogue:ramos.defeat.1"]
   },
   [TrainerType.VIOLA]: {
-    encounter: [
-      "dialogue:viola.encounter.1",
-      "dialogue:viola.encounter.2"
-    ],
-    victory: [
-      "dialogue:viola.victory.1",
-      "dialogue:viola.victory.2"
-    ],
-    defeat: [
-      "dialogue:viola.defeat.1",
-      "dialogue:viola.defeat.2"
-    ]
+    encounter: ["dialogue:viola.encounter.1", "dialogue:viola.encounter.2"],
+    victory: ["dialogue:viola.victory.1", "dialogue:viola.victory.2"],
+    defeat: ["dialogue:viola.defeat.1", "dialogue:viola.defeat.2"]
   },
   [TrainerType.CANDICE]: {
-    encounter: [
-      "dialogue:candice.encounter.1",
-      "dialogue:candice.encounter.2"
-    ],
-    victory: [
-      "dialogue:candice.victory.1",
-      "dialogue:candice.victory.2"
-    ],
-    defeat: [
-      "dialogue:candice.defeat.1",
-      "dialogue:candice.defeat.2"
-    ]
+    encounter: ["dialogue:candice.encounter.1", "dialogue:candice.encounter.2"],
+    victory: ["dialogue:candice.victory.1", "dialogue:candice.victory.2"],
+    defeat: ["dialogue:candice.defeat.1", "dialogue:candice.defeat.2"]
   },
   [TrainerType.GARDENIA]: {
-    encounter: [
-      "dialogue:gardenia.encounter.1"
-    ],
-    victory: [
-      "dialogue:gardenia.victory.1"
-    ],
-    defeat: [
-      "dialogue:gardenia.defeat.1"
-    ]
+    encounter: ["dialogue:gardenia.encounter.1"],
+    victory: ["dialogue:gardenia.victory.1"],
+    defeat: ["dialogue:gardenia.defeat.1"]
   },
   [TrainerType.AARON]: {
-    encounter: [
-      "dialogue:aaron.encounter.1"
-    ],
-    victory: [
-      "dialogue:aaron.victory.1"
-    ],
-    defeat: [
-      "dialogue:aaron.defeat.1"
-    ]
+    encounter: ["dialogue:aaron.encounter.1"],
+    victory: ["dialogue:aaron.victory.1"],
+    defeat: ["dialogue:aaron.defeat.1"]
   },
   [TrainerType.CRESS]: {
-    encounter: [
-      "dialogue:cress.encounter.1"
-    ],
-    victory: [
-      "dialogue:cress.victory.1"
-    ],
-    defeat: [
-      "dialogue:cress.defeat.1"
-    ]
+    encounter: ["dialogue:cress.encounter.1"],
+    victory: ["dialogue:cress.victory.1"],
+    defeat: ["dialogue:cress.defeat.1"]
   },
   [TrainerType.ALLISTER]: {
-    encounter: [
-      "dialogue:allister.encounter.1"
-    ],
-    victory: [
-      "dialogue:allister.victory.1"
-    ],
-    defeat: [
-      "dialogue:allister.defeat.1"
-    ]
+    encounter: ["dialogue:allister.encounter.1"],
+    victory: ["dialogue:allister.victory.1"],
+    defeat: ["dialogue:allister.defeat.1"]
   },
   [TrainerType.CLAY]: {
-    encounter: [
-      "dialogue:clay.encounter.1"
-    ],
-    victory: [
-      "dialogue:clay.victory.1"
-    ],
-    defeat: [
-      "dialogue:clay.defeat.1"
-    ]
+    encounter: ["dialogue:clay.encounter.1"],
+    victory: ["dialogue:clay.victory.1"],
+    defeat: ["dialogue:clay.defeat.1"]
   },
   [TrainerType.KOFU]: {
-    encounter: [
-      "dialogue:kofu.encounter.1"
-    ],
-    victory: [
-      "dialogue:kofu.victory.1"
-    ],
-    defeat: [
-      "dialogue:kofu.defeat.1"
-    ]
+    encounter: ["dialogue:kofu.encounter.1"],
+    victory: ["dialogue:kofu.victory.1"],
+    defeat: ["dialogue:kofu.defeat.1"]
   },
   [TrainerType.TULIP]: {
-    encounter: [
-      "dialogue:tulip.encounter.1"
-    ],
-    victory: [
-      "dialogue:tulip.victory.1"
-    ],
-    defeat: [
-      "dialogue:tulip.defeat.1"
-    ]
+    encounter: ["dialogue:tulip.encounter.1"],
+    victory: ["dialogue:tulip.victory.1"],
+    defeat: ["dialogue:tulip.defeat.1"]
   },
   [TrainerType.SIDNEY]: {
-    encounter: [
-      "dialogue:sidney.encounter.1"
-    ],
-    victory: [
-      "dialogue:sidney.victory.1"
-    ],
-    defeat: [
-      "dialogue:sidney.defeat.1"
-    ]
+    encounter: ["dialogue:sidney.encounter.1"],
+    victory: ["dialogue:sidney.victory.1"],
+    defeat: ["dialogue:sidney.defeat.1"]
   },
   [TrainerType.PHOEBE]: {
-    encounter: [
-      "dialogue:phoebe.encounter.1"
-    ],
-    victory: [
-      "dialogue:phoebe.victory.1"
-    ],
-    defeat: [
-      "dialogue:phoebe.defeat.1"
-    ]
+    encounter: ["dialogue:phoebe.encounter.1"],
+    victory: ["dialogue:phoebe.victory.1"],
+    defeat: ["dialogue:phoebe.defeat.1"]
   },
   [TrainerType.GLACIA]: {
-    encounter: [
-      "dialogue:glacia.encounter.1"
-    ],
-    victory: [
-      "dialogue:glacia.victory.1"
-    ],
-    defeat: [
-      "dialogue:glacia.defeat.1"
-    ]
+    encounter: ["dialogue:glacia.encounter.1"],
+    victory: ["dialogue:glacia.victory.1"],
+    defeat: ["dialogue:glacia.defeat.1"]
   },
   [TrainerType.DRAKE]: {
-    encounter: [
-      "dialogue:drake.encounter.1"
-    ],
-    victory: [
-      "dialogue:drake.victory.1"
-    ],
-    defeat: [
-      "dialogue:drake.defeat.1"
-    ]
+    encounter: ["dialogue:drake.encounter.1"],
+    victory: ["dialogue:drake.victory.1"],
+    defeat: ["dialogue:drake.defeat.1"]
   },
   [TrainerType.WALLACE]: {
-    encounter: [
-      "dialogue:wallace.encounter.1"
-    ],
-    victory: [
-      "dialogue:wallace.victory.1"
-    ],
-    defeat: [
-      "dialogue:wallace.defeat.1"
-    ]
+    encounter: ["dialogue:wallace.encounter.1"],
+    victory: ["dialogue:wallace.victory.1"],
+    defeat: ["dialogue:wallace.defeat.1"]
   },
   [TrainerType.LORELEI]: {
-    encounter: [
-      "dialogue:lorelei.encounter.1"
-    ],
-    victory: [
-      "dialogue:lorelei.victory.1"
-    ],
-    defeat: [
-      "dialogue:lorelei.defeat.1"
-    ]
+    encounter: ["dialogue:lorelei.encounter.1"],
+    victory: ["dialogue:lorelei.victory.1"],
+    defeat: ["dialogue:lorelei.defeat.1"]
   },
   [TrainerType.WILL]: {
-    encounter: [
-      "dialogue:will.encounter.1"
-    ],
-    victory: [
-      "dialogue:will.victory.1"
-    ],
-    defeat: [
-      "dialogue:will.defeat.1"
-    ]
+    encounter: ["dialogue:will.encounter.1"],
+    victory: ["dialogue:will.victory.1"],
+    defeat: ["dialogue:will.defeat.1"]
   },
   [TrainerType.MALVA]: {
-    encounter: [
-      "dialogue:malva.encounter.1"
-    ],
-    victory: [
-      "dialogue:malva.victory.1"
-    ],
-    defeat: [
-      "dialogue:malva.defeat.1"
-    ]
+    encounter: ["dialogue:malva.encounter.1"],
+    victory: ["dialogue:malva.victory.1"],
+    defeat: ["dialogue:malva.defeat.1"]
   },
   [TrainerType.HALA]: {
-    encounter: [
-      "dialogue:hala.encounter.1"
-    ],
-    victory: [
-      "dialogue:hala.victory.1"
-    ],
-    defeat: [
-      "dialogue:hala.defeat.1"
-    ]
+    encounter: ["dialogue:hala.encounter.1"],
+    victory: ["dialogue:hala.victory.1"],
+    defeat: ["dialogue:hala.defeat.1"]
   },
   [TrainerType.MOLAYNE]: {
-    encounter: [
-      "dialogue:molayne.encounter.1"
-    ],
-    victory: [
-      "dialogue:molayne.victory.1"
-    ],
-    defeat: [
-      "dialogue:molayne.defeat.1"
-    ]
+    encounter: ["dialogue:molayne.encounter.1"],
+    victory: ["dialogue:molayne.victory.1"],
+    defeat: ["dialogue:molayne.defeat.1"]
   },
   [TrainerType.RIKA]: {
-    encounter: [
-      "dialogue:rika.encounter.1"
-    ],
-    victory: [
-      "dialogue:rika.victory.1"
-    ],
-    defeat: [
-      "dialogue:rika.defeat.1"
-    ]
+    encounter: ["dialogue:rika.encounter.1"],
+    victory: ["dialogue:rika.victory.1"],
+    defeat: ["dialogue:rika.defeat.1"]
   },
   [TrainerType.BRUNO]: {
-    encounter: [
-      "dialogue:bruno.encounter.1"
-    ],
-    victory: [
-      "dialogue:bruno.victory.1"
-    ],
-    defeat: [
-      "dialogue:bruno.defeat.1"
-    ]
+    encounter: ["dialogue:bruno.encounter.1"],
+    victory: ["dialogue:bruno.victory.1"],
+    defeat: ["dialogue:bruno.defeat.1"]
   },
   [TrainerType.BUGSY]: {
-    encounter: [
-      "dialogue:bugsy.encounter.1"
-    ],
-    victory: [
-      "dialogue:bugsy.victory.1"
-    ],
-    defeat: [
-      "dialogue:bugsy.defeat.1"
-    ]
+    encounter: ["dialogue:bugsy.encounter.1"],
+    victory: ["dialogue:bugsy.victory.1"],
+    defeat: ["dialogue:bugsy.defeat.1"]
   },
   [TrainerType.KOGA]: {
-    encounter: [
-      "dialogue:koga.encounter.1"
-    ],
-    victory: [
-      "dialogue:koga.victory.1"
-    ],
-    defeat: [
-      "dialogue:koga.defeat.1"
-    ]
+    encounter: ["dialogue:koga.encounter.1"],
+    victory: ["dialogue:koga.victory.1"],
+    defeat: ["dialogue:koga.defeat.1"]
   },
   [TrainerType.BERTHA]: {
-    encounter: [
-      "dialogue:bertha.encounter.1"
-    ],
-    victory: [
-      "dialogue:bertha.victory.1"
-    ],
-    defeat: [
-      "dialogue:bertha.defeat.1"
-    ]
+    encounter: ["dialogue:bertha.encounter.1"],
+    victory: ["dialogue:bertha.victory.1"],
+    defeat: ["dialogue:bertha.defeat.1"]
   },
   [TrainerType.LENORA]: {
-    encounter: [
-      "dialogue:lenora.encounter.1"
-    ],
-    victory: [
-      "dialogue:lenora.victory.1"
-    ],
-    defeat: [
-      "dialogue:lenora.defeat.1"
-    ]
+    encounter: ["dialogue:lenora.encounter.1"],
+    victory: ["dialogue:lenora.victory.1"],
+    defeat: ["dialogue:lenora.defeat.1"]
   },
   [TrainerType.SIEBOLD]: {
-    encounter: [
-      "dialogue:siebold.encounter.1"
-    ],
-    victory: [
-      "dialogue:siebold.victory.1"
-    ],
-    defeat: [
-      "dialogue:siebold.defeat.1"
-    ]
+    encounter: ["dialogue:siebold.encounter.1"],
+    victory: ["dialogue:siebold.victory.1"],
+    defeat: ["dialogue:siebold.defeat.1"]
   },
   [TrainerType.ROXIE]: {
-    encounter: [
-      "dialogue:roxie.encounter.1"
-    ],
-    victory: [
-      "dialogue:roxie.victory.1"
-    ],
-    defeat: [
-      "dialogue:roxie.defeat.1"
-    ]
+    encounter: ["dialogue:roxie.encounter.1"],
+    victory: ["dialogue:roxie.victory.1"],
+    defeat: ["dialogue:roxie.defeat.1"]
   },
   [TrainerType.OLIVIA]: {
-    encounter: [
-      "dialogue:olivia.encounter.1"
-    ],
-    victory: [
-      "dialogue:olivia.victory.1"
-    ],
-    defeat: [
-      "dialogue:olivia.defeat.1"
-    ]
+    encounter: ["dialogue:olivia.encounter.1"],
+    victory: ["dialogue:olivia.victory.1"],
+    defeat: ["dialogue:olivia.defeat.1"]
   },
   [TrainerType.POPPY]: {
-    encounter: [
-      "dialogue:poppy.encounter.1"
-    ],
-    victory: [
-      "dialogue:poppy.victory.1"
-    ],
-    defeat: [
-      "dialogue:poppy.defeat.1"
-    ]
+    encounter: ["dialogue:poppy.encounter.1"],
+    victory: ["dialogue:poppy.victory.1"],
+    defeat: ["dialogue:poppy.defeat.1"]
   },
   [TrainerType.AGATHA]: {
-    encounter: [
-      "dialogue:agatha.encounter.1"
-    ],
-    victory: [
-      "dialogue:agatha.victory.1"
-    ],
-    defeat: [
-      "dialogue:agatha.defeat.1"
-    ]
+    encounter: ["dialogue:agatha.encounter.1"],
+    victory: ["dialogue:agatha.victory.1"],
+    defeat: ["dialogue:agatha.defeat.1"]
   },
   [TrainerType.FLINT]: {
-    encounter: [
-      "dialogue:flint.encounter.1"
-    ],
-    victory: [
-      "dialogue:flint.victory.1"
-    ],
-    defeat: [
-      "dialogue:flint.defeat.1"
-    ]
+    encounter: ["dialogue:flint.encounter.1"],
+    victory: ["dialogue:flint.victory.1"],
+    defeat: ["dialogue:flint.defeat.1"]
   },
   [TrainerType.GRIMSLEY]: {
-    encounter: [
-      "dialogue:grimsley.encounter.1"
-    ],
-    victory: [
-      "dialogue:grimsley.victory.1"
-    ],
-    defeat: [
-      "dialogue:grimsley.defeat.1"
-    ]
+    encounter: ["dialogue:grimsley.encounter.1"],
+    victory: ["dialogue:grimsley.victory.1"],
+    defeat: ["dialogue:grimsley.defeat.1"]
   },
   [TrainerType.CAITLIN]: {
-    encounter: [
-      "dialogue:caitlin.encounter.1"
-    ],
-    victory: [
-      "dialogue:caitlin.victory.1"
-    ],
-    defeat: [
-      "dialogue:caitlin.defeat.1"
-    ]
+    encounter: ["dialogue:caitlin.encounter.1"],
+    victory: ["dialogue:caitlin.victory.1"],
+    defeat: ["dialogue:caitlin.defeat.1"]
   },
   [TrainerType.DIANTHA]: {
-    encounter: [
-      "dialogue:diantha.encounter.1"
-    ],
-    victory: [
-      "dialogue:diantha.victory.1"
-    ],
-    defeat: [
-      "dialogue:diantha.defeat.1"
-    ]
+    encounter: ["dialogue:diantha.encounter.1"],
+    victory: ["dialogue:diantha.victory.1"],
+    defeat: ["dialogue:diantha.defeat.1"]
   },
   [TrainerType.WIKSTROM]: {
-    encounter: [
-      "dialogue:wikstrom.encounter.1"
-    ],
-    victory: [
-      "dialogue:wikstrom.victory.1"
-    ],
-    defeat: [
-      "dialogue:wikstrom.defeat.1"
-    ]
+    encounter: ["dialogue:wikstrom.encounter.1"],
+    victory: ["dialogue:wikstrom.victory.1"],
+    defeat: ["dialogue:wikstrom.defeat.1"]
   },
   [TrainerType.ACEROLA]: {
-    encounter: [
-      "dialogue:acerola.encounter.1"
-    ],
-    victory: [
-      "dialogue:acerola.victory.1"
-    ],
-    defeat: [
-      "dialogue:acerola.defeat.1"
-    ]
+    encounter: ["dialogue:acerola.encounter.1"],
+    victory: ["dialogue:acerola.victory.1"],
+    defeat: ["dialogue:acerola.defeat.1"]
   },
   [TrainerType.LARRY_ELITE]: {
-    encounter: [
-      "dialogue:larry_elite.encounter.1"
-    ],
-    victory: [
-      "dialogue:larry_elite.victory.1"
-    ],
-    defeat: [
-      "dialogue:larry_elite.defeat.1"
-    ]
+    encounter: ["dialogue:larry_elite.encounter.1"],
+    victory: ["dialogue:larry_elite.victory.1"],
+    defeat: ["dialogue:larry_elite.defeat.1"]
   },
   [TrainerType.LANCE]: {
-    encounter: [
-      "dialogue:lance.encounter.1",
-      "dialogue:lance.encounter.2"
-    ],
-    victory: [
-      "dialogue:lance.victory.1",
-      "dialogue:lance.victory.2"
-    ],
-    defeat: [
-      "dialogue:lance.defeat.1",
-      "dialogue:lance.defeat.2"
-    ]
+    encounter: ["dialogue:lance.encounter.1", "dialogue:lance.encounter.2"],
+    victory: ["dialogue:lance.victory.1", "dialogue:lance.victory.2"],
+    defeat: ["dialogue:lance.defeat.1", "dialogue:lance.defeat.2"]
   },
   [TrainerType.KAREN]: {
     encounter: [
@@ -1667,834 +1087,408 @@ export const trainerTypeDialogue: TrainerTypeDialogue = {
       "dialogue:karen.encounter.2",
       "dialogue:karen.encounter.3"
     ],
-    victory: [
-      "dialogue:karen.victory.1",
-      "dialogue:karen.victory.2",
-      "dialogue:karen.victory.3"
-    ],
-    defeat: [
-      "dialogue:karen.defeat.1",
-      "dialogue:karen.defeat.2",
-      "dialogue:karen.defeat.3"
-    ]
+    victory: ["dialogue:karen.victory.1", "dialogue:karen.victory.2", "dialogue:karen.victory.3"],
+    defeat: ["dialogue:karen.defeat.1", "dialogue:karen.defeat.2", "dialogue:karen.defeat.3"]
   },
   [TrainerType.MILO]: {
-    encounter: [
-      "dialogue:milo.encounter.1"
-    ],
-    victory: [
-      "dialogue:milo.victory.1"
-    ],
-    defeat: [
-      "dialogue:milo.defeat.1"
-    ]
+    encounter: ["dialogue:milo.encounter.1"],
+    victory: ["dialogue:milo.victory.1"],
+    defeat: ["dialogue:milo.defeat.1"]
   },
   [TrainerType.LUCIAN]: {
-    encounter: [
-      "dialogue:lucian.encounter.1"
-    ],
-    victory: [
-      "dialogue:lucian.victory.1"
-    ],
-    defeat: [
-      "dialogue:lucian.defeat.1"
-    ]
+    encounter: ["dialogue:lucian.encounter.1"],
+    victory: ["dialogue:lucian.victory.1"],
+    defeat: ["dialogue:lucian.defeat.1"]
   },
   [TrainerType.DRASNA]: {
-    encounter: [
-      "dialogue:drasna.encounter.1"
-    ],
-    victory: [
-      "dialogue:drasna.victory.1"
-    ],
-    defeat: [
-      "dialogue:drasna.defeat.1"
-    ]
+    encounter: ["dialogue:drasna.encounter.1"],
+    victory: ["dialogue:drasna.victory.1"],
+    defeat: ["dialogue:drasna.defeat.1"]
   },
   [TrainerType.KAHILI]: {
-    encounter: [
-      "dialogue:kahili.encounter.1"
-    ],
-    victory: [
-      "dialogue:kahili.victory.1"
-    ],
-    defeat: [
-      "dialogue:kahili.defeat.1"
-    ]
+    encounter: ["dialogue:kahili.encounter.1"],
+    victory: ["dialogue:kahili.victory.1"],
+    defeat: ["dialogue:kahili.defeat.1"]
   },
   [TrainerType.HASSEL]: {
-    encounter: [
-      "dialogue:hassel.encounter.1"
-    ],
-    victory: [
-      "dialogue:hassel.victory.1"
-    ],
-    defeat: [
-      "dialogue:hassel.defeat.1"
-    ]
+    encounter: ["dialogue:hassel.encounter.1"],
+    victory: ["dialogue:hassel.victory.1"],
+    defeat: ["dialogue:hassel.defeat.1"]
   },
   [TrainerType.BLUE]: {
-    encounter: [
-      "dialogue:blue.encounter.1"
-    ],
-    victory: [
-      "dialogue:blue.victory.1"
-    ],
-    defeat: [
-      "dialogue:blue.defeat.1"
-    ]
+    encounter: ["dialogue:blue.encounter.1"],
+    victory: ["dialogue:blue.victory.1"],
+    defeat: ["dialogue:blue.defeat.1"]
   },
   [TrainerType.PIERS]: {
-    encounter: [
-      "dialogue:piers.encounter.1"
-    ],
-    victory: [
-      "dialogue:piers.victory.1"
-    ],
-    defeat: [
-      "dialogue:piers.defeat.1"
-    ]
+    encounter: ["dialogue:piers.encounter.1"],
+    victory: ["dialogue:piers.victory.1"],
+    defeat: ["dialogue:piers.defeat.1"]
   },
   [TrainerType.RED]: {
-    encounter: [
-      "dialogue:red.encounter.1"
-    ],
-    victory: [
-      "dialogue:red.victory.1"
-    ],
-    defeat: [
-      "dialogue:red.defeat.1"
-    ]
+    encounter: ["dialogue:red.encounter.1"],
+    victory: ["dialogue:red.victory.1"],
+    defeat: ["dialogue:red.defeat.1"]
   },
   [TrainerType.JASMINE]: {
-    encounter: [
-      "dialogue:jasmine.encounter.1"
-    ],
-    victory: [
-      "dialogue:jasmine.victory.1"
-    ],
-    defeat: [
-      "dialogue:jasmine.defeat.1"
-    ]
+    encounter: ["dialogue:jasmine.encounter.1"],
+    victory: ["dialogue:jasmine.victory.1"],
+    defeat: ["dialogue:jasmine.defeat.1"]
   },
   [TrainerType.LANCE_CHAMPION]: {
-    encounter: [
-      "dialogue:lance_champion.encounter.1"
-    ],
-    victory: [
-      "dialogue:lance_champion.victory.1"
-    ],
-    defeat: [
-      "dialogue:lance_champion.defeat.1"
-    ]
+    encounter: ["dialogue:lance_champion.encounter.1"],
+    victory: ["dialogue:lance_champion.victory.1"],
+    defeat: ["dialogue:lance_champion.defeat.1"]
   },
   [TrainerType.STEVEN]: {
-    encounter: [
-      "dialogue:steven.encounter.1"
-    ],
-    victory: [
-      "dialogue:steven.victory.1"
-    ],
-    defeat: [
-      "dialogue:steven.defeat.1"
-    ]
+    encounter: ["dialogue:steven.encounter.1"],
+    victory: ["dialogue:steven.victory.1"],
+    defeat: ["dialogue:steven.defeat.1"]
   },
   [TrainerType.CYNTHIA]: {
-    encounter: [
-      "dialogue:cynthia.encounter.1"
-    ],
-    victory: [
-      "dialogue:cynthia.victory.1"
-    ],
-    defeat: [
-      "dialogue:cynthia.defeat.1"
-    ]
+    encounter: ["dialogue:cynthia.encounter.1"],
+    victory: ["dialogue:cynthia.victory.1"],
+    defeat: ["dialogue:cynthia.defeat.1"]
   },
   [TrainerType.IRIS]: {
-    encounter: [
-      "dialogue:iris.encounter.1"
-    ],
-    victory: [
-      "dialogue:iris.victory.1"
-    ],
-    defeat: [
-      "dialogue:iris.defeat.1"
-    ]
+    encounter: ["dialogue:iris.encounter.1"],
+    victory: ["dialogue:iris.victory.1"],
+    defeat: ["dialogue:iris.defeat.1"]
   },
   [TrainerType.HAU]: {
-    encounter: [
-      "dialogue:hau.encounter.1"
-    ],
-    victory: [
-      "dialogue:hau.victory.1"
-    ],
-    defeat: [
-      "dialogue:hau.defeat.1"
-    ]
+    encounter: ["dialogue:hau.encounter.1"],
+    victory: ["dialogue:hau.victory.1"],
+    defeat: ["dialogue:hau.defeat.1"]
   },
   [TrainerType.GEETA]: {
-    encounter: [
-      "dialogue:geeta.encounter.1"
-    ],
-    victory: [
-      "dialogue:geeta.victory.1"
-    ],
-    defeat: [
-      "dialogue:geeta.defeat.1"
-    ]
+    encounter: ["dialogue:geeta.encounter.1"],
+    victory: ["dialogue:geeta.victory.1"],
+    defeat: ["dialogue:geeta.defeat.1"]
   },
   [TrainerType.NEMONA]: {
-    encounter: [
-      "dialogue:nemona.encounter.1"
-    ],
-    victory: [
-      "dialogue:nemona.victory.1"
-    ],
-    defeat: [
-      "dialogue:nemona.defeat.1"
-    ]
+    encounter: ["dialogue:nemona.encounter.1"],
+    victory: ["dialogue:nemona.victory.1"],
+    defeat: ["dialogue:nemona.defeat.1"]
   },
   [TrainerType.LEON]: {
-    encounter: [
-      "dialogue:leon.encounter.1"
-    ],
-    victory: [
-      "dialogue:leon.victory.1"
-    ],
-    defeat: [
-      "dialogue:leon.defeat.1"
-    ]
+    encounter: ["dialogue:leon.encounter.1"],
+    victory: ["dialogue:leon.victory.1"],
+    defeat: ["dialogue:leon.defeat.1"]
   },
   [TrainerType.WHITNEY]: {
-    encounter: [
-      "dialogue:whitney.encounter.1"
-    ],
-    victory: [
-      "dialogue:whitney.victory.1"
-    ],
-    defeat: [
-      "dialogue:whitney.defeat.1"
-    ]
+    encounter: ["dialogue:whitney.encounter.1"],
+    victory: ["dialogue:whitney.victory.1"],
+    defeat: ["dialogue:whitney.defeat.1"]
   },
   [TrainerType.CHUCK]: {
-    encounter: [
-      "dialogue:chuck.encounter.1"
-    ],
-    victory: [
-      "dialogue:chuck.victory.1"
-    ],
-    defeat: [
-      "dialogue:chuck.defeat.1"
-    ]
+    encounter: ["dialogue:chuck.encounter.1"],
+    victory: ["dialogue:chuck.victory.1"],
+    defeat: ["dialogue:chuck.defeat.1"]
   },
   [TrainerType.KATY]: {
-    encounter: [
-      "dialogue:katy.encounter.1"
-    ],
-    victory: [
-      "dialogue:katy.victory.1"
-    ],
-    defeat: [
-      "dialogue:katy.defeat.1"
-    ]
+    encounter: ["dialogue:katy.encounter.1"],
+    victory: ["dialogue:katy.victory.1"],
+    defeat: ["dialogue:katy.defeat.1"]
   },
   [TrainerType.PRYCE]: {
-    encounter: [
-      "dialogue:pryce.encounter.1"
-    ],
-    victory: [
-      "dialogue:pryce.victory.1"
-    ],
-    defeat: [
-      "dialogue:pryce.defeat.1"
-    ]
+    encounter: ["dialogue:pryce.encounter.1"],
+    victory: ["dialogue:pryce.victory.1"],
+    defeat: ["dialogue:pryce.defeat.1"]
   },
   [TrainerType.CLAIR]: {
-    encounter: [
-      "dialogue:clair.encounter.1"
-    ],
-    victory: [
-      "dialogue:clair.victory.1"
-    ],
-    defeat: [
-      "dialogue:clair.defeat.1"
-    ]
+    encounter: ["dialogue:clair.encounter.1"],
+    victory: ["dialogue:clair.victory.1"],
+    defeat: ["dialogue:clair.defeat.1"]
   },
   [TrainerType.MAYLENE]: {
-    encounter: [
-      "dialogue:maylene.encounter.1"
-    ],
-    victory: [
-      "dialogue:maylene.victory.1"
-    ],
-    defeat: [
-      "dialogue:maylene.defeat.1"
-    ]
+    encounter: ["dialogue:maylene.encounter.1"],
+    victory: ["dialogue:maylene.victory.1"],
+    defeat: ["dialogue:maylene.defeat.1"]
   },
   [TrainerType.FANTINA]: {
-    encounter: [
-      "dialogue:fantina.encounter.1"
-    ],
-    victory: [
-      "dialogue:fantina.victory.1"
-    ],
-    defeat: [
-      "dialogue:fantina.defeat.1"
-    ]
+    encounter: ["dialogue:fantina.encounter.1"],
+    victory: ["dialogue:fantina.victory.1"],
+    defeat: ["dialogue:fantina.defeat.1"]
   },
   [TrainerType.BYRON]: {
-    encounter: [
-      "dialogue:byron.encounter.1"
-    ],
-    victory: [
-      "dialogue:byron.victory.1"
-    ],
-    defeat: [
-      "dialogue:byron.defeat.1"
-    ]
+    encounter: ["dialogue:byron.encounter.1"],
+    victory: ["dialogue:byron.victory.1"],
+    defeat: ["dialogue:byron.defeat.1"]
   },
   [TrainerType.OLYMPIA]: {
-    encounter: [
-      "dialogue:olympia.encounter.1"
-    ],
-    victory: [
-      "dialogue:olympia.victory.1"
-    ],
-    defeat: [
-      "dialogue:olympia.defeat.1"
-    ]
+    encounter: ["dialogue:olympia.encounter.1"],
+    victory: ["dialogue:olympia.victory.1"],
+    defeat: ["dialogue:olympia.defeat.1"]
   },
   [TrainerType.VOLKNER]: {
-    encounter: [
-      "dialogue:volkner.encounter.1"
-    ],
-    victory: [
-      "dialogue:volkner.victory.1"
-    ],
-    defeat: [
-      "dialogue:volkner.defeat.1"
-    ]
+    encounter: ["dialogue:volkner.encounter.1"],
+    victory: ["dialogue:volkner.victory.1"],
+    defeat: ["dialogue:volkner.defeat.1"]
   },
   [TrainerType.BURGH]: {
-    encounter: [
-      "dialogue:burgh.encounter.1",
-      "dialogue:burgh.encounter.2"
-    ],
-    victory: [
-      "dialogue:burgh.victory.1",
-      "dialogue:burgh.victory.2"
-    ],
-    defeat: [
-      "dialogue:burgh.defeat.1",
-      "dialogue:burgh.defeat.2"
-    ]
+    encounter: ["dialogue:burgh.encounter.1", "dialogue:burgh.encounter.2"],
+    victory: ["dialogue:burgh.victory.1", "dialogue:burgh.victory.2"],
+    defeat: ["dialogue:burgh.defeat.1", "dialogue:burgh.defeat.2"]
   },
   [TrainerType.ELESA]: {
-    encounter: [
-      "dialogue:elesa.encounter.1"
-    ],
-    victory: [
-      "dialogue:elesa.victory.1"
-    ],
-    defeat: [
-      "dialogue:elesa.defeat.1"
-    ]
+    encounter: ["dialogue:elesa.encounter.1"],
+    victory: ["dialogue:elesa.victory.1"],
+    defeat: ["dialogue:elesa.defeat.1"]
   },
   [TrainerType.SKYLA]: {
-    encounter: [
-      "dialogue:skyla.encounter.1"
-    ],
-    victory: [
-      "dialogue:skyla.victory.1"
-    ],
-    defeat: [
-      "dialogue:skyla.defeat.1"
-    ]
+    encounter: ["dialogue:skyla.encounter.1"],
+    victory: ["dialogue:skyla.victory.1"],
+    defeat: ["dialogue:skyla.defeat.1"]
   },
   [TrainerType.BRYCEN]: {
-    encounter: [
-      "dialogue:brycen.encounter.1"
-    ],
-    victory: [
-      "dialogue:brycen.victory.1"
-    ],
-    defeat: [
-      "dialogue:brycen.defeat.1"
-    ]
+    encounter: ["dialogue:brycen.encounter.1"],
+    victory: ["dialogue:brycen.victory.1"],
+    defeat: ["dialogue:brycen.defeat.1"]
   },
   [TrainerType.DRAYDEN]: {
-    encounter: [
-      "dialogue:drayden.encounter.1"
-    ],
-    victory: [
-      "dialogue:drayden.victory.1"
-    ],
-    defeat: [
-      "dialogue:drayden.defeat.1"
-    ]
+    encounter: ["dialogue:drayden.encounter.1"],
+    victory: ["dialogue:drayden.victory.1"],
+    defeat: ["dialogue:drayden.defeat.1"]
   },
   [TrainerType.GRANT]: {
-    encounter: [
-      "dialogue:grant.encounter.1"
-    ],
-    victory: [
-      "dialogue:grant.victory.1"
-    ],
-    defeat: [
-      "dialogue:grant.defeat.1"
-    ]
+    encounter: ["dialogue:grant.encounter.1"],
+    victory: ["dialogue:grant.victory.1"],
+    defeat: ["dialogue:grant.defeat.1"]
   },
   [TrainerType.KORRINA]: {
-    encounter: [
-      "dialogue:korrina.encounter.1"
-    ],
-    victory: [
-      "dialogue:korrina.victory.1"
-    ],
-    defeat: [
-      "dialogue:korrina.defeat.1"
-    ]
+    encounter: ["dialogue:korrina.encounter.1"],
+    victory: ["dialogue:korrina.victory.1"],
+    defeat: ["dialogue:korrina.defeat.1"]
   },
   [TrainerType.CLEMONT]: {
-    encounter: [
-      "dialogue:clemont.encounter.1"
-    ],
-    victory: [
-      "dialogue:clemont.victory.1"
-    ],
-    defeat: [
-      "dialogue:clemont.defeat.1"
-    ]
+    encounter: ["dialogue:clemont.encounter.1"],
+    victory: ["dialogue:clemont.victory.1"],
+    defeat: ["dialogue:clemont.defeat.1"]
   },
   [TrainerType.VALERIE]: {
-    encounter: [
-      "dialogue:valerie.encounter.1"
-    ],
-    victory: [
-      "dialogue:valerie.victory.1"
-    ],
-    defeat: [
-      "dialogue:valerie.defeat.1"
-    ]
+    encounter: ["dialogue:valerie.encounter.1"],
+    victory: ["dialogue:valerie.victory.1"],
+    defeat: ["dialogue:valerie.defeat.1"]
   },
   [TrainerType.WULFRIC]: {
-    encounter: [
-      "dialogue:wulfric.encounter.1"
-    ],
-    victory: [
-      "dialogue:wulfric.victory.1"
-    ],
-    defeat: [
-      "dialogue:wulfric.defeat.1"
-    ]
+    encounter: ["dialogue:wulfric.encounter.1"],
+    victory: ["dialogue:wulfric.victory.1"],
+    defeat: ["dialogue:wulfric.defeat.1"]
   },
   [TrainerType.KABU]: {
-    encounter: [
-      "dialogue:kabu.encounter.1"
-    ],
-    victory: [
-      "dialogue:kabu.victory.1"
-    ],
-    defeat: [
-      "dialogue:kabu.defeat.1"
-    ]
+    encounter: ["dialogue:kabu.encounter.1"],
+    victory: ["dialogue:kabu.victory.1"],
+    defeat: ["dialogue:kabu.defeat.1"]
   },
   [TrainerType.BEA]: {
-    encounter: [
-      "dialogue:bea.encounter.1"
-    ],
-    victory: [
-      "dialogue:bea.victory.1"
-    ],
-    defeat: [
-      "dialogue:bea.defeat.1"
-    ]
+    encounter: ["dialogue:bea.encounter.1"],
+    victory: ["dialogue:bea.victory.1"],
+    defeat: ["dialogue:bea.defeat.1"]
   },
   [TrainerType.OPAL]: {
-    encounter: [
-      "dialogue:opal.encounter.1"
-    ],
-    victory: [
-      "dialogue:opal.victory.1"
-    ],
-    defeat: [
-      "dialogue:opal.defeat.1"
-    ]
+    encounter: ["dialogue:opal.encounter.1"],
+    victory: ["dialogue:opal.victory.1"],
+    defeat: ["dialogue:opal.defeat.1"]
   },
   [TrainerType.BEDE]: {
-    encounter: [
-      "dialogue:bede.encounter.1"
-    ],
-    victory: [
-      "dialogue:bede.victory.1"
-    ],
-    defeat: [
-      "dialogue:bede.defeat.1"
-    ]
+    encounter: ["dialogue:bede.encounter.1"],
+    victory: ["dialogue:bede.victory.1"],
+    defeat: ["dialogue:bede.defeat.1"]
   },
   [TrainerType.GORDIE]: {
-    encounter: [
-      "dialogue:gordie.encounter.1"
-    ],
-    victory: [
-      "dialogue:gordie.victory.1"
-    ],
-    defeat: [
-      "dialogue:gordie.defeat.1"
-    ]
+    encounter: ["dialogue:gordie.encounter.1"],
+    victory: ["dialogue:gordie.victory.1"],
+    defeat: ["dialogue:gordie.defeat.1"]
   },
   [TrainerType.MARNIE]: {
-    encounter: [
-      "dialogue:marnie.encounter.1"
-    ],
-    victory: [
-      "dialogue:marnie.victory.1"
-    ],
-    defeat: [
-      "dialogue:marnie.defeat.1"
-    ]
+    encounter: ["dialogue:marnie.encounter.1"],
+    victory: ["dialogue:marnie.victory.1"],
+    defeat: ["dialogue:marnie.defeat.1"]
   },
   [TrainerType.RAIHAN]: {
-    encounter: [
-      "dialogue:raihan.encounter.1"
-    ],
-    victory: [
-      "dialogue:raihan.victory.1"
-    ],
-    defeat: [
-      "dialogue:raihan.defeat.1"
-    ]
+    encounter: ["dialogue:raihan.encounter.1"],
+    victory: ["dialogue:raihan.victory.1"],
+    defeat: ["dialogue:raihan.defeat.1"]
   },
   [TrainerType.BRASSIUS]: {
-    encounter: [
-      "dialogue:brassius.encounter.1"
-    ],
-    victory: [
-      "dialogue:brassius.victory.1"
-    ],
-    defeat: [
-      "dialogue:brassius.defeat.1"
-    ]
+    encounter: ["dialogue:brassius.encounter.1"],
+    victory: ["dialogue:brassius.victory.1"],
+    defeat: ["dialogue:brassius.defeat.1"]
   },
   [TrainerType.IONO]: {
-    encounter: [
-      "dialogue:iono.encounter.1"
-    ],
-    victory: [
-      "dialogue:iono.victory.1"
-    ],
-    defeat: [
-      "dialogue:iono.defeat.1"
-    ]
+    encounter: ["dialogue:iono.encounter.1"],
+    victory: ["dialogue:iono.victory.1"],
+    defeat: ["dialogue:iono.defeat.1"]
   },
   [TrainerType.LARRY]: {
-    encounter: [
-      "dialogue:larry.encounter.1"
-    ],
-    victory: [
-      "dialogue:larry.victory.1"
-    ],
-    defeat: [
-      "dialogue:larry.defeat.1"
-    ]
+    encounter: ["dialogue:larry.encounter.1"],
+    victory: ["dialogue:larry.victory.1"],
+    defeat: ["dialogue:larry.defeat.1"]
   },
   [TrainerType.RYME]: {
-    encounter: [
-      "dialogue:ryme.encounter.1"
-    ],
-    victory: [
-      "dialogue:ryme.victory.1"
-    ],
-    defeat: [
-      "dialogue:ryme.defeat.1"
-    ]
+    encounter: ["dialogue:ryme.encounter.1"],
+    victory: ["dialogue:ryme.victory.1"],
+    defeat: ["dialogue:ryme.defeat.1"]
   },
   [TrainerType.GRUSHA]: {
-    encounter: [
-      "dialogue:grusha.encounter.1"
-    ],
-    victory: [
-      "dialogue:grusha.victory.1"
-    ],
-    defeat: [
-      "dialogue:grusha.defeat.1"
-    ]
+    encounter: ["dialogue:grusha.encounter.1"],
+    victory: ["dialogue:grusha.victory.1"],
+    defeat: ["dialogue:grusha.defeat.1"]
   },
   [TrainerType.MARNIE_ELITE]: {
-    encounter: [
-      "dialogue:marnie_elite.encounter.1",
-      "dialogue:marnie_elite.encounter.2"
-    ],
-    victory: [
-      "dialogue:marnie_elite.victory.1",
-      "dialogue:marnie_elite.victory.2"
-    ],
-    defeat: [
-      "dialogue:marnie_elite.defeat.1",
-      "dialogue:marnie_elite.defeat.2"
-    ]
+    encounter: ["dialogue:marnie_elite.encounter.1", "dialogue:marnie_elite.encounter.2"],
+    victory: ["dialogue:marnie_elite.victory.1", "dialogue:marnie_elite.victory.2"],
+    defeat: ["dialogue:marnie_elite.defeat.1", "dialogue:marnie_elite.defeat.2"]
   },
   [TrainerType.NESSA_ELITE]: {
-    encounter: [
-      "dialogue:nessa_elite.encounter.1",
-      "dialogue:nessa_elite.encounter.2"
-    ],
-    victory: [
-      "dialogue:nessa_elite.victory.1",
-      "dialogue:nessa_elite.victory.2"
-    ],
-    defeat: [
-      "dialogue:nessa_elite.defeat.1",
-      "dialogue:nessa_elite.defeat.2"
-    ]
+    encounter: ["dialogue:nessa_elite.encounter.1", "dialogue:nessa_elite.encounter.2"],
+    victory: ["dialogue:nessa_elite.victory.1", "dialogue:nessa_elite.victory.2"],
+    defeat: ["dialogue:nessa_elite.defeat.1", "dialogue:nessa_elite.defeat.2"]
   },
   [TrainerType.BEA_ELITE]: {
-    encounter: [
-      "dialogue:bea_elite.encounter.1",
-      "dialogue:bea_elite.encounter.2"
-    ],
-    victory: [
-      "dialogue:bea_elite.victory.1",
-      "dialogue:bea_elite.victory.2"
-    ],
-    defeat: [
-      "dialogue:bea_elite.defeat.1",
-      "dialogue:bea_elite.defeat.2"
-    ]
+    encounter: ["dialogue:bea_elite.encounter.1", "dialogue:bea_elite.encounter.2"],
+    victory: ["dialogue:bea_elite.victory.1", "dialogue:bea_elite.victory.2"],
+    defeat: ["dialogue:bea_elite.defeat.1", "dialogue:bea_elite.defeat.2"]
   },
   [TrainerType.ALLISTER_ELITE]: {
-    encounter: [
-      "dialogue:allister_elite.encounter.1",
-      "dialogue:allister_elite.encounter.2"
-    ],
-    victory: [
-      "dialogue:allister_elite.victory.1",
-      "dialogue:allister_elite.victory.2"
-    ],
-    defeat: [
-      "dialogue:allister_elite.defeat.1",
-      "dialogue:allister_elite.defeat.2"
-    ]
+    encounter: ["dialogue:allister_elite.encounter.1", "dialogue:allister_elite.encounter.2"],
+    victory: ["dialogue:allister_elite.victory.1", "dialogue:allister_elite.victory.2"],
+    defeat: ["dialogue:allister_elite.defeat.1", "dialogue:allister_elite.defeat.2"]
   },
   [TrainerType.RAIHAN_ELITE]: {
-    encounter: [
-      "dialogue:raihan_elite.encounter.1",
-      "dialogue:raihan_elite.encounter.2"
-    ],
-    victory: [
-      "dialogue:raihan_elite.victory.1",
-      "dialogue:raihan_elite.victory.2"
-    ],
-    defeat: [
-      "dialogue:raihan_elite.defeat.1",
-      "dialogue:raihan_elite.defeat.2"
-    ]
+    encounter: ["dialogue:raihan_elite.encounter.1", "dialogue:raihan_elite.encounter.2"],
+    victory: ["dialogue:raihan_elite.victory.1", "dialogue:raihan_elite.victory.2"],
+    defeat: ["dialogue:raihan_elite.defeat.1", "dialogue:raihan_elite.defeat.2"]
   },
   [TrainerType.ALDER]: {
-    encounter: [
-      "dialogue:alder.encounter.1"
-    ],
-    victory: [
-      "dialogue:alder.victory.1"
-    ],
-    defeat: [
-      "dialogue:alder.defeat.1"
-    ]
+    encounter: ["dialogue:alder.encounter.1"],
+    victory: ["dialogue:alder.victory.1"],
+    defeat: ["dialogue:alder.defeat.1"]
   },
   [TrainerType.KIERAN]: {
-    encounter: [
-      "dialogue:kieran.encounter.1"
-    ],
-    victory: [
-      "dialogue:kieran.victory.1"
-    ],
-    defeat: [
-      "dialogue:kieran.defeat.1"
-    ]
+    encounter: ["dialogue:kieran.encounter.1"],
+    victory: ["dialogue:kieran.victory.1"],
+    defeat: ["dialogue:kieran.defeat.1"]
   },
   [TrainerType.RIVAL]: [
     {
-      encounter: [
-        "dialogue:rival.encounter.1",
-      ],
-      victory: [
-        "dialogue:rival.victory.1",
-      ],
-
+      encounter: ["dialogue:rival.encounter.1"],
+      victory: ["dialogue:rival.victory.1"]
     },
     {
-      encounter: [
-        "dialogue:rival_female.encounter.1",
-      ],
-      victory: [
-        "dialogue:rival_female.victory.1",
-      ]
+      encounter: ["dialogue:rival_female.encounter.1"],
+      victory: ["dialogue:rival_female.victory.1"]
     }
   ],
   [TrainerType.RIVAL_2]: [
     {
-      encounter: [
-        "dialogue:rival_2.encounter.1",
-      ],
-      victory: [
-        "dialogue:rival_2.victory.1",
-      ],
-
+      encounter: ["dialogue:rival_2.encounter.1"],
+      victory: ["dialogue:rival_2.victory.1"]
     },
     {
-      encounter: [
-        "dialogue:rival_2_female.encounter.1",
-      ],
-      victory: [
-        "dialogue:rival_2_female.victory.1",
-      ],
-      defeat: [
-        "dialogue:rival_2_female.defeat.1",
-      ]
-    },
+      encounter: ["dialogue:rival_2_female.encounter.1"],
+      victory: ["dialogue:rival_2_female.victory.1"],
+      defeat: ["dialogue:rival_2_female.defeat.1"]
+    }
   ],
   [TrainerType.RIVAL_3]: [
     {
-      encounter: [
-        "dialogue:rival_3.encounter.1",
-      ],
-      victory: [
-        "dialogue:rival_3.victory.1",
-      ]
+      encounter: ["dialogue:rival_3.encounter.1"],
+      victory: ["dialogue:rival_3.victory.1"]
     },
     {
-      encounter: [
-        "dialogue:rival_3_female.encounter.1",
-      ],
-      victory: [
-        "dialogue:rival_3_female.victory.1",
-      ],
-      defeat: [
-        "dialogue:rival_3_female.defeat.1",
-      ]
+      encounter: ["dialogue:rival_3_female.encounter.1"],
+      victory: ["dialogue:rival_3_female.victory.1"],
+      defeat: ["dialogue:rival_3_female.defeat.1"]
     }
   ],
   [TrainerType.RIVAL_4]: [
     {
-      encounter: [
-        "dialogue:rival_4.encounter.1",
-      ],
-      victory: [
-        "dialogue:rival_4.victory.1",
-      ]
+      encounter: ["dialogue:rival_4.encounter.1"],
+      victory: ["dialogue:rival_4.victory.1"]
     },
     {
-      encounter: [
-        "dialogue:rival_4_female.encounter.1",
-      ],
-      victory: [
-        "dialogue:rival_4_female.victory.1",
-      ],
-      defeat: [
-        "dialogue:rival_4_female.defeat.1",
-      ]
+      encounter: ["dialogue:rival_4_female.encounter.1"],
+      victory: ["dialogue:rival_4_female.victory.1"],
+      defeat: ["dialogue:rival_4_female.defeat.1"]
     }
   ],
   [TrainerType.RIVAL_5]: [
     {
-      encounter: [
-        "dialogue:rival_5.encounter.1",
-      ],
-      victory: [
-        "dialogue:rival_5.victory.1",
-      ]
+      encounter: ["dialogue:rival_5.encounter.1"],
+      victory: ["dialogue:rival_5.victory.1"]
     },
     {
-      encounter: [
-        "dialogue:rival_5_female.encounter.1",
-      ],
-      victory: [
-        "dialogue:rival_5_female.victory.1",
-      ],
-      defeat: [
-        "dialogue:rival_5_female.defeat.1",
-      ]
+      encounter: ["dialogue:rival_5_female.encounter.1"],
+      victory: ["dialogue:rival_5_female.victory.1"],
+      defeat: ["dialogue:rival_5_female.defeat.1"]
     }
   ],
   [TrainerType.RIVAL_6]: [
     {
-      encounter: [
-        "dialogue:rival_6.encounter.1",
-      ],
-      victory: [
-        "dialogue:rival_6.victory.1",
-      ]
+      encounter: ["dialogue:rival_6.encounter.1"],
+      victory: ["dialogue:rival_6.victory.1"]
     },
     {
-      encounter: [
-        "dialogue:rival_6_female.encounter.1",
-      ],
-      victory: [
-        "dialogue:rival_6_female.victory.1",
-      ],
+      encounter: ["dialogue:rival_6_female.encounter.1"],
+      victory: ["dialogue:rival_6_female.victory.1"]
     }
   ]
 };
 
-
 export const doubleBattleDialogue = {
-  "blue_red_double": {
+  blue_red_double: {
     encounter: ["doubleBattleDialogue:blue_red_double.encounter.1"],
     victory: ["doubleBattleDialogue:blue_red_double.victory.1"]
   },
-  "red_blue_double": {
+  red_blue_double: {
     encounter: ["doubleBattleDialogue:red_blue_double.encounter.1"],
     victory: ["doubleBattleDialogue:red_blue_double.victory.1"]
   },
-  "tate_liza_double": {
+  tate_liza_double: {
     encounter: ["doubleBattleDialogue:tate_liza_double.encounter.1"],
     victory: ["doubleBattleDialogue:tate_liza_double.victory.1"]
   },
-  "liza_tate_double": {
+  liza_tate_double: {
     encounter: ["doubleBattleDialogue:liza_tate_double.encounter.1"],
-    victory: [ "doubleBattleDialogue:liza_tate_double.victory.1"]
+    victory: ["doubleBattleDialogue:liza_tate_double.victory.1"]
   },
-  "wallace_steven_double": {
-    encounter: [ "doubleBattleDialogue:wallace_steven_double.encounter.1"],
-    victory: [ "doubleBattleDialogue:wallace_steven_double.victory.1"]
+  wallace_steven_double: {
+    encounter: ["doubleBattleDialogue:wallace_steven_double.encounter.1"],
+    victory: ["doubleBattleDialogue:wallace_steven_double.victory.1"]
   },
-  "steven_wallace_double": {
-    encounter: [ "doubleBattleDialogue:steven_wallace_double.encounter.1"],
-    victory: [ "doubleBattleDialogue:steven_wallace_double.victory.1"]
+  steven_wallace_double: {
+    encounter: ["doubleBattleDialogue:steven_wallace_double.encounter.1"],
+    victory: ["doubleBattleDialogue:steven_wallace_double.victory.1"]
   },
-  "alder_iris_double": {
-    encounter: [ "doubleBattleDialogue:alder_iris_double.encounter.1"],
-    victory: [ "doubleBattleDialogue:alder_iris_double.victory.1"]
+  alder_iris_double: {
+    encounter: ["doubleBattleDialogue:alder_iris_double.encounter.1"],
+    victory: ["doubleBattleDialogue:alder_iris_double.victory.1"]
   },
-  "iris_alder_double": {
-    encounter: [ "doubleBattleDialogue:iris_alder_double.encounter.1"],
-    victory: [ "doubleBattleDialogue:iris_alder_double.victory.1"]
+  iris_alder_double: {
+    encounter: ["doubleBattleDialogue:iris_alder_double.encounter.1"],
+    victory: ["doubleBattleDialogue:iris_alder_double.victory.1"]
   },
-  "marnie_piers_double": {
-    encounter: [ "doubleBattleDialogue:marnie_piers_double.encounter.1"],
-    victory: [ "doubleBattleDialogue:marnie_piers_double.victory.1"]
+  marnie_piers_double: {
+    encounter: ["doubleBattleDialogue:marnie_piers_double.encounter.1"],
+    victory: ["doubleBattleDialogue:marnie_piers_double.victory.1"]
   },
-  "piers_marnie_double": {
-    encounter: [ "doubleBattleDialogue:piers_marnie_double.encounter.1"],
-    victory: [ "doubleBattleDialogue:piers_marnie_double.victory.1"]
-  },
-
-
+  piers_marnie_double: {
+    encounter: ["doubleBattleDialogue:piers_marnie_double.encounter.1"],
+    victory: ["doubleBattleDialogue:piers_marnie_double.victory.1"]
+  }
 };
 
 export const battleSpecDialogue = {
   [BattleSpec.FINAL_BOSS]: {
     encounter: "battleSpecDialogue:encounter",
     firstStageWin: "battleSpecDialogue:firstStageWin",
-    secondStageWin: "battleSpecDialogue:secondStageWin",
+    secondStageWin: "battleSpecDialogue:secondStageWin"
   }
 };
 
 export const miscDialogue = {
-  ending: [
-    "miscDialogue:ending",
-    "miscDialogue:ending_female"
-  ]
+  ending: ["miscDialogue:ending", "miscDialogue:ending_female"]
 };
 
 export function getCharVariantFromDialogue(message: string): string {
@@ -2506,7 +1500,7 @@ export function getCharVariantFromDialogue(message: string): string {
 }
 
 export function initTrainerTypeDialogue(): void {
-  const trainerTypes = Object.keys(trainerTypeDialogue).map(t => parseInt(t) as TrainerType);
+  const trainerTypes = Object.keys(trainerTypeDialogue).map((t) => parseInt(t) as TrainerType);
   for (const trainerType of trainerTypes) {
     const messages = trainerTypeDialogue[trainerType];
     const messageTypes = ["encounter", "victory", "defeat"];
@@ -2516,7 +1510,9 @@ export function initTrainerTypeDialogue(): void {
           trainerConfigs[trainerType][`${messageType}Messages`] = messages[0][messageType];
         }
         if (messages.length > 1) {
-          trainerConfigs[trainerType][`female${messageType.slice(0, 1).toUpperCase()}${messageType.slice(1)}Messages`] = messages[1][messageType];
+          trainerConfigs[trainerType][
+            `female${messageType.slice(0, 1).toUpperCase()}${messageType.slice(1)}Messages`
+          ] = messages[1][messageType];
         }
       } else {
         trainerConfigs[trainerType][`${messageType}Messages`] = messages[messageType];

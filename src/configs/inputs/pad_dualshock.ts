@@ -1,5 +1,5 @@
-import {SettingGamepad} from "../../system/settings/settings-gamepad";
-import {Button} from "#enums/buttons";
+import { SettingGamepad } from "../../system/settings/settings-gamepad";
+import { Button } from "#enums/buttons";
 
 /**
  * Dualshock mapping
@@ -56,7 +56,7 @@ const pad_dualshock = {
     [SettingGamepad.Button_Cycle_Variant]: Button.V,
     [SettingGamepad.Button_Menu]: Button.MENU,
     [SettingGamepad.Button_Stats]: Button.STATS,
-    [SettingGamepad.Button_Cycle_Form]:  Button.CYCLE_FORM,
+    [SettingGamepad.Button_Cycle_Form]: Button.CYCLE_FORM,
     [SettingGamepad.Button_Cycle_Shiny]: Button.CYCLE_SHINY,
     [SettingGamepad.Button_Cycle_Gender]: Button.CYCLE_GENDER,
     [SettingGamepad.Button_Cycle_Ability]: Button.CYCLE_ABILITY,
@@ -81,8 +81,8 @@ const pad_dualshock = {
     RT: SettingGamepad.Button_Cycle_Ability,
     LS: SettingGamepad.Button_Speed_Up,
     RS: SettingGamepad.Button_Slow_Down,
-    TOUCH: SettingGamepad.Button_Submit,
-  },
+    TOUCH: SettingGamepad.Button_Submit
+  }
 };
 
 export default pad_dualshock;

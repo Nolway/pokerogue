@@ -1,12 +1,13 @@
 import { SimpleTranslationEntries } from "#app/plugins/i18n";
 
 export const challenges: SimpleTranslationEntries = {
-  "title": "Paramètres du Challenge",
-  "start": "Démarrer",
-  "illegalEvolution": "{{pokemon}} s’est transformé en Pokémon\ninéligible pour ce challenge !",
+  title: "Paramètres du Challenge",
+  start: "Démarrer",
+  illegalEvolution: "{{pokemon}} s’est transformé en Pokémon\ninéligible pour ce challenge !",
   "singleGeneration.name": "Mono-génération",
   "singleGeneration.value.0": "Désactivé",
-  "singleGeneration.desc.0": "Vous ne pouvez choisir que des Pokémon de la génération sélectionnée.",
+  "singleGeneration.desc.0":
+    "Vous ne pouvez choisir que des Pokémon de la génération sélectionnée.",
   "singleGeneration.value.1": "1G",
   "singleGeneration.desc.1": "Vous ne pouvez choisir que des Pokémon de 1re génération.",
   "singleGeneration.value.2": "2G",
@@ -63,5 +64,5 @@ export const challenges: SimpleTranslationEntries = {
   "singleType.value.17": "Ténèbres",
   "singleType.desc.17": "Vous ne pouvez choisir que des Pokémon de type Ténèbres.",
   "singleType.value.18": "Fée",
-  "singleType.desc.18": "Vous ne pouvez choisir que des Pokémon de type Fée.",
+  "singleType.desc.18": "Vous ne pouvez choisir que des Pokémon de type Fée."
 } as const;

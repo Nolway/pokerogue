@@ -3,7 +3,7 @@ import { TextStyle, addTextObject } from "./text";
 import { Mode } from "./ui";
 import UiHandler from "./ui-handler";
 import { WindowVariant, addWindow } from "./ui-theme";
-import {Button} from "#enums/buttons";
+import { Button } from "#enums/buttons";
 
 export interface ModalConfig {
   buttonActions: Function[];
@@ -42,7 +42,15 @@ export abstract class ModalUiHandler extends UiHandler {
 
     this.modalContainer = this.scene.add.container(0, 0);
 
-    this.modalContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.scene.game.canvas.width / 6, this.scene.game.canvas.height / 6), Phaser.Geom.Rectangle.Contains);
+    this.modalContainer.setInteractive(
+      new Phaser.Geom.Rectangle(
+        0,
+        0,
+        this.scene.game.canvas.width / 6,
+        this.scene.game.canvas.height / 6
+      ),
+      Phaser.Geom.Rectangle.Contains
+    );
 
     this.modalBg = addWindow(this.scene, 0, 0, 0, 0);
 
@@ -63,9 +71,23 @@ export abstract class ModalUiHandler extends UiHandler {
       const buttonLabel = addTextObject(this.scene, 0, 8, label, TextStyle.TOOLTIP_CONTENT);
       buttonLabel.setOrigin(0.5, 0.5);
 
-      const buttonBg = addWindow(this.scene, 0, 0, buttonLabel.getBounds().width + 8, 16, false, false, 0, 0, WindowVariant.THIN);
+      const buttonBg = addWindow(
+        this.scene,
+        0,
+        0,
+        buttonLabel.getBounds().width + 8,
+        16,
+        false,
+        false,
+        0,
+        0,
+        WindowVariant.THIN
+      );
       buttonBg.setOrigin(0.5, 0);
-      buttonBg.setInteractive(new Phaser.Geom.Rectangle(0, 0, buttonBg.width, buttonBg.height), Phaser.Geom.Rectangle.Contains);
+      buttonBg.setInteractive(
+        new Phaser.Geom.Rectangle(0, 0, buttonBg.width, buttonBg.height),
+        Phaser.Geom.Rectangle.Contains
+      );
 
       const buttonContainer = this.scene.add.container(0, buttonTopMargin);
 
@@ -105,10 +127,13 @@ export abstract class ModalUiHandler extends UiHandler {
   }
 
   updateContainer(config?: ModalConfig): void {
-    const [ marginTop, marginRight, marginBottom, marginLeft ] = this.getMargin(config);
+    const [marginTop, marginRight, marginBottom, marginLeft] = this.getMargin(config);
 
-    const [ width, height ] = [ this.getWidth(config), this.getHeight(config) ];
-    this.modalContainer.setPosition((((this.scene.game.canvas.width / 6) - (width + (marginRight - marginLeft))) / 2), (((-this.scene.game.canvas.height / 6) - (height + (marginBottom - marginTop))) / 2));
+    const [width, height] = [this.getWidth(config), this.getHeight(config)];
+    this.modalContainer.setPosition(
+      (this.scene.game.canvas.width / 6 - (width + (marginRight - marginLeft))) / 2,
+      (-this.scene.game.canvas.height / 6 - (height + (marginBottom - marginTop))) / 2
+    );
 
     this.modalBg.setSize(width, height);
 
@@ -121,7 +146,10 @@ export abstract class ModalUiHandler extends UiHandler {
     for (let b = 0; b < this.buttonContainers.length; b++) {
       const sliceWidth = width / (this.buttonContainers.length + 1);
 
-      this.buttonContainers[b].setPosition(sliceWidth * (b + 1), this.modalBg.height - (this.buttonBgs[b].height + 8));
+      this.buttonContainers[b].setPosition(
+        sliceWidth * (b + 1),
+        this.modalBg.height - (this.buttonBgs[b].height + 8)
+      );
     }
   }
 
@@ -133,6 +161,6 @@ export abstract class ModalUiHandler extends UiHandler {
     super.clear();
     this.modalContainer.setVisible(false);
 
-    this.buttonBgs.map(bg => bg.off("pointerdown"));
+    this.buttonBgs.map((bg) => bg.off("pointerdown"));
   }
 }

@@ -1,12 +1,12 @@
 import * as Utils from "../utils";
+import PokemonSpecies, { getPokemonSpecies, speciesStarters } from "./pokemon-species";
+import { Type } from "./type";
 import i18next from "#app/plugins/i18n.js";
 import { GameData } from "#app/system/game-data.js";
-import PokemonSpecies, { getPokemonSpecies, speciesStarters } from "./pokemon-species";
 import Pokemon from "#app/field/pokemon.js";
 import { BattleType, FixedBattleConfig } from "#app/battle.js";
 import Trainer, { TrainerVariant } from "#app/field/trainer.js";
 import { GameMode } from "#app/game-mode.js";
-import { Type } from "./type";
 import { Challenges } from "#enums/challenges";
 import { Species } from "#enums/species";
 import { TrainerType } from "#enums/trainer-type";
@@ -16,34 +16,34 @@ import { TrainerType } from "#enums/trainer-type";
  * parameters to use when calling the applyChallenges function.
  */
 export enum ChallengeType {
-   /**
-    * Challenges which modify what starters you can choose
-    * @param args [0] {@link PokemonSpecies} The species to check
-    *             [1] {@link Utils.BooleanHolder} Sets to false if illegal, pass in true.
+  /**
+   * Challenges which modify what starters you can choose
+   * @param args [0] {@link PokemonSpecies} The species to check
+   *             [1] {@link Utils.BooleanHolder} Sets to false if illegal, pass in true.
    */
   STARTER_CHOICE,
-   /**
-    * Challenges which modify how many starter points you have
-    * @param args [0] {@link Utils.NumberHolder} The amount of starter points you have
+  /**
+   * Challenges which modify how many starter points you have
+   * @param args [0] {@link Utils.NumberHolder} The amount of starter points you have
    */
   STARTER_POINTS,
   /**
    * Challenges which modify your starters in some way
    * Not Fully Implemented
-  */
+   */
   STARTER_MODIFY,
   /**
    * Challenges which limit which pokemon you can have in battle.
    * @param args [0] {@link Pokemon} The pokemon to check
    *             [1] {@link Utils.BooleanHolder} Sets to false if illegal, pass in true.
-  */
+   */
   POKEMON_IN_BATTLE,
   /**
    * Adds or modifies the fixed battles in a run
    * @param args [0] integer The wave to get a battle for
    *             [1] {@link FixedBattleConfig} A new fixed battle. It'll be modified if a battle exists.
-  */
-  FIXED_BATTLES,
+   */
+  FIXED_BATTLES
 }
 
 /**
@@ -87,7 +87,10 @@ export abstract class Challenge {
    * @returns The i18n key for this challenge
    */
   geti18nKey(): string {
-    return Challenges[this.id].split("_").map((f, i) => i ? `${f[0]}${f.slice(1).toLowerCase()}` : f.toLowerCase()).join("");
+    return Challenges[this.id]
+      .split("_")
+      .map((f, i) => (i ? `${f[0]}${f.slice(1).toLowerCase()}` : f.toLowerCase()))
+      .join("");
   }
 
   /**
@@ -96,7 +99,7 @@ export abstract class Challenge {
    * @returns {boolean} Whether this challenge is unlocked.
    */
   isUnlocked(data: GameData): boolean {
-    return this.conditions.every(f => f(data));
+    return this.conditions.every((f) => f(data));
   }
 
   /**
@@ -116,7 +119,7 @@ export abstract class Challenge {
    * @returns {Challenge} This challenge
    */
   isOfType(challengeType: ChallengeType): boolean {
-    return this.challengeTypes.some(c => c === challengeType);
+    return this.challengeTypes.some((c) => c === challengeType);
   }
 
   /**
@@ -286,9 +289,19 @@ export class SingleGenerationChallenge extends Challenge {
     case ChallengeType.POKEMON_IN_BATTLE:
       const pokemon = args[0] as Pokemon;
       const isValidPokemon = args[1] as Utils.BooleanHolder;
-      const baseGeneration = pokemon.species.speciesId === Species.VICTINI ? 5 : getPokemonSpecies(pokemon.species.speciesId).generation;
-      const fusionGeneration = pokemon.isFusion() ? pokemon.fusionSpecies.speciesId === Species.VICTINI ? 5 : getPokemonSpecies(pokemon.fusionSpecies.speciesId).generation : 0;
-      if (pokemon.isPlayer() && (baseGeneration !== this.value || (pokemon.isFusion() && fusionGeneration !== this.value))) {
+      const baseGeneration =
+          pokemon.species.speciesId === Species.VICTINI
+            ? 5
+            : getPokemonSpecies(pokemon.species.speciesId).generation;
+      const fusionGeneration = pokemon.isFusion()
+        ? pokemon.fusionSpecies.speciesId === Species.VICTINI
+          ? 5
+          : getPokemonSpecies(pokemon.fusionSpecies.speciesId).generation
+        : 0;
+      if (
+        pokemon.isPlayer() &&
+          (baseGeneration !== this.value || (pokemon.isFusion() && fusionGeneration !== this.value))
+      ) {
         isValidPokemon.value = false;
         return true;
       }
@@ -299,25 +312,79 @@ export class SingleGenerationChallenge extends Challenge {
       let trainerTypes: TrainerType[] = [];
       switch (waveIndex) {
       case 182:
-        trainerTypes = [ TrainerType.LORELEI, TrainerType.WILL, TrainerType.SIDNEY, TrainerType.AARON, TrainerType.SHAUNTAL, TrainerType.MALVA, Utils.randSeedItem([ TrainerType.HALA, TrainerType.MOLAYNE ]),TrainerType.MARNIE_ELITE, TrainerType.RIKA ];
+        trainerTypes = [
+          TrainerType.LORELEI,
+          TrainerType.WILL,
+          TrainerType.SIDNEY,
+          TrainerType.AARON,
+          TrainerType.SHAUNTAL,
+          TrainerType.MALVA,
+          Utils.randSeedItem([TrainerType.HALA, TrainerType.MOLAYNE]),
+          TrainerType.MARNIE_ELITE,
+          TrainerType.RIKA
+        ];
         break;
       case 184:
-        trainerTypes = [ TrainerType.BRUNO, TrainerType.KOGA, TrainerType.PHOEBE, TrainerType.BERTHA, TrainerType.MARSHAL, TrainerType.SIEBOLD, TrainerType.OLIVIA, TrainerType.NESSA_ELITE, TrainerType.POPPY ];
+        trainerTypes = [
+          TrainerType.BRUNO,
+          TrainerType.KOGA,
+          TrainerType.PHOEBE,
+          TrainerType.BERTHA,
+          TrainerType.MARSHAL,
+          TrainerType.SIEBOLD,
+          TrainerType.OLIVIA,
+          TrainerType.NESSA_ELITE,
+          TrainerType.POPPY
+        ];
         break;
       case 186:
-        trainerTypes = [ TrainerType.AGATHA, TrainerType.BRUNO, TrainerType.GLACIA, TrainerType.FLINT, TrainerType.GRIMSLEY, TrainerType.WIKSTROM, TrainerType.ACEROLA, Utils.randSeedItem([TrainerType.BEA_ELITE,TrainerType.ALLISTER_ELITE]), TrainerType.LARRY_ELITE ];
+        trainerTypes = [
+          TrainerType.AGATHA,
+          TrainerType.BRUNO,
+          TrainerType.GLACIA,
+          TrainerType.FLINT,
+          TrainerType.GRIMSLEY,
+          TrainerType.WIKSTROM,
+          TrainerType.ACEROLA,
+          Utils.randSeedItem([TrainerType.BEA_ELITE, TrainerType.ALLISTER_ELITE]),
+          TrainerType.LARRY_ELITE
+        ];
         break;
       case 188:
-        trainerTypes = [ TrainerType.LANCE, TrainerType.KAREN, TrainerType.DRAKE, TrainerType.LUCIAN, TrainerType.CAITLIN, TrainerType.DRASNA, TrainerType.KAHILI, TrainerType.RAIHAN_ELITE, TrainerType.HASSEL ];
+        trainerTypes = [
+          TrainerType.LANCE,
+          TrainerType.KAREN,
+          TrainerType.DRAKE,
+          TrainerType.LUCIAN,
+          TrainerType.CAITLIN,
+          TrainerType.DRASNA,
+          TrainerType.KAHILI,
+          TrainerType.RAIHAN_ELITE,
+          TrainerType.HASSEL
+        ];
         break;
       case 190:
-        trainerTypes = [ TrainerType.BLUE, Utils.randSeedItem([ TrainerType.RED, TrainerType.LANCE_CHAMPION ]), Utils.randSeedItem([ TrainerType.STEVEN, TrainerType.WALLACE ]), TrainerType.CYNTHIA, Utils.randSeedItem([ TrainerType.ALDER, TrainerType.IRIS ]), TrainerType.DIANTHA, TrainerType.HAU, TrainerType.LEON, Utils.randSeedItem([ TrainerType.GEETA, TrainerType.NEMONA ]) ];
+        trainerTypes = [
+          TrainerType.BLUE,
+          Utils.randSeedItem([TrainerType.RED, TrainerType.LANCE_CHAMPION]),
+          Utils.randSeedItem([TrainerType.STEVEN, TrainerType.WALLACE]),
+          TrainerType.CYNTHIA,
+          Utils.randSeedItem([TrainerType.ALDER, TrainerType.IRIS]),
+          TrainerType.DIANTHA,
+          TrainerType.HAU,
+          TrainerType.LEON,
+          Utils.randSeedItem([TrainerType.GEETA, TrainerType.NEMONA])
+        ];
         break;
       }
       if (trainerTypes.length === 0) {
         return false;
       } else {
-        battleConfig.setBattleType(BattleType.TRAINER).setGetTrainerFunc(scene => new Trainer(scene, trainerTypes[this.value - 1], TrainerVariant.DEFAULT));
+        battleConfig
+          .setBattleType(BattleType.TRAINER)
+          .setGetTrainerFunc(
+            (scene) => new Trainer(scene, trainerTypes[this.value - 1], TrainerVariant.DEFAULT)
+          );
         return true;
       }
     }
@@ -353,8 +420,8 @@ interface monotypeOverride {
  */
 export class SingleTypeChallenge extends Challenge {
   private static TYPE_OVERRIDES: monotypeOverride[] = [
-    {species: Species.MELOETTA, type: Type.PSYCHIC, fusion: true},
-    {species: Species.CASTFORM, type: Type.NORMAL, fusion: false},
+    { species: Species.MELOETTA, type: Type.PSYCHIC, fusion: true },
+    { species: Species.CASTFORM, type: Type.NORMAL, fusion: false }
   ];
 
   constructor() {
@@ -380,8 +447,16 @@ export class SingleTypeChallenge extends Challenge {
     case ChallengeType.POKEMON_IN_BATTLE:
       const pokemon = args[0] as Pokemon;
       const isValidPokemon = args[1] as Utils.BooleanHolder;
-      if (pokemon.isPlayer() && !pokemon.isOfType(this.value - 1, false, false, true)
-        && !SingleTypeChallenge.TYPE_OVERRIDES.some(o => o.type === (this.value - 1) && (pokemon.isFusion() && o.fusion ? pokemon.fusionSpecies : pokemon.species).speciesId === o.species)) {
+      if (
+        pokemon.isPlayer() &&
+          !pokemon.isOfType(this.value - 1, false, false, true) &&
+          !SingleTypeChallenge.TYPE_OVERRIDES.some(
+            (o) =>
+              o.type === this.value - 1 &&
+              (pokemon.isFusion() && o.fusion ? pokemon.fusionSpecies : pokemon.species)
+                .speciesId === o.species
+          )
+      ) {
         isValidPokemon.value = false;
         return true;
       }
@@ -540,9 +615,13 @@ export class LowerStarterPointsChallenge extends Challenge {
  * @param {any[]} args Any args for that challenge type
  * @returns {boolean} True if any challenge was successfully applied.
  */
-export function applyChallenges(gameMode: GameMode, challengeType: ChallengeType, ...args: any[]): boolean {
+export function applyChallenges(
+  gameMode: GameMode,
+  challengeType: ChallengeType,
+  ...args: any[]
+): boolean {
   let ret = false;
-  gameMode.challenges.forEach(v => {
+  gameMode.challenges.forEach((v) => {
     if (v.isOfType(challengeType)) {
       ret ||= v.apply(challengeType, args);
     }
@@ -569,7 +648,7 @@ export const allChallenges: Challenge[] = [];
 export function initChallenges() {
   allChallenges.push(
     new SingleGenerationChallenge(),
-    new SingleTypeChallenge(),
+    new SingleTypeChallenge()
     // new LowerStarterMaxCostChallenge(),
     // new LowerStarterPointsChallenge(),
     // new FreshStartChallenge()

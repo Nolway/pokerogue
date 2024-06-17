@@ -779,7 +779,8 @@ export const move: MoveTranslationEntries = {
   },
   destinyBond: {
     name: "길동무",
-    effect: "기술을 쓴 뒤 상대의 공격으로 기절했을 때 공격 상대도 기절하게 한다. 연속으로 쓰면 실패한다."
+    effect:
+      "기술을 쓴 뒤 상대의 공격으로 기절했을 때 공격 상대도 기절하게 한다. 연속으로 쓰면 실패한다."
   },
   perishSong: {
     name: "멸망의노래",
@@ -807,7 +808,8 @@ export const move: MoveTranslationEntries = {
   },
   sandstorm: {
     name: "모래바람",
-    effect: "5턴 동안 모래바람을 일으켜 바위 땅, 강철타입 이외의 상대에게 데미지를 준다. 바위타입의 특수방어가 올라간다."
+    effect:
+      "5턴 동안 모래바람을 일으켜 바위 땅, 강철타입 이외의 상대에게 데미지를 준다. 바위타입의 특수방어가 올라간다."
   },
   gigaDrain: {
     name: "기가드레인",
@@ -851,11 +853,13 @@ export const move: MoveTranslationEntries = {
   },
   meanLook: {
     name: "검은눈빛",
-    effect: "빨려 들어갈 것 같은 까만 눈빛으로 가만히 응시하여 상대를 배틀에서 도망갈 수 없게 한다."
+    effect:
+      "빨려 들어갈 것 같은 까만 눈빛으로 가만히 응시하여 상대를 배틀에서 도망갈 수 없게 한다."
   },
   attract: {
     name: "헤롱헤롱",
-    effect: "수컷은 암컷을 암컷은 수컷을 유혹하여 헤롱헤롱하게 만든다. 상대가 기술을 쓰기 어려워진다."
+    effect:
+      "수컷은 암컷을 암컷은 수컷을 유혹하여 헤롱헤롱하게 만든다. 상대가 기술을 쓰기 어려워진다."
   },
   sleepTalk: {
     name: "잠꼬대",
@@ -919,7 +923,8 @@ export const move: MoveTranslationEntries = {
   },
   rapidSpin: {
     name: "고속스핀",
-    effect: "회전해서 상대를 공격한다. 조이기, 김밥말이, 씨뿌리기 등을 날려버린다. 자신의 스피드도 오른다."
+    effect:
+      "회전해서 상대를 공격한다. 조이기, 김밥말이, 씨뿌리기 등을 날려버린다. 자신의 스피드도 오른다."
   },
   sweetScent: {
     name: "달콤한향기",
@@ -983,7 +988,8 @@ export const move: MoveTranslationEntries = {
   },
   extremeSpeed: {
     name: "신속",
-    effect: "눈에 보이지 않는 굉장한 속도로 상대에게 돌진하여 공격한다. 반드시 선제공격을 할 수 있다."
+    effect:
+      "눈에 보이지 않는 굉장한 속도로 상대에게 돌진하여 공격한다. 반드시 선제공격을 할 수 있다."
   },
   ancientPower: {
     name: "원시의힘",
@@ -1131,7 +1137,8 @@ export const move: MoveTranslationEntries = {
   },
   knockOff: {
     name: "탁쳐서떨구기",
-    effect: "상대의 지닌 물건을 탁 쳐서 떨어뜨려 배틀이 끝날 때까지 사용할 수 없게 한다. 물건을 가진 상대에게는 데미지를 더 준다."
+    effect:
+      "상대의 지닌 물건을 탁 쳐서 떨어뜨려 배틀이 끝날 때까지 사용할 수 없게 한다. 물건을 가진 상대에게는 데미지를 더 준다."
   },
   endeavor: {
     name: "죽기살기",
@@ -1428,7 +1435,8 @@ export const move: MoveTranslationEntries = {
   },
   gravity: {
     name: "중력",
-    effect: "5턴 동안 부유나 비행타입에 땅타입의 기술이 맞게 된다. 공중으로 나는 기술도 사용할 수 없다."
+    effect:
+      "5턴 동안 부유나 비행타입에 땅타입의 기술이 맞게 된다. 공중으로 나는 기술도 사용할 수 없다."
   },
   miracleEye: {
     name: "미라클아이",
@@ -1456,7 +1464,8 @@ export const move: MoveTranslationEntries = {
   },
   naturalGift: {
     name: "자연의은혜",
-    effect: "나무열매에서 힘을 얻어 공격한다. 지니게 한 나무열매에 따라 기술의 타입과 위력이 바뀐다."
+    effect:
+      "나무열매에서 힘을 얻어 공격한다. 지니게 한 나무열매에 따라 기술의 타입과 위력이 바뀐다."
   },
   feint: {
     name: "페인트",
@@ -1464,7 +1473,8 @@ export const move: MoveTranslationEntries = {
   },
   pluck: {
     name: "쪼아대기",
-    effect: "부리로 공격한다. 상대가 나무열매를 지니고 있을 때 먹어서 나무열매의 효과를 받을 수 있다."
+    effect:
+      "부리로 공격한다. 상대가 나무열매를 지니고 있을 때 먹어서 나무열매의 효과를 받을 수 있다."
   },
   tailwind: {
     name: "순풍",
@@ -1496,7 +1506,8 @@ export const move: MoveTranslationEntries = {
   },
   embargo: {
     name: "금제",
-    effect: "지니게 한 도구를 5턴 동안 쓸 수 없게 한다. 트레이너도 그 포켓몬에게는 도구를 쓸 수 없다."
+    effect:
+      "지니게 한 도구를 5턴 동안 쓸 수 없게 한다. 트레이너도 그 포켓몬에게는 도구를 쓸 수 없다."
   },
   fling: {
     name: "내던지기",
@@ -1740,7 +1751,8 @@ export const move: MoveTranslationEntries = {
   },
   dracoMeteor: {
     name: "용성군",
-    effect: "천공에서 운석을 상대에게 떨어뜨린다. 사용하면 반동으로 자신의 특수공격이 크게 떨어진다."
+    effect:
+      "천공에서 운석을 상대에게 떨어뜨린다. 사용하면 반동으로 자신의 특수공격이 크게 떨어진다."
   },
   discharge: {
     name: "방전",
@@ -1752,7 +1764,8 @@ export const move: MoveTranslationEntries = {
   },
   leafStorm: {
     name: "리프스톰",
-    effect: "뾰족한 잎사귀로 상대에게 돌풍을 일으킨다. 사용하면 반동으로 자신의 특수공격이 크게 떨어진다."
+    effect:
+      "뾰족한 잎사귀로 상대에게 돌풍을 일으킨다. 사용하면 반동으로 자신의 특수공격이 크게 떨어진다."
   },
   powerWhip: {
     name: "파워휩",
@@ -1804,7 +1817,8 @@ export const move: MoveTranslationEntries = {
   },
   bugBite: {
     name: "벌레먹기",
-    effect: "물어서 공격한다. 상대가 나무열매를 지니고 있을 때 먹어서 나무열매의 효과를 받을 수 있다."
+    effect:
+      "물어서 공격한다. 상대가 나무열매를 지니고 있을 때 먹어서 나무열매의 효과를 받을 수 있다."
   },
   chargeBeam: {
     name: "차지빔",
@@ -1908,7 +1922,8 @@ export const move: MoveTranslationEntries = {
   },
   ragePowder: {
     name: "분노가루",
-    effect: "안절부절못하게 하는 가루를 자신에게 뿌려서 주의를 끈다. 상대의 공격은 모두 자신에게 향한다."
+    effect:
+      "안절부절못하게 하는 가루를 자신에게 뿌려서 주의를 끈다. 상대의 공격은 모두 자신에게 향한다."
   },
   telekinesis: {
     name: "텔레키네시스",
@@ -1992,7 +2007,8 @@ export const move: MoveTranslationEntries = {
   },
   echoedVoice: {
     name: "에코보이스",
-    effect: "울리는 목소리로 상대를 공격한다. 매 턴 누군가 이 기술을 계속해서 쓰면 위력이 올라간다."
+    effect:
+      "울리는 목소리로 상대를 공격한다. 매 턴 누군가 이 기술을 계속해서 쓰면 위력이 올라간다."
   },
   chipAway: {
     name: "야금야금",
@@ -2020,7 +2036,8 @@ export const move: MoveTranslationEntries = {
   },
   shellSmash: {
     name: "껍질깨기",
-    effect: "껍질을 깨서 자신의 방어와 특수방어를 떨어뜨리지만 공격과 특수공격, 스피드를 크게 올린다."
+    effect:
+      "껍질을 깨서 자신의 방어와 특수방어를 떨어뜨리지만 공격과 특수공격, 스피드를 크게 올린다."
   },
   healPulse: {
     name: "치유파동",
@@ -2032,7 +2049,8 @@ export const move: MoveTranslationEntries = {
   },
   skyDrop: {
     name: "프리폴",
-    effect: "1턴째에 상대를 하늘로 끌고 가서 2턴째에 떨어뜨려 공격한다. 끌려간 상대는 움직일 수 없다."
+    effect:
+      "1턴째에 상대를 하늘로 끌고 가서 2턴째에 떨어뜨려 공격한다. 끌려간 상대는 움직일 수 없다."
   },
   shiftGear: {
     name: "기어체인지",
@@ -2044,7 +2062,8 @@ export const move: MoveTranslationEntries = {
   },
   incinerate: {
     name: "불태우기",
-    effect: "불꽃으로 상대를 공격한다. 상대가 나무열매 등을 지니고 있을 때 불태워서 쓸 수 없게 만든다."
+    effect:
+      "불꽃으로 상대를 공격한다. 상대가 나무열매 등을 지니고 있을 때 불태워서 쓸 수 없게 만든다."
   },
   quash: {
     name: "순서미루기",
@@ -2132,7 +2151,8 @@ export const move: MoveTranslationEntries = {
   },
   hornLeech: {
     name: "우드혼",
-    effect: "뿔을 꿰찔러서 상대의 양분을 흡수한다. 입힌 데미지의 절반에 해당하는 HP를 회복할 수 있다."
+    effect:
+      "뿔을 꿰찔러서 상대의 양분을 흡수한다. 입힌 데미지의 절반에 해당하는 HP를 회복할 수 있다."
   },
   sacredSword: {
     name: "성스러운칼",
@@ -2208,7 +2228,8 @@ export const move: MoveTranslationEntries = {
   },
   blueFlare: {
     name: "푸른불꽃",
-    effect: "아름다우면서도 격렬한 푸른불꽃으로 상대를 둘러싸서 공격한다. 화상 상태로 만들 때가 있다."
+    effect:
+      "아름다우면서도 격렬한 푸른불꽃으로 상대를 둘러싸서 공격한다. 화상 상태로 만들 때가 있다."
   },
   fieryDance: {
     name: "불꽃춤",
@@ -2220,7 +2241,8 @@ export const move: MoveTranslationEntries = {
   },
   iceBurn: {
     name: "콜드플레어",
-    effect: "모든 것을 얼려버리는 격렬한 냉기로 2턴째에 상대를 둘러싼다. 화상 상태로 만들 때가 있다."
+    effect:
+      "모든 것을 얼려버리는 격렬한 냉기로 2턴째에 상대를 둘러싼다. 화상 상태로 만들 때가 있다."
   },
   snarl: {
     name: "바크아웃",
@@ -2232,7 +2254,8 @@ export const move: MoveTranslationEntries = {
   },
   vCreate: {
     name: "V제너레이트",
-    effect: "작열하는 불꽃을 이마에서 발생시켜 이판사판으로 몸통박치기한다. 방어, 특수방어, 스피드가 떨어진다."
+    effect:
+      "작열하는 불꽃을 이마에서 발생시켜 이판사판으로 몸통박치기한다. 방어, 특수방어, 스피드가 떨어진다."
   },
   fusionFlare: {
     name: "크로스플레임",
@@ -2248,7 +2271,8 @@ export const move: MoveTranslationEntries = {
   },
   matBlock: {
     name: "마룻바닥세워막기",
-    effect: "뒤집어 세운 마룻바닥을 방패로 하여 자신과 같은 편으로 향하는 기술 데미지를 막는다. 변화 기술은 막을 수 없다."
+    effect:
+      "뒤집어 세운 마룻바닥을 방패로 하여 자신과 같은 편으로 향하는 기술 데미지를 막는다. 변화 기술은 막을 수 없다."
   },
   belch: {
     name: "트림",
@@ -2268,7 +2292,8 @@ export const move: MoveTranslationEntries = {
   },
   phantomForce: {
     name: "고스트다이브",
-    effect: "1턴째에 어디론가 사라져서 2턴째에 상대를 공격한다. 기술 방어를 무시하고 공격할 수 있다."
+    effect:
+      "1턴째에 어디론가 사라져서 2턴째에 상대를 공격한다. 기술 방어를 무시하고 공격할 수 있다."
   },
   trickOrTreat: {
     name: "핼러윈",
@@ -2296,7 +2321,8 @@ export const move: MoveTranslationEntries = {
   },
   freezeDry: {
     name: "프리즈드라이",
-    effect: "상대를 급격히 차갑게 하여 얼음 상태로 만들 때가 있다. 물타입 포켓몬에게도 효과가 굉장해진다."
+    effect:
+      "상대를 급격히 차갑게 하여 얼음 상태로 만들 때가 있다. 물타입 포켓몬에게도 효과가 굉장해진다."
   },
   disarmingVoice: {
     name: "차밍보이스",
@@ -2420,7 +2446,8 @@ export const move: MoveTranslationEntries = {
   },
   electricTerrain: {
     name: "일렉트릭필드",
-    effect: "5턴 동안 일렉트릭필드로 만든다. 땅에 있는 포켓몬은 잠들지 않는다. 전기타입의 위력이 올라간다."
+    effect:
+      "5턴 동안 일렉트릭필드로 만든다. 땅에 있는 포켓몬은 잠들지 않는다. 전기타입의 위력이 올라간다."
   },
   dazzlingGleam: {
     name: "매지컬샤인",
@@ -2464,7 +2491,8 @@ export const move: MoveTranslationEntries = {
   },
   thousandWaves: {
     name: "사우전드웨이브",
-    effect: "땅 위를 뻗어 나가는 파도로 공격한다. 파도에 휩쓸린 상대는 전투에서 도망칠 수 없게 된다."
+    effect:
+      "땅 위를 뻗어 나가는 파도로 공격한다. 파도에 휩쓸린 상대는 전투에서 도망칠 수 없게 된다."
   },
   landsWrath: {
     name: "그라운드포스",
@@ -2500,7 +2528,8 @@ export const move: MoveTranslationEntries = {
   },
   allOutPummelingPhysical: {
     name: "전력무쌍격렬권",
-    effect: "Z파워로 만든 에너지 구슬을 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다."
+    effect:
+      "Z파워로 만든 에너지 구슬을 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다."
   },
   allOutPummelingSpecial: {
     name: "전력무쌍격렬권",
@@ -2508,7 +2537,8 @@ export const move: MoveTranslationEntries = {
   },
   supersonicSkystrikePhysical: {
     name: "파이널다이브클래시",
-    effect: "Z파워로 기세 좋게 날아올라 상대를 향해 전력으로 낙하한다. 원래 기술에 따라 위력이 변한다."
+    effect:
+      "Z파워로 기세 좋게 날아올라 상대를 향해 전력으로 낙하한다. 원래 기술에 따라 위력이 변한다."
   },
   supersonicSkystrikeSpecial: {
     name: "파이널다이브클래시",
@@ -2524,7 +2554,8 @@ export const move: MoveTranslationEntries = {
   },
   tectonicRagePhysical: {
     name: "라이징랜드오버",
-    effect: "Z파워로 땅 깊숙이 파고들어 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다."
+    effect:
+      "Z파워로 땅 깊숙이 파고들어 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다."
   },
   tectonicRageSpecial: {
     name: "라이징랜드오버",
@@ -2532,7 +2563,8 @@ export const move: MoveTranslationEntries = {
   },
   continentalCrushPhysical: {
     name: "월즈엔드폴",
-    effect: "Z파워로 큰 바위산을 불러내 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다."
+    effect:
+      "Z파워로 큰 바위산을 불러내 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다."
   },
   continentalCrushSpecial: {
     name: "월즈엔드폴",
@@ -2548,7 +2580,8 @@ export const move: MoveTranslationEntries = {
   },
   neverEndingNightmarePhysical: {
     name: "무한암야로의유인",
-    effect: "Z파워로 불러낸 강한 원념이 전력으로 상대에게 쏟아진다. 원래 기술에 따라 위력이 변한다."
+    effect:
+      "Z파워로 불러낸 강한 원념이 전력으로 상대에게 쏟아진다. 원래 기술에 따라 위력이 변한다."
   },
   neverEndingNightmareSpecial: {
     name: "무한암야로의유인",
@@ -2564,7 +2597,8 @@ export const move: MoveTranslationEntries = {
   },
   infernoOverdrivePhysical: {
     name: "다이내믹풀플레임",
-    effect: "Z파워로 활활 타는 불꽃을 뱉어내 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다."
+    effect:
+      "Z파워로 활활 타는 불꽃을 뱉어내 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다."
   },
   infernoOverdriveSpecial: {
     name: "다이내믹풀플레임",
@@ -2572,7 +2606,8 @@ export const move: MoveTranslationEntries = {
   },
   hydroVortexPhysical: {
     name: "슈퍼아쿠아토네이도",
-    effect: "Z파워로 큰 바다회오리를 만들어 전력으로 상대를 집어삼킨다. 원래 기술에 따라 위력이 변한다."
+    effect:
+      "Z파워로 큰 바다회오리를 만들어 전력으로 상대를 집어삼킨다. 원래 기술에 따라 위력이 변한다."
   },
   hydroVortexSpecial: {
     name: "슈퍼아쿠아토네이도",
@@ -2580,7 +2615,8 @@ export const move: MoveTranslationEntries = {
   },
   bloomDoomPhysical: {
     name: "블룸샤인엑스트라",
-    effect: "Z파워로 화초들의 에너지를 빌려 전력으로 상대를 공격한다. 원래 기술에 따라 위력이 변한다."
+    effect:
+      "Z파워로 화초들의 에너지를 빌려 전력으로 상대를 공격한다. 원래 기술에 따라 위력이 변한다."
   },
   bloomDoomSpecial: {
     name: "블룸샤인엑스트라",
@@ -2588,7 +2624,8 @@ export const move: MoveTranslationEntries = {
   },
   gigavoltHavocPhysical: {
     name: "스파킹기가볼트",
-    effect: "Z파워로 비축한 강한 전기를 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다."
+    effect:
+      "Z파워로 비축한 강한 전기를 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다."
   },
   gigavoltHavocSpecial: {
     name: "스파킹기가볼트",
@@ -2604,7 +2641,8 @@ export const move: MoveTranslationEntries = {
   },
   subzeroSlammerPhysical: {
     name: "레이징지오프리즈",
-    effect: "Z파워로 기온을 급격하게 떨어뜨려 전력으로 상대를 얼린다. 원래 기술에 따라 위력이 변한다."
+    effect:
+      "Z파워로 기온을 급격하게 떨어뜨려 전력으로 상대를 얼린다. 원래 기술에 따라 위력이 변한다."
   },
   subzeroSlammerSpecial: {
     name: "레이징지오프리즈",
@@ -2620,7 +2658,8 @@ export const move: MoveTranslationEntries = {
   },
   blackHoleEclipsePhysical: {
     name: "블랙홀이클립스",
-    effect: "Z파워로 어둠의 에너지를 모아 전력으로 상대를 끌어당긴다. 원래 기술에 따라 위력이 변한다."
+    effect:
+      "Z파워로 어둠의 에너지를 모아 전력으로 상대를 끌어당긴다. 원래 기술에 따라 위력이 변한다."
   },
   blackHoleEclipseSpecial: {
     name: "블랙홀이클립스",
@@ -2628,7 +2667,8 @@ export const move: MoveTranslationEntries = {
   },
   twinkleTacklePhysical: {
     name: "러블리스타임팩트",
-    effect: "Z파워로 매혹의 공간을 만들어 전력으로 상대를 가지고 논다. 원래 기술에 따라 위력이 변한다."
+    effect:
+      "Z파워로 매혹의 공간을 만들어 전력으로 상대를 가지고 논다. 원래 기술에 따라 위력이 변한다."
   },
   twinkleTackleSpecial: {
     name: "러블리스타임팩트",
@@ -2836,7 +2876,8 @@ export const move: MoveTranslationEntries = {
   },
   shadowBone: {
     name: "섀도본",
-    effect: "영혼이 머물고 있는 뼈로 상대를 세게 때려서 공격한다. 상대의 방어를 떨어뜨릴 때가 있다."
+    effect:
+      "영혼이 머물고 있는 뼈로 상대를 세게 때려서 공격한다. 상대의 방어를 떨어뜨릴 때가 있다."
   },
   accelerock: {
     name: "액셀록",
@@ -2868,7 +2909,8 @@ export const move: MoveTranslationEntries = {
   },
   zingZap: {
     name: "찌리리따끔따끔",
-    effect: "상대에게 부딪쳐 강력한 전기를 날려서 찌리리따끔따끔하게 만든다. 상대를 풀죽게 만들 때가 있다."
+    effect:
+      "상대에게 부딪쳐 강력한 전기를 날려서 찌리리따끔따끔하게 만든다. 상대를 풀죽게 만들 때가 있다."
   },
   naturesMadness: {
     name: "자연의분노",
@@ -2896,7 +2938,8 @@ export const move: MoveTranslationEntries = {
   },
   lightThatBurnsTheSky: {
     name: "하늘을태우는멸망의빛",
-    effect: "네크로즈마가 상대의 특성 효과를 무시하고 공격과 특수공격 중 높은 쪽으로 데미지를 준다."
+    effect:
+      "네크로즈마가 상대의 특성 효과를 무시하고 공격과 특수공격 중 높은 쪽으로 데미지를 준다."
   },
   searingSunrazeSmash: {
     name: "선샤인스매셔",
@@ -2965,11 +3008,13 @@ export const move: MoveTranslationEntries = {
   },
   sparklySwirl: {
     name: "반짝반짝스톰",
-    effect: "숨 막힐 듯 진한 향기의 회오리로 상대를 휘감아 공격한다. 같은 편의 상태 이상을 회복한다."
+    effect:
+      "숨 막힐 듯 진한 향기의 회오리로 상대를 휘감아 공격한다. 같은 편의 상태 이상을 회복한다."
   },
   veeveeVolley: {
     name: "브이브이브레이크",
-    effect: "트레이너를 좋아하는 이브이의 마음이 강할수록 위력이 올라가는 몸통박치기. 반드시 명중한다."
+    effect:
+      "트레이너를 좋아하는 이브이의 마음이 강할수록 위력이 올라가는 몸통박치기. 반드시 명중한다."
   },
   doubleIronBash: {
     name: "더블펀처",
@@ -2986,11 +3031,13 @@ export const move: MoveTranslationEntries = {
   },
   snipeShot: {
     name: "노려맞히기",
-    effect: "상대의 기술을 끌어모으는 특성이나 기술의 영향을 무시하고 선택한 상대를 공격할 수 있다."
+    effect:
+      "상대의 기술을 끌어모으는 특성이나 기술의 영향을 무시하고 선택한 상대를 공격할 수 있다."
   },
   jawLock: {
     name: "물고버티기",
-    effect: "어느 한쪽이 기절할 때까지 교체할 수 없게 된다. 한쪽의 포켓몬이 없어지면 효과가 사라진다."
+    effect:
+      "어느 한쪽이 기절할 때까지 교체할 수 없게 된다. 한쪽의 포켓몬이 없어지면 효과가 사라진다."
   },
   stuffCheeks: {
     name: "볼가득넣기",
@@ -3138,7 +3185,8 @@ export const move: MoveTranslationEntries = {
   },
   auraWheel: {
     name: "오라휠",
-    effect: "볼주머니에 저장해둔 에너지로 공격하고 자신의 스피드를 올린다. 모르페코의 모습에 따라 타입이 바뀐다."
+    effect:
+      "볼주머니에 저장해둔 에너지로 공격하고 자신의 스피드를 올린다. 모르페코의 모습에 따라 타입이 바뀐다."
   },
   breakingSwipe: {
     name: "와이드브레이커",
@@ -3174,7 +3222,8 @@ export const move: MoveTranslationEntries = {
   },
   obstruct: {
     name: "블로킹",
-    effect: "상대의 공격을 전혀 받지 않는다. 연속으로 쓰면 실패하기 쉽다. 접촉한 상대의 방어를 크게 떨어뜨린다."
+    effect:
+      "상대의 공격을 전혀 받지 않는다. 연속으로 쓰면 실패하기 쉽다. 접촉한 상대의 방어를 크게 떨어뜨린다."
   },
   falseSurrender: {
     name: "사죄의찌르기",
@@ -3194,7 +3243,8 @@ export const move: MoveTranslationEntries = {
   },
   expandingForce: {
     name: "와이드포스",
-    effect: "사이코 파워로 상대를 공격한다. 사이코필드일 때는 위력이 오르며 모든 상대에게 데미지를 준다."
+    effect:
+      "사이코 파워로 상대를 공격한다. 사이코필드일 때는 위력이 오르며 모든 상대에게 데미지를 준다."
   },
   steelRoller: {
     name: "아이언롤러",
@@ -3202,7 +3252,8 @@ export const move: MoveTranslationEntries = {
   },
   scaleShot: {
     name: "스케일샷",
-    effect: "비늘을 쏘아서 공격한다. 2-5회 동안 연속으로 쓴다. 스피드가 올라가지만 방어가 떨어진다."
+    effect:
+      "비늘을 쏘아서 공격한다. 2-5회 동안 연속으로 쓴다. 스피드가 올라가지만 방어가 떨어진다."
   },
   meteorBeam: {
     name: "메테오빔",
@@ -3210,11 +3261,13 @@ export const move: MoveTranslationEntries = {
   },
   shellSideArm: {
     name: "셸암즈",
-    effect: "물리와 특수 중 더 많은 데미지를 줄 수 있는 능력으로 공격한다. 독 상태로 만들 때가 있다."
+    effect:
+      "물리와 특수 중 더 많은 데미지를 줄 수 있는 능력으로 공격한다. 독 상태로 만들 때가 있다."
   },
   mistyExplosion: {
     name: "미스트버스트",
-    effect: "자신의 주위에 있는 모두를 공격하지만 사용하면 기절한다. 미스트필드일 때 위력이 올라간다."
+    effect:
+      "자신의 주위에 있는 모두를 공격하지만 사용하면 기절한다. 미스트필드일 때 위력이 올라간다."
   },
   grassyGlide: {
     name: "그래스슬라이더",
@@ -3222,11 +3275,13 @@ export const move: MoveTranslationEntries = {
   },
   risingVoltage: {
     name: "라이징볼트",
-    effect: "지면에서 올라오는 전격으로 공격한다. 상대가 일렉트릭필드 위에 있을 때 기술의 위력이 2배가 된다."
+    effect:
+      "지면에서 올라오는 전격으로 공격한다. 상대가 일렉트릭필드 위에 있을 때 기술의 위력이 2배가 된다."
   },
   terrainPulse: {
     name: "대지의파동",
-    effect: "필드의 힘을 빌려서 공격한다. 사용했을 때의 필드 상태에 따라서 기술 타입과 위력이 바뀐다."
+    effect:
+      "필드의 힘을 빌려서 공격한다. 사용했을 때의 필드 상태에 따라서 기술 타입과 위력이 바뀐다."
   },
   skitterSmack: {
     name: "엄습하는일격",
@@ -3238,7 +3293,8 @@ export const move: MoveTranslationEntries = {
   },
   lashOut: {
     name: "분풀이",
-    effect: "상대에 대한 울분이 담긴 공격을 한다. 그 턴에 능력이 떨어져 있으면 기술의 위력이 2배가 된다."
+    effect:
+      "상대에 대한 울분이 담긴 공격을 한다. 그 턴에 능력이 떨어져 있으면 기술의 위력이 2배가 된다."
   },
   poltergeist: {
     name: "폴터가이스트",
@@ -3367,7 +3423,8 @@ export const move: MoveTranslationEntries = {
   },
   barbBarrage: {
     name: "독침천밭",
-    effect: "무수히 많은 독침으로 공격한다. 상대를 독 상태로 만들 때가 있다. 상대가 독 상태인 경우 위력이 2배가 된다."
+    effect:
+      "무수히 많은 독침으로 공격한다. 상대를 독 상태로 만들 때가 있다. 상대가 독 상태인 경우 위력이 2배가 된다."
   },
   esperWing: {
     name: "오라윙",
@@ -3386,11 +3443,13 @@ export const move: MoveTranslationEntries = {
   },
   tripleArrows: {
     name: "3연화살",
-    effect: "발 기술을 사용하고 3개의 화살을 동시에 발사한다. 상대의 방어를 떨어뜨리거나 풀죽게 만들 때가 있다. 급소에 맞기 쉽다."
+    effect:
+      "발 기술을 사용하고 3개의 화살을 동시에 발사한다. 상대의 방어를 떨어뜨리거나 풀죽게 만들 때가 있다. 급소에 맞기 쉽다."
   },
   infernalParade: {
     name: "백귀야행",
-    effect: "무수히 많은 불덩이로 공격한다. 화상 상태로 만들 때가 있다. 상대가 상태 이상인 경우 위력이 2배가 된다."
+    effect:
+      "무수히 많은 불덩이로 공격한다. 화상 상태로 만들 때가 있다. 상대가 상태 이상인 경우 위력이 2배가 된다."
   },
   ceaselessEdge: {
     name: "비검천중파",
@@ -3399,17 +3458,20 @@ export const move: MoveTranslationEntries = {
   bleakwindStorm: {
     name: "찬바람폭풍",
     /* 임의번역 (레전드 아르세우스 신규 기술) */
-    effect: "심신을 모두 떨게 만드는 차갑고도 거친 바람으로 공격한다. 상대의 스피드를 떨어뜨릴 때가 있다."
+    effect:
+      "심신을 모두 떨게 만드는 차갑고도 거친 바람으로 공격한다. 상대의 스피드를 떨어뜨릴 때가 있다."
   },
   wildboltStorm: {
     name: "번개폭풍",
     /* 임의번역 (레전드 아르세우스 신규 기술) */
-    effect: "폭풍을 일으키고 뇌운을 불러서 번개와 바람으로 매섭게 공격한다. 상대를 마비 상태로 만들 때가 있다."
+    effect:
+      "폭풍을 일으키고 뇌운을 불러서 번개와 바람으로 매섭게 공격한다. 상대를 마비 상태로 만들 때가 있다."
   },
   sandsearStorm: {
     name: "열사의폭풍",
     /* 임의번역 (레전드 아르세우스 신규 기술) */
-    effect: "뜨겁게 달궈진 모래와 강렬한 바람으로 상대를 둘러싸서 공격한다. 상대를 화상 상태로 만들 때가 있다."
+    effect:
+      "뜨겁게 달궈진 모래와 강렬한 바람으로 상대를 둘러싸서 공격한다. 상대를 화상 상태로 만들 때가 있다."
   },
   lunarBlessing: {
     name: "초승달의기도",
@@ -3517,7 +3579,8 @@ export const move: MoveTranslationEntries = {
   gMaxMeltdown: {
     name: "거다이융격",
     /* 임의번역 (Go 연동 포켓몬 기술) */
-    effect: "거다이맥스한 멜메탈이 사용하는 강철타입 공격. 똑같은 기술을 2회 연속으로 쓸 수 없게 한다."
+    effect:
+      "거다이맥스한 멜메탈이 사용하는 강철타입 공격. 똑같은 기술을 2회 연속으로 쓸 수 없게 한다."
   },
   gMaxFoamBurst: {
     name: "거다이포말",
@@ -3557,19 +3620,23 @@ export const move: MoveTranslationEntries = {
   },
   teraBlast: {
     name: "테라버스트",
-    effect: "테라스탈 중이면, 테라스탈타입의 에너지를 방출해서 공격한다. 공격과 특수공격을 비교해서 높은 쪽으로 데미지를 준다."
+    effect:
+      "테라스탈 중이면, 테라스탈타입의 에너지를 방출해서 공격한다. 공격과 특수공격을 비교해서 높은 쪽으로 데미지를 준다."
   },
   silkTrap: {
     name: "스레드트랩",
-    effect: "실로 함정을 만들어 둘러친다. 상대의 공격을 막음과 동시에 접촉한 상대의 스피드를 떨어뜨린다."
+    effect:
+      "실로 함정을 만들어 둘러친다. 상대의 공격을 막음과 동시에 접촉한 상대의 스피드를 떨어뜨린다."
   },
   axeKick: {
     name: "발꿈치찍기",
-    effect: "발꿈치를 들어 올린 뒤 내리찍어 공격한다. 상대를 혼란시킬 때가 있다. 빗나가면 자신이 데미지를 입는다."
+    effect:
+      "발꿈치를 들어 올린 뒤 내리찍어 공격한다. 상대를 혼란시킬 때가 있다. 빗나가면 자신이 데미지를 입는다."
   },
   lastRespects: {
     name: "성묘",
-    effect: "동료의 한을 풀어 주기 위해 공격한다. 쓰러진 같은 편 포켓몬이 많을수록 기술의 위력이 올라간다."
+    effect:
+      "동료의 한을 풀어 주기 위해 공격한다. 쓰러진 같은 편 포켓몬이 많을수록 기술의 위력이 올라간다."
   },
   luminaCrash: {
     name: "루미나콜리전",
@@ -3577,11 +3644,13 @@ export const move: MoveTranslationEntries = {
   },
   orderUp: {
     name: "한판내기",
-    effect: "멋들어진 몸놀림으로 공격한다. 입속에 싸리용이 있으면 싸리용의 모습에 따라 능력이 올라간다."
+    effect:
+      "멋들어진 몸놀림으로 공격한다. 입속에 싸리용이 있으면 싸리용의 모습에 따라 능력이 올라간다."
   },
   jetPunch: {
     name: "제트펀치",
-    effect: "거센 물살을 주먹에 둘러 눈에 보이지 않는 속도로 펀치를 날린다. 반드시 선제공격할 수 있다."
+    effect:
+      "거센 물살을 주먹에 둘러 눈에 보이지 않는 속도로 펀치를 날린다. 반드시 선제공격할 수 있다."
   },
   spicyExtract: {
     name: "하바네로엑기스",
@@ -3601,7 +3670,8 @@ export const move: MoveTranslationEntries = {
   },
   glaiveRush: {
     name: "대검돌격",
-    effect: "몸을 내던지는 무모한 돌격. 기술을 사용한 다음, 상대의 공격이 반드시 명중하고 데미지를 2배로 입게 된다."
+    effect:
+      "몸을 내던지는 무모한 돌격. 기술을 사용한 다음, 상대의 공격이 반드시 명중하고 데미지를 2배로 입게 된다."
   },
   revivalBlessing: {
     name: "회생의기도",
@@ -3609,7 +3679,8 @@ export const move: MoveTranslationEntries = {
   },
   saltCure: {
     name: "소금절이",
-    effect: "상대를 소금절이 상태로 만들어 매 턴 데미지를 준다. 강철타입이나 물타입에게 더 고통스럽다."
+    effect:
+      "상대를 소금절이 상태로 만들어 매 턴 데미지를 준다. 강철타입이나 물타입에게 더 고통스럽다."
   },
   tripleDive: {
     name: "트리플다이브",
@@ -3617,7 +3688,8 @@ export const move: MoveTranslationEntries = {
   },
   mortalSpin: {
     name: "킬러스핀",
-    effect: "회전해서 상대를 공격한다. 조이기, 김밥말이, 씨뿌리기 등의 효과를 날려버린다. 상대를 독 상태로 만든다."
+    effect:
+      "회전해서 상대를 공격한다. 조이기, 김밥말이, 씨뿌리기 등의 효과를 날려버린다. 상대를 독 상태로 만든다."
   },
   doodle: {
     name: "베껴그리기",
@@ -3641,23 +3713,28 @@ export const move: MoveTranslationEntries = {
   },
   aquaStep: {
     name: "아쿠아스텝",
-    effect: "물 흐르듯 민첩하고 경쾌한 발재간으로 상대를 농락하며 데미지를 준다. 자신의 스피드를 올린다."
+    effect:
+      "물 흐르듯 민첩하고 경쾌한 발재간으로 상대를 농락하며 데미지를 준다. 자신의 스피드를 올린다."
   },
   ragingBull: {
     name: "레이징불",
-    effect: "분노해 날뛰는 성난소의 맹렬한 태클. 폼에 따라 기술의 타입이 달라지고 빛의장막이나 리플렉터 등도 파괴할 수 있다."
+    effect:
+      "분노해 날뛰는 성난소의 맹렬한 태클. 폼에 따라 기술의 타입이 달라지고 빛의장막이나 리플렉터 등도 파괴할 수 있다."
   },
   makeItRain: {
     name: "골드러시",
-    effect: "대량의 코인을 날려서 공격한다. 자신의 특수공격이 떨어진다. 배틀 후에 돈을 받을 수 있다."
+    effect:
+      "대량의 코인을 날려서 공격한다. 자신의 특수공격이 떨어진다. 배틀 후에 돈을 받을 수 있다."
   },
   psyblade: {
     name: "사이코블레이드",
-    effect: "실체가 없는 칼날로 상대를 베어 가른다. 일렉트릭필드 위에 있을 때 기술의 위력이 1.5배가 된다."
+    effect:
+      "실체가 없는 칼날로 상대를 베어 가른다. 일렉트릭필드 위에 있을 때 기술의 위력이 1.5배가 된다."
   },
   hydroSteam: {
     name: "하이드로스팀",
-    effect: "펄펄 끓는 물을 기세 좋게 뿜어낸다. 햇살이 강할 때 기술의 위력이 떨어지기는커녕 1.5배가 된다."
+    effect:
+      "펄펄 끓는 물을 기세 좋게 뿜어낸다. 햇살이 강할 때 기술의 위력이 떨어지기는커녕 1.5배가 된다."
   },
   ruination: {
     name: "카타스트로피",
@@ -3665,11 +3742,13 @@ export const move: MoveTranslationEntries = {
   },
   collisionCourse: {
     name: "액셀브레이크",
-    effect: "변형하며 거칠게 낙하한 다음 고대의 대폭발을 일으킨다. 약점인 상대에게는 위력이 더욱 올라간다."
+    effect:
+      "변형하며 거칠게 낙하한 다음 고대의 대폭발을 일으킨다. 약점인 상대에게는 위력이 더욱 올라간다."
   },
   electroDrift: {
     name: "라이트닝드라이브",
-    effect: "변형하며 초고속으로 달려서 미지의 전격으로 상대를 관통한다. 약점인 상대에게는 위력이 더욱 올라간다."
+    effect:
+      "변형하며 초고속으로 달려서 미지의 전격으로 상대를 관통한다. 약점인 상대에게는 위력이 더욱 올라간다."
   },
   shedTail: {
     name: "꼬리자르기",
@@ -3681,7 +3760,8 @@ export const move: MoveTranslationEntries = {
   },
   tidyUp: {
     name: "정리정돈",
-    effect: "압정뿌리기, 스텔스록, 끈적끈적네트, 독압정, 대타출동을 모두 정리한다. 자신의 공격력과 스피드가 올라간다."
+    effect:
+      "압정뿌리기, 스텔스록, 끈적끈적네트, 독압정, 대타출동을 모두 정리한다. 자신의 공격력과 스피드가 올라간다."
   },
   snowscape: {
     name: "설경",
@@ -3713,11 +3793,13 @@ export const move: MoveTranslationEntries = {
   },
   armorCannon: {
     name: "아머캐논",
-    effect: "자신의 갑옷을 활활 타오르는 탄환으로 발사해서 공격한다. 자신의 방어와 특수방어가 떨어진다."
+    effect:
+      "자신의 갑옷을 활활 타오르는 탄환으로 발사해서 공격한다. 자신의 방어와 특수방어가 떨어진다."
   },
   bitterBlade: {
     name: "원념의칼",
-    effect: "현세의 미련을 칼끝에 담아 베어 버린다. 입힌 데미지의 절반에 해당하는 HP를 회복할 수 있다."
+    effect:
+      "현세의 미련을 칼끝에 담아 베어 버린다. 입힌 데미지의 절반에 해당하는 HP를 회복할 수 있다."
   },
   doubleShock: {
     name: "전광쌍격",
@@ -3766,11 +3848,13 @@ export const move: MoveTranslationEntries = {
   },
   matchaGotcha: {
     name: "휘적휘적포",
-    effect: "휘저은 차를 대포처럼 발사해 준 데미지의 절반을 HP로 회복한다. 화상 상태로 만들 때도 있다."
+    effect:
+      "휘저은 차를 대포처럼 발사해 준 데미지의 절반을 HP로 회복한다. 화상 상태로 만들 때도 있다."
   },
   syrupBomb: {
     name: "시럽봄",
-    effect: "끈적끈적한 물엿을 폭발시킨다. 상대를 물엿범벅 상태로 만들어서 3턴 동안 계속 스피드를 떨어뜨린다."
+    effect:
+      "끈적끈적한 물엿을 폭발시킨다. 상대를 물엿범벅 상태로 만들어서 3턴 동안 계속 스피드를 떨어뜨린다."
   },
   ivyCudgel: {
     name: "덩굴방망이",
@@ -3778,15 +3862,18 @@ export const move: MoveTranslationEntries = {
   },
   electroShot: {
     name: "일렉트로빔",
-    effect: "1턴째에 전기를 모아서 특수공격을 올리고 2턴째에 고압의 전기를 발사한다. 비가 오는 날씨일 때는 바로 발사할 수 있다."
+    effect:
+      "1턴째에 전기를 모아서 특수공격을 올리고 2턴째에 고압의 전기를 발사한다. 비가 오는 날씨일 때는 바로 발사할 수 있다."
   },
   teraStarstorm: {
     name: "테라클러스터",
-    effect: "결정의 힘을 내리쬐어 적을 없애 버린다. 테라파고스가 스텔라폼일 때 사용하면 모든 상대에게 데미지를 준다."
+    effect:
+      "결정의 힘을 내리쬐어 적을 없애 버린다. 테라파고스가 스텔라폼일 때 사용하면 모든 상대에게 데미지를 준다."
   },
   fickleBeam: {
     name: "변덕레이저",
-    effect: "광선을 발사해서 공격한다. 가끔 다른 머리도 협력해서 레이저를 발사하여 위력이 2배가 된다."
+    effect:
+      "광선을 발사해서 공격한다. 가끔 다른 머리도 협력해서 레이저를 발사하여 위력이 2배가 된다."
   },
   burningBulwark: {
     name: "화염의수호",
@@ -3810,11 +3897,13 @@ export const move: MoveTranslationEntries = {
   },
   dragonCheer: {
     name: "드래곤옐",
-    effect: "용의 북돋움으로 사기를 높여서 같은 편의 기술이 급소에 맞기 쉬워진다. 드래곤타입이면 더욱더 사기가 북돋는다."
+    effect:
+      "용의 북돋움으로 사기를 높여서 같은 편의 기술이 급소에 맞기 쉬워진다. 드래곤타입이면 더욱더 사기가 북돋는다."
   },
   alluringVoice: {
     name: "매혹의보이스",
-    effect: "천사와도 같은 노랫소리로 상대를 공격한다. 그 턴에 능력이 올라간 포켓몬을 혼란 상태로 만든다."
+    effect:
+      "천사와도 같은 노랫소리로 상대를 공격한다. 그 턴에 능력이 올라간 포켓몬을 혼란 상태로 만든다."
   },
   temperFlare: {
     name: "열불내기",
@@ -3826,14 +3915,17 @@ export const move: MoveTranslationEntries = {
   },
   psychicNoise: {
     name: "사이코노이즈",
-    effect: "불쾌한 음파를 상대에게 날려서 공격한다. 2턴 동안 상대는 기술이나 특성 또는 지니고 있는 도구로 HP를 회복할 수 없게 된다."
+    effect:
+      "불쾌한 음파를 상대에게 날려서 공격한다. 2턴 동안 상대는 기술이나 특성 또는 지니고 있는 도구로 HP를 회복할 수 없게 된다."
   },
   upperHand: {
     name: "기선제압",
-    effect: "움직임에 반응하여 손바닥으로 밀쳐서 상대를 풀죽게 한다. 상대가 쓴 기술이 선제공격 기술이 아니면 실패한다."
+    effect:
+      "움직임에 반응하여 손바닥으로 밀쳐서 상대를 풀죽게 한다. 상대가 쓴 기술이 선제공격 기술이 아니면 실패한다."
   },
   malignantChain: {
     name: "악독사슬",
-    effect: "독으로 된 사슬로 상대를 휘감은 뒤 독소를 흘려보내어 해치운다. 맹독 상태로 만들 때가 있다."
+    effect:
+      "독으로 된 사슬로 상대를 휘감은 뒤 독소를 흘려보내어 해치운다. 맹독 상태로 만들 때가 있다."
   }
 } as const;

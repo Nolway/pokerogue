@@ -1,5 +1,5 @@
-import { BattleStat, getBattleStatName } from "./battle-stat";
 import i18next from "i18next";
+import { BattleStat, getBattleStatName } from "./battle-stat";
 
 export enum TempBattleStat {
   ATK,

@@ -9,7 +9,7 @@ export enum EggEventType {
 /**
  * Container class for {@linkcode EggEventType.EGG_COUNT_CHANGED} events
  * @extends Event
-*/
+ */
 export class EggCountChangedEvent extends Event {
   /** The updated egg count. */
   public eggCount: integer;

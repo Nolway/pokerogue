@@ -10,17 +10,39 @@ export default class PokeballTray extends Phaser.GameObjects.Container {
   public shown: boolean;
 
   constructor(scene: BattleScene, player: boolean) {
-    super(scene, player ? (scene.game.canvas.width / 6) : 0, player ? -72 : -144);
+    super(scene, player ? scene.game.canvas.width / 6 : 0, player ? -72 : -144);
     this.player = player;
   }
 
   setup(): void {
-    this.bg = this.scene.add.nineslice(0, 0, `pb_tray_overlay_${this.player ? "player" : "enemy"}`, null, 104, 4, 48, 8, 0, 0);
+    this.bg = this.scene.add.nineslice(
+      0,
+      0,
+      `pb_tray_overlay_${this.player ? "player" : "enemy"}`,
+      null,
+      104,
+      4,
+      48,
+      8,
+      0,
+      0
+    );
     this.bg.setOrigin(this.player ? 1 : 0, 0);
 
     this.add(this.bg);
 
-    this.balls = new Array(6).fill(null).map((_, i) => this.scene.add.sprite((this.player ? -83 : 76) + (this.scene.game.canvas.width / 6) * (this.player ? -1 : 1) + 10 * i * (this.player ? 1 : -1), -8, "pb_tray_ball", "empty"));
+    this.balls = new Array(6)
+      .fill(null)
+      .map((_, i) =>
+        this.scene.add.sprite(
+          (this.player ? -83 : 76) +
+            (this.scene.game.canvas.width / 6) * (this.player ? -1 : 1) +
+            10 * i * (this.player ? 1 : -1),
+          -8,
+          "pb_tray_ball",
+          "empty"
+        )
+      );
 
     for (const ball of this.balls) {
       ball.setOrigin(0, 0);
@@ -32,7 +54,7 @@ export default class PokeballTray extends Phaser.GameObjects.Container {
   }
 
   showPbTray(party: Pokemon[]): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (this.shown) {
         return resolve();
       }
@@ -71,7 +93,10 @@ export default class PokeballTray extends Phaser.GameObjects.Container {
               x: `${this.player ? "-" : "+"}=104`,
               duration: b * 100,
               ease: "Sine.easeIn",
-              onComplete: () => (this.scene as BattleScene).playSound(b < party.length ? "pb_tray_ball" : "pb_tray_empty")
+              onComplete: () =>
+                (this.scene as BattleScene).playSound(
+                  b < party.length ? "pb_tray_ball" : "pb_tray_empty"
+                )
             });
           });
         }
@@ -85,7 +110,7 @@ export default class PokeballTray extends Phaser.GameObjects.Container {
   }
 
   hide(): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (!this.shown) {
         return resolve();
       }

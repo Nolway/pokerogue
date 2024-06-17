@@ -1,13 +1,11 @@
 import BattleScene from "../../battle-scene";
+import { Mode } from "../ui";
 import AbstractBindingUiHandler from "./abstract-binding-ui-handler";
-import {Mode} from "../ui";
-import { getKeyWithKeycode} from "#app/configs/inputs/configHandler";
-import {Device} from "#enums/devices";
-import {addTextObject, TextStyle} from "#app/ui/text";
-
+import { getKeyWithKeycode } from "#app/configs/inputs/configHandler";
+import { Device } from "#enums/devices";
+import { addTextObject, TextStyle } from "#app/ui/text";
 
 export default class KeyboardBindingUiHandler extends AbstractBindingUiHandler {
-
   constructor(scene: BattleScene, mode?: Mode) {
     super(scene, mode);
     // Listen to gamepad button down events to initiate binding.
@@ -24,14 +22,18 @@ export default class KeyboardBindingUiHandler extends AbstractBindingUiHandler {
 
     this.actionLabel = addTextObject(this.scene, 0, 0, "Assign button", TextStyle.SETTINGS_LABEL);
     this.actionLabel.setOrigin(0, 0.5);
-    this.actionLabel.setPositionRelative(this.actionBg, this.actionBg.width - 80, this.actionBg.height / 2);
+    this.actionLabel.setPositionRelative(
+      this.actionBg,
+      this.actionBg.width - 80,
+      this.actionBg.height / 2
+    );
     this.actionsContainer.add(this.actionLabel);
 
     this.optionSelectContainer.add(this.newButtonIcon);
   }
 
   getSelectedDevice() {
-    return this.scene.inputController?.selectedDevice[Device.KEYBOARD];
+    return this.scene.inputController.selectedDevice[Device.KEYBOARD];
   }
 
   onKeyDown(event): void {
@@ -43,7 +45,7 @@ export default class KeyboardBindingUiHandler extends AbstractBindingUiHandler {
       Phaser.Input.Keyboard.KeyCodes.HOME,
       Phaser.Input.Keyboard.KeyCodes.ENTER,
       Phaser.Input.Keyboard.KeyCodes.ESC,
-      Phaser.Input.Keyboard.KeyCodes.DELETE,
+      Phaser.Input.Keyboard.KeyCodes.DELETE
     ];
     const key = event.keyCode;
     // // Check conditions before processing the button press.
@@ -69,5 +71,4 @@ export default class KeyboardBindingUiHandler extends AbstractBindingUiHandler {
     }
     return false;
   }
-
 }

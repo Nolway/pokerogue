@@ -1,6 +1,6 @@
 import BattleScene from "../battle-scene";
-import PokemonSpecies, { getPokemonSpecies, speciesStarters } from "./pokemon-species";
 import i18next from "../plugins/i18n";
+import PokemonSpecies, { getPokemonSpecies, speciesStarters } from "./pokemon-species";
 import { EggTier } from "#enums/egg-type";
 import { Species } from "#enums/species";
 
@@ -91,11 +91,14 @@ export function getEggGachaTypeDescriptor(scene: BattleScene, egg: Egg): string 
   }
 }
 
-export function getLegendaryGachaSpeciesForTimestamp(scene: BattleScene, timestamp: integer): Species {
+export function getLegendaryGachaSpeciesForTimestamp(
+  scene: BattleScene,
+  timestamp: integer
+): Species {
   const legendarySpecies = Object.entries(speciesStarters)
-    .filter(s => s[1] >= 8 && s[1] <= 9)
-    .map(s => parseInt(s[0]))
-    .filter(s => getPokemonSpecies(s).isObtainable());
+    .filter((s) => s[1] >= 8 && s[1] <= 9)
+    .map((s) => parseInt(s[0]))
+    .filter((s) => getPokemonSpecies(s).isObtainable());
 
   let ret: Species;
 
@@ -105,9 +108,13 @@ export function getLegendaryGachaSpeciesForTimestamp(scene: BattleScene, timesta
   const offset = Math.floor(Math.floor(dayTimestamp / 86400000) / legendarySpecies.length); // Cycle number
   const index = Math.floor(dayTimestamp / 86400000) % legendarySpecies.length; // Index within cycle
 
-  scene.executeWithSeedOffset(() => {
-    ret = Phaser.Math.RND.shuffle(legendarySpecies)[index];
-  }, offset, EGG_SEED.toString());
+  scene.executeWithSeedOffset(
+    () => {
+      ret = Phaser.Math.RND.shuffle(legendarySpecies)[index];
+    },
+    offset,
+    EGG_SEED.toString()
+  );
 
   return ret;
 }
@@ -117,7 +124,7 @@ export function getLegendaryGachaSpeciesForTimestamp(scene: BattleScene, timesta
  * @param species - Species for wich we will check the egg tier it belongs to
  * @returns The egg tier of a given pokemon species
  */
-export function getEggTierForSpecies(pokemonSpecies :PokemonSpecies): EggTier {
+export function getEggTierForSpecies(pokemonSpecies: PokemonSpecies): EggTier {
   const speciesBaseValue = speciesStarters[pokemonSpecies.getRootSpeciesId()];
   if (speciesBaseValue <= 3) {
     return EggTier.COMMON;

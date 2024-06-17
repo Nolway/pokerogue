@@ -74,7 +74,8 @@ export const ability: AbilityTranslationEntries = {
   },
   flashFire: {
     name: "타오르는불꽃",
-    description: "불꽃타입의 기술을 받으면 불꽃을 받아서 자신이 사용하는 불꽃타입의 기술이 강해진다."
+    description:
+      "불꽃타입의 기술을 받으면 불꽃을 받아서 자신이 사용하는 불꽃타입의 기술이 강해진다."
   },
   shieldDust: {
     name: "인분",
@@ -86,7 +87,8 @@ export const ability: AbilityTranslationEntries = {
   },
   suctionCups: {
     name: "흡반",
-    description: "흡반으로 지면에 달라붙어 포켓몬을 교체시키는 기술이나 도구의 효과를 발휘하지 못하게 한다."
+    description:
+      "흡반으로 지면에 달라붙어 포켓몬을 교체시키는 기술이나 도구의 효과를 발휘하지 못하게 한다."
   },
   intimidate: {
     name: "위협",
@@ -231,11 +233,13 @@ export const ability: AbilityTranslationEntries = {
   },
   plus: {
     name: "플러스",
-    description: "플러스나 마이너스의 특성을 가진 포켓몬이 동료에 있으면 자신의 특수공격이 올라간다."
+    description:
+      "플러스나 마이너스의 특성을 가진 포켓몬이 동료에 있으면 자신의 특수공격이 올라간다."
   },
   minus: {
     name: "마이너스",
-    description: "플러스나 마이너스의 특성을 가진 포켓몬이 동료에 있으면 자신의 특수공격이 올라간다."
+    description:
+      "플러스나 마이너스의 특성을 가진 포켓몬이 동료에 있으면 자신의 특수공격이 올라간다."
   },
   forecast: {
     name: "기분파",
@@ -351,11 +355,13 @@ export const ability: AbilityTranslationEntries = {
   },
   drySkin: {
     name: "건조피부",
-    description: "비가 오는 날씨나 물타입의 기술로 HP가 회복되고 맑을 때나 불꽃타입의 기술로는 줄어든다."
+    description:
+      "비가 오는 날씨나 물타입의 기술로 HP가 회복되고 맑을 때나 불꽃타입의 기술로는 줄어든다."
   },
   download: {
     name: "다운로드",
-    description: "상대의 방어와 특수방어를 비교해서 낮은 쪽 능력에 맞춰서 자신의 공격이나 특수공격을 올린다."
+    description:
+      "상대의 방어와 특수방어를 비교해서 낮은 쪽 능력에 맞춰서 자신의 공격이나 특수공격을 올린다."
   },
   ironFist: {
     name: "철주먹",
@@ -475,7 +481,8 @@ export const ability: AbilityTranslationEntries = {
   },
   honeyGather: {
     name: "꿀모으기",
-    description: "배틀이 끝났을 때 달콤한꿀을 주울 때가 있다. 배틀 후에 꿀을 팔아 돈을 받을 수 있다."
+    description:
+      "배틀이 끝났을 때 달콤한꿀을 주울 때가 있다. 배틀 후에 꿀을 팔아 돈을 받을 수 있다."
   },
   frisk: {
     name: "통찰",
@@ -845,7 +852,8 @@ export const ability: AbilityTranslationEntries = {
   },
   battleBond: {
     name: "유대변화",
-    description: "상대를 쓰러뜨리면 트레이너와의 유대감이 깊어져서 지우개굴닌자로 변한다. 물수리검이 강해진다."
+    description:
+      "상대를 쓰러뜨리면 트레이너와의 유대감이 깊어져서 지우개굴닌자로 변한다. 물수리검이 강해진다."
   },
   powerConstruct: {
     name: "스웜체인지",
@@ -877,7 +885,8 @@ export const ability: AbilityTranslationEntries = {
   },
   fluffy: {
     name: "복슬복슬",
-    description: "상대로부터 받은 접촉하는 기술의 데미지를 반감시키지만 불꽃타입 기술의 데미지는 2배가 된다."
+    description:
+      "상대로부터 받은 접촉하는 기술의 데미지를 반감시키지만 불꽃타입 기술의 데미지는 2배가 된다."
   },
   dazzling: {
     name: "비비드바디",
@@ -970,7 +979,8 @@ export const ability: AbilityTranslationEntries = {
   },
   gulpMissile: {
     name: "그대로꿀꺽미사일",
-    description: "파도타기나 다이빙을 쓰면 먹이를 물어온다. 데미지를 받으면 먹이를 토해내서 공격한다."
+    description:
+      "파도타기나 다이빙을 쓰면 먹이를 물어온다. 데미지를 받으면 먹이를 토해내서 공격한다."
   },
   stalwart: {
     name: "굳건한신념",
@@ -998,7 +1008,8 @@ export const ability: AbilityTranslationEntries = {
   },
   iceFace: {
     name: "아이스페이스",
-    description: "물리공격을 머리의 얼음이 대신 맞아주지만 모습도 바뀐다. 얼음은 싸라기눈이 내리면 원래대로 돌아온다."
+    description:
+      "물리공격을 머리의 얼음이 대신 맞아주지만 모습도 바뀐다. 얼음은 싸라기눈이 내리면 원래대로 돌아온다."
   },
   powerSpot: {
     name: "파워스폿",
@@ -1030,7 +1041,8 @@ export const ability: AbilityTranslationEntries = {
   },
   neutralizingGas: {
     name: "화학변화가스",
-    description: "화학변화가스를 가진 포켓몬이 배틀에 나와 있으면 모든 포켓몬이 가진 특성의 효과가 사라지거나 발동하지 않게 된다."
+    description:
+      "화학변화가스를 가진 포켓몬이 배틀에 나와 있으면 모든 포켓몬이 가진 특성의 효과가 사라지거나 발동하지 않게 된다."
   },
   pastelVeil: {
     name: "파스텔베일",
@@ -1038,7 +1050,8 @@ export const ability: AbilityTranslationEntries = {
   },
   hungerSwitch: {
     name: "꼬르륵스위치",
-    description: "턴이 끝날 때마다 배부른 모양, 배고픈 모양, 배부른 모양...으로 번갈아서 모습을 바꾼다."
+    description:
+      "턴이 끝날 때마다 배부른 모양, 배고픈 모양, 배부른 모양...으로 번갈아서 모습을 바꾼다."
   },
   quickDraw: {
     name: "퀵드로",
@@ -1090,11 +1103,13 @@ export const ability: AbilityTranslationEntries = {
   },
   angerShell: {
     name: "분노의껍질",
-    description: "상대의 공격에 의해 HP가 절반이 되면 화가 나서 방어와 특수방어가 떨어지지만 공격, 특수공격, 스피드가 올라간다."
+    description:
+      "상대의 공격에 의해 HP가 절반이 되면 화가 나서 방어와 특수방어가 떨어지지만 공격, 특수공격, 스피드가 올라간다."
   },
   purifyingSalt: {
     name: "정화의소금",
-    description: "깨끗한 소금에 의해 상태 이상이 되지 않는다. 고스트타입 기술의 데미지를 반감시킨다."
+    description:
+      "깨끗한 소금에 의해 상태 이상이 되지 않는다. 고스트타입 기술의 데미지를 반감시킨다."
   },
   wellBakedBody: {
     name: "노릇노릇바디",
@@ -1106,7 +1121,8 @@ export const ability: AbilityTranslationEntries = {
   },
   guardDog: {
     name: "파수견",
-    description: "위협을 받으면 공격이 올라간다. 포켓몬을 교체시키는 기술이나 도구의 효과를 받지 않는다."
+    description:
+      "위협을 받으면 공격이 올라간다. 포켓몬을 교체시키는 기술이나 도구의 효과를 받지 않는다."
   },
   rockyPayload: {
     name: "바위나르기",
@@ -1142,7 +1158,8 @@ export const ability: AbilityTranslationEntries = {
   },
   vesselOfRuin: {
     name: "재앙의그릇",
-    description: "재앙을 부르는 그릇의 힘으로 자신을 제외한 모든 포켓몬의 특수 공격을 약하게 만든다."
+    description:
+      "재앙을 부르는 그릇의 힘으로 자신을 제외한 모든 포켓몬의 특수 공격을 약하게 만든다."
   },
   swordOfRuin: {
     name: "재앙의검",
@@ -1158,11 +1175,13 @@ export const ability: AbilityTranslationEntries = {
   },
   orichalcumPulse: {
     name: "진홍빛고동",
-    description: "등장했을 때 날씨를 맑음으로 만든다. 햇살이 강하면 고대의 고동에 의해 공격이 강화된다."
+    description:
+      "등장했을 때 날씨를 맑음으로 만든다. 햇살이 강하면 고대의 고동에 의해 공격이 강화된다."
   },
   hadronEngine: {
     name: "하드론엔진",
-    description: "등장했을 때 일렉트릭필드를 전개한다. 일렉트릭필드일 때 미래 기관에 의해 특수공격이 강화된다."
+    description:
+      "등장했을 때 일렉트릭필드를 전개한다. 일렉트릭필드일 때 미래 기관에 의해 특수공격이 강화된다."
   },
   opportunist: {
     name: "편승",
@@ -1178,7 +1197,8 @@ export const ability: AbilityTranslationEntries = {
   },
   supremeOverlord: {
     name: "총대장",
-    description: "등장했을 때 지금까지 쓰러진 같은 편의 수가 많을수록 조금씩 공격과 특수공격이 올라간다."
+    description:
+      "등장했을 때 지금까지 쓰러진 같은 편의 수가 많을수록 조금씩 공격과 특수공격이 올라간다."
   },
   costar: {
     name: "협연",
@@ -1190,7 +1210,8 @@ export const ability: AbilityTranslationEntries = {
   },
   armorTail: {
     name: "테일아머",
-    description: "머리를 감싸고 있는 수수께끼의 꼬리가 이쪽을 향한 선제 기술을 사용할 수 없게 한다."
+    description:
+      "머리를 감싸고 있는 수수께끼의 꼬리가 이쪽을 향한 선제 기술을 사용할 수 없게 한다."
   },
   earthEater: {
     name: "흙먹기",
@@ -1203,7 +1224,8 @@ export const ability: AbilityTranslationEntries = {
   mindsEye: {
     name: "심안",
     /* 축약 있음 */
-    description: "노말타입과 격투타입 기술을 고스트타입에게 맞힐 수 있다. 상대의 회피율 변화를 무시하고 명중률도 떨어지지 않는다."
+    description:
+      "노말타입과 격투타입 기술을 고스트타입에게 맞힐 수 있다. 상대의 회피율 변화를 무시하고 명중률도 떨어지지 않는다."
   },
   supersweetSyrup: {
     name: "감미로운꿀",
@@ -1239,14 +1261,16 @@ export const ability: AbilityTranslationEntries = {
   },
   teraShell: {
     name: "테라셸",
-    description: "모든 타입의 힘이 담긴 등껍질이 HP가 꽉 찼을 때 받는 데미지를 모두 효과가 별로이게 만든다."
+    description:
+      "모든 타입의 힘이 담긴 등껍질이 HP가 꽉 찼을 때 받는 데미지를 모두 효과가 별로이게 만든다."
   },
   teraformZero: {
     name: "제로포밍",
-    description: "테라파고스가 스텔라폼이 되었을 때 숨겨진 힘에 의해 날씨와 필드의 영향을 모두 무효로 만든다."
+    description:
+      "테라파고스가 스텔라폼이 되었을 때 숨겨진 힘에 의해 날씨와 필드의 영향을 모두 무효로 만든다."
   },
   poisonPuppeteer: {
     name: "독조종",
     description: "복숭악동의 기술에 의해 독 상태가 된 상대는 혼란 상태도 되어 버린다."
-  },
+  }
 } as const;

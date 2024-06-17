@@ -73,12 +73,11 @@ export class EggHatchPhase extends Phase {
     super.start();
 
     this.scene.ui.setModeForceTransition(Mode.EGG_HATCH_SCENE).then(() => {
-
       if (!this.egg) {
         return this.end();
       }
 
-      const eggIndex = this.scene.gameData.eggs.findIndex(e => e.id === this.egg.id);
+      const eggIndex = this.scene.gameData.eggs.findIndex((e) => e.id === this.egg.id);
 
       if (eggIndex === -1) {
         return this.end();
@@ -96,13 +95,21 @@ export class EggHatchPhase extends Phase {
       this.eggHatchBg.setOrigin(0, 0);
       this.eggHatchContainer.add(this.eggHatchBg);
 
-      this.eggContainer = this.scene.add.container(this.eggHatchBg.displayWidth / 2, this.eggHatchBg.displayHeight / 2);
+      this.eggContainer = this.scene.add.container(
+        this.eggHatchBg.displayWidth / 2,
+        this.eggHatchBg.displayHeight / 2
+      );
 
       this.eggSprite = this.scene.add.sprite(0, 0, "egg", `egg_${this.egg.getKey()}`);
       this.eggCrackSprite = this.scene.add.sprite(0, 0, "egg_crack", "0");
       this.eggCrackSprite.setVisible(false);
 
-      this.eggLightraysOverlay = this.scene.add.sprite((-this.eggHatchBg.displayWidth / 2) + 4, -this.eggHatchBg.displayHeight / 2, "egg_lightrays", "3");
+      this.eggLightraysOverlay = this.scene.add.sprite(
+        -this.eggHatchBg.displayWidth / 2 + 4,
+        -this.eggHatchBg.displayHeight / 2,
+        "egg_lightrays",
+        "3"
+      );
       this.eggLightraysOverlay.setOrigin(0, 0);
       this.eggLightraysOverlay.setVisible(false);
 
@@ -115,19 +122,36 @@ export class EggHatchPhase extends Phase {
       this.eggHatchContainer.add(this.eggCounterContainer);
 
       const getPokemonSprite = () => {
-        const ret = this.scene.add.sprite(this.eggHatchBg.displayWidth / 2, this.eggHatchBg.displayHeight / 2, "pkmn__sub");
-        ret.setPipeline(this.scene.spritePipeline, { tone: [ 0.0, 0.0, 0.0, 0.0 ], ignoreTimeTint: true });
+        const ret = this.scene.add.sprite(
+          this.eggHatchBg.displayWidth / 2,
+          this.eggHatchBg.displayHeight / 2,
+          "pkmn__sub"
+        );
+        ret.setPipeline(this.scene.spritePipeline, {
+          tone: [0.0, 0.0, 0.0, 0.0],
+          ignoreTimeTint: true
+        });
         return ret;
       };
 
       this.eggHatchContainer.add((this.pokemonSprite = getPokemonSprite()));
 
-      this.pokemonShinySparkle = this.scene.add.sprite(this.pokemonSprite.x, this.pokemonSprite.y, "shiny");
+      this.pokemonShinySparkle = this.scene.add.sprite(
+        this.pokemonSprite.x,
+        this.pokemonSprite.y,
+        "shiny"
+      );
       this.pokemonShinySparkle.setVisible(false);
 
       this.eggHatchContainer.add(this.pokemonShinySparkle);
 
-      this.eggHatchOverlay = this.scene.add.rectangle(0, -this.scene.game.canvas.height / 6, this.scene.game.canvas.width / 6, this.scene.game.canvas.height / 6, 0xFFFFFF);
+      this.eggHatchOverlay = this.scene.add.rectangle(
+        0,
+        -this.scene.game.canvas.height / 6,
+        this.scene.game.canvas.width / 6,
+        this.scene.game.canvas.height / 6,
+        0xffffff
+      );
       this.eggHatchOverlay.setOrigin(0, 0);
       this.eggHatchOverlay.setAlpha(0);
       this.scene.fieldUI.add(this.eggHatchOverlay);
@@ -216,7 +240,7 @@ export class EggHatchPhase extends Phase {
    * @returns nothing since it's a Promise<void>
    */
   doEggShake(intensity: number, repeatCount?: integer, count?: integer): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (repeatCount === undefined) {
         repeatCount = 0;
       }
@@ -262,7 +286,7 @@ export class EggHatchPhase extends Phase {
     if (!this.canSkip || this.skipped) {
       return false;
     }
-    if (this.eggCounterContainer.eggCountText?.data === undefined) {
+    if (this.eggCounterContainer.eggCountText.data === undefined) {
       return false;
     }
     this.skipped = true;
@@ -284,7 +308,9 @@ export class EggHatchPhase extends Phase {
       SoundFade.fadeOut(this.scene, this.evolutionBgm, Utils.fixedInt(100));
     }
     for (let e = 0; e < 5; e++) {
-      this.scene.time.delayedCall(Utils.fixedInt(375 * e), () => this.scene.playSound("egg_hatch", { volume: 1 - (e * 0.2) }));
+      this.scene.time.delayedCall(Utils.fixedInt(375 * e), () =>
+        this.scene.playSound("egg_hatch", { volume: 1 - e * 0.2 })
+      );
     }
     this.eggLightraysOverlay.setVisible(true);
     this.eggLightraysOverlay.play("egg_lightrays");
@@ -332,30 +358,49 @@ export class EggHatchPhase extends Phase {
     this.pokemonSprite.setVisible(true);
     this.scene.time.delayedCall(Utils.fixedInt(250), () => {
       this.eggsToHatchCount--;
-      this.eggHatchHandler.eventTarget.dispatchEvent(new EggCountChangedEvent(this.eggsToHatchCount));
+      this.eggHatchHandler.eventTarget.dispatchEvent(
+        new EggCountChangedEvent(this.eggsToHatchCount)
+      );
       this.pokemon.cry();
       if (isShiny) {
         this.scene.time.delayedCall(Utils.fixedInt(500), () => {
-          this.pokemonShinySparkle.play(`sparkle${this.pokemon.variant ? `_${this.pokemon.variant + 1}` : ""}`);
+          this.pokemonShinySparkle.play(
+            `sparkle${this.pokemon.variant ? `_${this.pokemon.variant + 1}` : ""}`
+          );
           this.scene.playSound("sparkle");
         });
       }
-      this.scene.time.delayedCall(Utils.fixedInt(!this.skipped ? !isShiny ? 1250 : 1750 : !isShiny ? 250 : 750), () => {
-        this.infoContainer.show(this.pokemon, false, this.skipped ? 2 : 1);
+      this.scene.time.delayedCall(
+        Utils.fixedInt(!this.skipped ? (!isShiny ? 1250 : 1750) : !isShiny ? 250 : 750),
+        () => {
+          this.infoContainer.show(this.pokemon, false, this.skipped ? 2 : 1);
 
-        this.scene.playSoundWithoutBgm("evolution_fanfare");
+          this.scene.playSoundWithoutBgm("evolution_fanfare");
 
-        this.scene.ui.showText(`${this.pokemon.name} hatched from the egg!`, null, () => {
-          this.scene.gameData.updateSpeciesDexIvs(this.pokemon.species.speciesId, this.pokemon.ivs);
-          this.scene.gameData.setPokemonCaught(this.pokemon, true, true).then(() => {
-            this.scene.gameData.setEggMoveUnlocked(this.pokemon.species, this.eggMoveIndex).then(() => {
-              this.scene.ui.showText(null, 0);
-              this.end();
-            });
-          });
-        }, null, true, 3000);
-        //this.scene.time.delayedCall(Utils.fixedInt(4250), () => this.scene.playBgm());
-      });
+          this.scene.ui.showText(
+            `${this.pokemon.name} hatched from the egg!`,
+            null,
+            () => {
+              this.scene.gameData.updateSpeciesDexIvs(
+                this.pokemon.species.speciesId,
+                this.pokemon.ivs
+              );
+              this.scene.gameData.setPokemonCaught(this.pokemon, true, true).then(() => {
+                this.scene.gameData
+                  .setEggMoveUnlocked(this.pokemon.species, this.eggMoveIndex)
+                  .then(() => {
+                    this.scene.ui.showText(null, 0);
+                    this.end();
+                  });
+              });
+            },
+            null,
+            true,
+            3000
+          );
+          //this.scene.time.delayedCall(Utils.fixedInt(4250), () => this.scene.playBgm());
+        }
+      );
     });
     this.scene.tweens.add({
       duration: Utils.fixedInt(this.skipped ? 500 : 3000),
@@ -399,7 +444,12 @@ export class EggHatchPhase extends Phase {
     const initialX = this.eggHatchBg.displayWidth / 2;
     const initialY = this.eggHatchBg.displayHeight / 2 + offsetY;
     const shardKey = !this.egg.isManaphyEgg() ? this.egg.tier.toString() : "1";
-    const particle = this.scene.add.image(initialX, initialY, "egg_shard", `${shardKey}_${Math.floor(trigIndex / 2)}`);
+    const particle = this.scene.add.image(
+      initialX,
+      initialY,
+      "egg_shard",
+      `${shardKey}_${Math.floor(trigIndex / 2)}`
+    );
     this.eggHatchContainer.add(particle);
 
     let f = 0;
@@ -422,7 +472,7 @@ export class EggHatchPhase extends Phase {
         particle.setPosition(initialX + (speed * f) / 3, initialY + yOffset);
         particle.y += -this.sin(trigIndex, amp);
         if (f > 108) {
-          particle.setScale((1 - (f - 108) / 20));
+          particle.setScale(1 - (f - 108) / 20);
         }
         trigIndex += 2 * speedMultiplier;
         f += speedMultiplier;
@@ -435,7 +485,6 @@ export class EggHatchPhase extends Phase {
     updateParticle();
   }
 
-
   /**
    * Generates a Pokemon to be hatched by the egg
    * @returns the hatched PlayerPokemon
@@ -444,135 +493,169 @@ export class EggHatchPhase extends Phase {
     let ret: PlayerPokemon;
     let speciesOverride: Species; // SpeciesOverride should probably be a passed in parameter for future species-eggs
 
-    this.scene.executeWithSeedOffset(() => {
+    this.scene.executeWithSeedOffset(
+      () => {
+        /**
+         * Manaphy eggs have a 1/8 chance of being Manaphy and 7/8 chance of being Phione
+         * Legendary eggs pulled from the legendary gacha have a 50% of being converted into
+         * the species that was the legendary focus at the time
+         */
+        if (this.egg.isManaphyEgg()) {
+          const rand = Utils.randSeedInt(8);
 
-      /**
-       * Manaphy eggs have a 1/8 chance of being Manaphy and 7/8 chance of being Phione
-       * Legendary eggs pulled from the legendary gacha have a 50% of being converted into
-       * the species that was the legendary focus at the time
-       */
-      if (this.egg.isManaphyEgg()) {
-        const rand = Utils.randSeedInt(8);
-
-        speciesOverride = rand ? Species.PHIONE : Species.MANAPHY;
-      } else if (this.egg.tier === EggTier.MASTER
-        && this.egg.gachaType === GachaType.LEGENDARY) {
-        if (!Utils.randSeedInt(2)) {
-          speciesOverride = getLegendaryGachaSpeciesForTimestamp(this.scene, this.egg.timestamp);
-        }
-      }
-
-      if (speciesOverride) {
-        const pokemonSpecies = getPokemonSpecies(speciesOverride);
-        ret = this.scene.addPlayerPokemon(pokemonSpecies, 1, undefined, undefined, undefined, false);
-      } else {
-        let minStarterValue: integer;
-        let maxStarterValue: integer;
-
-        switch (this.egg.tier) {
-        case EggTier.GREAT:
-          minStarterValue = 4;
-          maxStarterValue = 5;
-          break;
-        case EggTier.ULTRA:
-          minStarterValue = 6;
-          maxStarterValue = 7;
-          break;
-        case EggTier.MASTER:
-          minStarterValue = 8;
-          maxStarterValue = 9;
-          break;
-        default:
-          minStarterValue = 1;
-          maxStarterValue = 3;
-          break;
-        }
-
-        const ignoredSpecies = [ Species.PHIONE, Species.MANAPHY, Species.ETERNATUS ];
-
-        let speciesPool = Object.keys(speciesStarters)
-          .filter(s => speciesStarters[s] >= minStarterValue && speciesStarters[s] <= maxStarterValue)
-          .map(s => parseInt(s) as Species)
-          .filter(s => !pokemonPrevolutions.hasOwnProperty(s) && getPokemonSpecies(s).isObtainable() && ignoredSpecies.indexOf(s) === -1);
-
-        // If this is the 10th egg without unlocking something new, attempt to force it.
-        if (this.scene.gameData.unlockPity[this.egg.tier] >= 9) {
-          const lockedPool = speciesPool.filter(s => !this.scene.gameData.dexData[s].caughtAttr);
-          if (lockedPool.length) { // Skip this if everything is unlocked
-            speciesPool = lockedPool;
+          speciesOverride = rand ? Species.PHIONE : Species.MANAPHY;
+        } else if (this.egg.tier === EggTier.MASTER && this.egg.gachaType === GachaType.LEGENDARY) {
+          if (!Utils.randSeedInt(2)) {
+            speciesOverride = getLegendaryGachaSpeciesForTimestamp(this.scene, this.egg.timestamp);
           }
+        }
+
+        if (speciesOverride) {
+          const pokemonSpecies = getPokemonSpecies(speciesOverride);
+          ret = this.scene.addPlayerPokemon(
+            pokemonSpecies,
+            1,
+            undefined,
+            undefined,
+            undefined,
+            false
+          );
+        } else {
+          let minStarterValue: integer;
+          let maxStarterValue: integer;
+
+          switch (this.egg.tier) {
+          case EggTier.GREAT:
+            minStarterValue = 4;
+            maxStarterValue = 5;
+            break;
+          case EggTier.ULTRA:
+            minStarterValue = 6;
+            maxStarterValue = 7;
+            break;
+          case EggTier.MASTER:
+            minStarterValue = 8;
+            maxStarterValue = 9;
+            break;
+          default:
+            minStarterValue = 1;
+            maxStarterValue = 3;
+            break;
+          }
+
+          const ignoredSpecies = [Species.PHIONE, Species.MANAPHY, Species.ETERNATUS];
+
+          let speciesPool = Object.keys(speciesStarters)
+            .filter(
+              (s) => speciesStarters[s] >= minStarterValue && speciesStarters[s] <= maxStarterValue
+            )
+            .map((s) => parseInt(s) as Species)
+            .filter(
+              (s) =>
+                !pokemonPrevolutions.hasOwnProperty(s) &&
+                getPokemonSpecies(s).isObtainable() &&
+                ignoredSpecies.indexOf(s) === -1
+            );
+
+          // If this is the 10th egg without unlocking something new, attempt to force it.
+          if (this.scene.gameData.unlockPity[this.egg.tier] >= 9) {
+            const lockedPool = speciesPool.filter(
+              (s) => !this.scene.gameData.dexData[s].caughtAttr
+            );
+            if (lockedPool.length) {
+              // Skip this if everything is unlocked
+              speciesPool = lockedPool;
+            }
+          }
+
+          /**
+           * Pokemon that are cheaper in their tier get a weight boost. Regionals get a weight penalty
+           * 1 cost mons get 2x
+           * 2 cost mons get 1.5x
+           * 4, 6, 8 cost mons get 1.75x
+           * 3, 5, 7, 9 cost mons get 1x
+           * Alolan, Galarian, and Paldean mons get 0.5x
+           * Hisui mons get 0.125x
+           *
+           * The total weight is also being calculated EACH time there is an egg hatch instead of being generated once
+           * and being the same each time
+           */
+          let totalWeight = 0;
+          const speciesWeights = [];
+          for (const speciesId of speciesPool) {
+            let weight = Math.floor(
+              (((maxStarterValue - speciesStarters[speciesId]) /
+                (maxStarterValue - minStarterValue + 1)) *
+                1.5 +
+                1) *
+                100
+            );
+            const species = getPokemonSpecies(speciesId);
+            if (species.isRegional()) {
+              weight = Math.floor(weight / (species.isRareRegional() ? 8 : 2));
+            }
+            speciesWeights.push(totalWeight + weight);
+            totalWeight += weight;
+          }
+
+          let species: Species;
+
+          const rand = Utils.randSeedInt(totalWeight);
+          for (let s = 0; s < speciesWeights.length; s++) {
+            if (rand < speciesWeights[s]) {
+              species = speciesPool[s];
+              break;
+            }
+          }
+
+          if (this.scene.gameData.dexData[species].caughtAttr) {
+            this.scene.gameData.unlockPity[this.egg.tier] = Math.min(
+              this.scene.gameData.unlockPity[this.egg.tier] + 1,
+              10
+            );
+          } else {
+            this.scene.gameData.unlockPity[this.egg.tier] = 0;
+          }
+
+          const pokemonSpecies = getPokemonSpecies(species);
+
+          ret = this.scene.addPlayerPokemon(
+            pokemonSpecies,
+            1,
+            undefined,
+            undefined,
+            undefined,
+            false
+          );
         }
 
         /**
-         * Pokemon that are cheaper in their tier get a weight boost. Regionals get a weight penalty
-         * 1 cost mons get 2x
-         * 2 cost mons get 1.5x
-         * 4, 6, 8 cost mons get 1.75x
-         * 3, 5, 7, 9 cost mons get 1x
-         * Alolan, Galarian, and Paldean mons get 0.5x
-         * Hisui mons get 0.125x
-         *
-         * The total weight is also being calculated EACH time there is an egg hatch instead of being generated once
-         * and being the same each time
+         * Non Shiny gacha Pokemon have a 1/128 chance of being shiny
+         * Shiny gacha Pokemon have a 1/64 chance of being shiny
+         * IVs are rolled twice and the higher of each stat's IV is taken
+         * The egg move gacha doubles the rate of rare egg moves but the base rates are
+         * Common: 1/48
+         * Rare: 1/24
+         * Epic: 1/12
+         * Legendary: 1/6
          */
-        let totalWeight = 0;
-        const speciesWeights = [];
-        for (const speciesId of speciesPool) {
-          let weight = Math.floor((((maxStarterValue - speciesStarters[speciesId]) / ((maxStarterValue - minStarterValue) + 1)) * 1.5 + 1) * 100);
-          const species = getPokemonSpecies(speciesId);
-          if (species.isRegional()) {
-            weight = Math.floor(weight / (species.isRareRegional() ? 8 : 2));
-          }
-          speciesWeights.push(totalWeight + weight);
-          totalWeight += weight;
+        ret.trySetShiny(this.egg.gachaType === GachaType.SHINY ? 1024 : 512);
+        ret.variant = ret.shiny ? ret.generateVariant() : 0;
+
+        const secondaryIvs = Utils.getIvsFromId(Utils.randSeedInt(4294967295));
+
+        for (let s = 0; s < ret.ivs.length; s++) {
+          ret.ivs[s] = Math.max(ret.ivs[s], secondaryIvs[s]);
         }
 
-        let species: Species;
-
-        const rand = Utils.randSeedInt(totalWeight);
-        for (let s = 0; s < speciesWeights.length; s++) {
-          if (rand < speciesWeights[s]) {
-            species = speciesPool[s];
-            break;
-          }
-        }
-
-        if (!!this.scene.gameData.dexData[species].caughtAttr) {
-          this.scene.gameData.unlockPity[this.egg.tier] = Math.min(this.scene.gameData.unlockPity[this.egg.tier] + 1, 10);
-        } else {
-          this.scene.gameData.unlockPity[this.egg.tier] = 0;
-        }
-
-        const pokemonSpecies = getPokemonSpecies(species);
-
-        ret = this.scene.addPlayerPokemon(pokemonSpecies, 1, undefined, undefined, undefined, false);
-      }
-
-      /**
-       * Non Shiny gacha Pokemon have a 1/128 chance of being shiny
-       * Shiny gacha Pokemon have a 1/64 chance of being shiny
-       * IVs are rolled twice and the higher of each stat's IV is taken
-       * The egg move gacha doubles the rate of rare egg moves but the base rates are
-       * Common: 1/48
-       * Rare: 1/24
-       * Epic: 1/12
-       * Legendary: 1/6
-       */
-      ret.trySetShiny(this.egg.gachaType === GachaType.SHINY ? 1024 : 512);
-      ret.variant = ret.shiny ? ret.generateVariant() : 0;
-
-      const secondaryIvs = Utils.getIvsFromId(Utils.randSeedInt(4294967295));
-
-      for (let s = 0; s < ret.ivs.length; s++) {
-        ret.ivs[s] = Math.max(ret.ivs[s], secondaryIvs[s]);
-      }
-
-      const baseChance = this.egg.gachaType === GachaType.MOVE ? 3 : 6;
-      this.eggMoveIndex = Utils.randSeedInt(baseChance * Math.pow(2, 3 - this.egg.tier))
-        ? Utils.randSeedInt(3)
-        : 3;
-
-    }, this.egg.id, EGG_SEED.toString());
+        const baseChance = this.egg.gachaType === GachaType.MOVE ? 3 : 6;
+        this.eggMoveIndex = Utils.randSeedInt(baseChance * Math.pow(2, 3 - this.egg.tier))
+          ? Utils.randSeedInt(3)
+          : 3;
+      },
+      this.egg.id,
+      EGG_SEED.toString()
+    );
 
     return ret;
   }

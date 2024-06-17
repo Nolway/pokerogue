@@ -1,48 +1,48 @@
 import { BerryTranslationEntries } from "#app/plugins/i18n";
 
 export const berry: BerryTranslationEntries = {
-  "SITRUS": {
+  SITRUS: {
     name: "Baya Zidra",
-    effect: "Restaura 25% PS si estos caen por debajo del 50%",
+    effect: "Restaura 25% PS si estos caen por debajo del 50%"
   },
-  "LUM": {
+  LUM: {
     name: "Baya Ziuela",
-    effect: "Cura cualquier problema de estado",
+    effect: "Cura cualquier problema de estado"
   },
-  "ENIGMA": {
+  ENIGMA: {
     name: "Baya Enigma",
-    effect: "Restaura 25% PS si le alcanza un ataque supereficaz",
+    effect: "Restaura 25% PS si le alcanza un ataque supereficaz"
   },
-  "LIECHI": {
+  LIECHI: {
     name: "Baya Lichi",
-    effect: "Aumenta el ataque si los PS están por debajo de 25%",
+    effect: "Aumenta el ataque si los PS están por debajo de 25%"
   },
-  "GANLON": {
+  GANLON: {
     name: "Baya Gonlan",
-    effect: "Aumenta la defensa si los PS están por debajo de 25%",
+    effect: "Aumenta la defensa si los PS están por debajo de 25%"
   },
-  "PETAYA": {
+  PETAYA: {
     name: "Baya Yapati",
-    effect: "Aumenta el ataque especial si los PS están por debajo de 25%",
+    effect: "Aumenta el ataque especial si los PS están por debajo de 25%"
   },
-  "APICOT": {
+  APICOT: {
     name: "Baya Aricoc",
-    effect: "Aumenta la defensa especial si los PS están por debajo de 25%",
+    effect: "Aumenta la defensa especial si los PS están por debajo de 25%"
   },
-  "SALAC": {
+  SALAC: {
     name: "Baya Aslac",
-    effect: "Aumenta la velocidad si los PS están por debajo de 25%",
+    effect: "Aumenta la velocidad si los PS están por debajo de 25%"
   },
-  "LANSAT": {
+  LANSAT: {
     name: "Baya Zonlan",
-    effect: "Aumenta el índice de golpe crítico si los PS están por debajo de 25%",
+    effect: "Aumenta el índice de golpe crítico si los PS están por debajo de 25%"
   },
-  "STARF": {
+  STARF: {
     name: "Baya Arabol",
-    effect: "Aumenta mucho una estadística al azar si los PS están por debajo de 25%",
+    effect: "Aumenta mucho una estadística al azar si los PS están por debajo de 25%"
   },
-  "LEPPA": {
+  LEPPA: {
     name: "Baya Zanama",
-    effect: "Restaura 10 PP del primer movimiento cuyos PP bajen a 0",
-  },
+    effect: "Restaura 10 PP del primer movimiento cuyos PP bajen a 0"
+  }
 } as const;

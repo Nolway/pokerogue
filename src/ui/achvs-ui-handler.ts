@@ -1,12 +1,11 @@
 import BattleScene from "../battle-scene";
-import { Button } from "#enums/buttons";
 import i18next from "../plugins/i18n";
 import { Achv, achvs, getAchievementDescription } from "../system/achv";
 import MessageUiHandler from "./message-ui-handler";
 import { addTextObject, TextStyle } from "./text";
 import { Mode } from "./ui";
 import { addWindow } from "./ui-theme";
-import { ParseKeys } from "i18next";
+import { Button } from "#enums/buttons";
 import { PlayerGender } from "#enums/player-gender";
 
 export default class AchvsUiHandler extends MessageUiHandler {
@@ -30,9 +29,17 @@ export default class AchvsUiHandler extends MessageUiHandler {
 
     this.achvsContainer = this.scene.add.container(1, -(this.scene.game.canvas.height / 6) + 1);
 
-    this.achvsContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.scene.game.canvas.width / 6, this.scene.game.canvas.height / 6), Phaser.Geom.Rectangle.Contains);
+    this.achvsContainer.setInteractive(
+      new Phaser.Geom.Rectangle(
+        0,
+        0,
+        this.scene.game.canvas.width / 6,
+        this.scene.game.canvas.height / 6
+      ),
+      Phaser.Geom.Rectangle.Contains
+    );
 
-    const headerBg = addWindow(this.scene, 0, 0, (this.scene.game.canvas.width / 6) - 2, 24);
+    const headerBg = addWindow(this.scene, 0, 0, this.scene.game.canvas.width / 6 - 2, 24);
     headerBg.setOrigin(0, 0);
 
     // We need to get the player gender from the game data to add the correct prefix to the achievement name
@@ -42,11 +49,23 @@ export default class AchvsUiHandler extends MessageUiHandler {
       genderPrefix = "PGF";
     }
 
-    const headerText = addTextObject(this.scene, 0, 0, i18next.t(`${genderPrefix}achv:Achievements.name` as ParseKeys), TextStyle.SETTINGS_LABEL);
+    const headerText = addTextObject(
+      this.scene,
+      0,
+      0,
+      i18next.t(`${genderPrefix}achv:Achievements.name`),
+      TextStyle.SETTINGS_LABEL
+    );
     headerText.setOrigin(0, 0);
     headerText.setPositionRelative(headerBg, 8, 4);
 
-    this.achvIconsBg = addWindow(this.scene, 0, headerBg.height, (this.scene.game.canvas.width / 6) - 2, (this.scene.game.canvas.height / 6) - headerBg.height - 68);
+    this.achvIconsBg = addWindow(
+      this.scene,
+      0,
+      headerBg.height,
+      this.scene.game.canvas.width / 6 - 2,
+      this.scene.game.canvas.height / 6 - headerBg.height - 68
+    );
     this.achvIconsBg.setOrigin(0, 0);
 
     this.achvIconsContainer = this.scene.add.container(6, headerBg.height + 6);
@@ -86,7 +105,13 @@ export default class AchvsUiHandler extends MessageUiHandler {
     this.unlockText.setOrigin(0, 0);
     this.unlockText.setPositionRelative(unlockBg, 8, 4);
 
-    const descriptionBg = addWindow(this.scene, 0, titleBg.y + titleBg.height, (this.scene.game.canvas.width / 6) - 2, 42);
+    const descriptionBg = addWindow(
+      this.scene,
+      0,
+      titleBg.y + titleBg.height,
+      this.scene.game.canvas.width / 6 - 2,
+      42
+    );
     descriptionBg.setOrigin(0, 0);
 
     const descriptionText = addTextObject(this.scene, 0, 0, "", TextStyle.WINDOW, { maxLines: 2 });
@@ -124,7 +149,8 @@ export default class AchvsUiHandler extends MessageUiHandler {
     Object.values(achvs).forEach((achv: Achv, i: integer) => {
       const icon = this.achvIcons[i];
       const unlocked = achvUnlocks.hasOwnProperty(achv.id);
-      const hidden = !unlocked && achv.secret && (!achv.parentId || !achvUnlocks.hasOwnProperty(achv.parentId));
+      const hidden =
+        !unlocked && achv.secret && (!achv.parentId || !achvUnlocks.hasOwnProperty(achv.parentId));
       const tinted = !hidden && !unlocked;
 
       icon.setFrame(!hidden ? achv.iconImage : "unknown");
@@ -153,15 +179,20 @@ export default class AchvsUiHandler extends MessageUiHandler {
       genderPrefix = "PGF";
     }
 
-    achv.name = i18next.t(`${genderPrefix}achv:${achv.localizationKey}.name` as ParseKeys);
+    achv.name = i18next.t(`${genderPrefix}achv:${achv.localizationKey}.name`);
     achv.description = getAchievementDescription(achv.localizationKey);
     const achvUnlocks = this.scene.gameData.achvUnlocks;
     const unlocked = achvUnlocks.hasOwnProperty(achv.id);
-    const hidden = !unlocked && achv.secret && (!achv.parentId || !achvUnlocks.hasOwnProperty(achv.parentId));
+    const hidden =
+      !unlocked && achv.secret && (!achv.parentId || !achvUnlocks.hasOwnProperty(achv.parentId));
     this.titleText.setText(unlocked ? achv.name : "???");
     this.showText(!hidden ? achv.description : "");
     this.scoreText.setText(`${achv.score}pt`);
-    this.unlockText.setText(unlocked ? new Date(achvUnlocks[achv.id]).toLocaleDateString() : i18next.t(`${genderPrefix}achv:Locked.name` as ParseKeys));
+    this.unlockText.setText(
+      unlocked
+        ? new Date(achvUnlocks[achv.id]).toLocaleDateString()
+        : i18next.t(`${genderPrefix}achv:Locked.name`)
+    );
   }
 
   processInput(button: Button): boolean {
@@ -210,7 +241,18 @@ export default class AchvsUiHandler extends MessageUiHandler {
     let updateAchv = ret;
 
     if (!this.cursorObj) {
-      this.cursorObj = this.scene.add.nineslice(0, 0, "select_cursor_highlight", null, 16, 16, 1, 1, 1, 1);
+      this.cursorObj = this.scene.add.nineslice(
+        0,
+        0,
+        "select_cursor_highlight",
+        null,
+        16,
+        16,
+        1,
+        1,
+        1,
+        1
+      );
       this.cursorObj.setOrigin(0, 0);
       this.achvIconsContainer.add(this.cursorObj);
       updateAchv = true;

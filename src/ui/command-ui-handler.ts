@@ -1,11 +1,11 @@
 import { CommandPhase } from "../phases";
 import BattleScene from "../battle-scene";
+import i18next from "../plugins/i18n";
 import { addTextObject, TextStyle } from "./text";
 import PartyUiHandler, { PartyUiMode } from "./party-ui-handler";
 import { Mode } from "./ui";
 import UiHandler from "./ui-handler";
-import i18next from "../plugins/i18n";
-import {Button} from "#enums/buttons";
+import { Button } from "#enums/buttons";
 
 export enum Command {
   FIGHT = 0,
@@ -39,7 +39,13 @@ export default class CommandUiHandler extends UiHandler {
     ui.add(this.commandsContainer);
 
     for (let c = 0; c < commands.length; c++) {
-      const commandText = addTextObject(this.scene, c % 2 === 0 ? 0 : 55.8, c < 2 ? 0 : 16, commands[c], TextStyle.WINDOW);
+      const commandText = addTextObject(
+        this.scene,
+        c % 2 === 0 ? 0 : 55.8,
+        c < 2 ? 0 : 16,
+        commands[c],
+        TextStyle.WINDOW
+      );
       this.commandsContainer.add(commandText);
     }
   }
@@ -47,7 +53,7 @@ export default class CommandUiHandler extends UiHandler {
   show(args: any[]): boolean {
     super.show(args);
 
-    this.fieldIndex = args.length ? args[0] as integer : 0;
+    this.fieldIndex = args.length ? (args[0] as integer) : 0;
 
     this.commandsContainer.setVisible(true);
 
@@ -63,7 +69,10 @@ export default class CommandUiHandler extends UiHandler {
     messageHandler.commandWindow.setVisible(true);
     messageHandler.movesWindowContainer.setVisible(false);
     messageHandler.message.setWordWrapWidth(1110);
-    messageHandler.showText(i18next.t("commandUiHandler:actionMessage", {pokemonName: commandPhase.getPokemon().name}), 0);
+    messageHandler.showText(
+      i18next.t("commandUiHandler:actionMessage", { pokemonName: commandPhase.getPokemon().name }),
+      0
+    );
     this.setCursor(this.getCursor());
 
     return true;
@@ -77,7 +86,6 @@ export default class CommandUiHandler extends UiHandler {
     const cursor = this.getCursor();
 
     if (button === Button.CANCEL || button === Button.ACTION) {
-
       if (button === Button.ACTION) {
         switch (cursor) {
         // Fight
@@ -95,7 +103,13 @@ export default class CommandUiHandler extends UiHandler {
           break;
           // Pokemon
         case 2:
-          ui.setMode(Mode.PARTY, PartyUiMode.SWITCH, (this.scene.getCurrentPhase() as CommandPhase).getPokemon().getFieldIndex(), null, PartyUiHandler.FilterNonFainted);
+          ui.setMode(
+            Mode.PARTY,
+            PartyUiMode.SWITCH,
+            (this.scene.getCurrentPhase() as CommandPhase).getPokemon().getFieldIndex(),
+            null,
+            PartyUiHandler.FilterNonFainted
+          );
           success = true;
           break;
           // Run

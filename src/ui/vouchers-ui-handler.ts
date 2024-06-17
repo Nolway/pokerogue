@@ -1,11 +1,11 @@
 import BattleScene from "../battle-scene";
-import { Button } from "#enums/buttons";
 import i18next from "../plugins/i18n";
 import { Voucher, getVoucherTypeIcon, getVoucherTypeName, vouchers } from "../system/voucher";
 import MessageUiHandler from "./message-ui-handler";
 import { TextStyle, addTextObject } from "./text";
 import { Mode } from "./ui";
 import { addWindow } from "./ui-theme";
+import { Button } from "#enums/buttons";
 
 const itemRows = 4;
 const itemCols = 17;
@@ -36,16 +36,36 @@ export default class VouchersUiHandler extends MessageUiHandler {
 
     this.vouchersContainer = this.scene.add.container(1, -(this.scene.game.canvas.height / 6) + 1);
 
-    this.vouchersContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.scene.game.canvas.width / 6, this.scene.game.canvas.height / 6), Phaser.Geom.Rectangle.Contains);
+    this.vouchersContainer.setInteractive(
+      new Phaser.Geom.Rectangle(
+        0,
+        0,
+        this.scene.game.canvas.width / 6,
+        this.scene.game.canvas.height / 6
+      ),
+      Phaser.Geom.Rectangle.Contains
+    );
 
-    const headerBg = addWindow(this.scene, 0, 0, (this.scene.game.canvas.width / 6) - 2, 24);
+    const headerBg = addWindow(this.scene, 0, 0, this.scene.game.canvas.width / 6 - 2, 24);
     headerBg.setOrigin(0, 0);
 
-    const headerText = addTextObject(this.scene, 0, 0, i18next.t("voucher:vouchers"), TextStyle.SETTINGS_LABEL);
+    const headerText = addTextObject(
+      this.scene,
+      0,
+      0,
+      i18next.t("voucher:vouchers"),
+      TextStyle.SETTINGS_LABEL
+    );
     headerText.setOrigin(0, 0);
     headerText.setPositionRelative(headerBg, 8, 4);
 
-    this.voucherIconsBg = addWindow(this.scene, 0, headerBg.height, (this.scene.game.canvas.width / 6) - 2, (this.scene.game.canvas.height / 6) - headerBg.height - 68);
+    this.voucherIconsBg = addWindow(
+      this.scene,
+      0,
+      headerBg.height,
+      this.scene.game.canvas.width / 6 - 2,
+      this.scene.game.canvas.height / 6 - headerBg.height - 68
+    );
     this.voucherIconsBg.setOrigin(0, 0);
 
     this.voucherIconsContainer = this.scene.add.container(6, headerBg.height + 6);
@@ -78,7 +98,13 @@ export default class VouchersUiHandler extends MessageUiHandler {
     this.unlockText.setOrigin(0, 0);
     this.unlockText.setPositionRelative(unlockBg, 8, 4);
 
-    const descriptionBg = addWindow(this.scene, 0, titleBg.y + titleBg.height, (this.scene.game.canvas.width / 6) - 2, 42);
+    const descriptionBg = addWindow(
+      this.scene,
+      0,
+      titleBg.y + titleBg.height,
+      this.scene.game.canvas.width / 6 - 2,
+      42
+    );
     descriptionBg.setOrigin(0, 0);
 
     const descriptionText = addTextObject(this.scene, 0, 0, "", TextStyle.WINDOW, { maxLines: 2 });
@@ -128,7 +154,11 @@ export default class VouchersUiHandler extends MessageUiHandler {
 
     this.titleText.setText(getVoucherTypeName(voucher.voucherType));
     this.showText(voucher.description);
-    this.unlockText.setText(unlocked ? new Date(voucherUnlocks[voucher.id]).toLocaleDateString() : i18next.t("voucher:locked"));
+    this.unlockText.setText(
+      unlocked
+        ? new Date(voucherUnlocks[voucher.id]).toLocaleDateString()
+        : i18next.t("voucher:locked")
+    );
   }
 
   processInput(button: Button): boolean {
@@ -141,7 +171,7 @@ export default class VouchersUiHandler extends MessageUiHandler {
       this.scene.ui.revertMode();
     } else {
       const rowIndex = Math.floor(this.cursor / itemCols);
-      const itemOffset = (this.scrollCursor * itemCols);
+      const itemOffset = this.scrollCursor * itemCols;
       switch (button) {
       case Button.UP:
         if (this.cursor < itemCols) {
@@ -153,9 +183,12 @@ export default class VouchersUiHandler extends MessageUiHandler {
         }
         break;
       case Button.DOWN:
-        const canMoveDown = (this.cursor + itemOffset) + itemCols < this.itemsTotal;
+        const canMoveDown = this.cursor + itemOffset + itemCols < this.itemsTotal;
         if (rowIndex >= itemRows - 1) {
-          if (this.scrollCursor < Math.ceil(this.itemsTotal / itemCols) - itemRows && canMoveDown) {
+          if (
+            this.scrollCursor < Math.ceil(this.itemsTotal / itemCols) - itemRows &&
+              canMoveDown
+          ) {
             success = this.setScrollCursor(this.scrollCursor + 1);
           }
         } else if (canMoveDown) {
@@ -164,14 +197,21 @@ export default class VouchersUiHandler extends MessageUiHandler {
         break;
       case Button.LEFT:
         if (!this.cursor && this.scrollCursor) {
-          success = this.setScrollCursor(this.scrollCursor - 1) && this.setCursor(this.cursor + (itemCols - 1));
+          success =
+              this.setScrollCursor(this.scrollCursor - 1) &&
+              this.setCursor(this.cursor + (itemCols - 1));
         } else if (this.cursor) {
           success = this.setCursor(this.cursor - 1);
         }
         break;
       case Button.RIGHT:
-        if (this.cursor + 1 === itemRows * itemCols && this.scrollCursor < Math.ceil(this.itemsTotal / itemCols) - itemRows) {
-          success = this.setScrollCursor(this.scrollCursor + 1) && this.setCursor(this.cursor - (itemCols - 1));
+        if (
+          this.cursor + 1 === itemRows * itemCols &&
+            this.scrollCursor < Math.ceil(this.itemsTotal / itemCols) - itemRows
+        ) {
+          success =
+              this.setScrollCursor(this.scrollCursor + 1) &&
+              this.setCursor(this.cursor - (itemCols - 1));
         } else if (this.cursor + itemOffset < Object.keys(vouchers).length - 1) {
           success = this.setCursor(this.cursor + 1);
         }
@@ -192,7 +232,18 @@ export default class VouchersUiHandler extends MessageUiHandler {
     let updateVoucher = ret;
 
     if (!this.cursorObj) {
-      this.cursorObj = this.scene.add.nineslice(0, 0, "select_cursor_highlight", null, 16, 16, 1, 1, 1, 1);
+      this.cursorObj = this.scene.add.nineslice(
+        0,
+        0,
+        "select_cursor_highlight",
+        null,
+        16,
+        16,
+        1,
+        1,
+        1,
+        1
+      );
       this.cursorObj.setOrigin(0, 0);
       this.voucherIconsContainer.add(this.cursorObj);
       updateVoucher = true;
@@ -216,7 +267,13 @@ export default class VouchersUiHandler extends MessageUiHandler {
 
     this.updateVoucherIcons();
 
-    this.showVoucher(vouchers[Object.keys(vouchers)[Math.min(this.cursor + this.scrollCursor * itemCols, Object.values(vouchers).length - 1)]]);
+    this.showVoucher(
+      vouchers[
+        Object.keys(vouchers)[
+          Math.min(this.cursor + this.scrollCursor * itemCols, Object.values(vouchers).length - 1)
+        ]
+      ]
+    );
 
     return true;
   }
@@ -243,7 +300,7 @@ export default class VouchersUiHandler extends MessageUiHandler {
     });
 
     if (voucherRange.length < this.voucherIcons.length) {
-      this.voucherIcons.slice(voucherRange.length).map(i => i.setVisible(false));
+      this.voucherIcons.slice(voucherRange.length).map((i) => i.setVisible(false));
     }
   }
 

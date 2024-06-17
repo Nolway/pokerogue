@@ -1,7 +1,7 @@
+import i18next from "i18next";
 import BattleScene from "../battle-scene";
 import Pokemon from "../field/pokemon";
 import { TextStyle, addTextObject } from "./text";
-import i18next from "i18next";
 
 const hiddenX = -118;
 const shownX = 0;
@@ -26,7 +26,9 @@ export default class AbilityBar extends Phaser.GameObjects.Container {
 
     this.add(this.bg);
 
-    this.abilityBarText = addTextObject(this.scene, 15, 3, "", TextStyle.MESSAGE, { fontSize: "72px" });
+    this.abilityBarText = addTextObject(this.scene, 15, 3, "", TextStyle.MESSAGE, {
+      fontSize: "72px"
+    });
     this.abilityBarText.setOrigin(0, 0);
     this.abilityBarText.setWordWrapWidth(600, true);
     this.add(this.abilityBarText);
@@ -36,7 +38,9 @@ export default class AbilityBar extends Phaser.GameObjects.Container {
   }
 
   showAbility(pokemon: Pokemon, passive: boolean = false): void {
-    this.abilityBarText.setText(`${i18next.t("fightUiHandler:abilityFlyInText", { pokemonName: pokemon.name, passive: passive ? i18next.t("fightUiHandler:passive") : "", abilityName: !passive ?  pokemon.getAbility().name : pokemon.getPassiveAbility().name })}`);
+    this.abilityBarText.setText(
+      `${i18next.t("fightUiHandler:abilityFlyInText", { pokemonName: pokemon.name, passive: passive ? i18next.t("fightUiHandler:passive") : "", abilityName: !passive ? pokemon.getAbility().name : pokemon.getPassiveAbility().name })}`
+    );
 
     if (this.shown) {
       return;

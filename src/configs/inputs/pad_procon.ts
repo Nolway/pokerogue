@@ -1,5 +1,5 @@
-import {SettingGamepad} from "#app/system/settings/settings-gamepad.js";
-import {Button} from "#enums/buttons";
+import { SettingGamepad } from "#app/system/settings/settings-gamepad.js";
+import { Button } from "#enums/buttons";
 
 /**
  * Nintendo Pro Controller mapping
@@ -24,7 +24,7 @@ const pad_procon = {
     LC_S: 13,
     LC_W: 14,
     LC_E: 15,
-    MENU: 16, // Home
+    MENU: 16 // Home
   },
   icons: {
     RC_S: "XB_Letter_B_OL.png",
@@ -42,7 +42,7 @@ const pad_procon = {
     LC_N: "UP.png",
     LC_S: "DOWN.png",
     LC_W: "LEFT.png",
-    LC_E: "RIGHT.png",
+    LC_E: "RIGHT.png"
   },
   settings: {
     [SettingGamepad.Button_Up]: Button.UP,
@@ -55,7 +55,7 @@ const pad_procon = {
     [SettingGamepad.Button_Cycle_Variant]: Button.V,
     [SettingGamepad.Button_Menu]: Button.MENU,
     [SettingGamepad.Button_Stats]: Button.STATS,
-    [SettingGamepad.Button_Cycle_Form]:  Button.CYCLE_FORM,
+    [SettingGamepad.Button_Cycle_Form]: Button.CYCLE_FORM,
     [SettingGamepad.Button_Cycle_Shiny]: Button.CYCLE_SHINY,
     [SettingGamepad.Button_Cycle_Gender]: Button.CYCLE_GENDER,
     [SettingGamepad.Button_Cycle_Ability]: Button.CYCLE_ABILITY,
@@ -79,7 +79,7 @@ const pad_procon = {
     RT: SettingGamepad.Button_Cycle_Ability,
     LS: SettingGamepad.Button_Speed_Up,
     RS: SettingGamepad.Button_Slow_Down
-  },
+  }
 };
 
 export default pad_procon;

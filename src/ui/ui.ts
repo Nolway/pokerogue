@@ -1,4 +1,6 @@
-import {default as BattleScene} from "../battle-scene";
+import i18next from "i18next";
+import { default as BattleScene } from "../battle-scene";
+import * as Utils from "../utils";
 import UiHandler from "./ui-handler";
 import BattleMessageUiHandler from "./battle-message-ui-handler";
 import CommandUiHandler from "./command-ui-handler";
@@ -24,11 +26,10 @@ import EggHatchSceneHandler from "./egg-hatch-scene-handler";
 import EggListUiHandler from "./egg-list-ui-handler";
 import EggGachaUiHandler from "./egg-gacha-ui-handler";
 import VouchersUiHandler from "./vouchers-ui-handler";
-import {addWindow} from "./ui-theme";
+import { addWindow } from "./ui-theme";
 import LoginFormUiHandler from "./login-form-ui-handler";
 import RegistrationFormUiHandler from "./registration-form-ui-handler";
 import LoadingModalUiHandler from "./loading-modal-ui-handler";
-import * as Utils from "../utils";
 import GameStatsUiHandler from "./game-stats-ui-handler";
 import AwaitableUiHandler from "./awaitable-ui-handler";
 import SaveSlotSelectUiHandler from "./save-slot-select-ui-handler";
@@ -37,13 +38,12 @@ import SavingIconHandler from "./saving-icon-handler";
 import UnavailableModalUiHandler from "./unavailable-modal-ui-handler";
 import OutdatedModalUiHandler from "./outdated-modal-ui-handler";
 import SessionReloadModalUiHandler from "./session-reload-modal-ui-handler";
-import {Button} from "#enums/buttons";
-import i18next, {ParseKeys} from "i18next";
 import GamepadBindingUiHandler from "./settings/gamepad-binding-ui-handler";
-import SettingsKeyboardUiHandler from "#app/ui/settings/settings-keyboard-ui-handler";
-import KeyboardBindingUiHandler from "#app/ui/settings/keyboard-binding-ui-handler";
 import SettingsDisplayUiHandler from "./settings/settings-display-ui-handler";
 import SettingsAudioUiHandler from "./settings/settings-audio-ui-handler";
+import { Button } from "#enums/buttons";
+import SettingsKeyboardUiHandler from "#app/ui/settings/settings-keyboard-ui-handler";
+import KeyboardBindingUiHandler from "#app/ui/settings/keyboard-binding-ui-handler";
 import { PlayerGender } from "#enums/player-gender";
 
 export enum Mode {
@@ -186,7 +186,13 @@ export default class UI extends Phaser.GameObjects.Container {
     for (const handler of this.handlers) {
       handler.setup();
     }
-    this.overlay = this.scene.add.rectangle(0, 0, this.scene.game.canvas.width / 6, this.scene.game.canvas.height / 6, 0);
+    this.overlay = this.scene.add.rectangle(
+      0,
+      0,
+      this.scene.game.canvas.width / 6,
+      this.scene.game.canvas.height / 6,
+      0
+    );
     this.overlay.setOrigin(0, 0);
     (this.scene as BattleScene).uiContainer.add(this.overlay);
     this.overlay.setVisible(false);
@@ -238,11 +244,11 @@ export default class UI extends Phaser.GameObjects.Container {
 
     const battleScene = this.scene as BattleScene;
     if ([Mode.CONFIRM, Mode.COMMAND, Mode.FIGHT, Mode.MESSAGE].includes(this.mode)) {
-      battleScene?.processInfoButton(pressed);
+      battleScene.processInfoButton(pressed);
       return true;
     }
 
-    battleScene?.processInfoButton(false);
+    battleScene.processInfoButton(false);
     return true;
   }
 
@@ -260,26 +266,48 @@ export default class UI extends Phaser.GameObjects.Container {
     return handler.processInput(button);
   }
 
-  showText(text: string, delay?: integer, callback?: Function, callbackDelay?: integer, prompt?: boolean, promptDelay?: integer): void {
+  showText(
+    text: string,
+    delay?: integer,
+    callback?: Function,
+    callbackDelay?: integer,
+    prompt?: boolean,
+    promptDelay?: integer
+  ): void {
     if (prompt && text.indexOf("$") > -1) {
-      const messagePages = text.split(/\$/g).map(m => m.trim());
+      const messagePages = text.split(/\$/g).map((m) => m.trim());
       let showMessageAndCallback = () => callback();
       for (let p = messagePages.length - 1; p >= 0; p--) {
         const originalFunc = showMessageAndCallback;
-        showMessageAndCallback = () => this.showText(messagePages[p], null, originalFunc, null, true);
+        showMessageAndCallback = () =>
+          this.showText(messagePages[p], null, originalFunc, null, true);
       }
       showMessageAndCallback();
     } else {
       const handler = this.getHandler();
       if (handler instanceof MessageUiHandler) {
-        (handler as MessageUiHandler).showText(text, delay, callback, callbackDelay, prompt, promptDelay);
+        handler.showText(text, delay, callback, callbackDelay, prompt, promptDelay);
       } else {
-        this.getMessageHandler().showText(text, delay, callback, callbackDelay, prompt, promptDelay);
+        this.getMessageHandler().showText(
+          text,
+          delay,
+          callback,
+          callbackDelay,
+          prompt,
+          promptDelay
+        );
       }
     }
   }
 
-  showDialogue(text: string, name: string, delay: integer = 0, callback: Function, callbackDelay?: integer, promptDelay?: integer): void {
+  showDialogue(
+    text: string,
+    name: string,
+    delay: integer = 0,
+    callback: Function,
+    callbackDelay?: integer,
+    promptDelay?: integer
+  ): void {
     // First get the gender of the player (default male) (also used if UNSET)
     let playerGenderPrefix = "PGM";
     if ((this.scene as BattleScene).gameData.gender === PlayerGender.FEMALE) {
@@ -290,12 +318,15 @@ export default class UI extends Phaser.GameObjects.Container {
 
     // Get localized dialogue (if available)
     let hasi18n = false;
-    if (i18next.exists(localizationKey as ParseKeys) ) {
-      text = i18next.t(localizationKey as ParseKeys);
+    if (i18next.exists(localizationKey)) {
+      text = i18next.t(localizationKey);
       hasi18n = true;
 
       // Skip dialogue if the player has enabled the option and the dialogue has been already seen
-      if ((this.scene as BattleScene).skipSeenDialogues && (this.scene as BattleScene).gameData.getSeenDialogues()[localizationKey] === true) {
+      if (
+        (this.scene as BattleScene).skipSeenDialogues &&
+        (this.scene as BattleScene).gameData.getSeenDialogues()[localizationKey] === true
+      ) {
         console.log(`Dialogue ${localizationKey} skipped`);
         callback();
         return;
@@ -306,7 +337,7 @@ export default class UI extends Phaser.GameObjects.Container {
       callback();
     };
     if (text.indexOf("$") > -1) {
-      const messagePages = text.split(/\$/g).map(m => m.trim());
+      const messagePages = text.split(/\$/g).map((m) => m.trim());
       for (let p = messagePages.length - 1; p >= 0; p--) {
         const originalFunc = showMessageAndCallback;
         showMessageAndCallback = () => this.showDialogue(messagePages[p], name, null, originalFunc);
@@ -315,9 +346,25 @@ export default class UI extends Phaser.GameObjects.Container {
     } else {
       const handler = this.getHandler();
       if (handler instanceof MessageUiHandler) {
-        (handler as MessageUiHandler).showDialogue(text, name, delay, showMessageAndCallback, callbackDelay, true, promptDelay);
+        handler.showDialogue(
+          text,
+          name,
+          delay,
+          showMessageAndCallback,
+          callbackDelay,
+          true,
+          promptDelay
+        );
       } else {
-        this.getMessageHandler().showDialogue(text, name, delay, showMessageAndCallback, callbackDelay, true, promptDelay);
+        this.getMessageHandler().showDialogue(
+          text,
+          name,
+          delay,
+          showMessageAndCallback,
+          callbackDelay,
+          true,
+          promptDelay
+        );
       }
     }
   }
@@ -330,8 +377,11 @@ export default class UI extends Phaser.GameObjects.Container {
 
     const key = playerGenderPrefix + text;
 
-    if (i18next.exists(key as ParseKeys) ) {
-      if ((this.scene as BattleScene).skipSeenDialogues && (this.scene as BattleScene).gameData.getSeenDialogues()[key] === true) {
+    if (i18next.exists(key)) {
+      if (
+        (this.scene as BattleScene).skipSeenDialogues &&
+        (this.scene as BattleScene).gameData.getSeenDialogues()[key] === true
+      ) {
         return true;
       }
     }
@@ -344,7 +394,10 @@ export default class UI extends Phaser.GameObjects.Container {
     const wrappedContent = this.tooltipContent.runWordWrap(content);
     this.tooltipContent.setText(wrappedContent);
     this.tooltipContent.y = title ? 16 : 4;
-    this.tooltipBg.width = Math.min(Math.max(this.tooltipTitle.displayWidth, this.tooltipContent.displayWidth) + 12, 684);
+    this.tooltipBg.width = Math.min(
+      Math.max(this.tooltipTitle.displayWidth, this.tooltipContent.displayWidth) + 12,
+      684
+    );
     this.tooltipBg.height = (title ? 31 : 19) + 10.5 * (wrappedContent.split("\n").length - 1);
     if (overlap) {
       (this.scene as BattleScene).uiContainer.moveAbove(this.tooltipContainer, this);
@@ -360,15 +413,22 @@ export default class UI extends Phaser.GameObjects.Container {
 
   update(): void {
     if (this.tooltipContainer.visible) {
-      const reverse = this.scene.game.input.mousePointer.x >= this.scene.game.canvas.width - this.tooltipBg.width * 6 - 12;
-      this.tooltipContainer.setPosition(!reverse ? this.scene.game.input.mousePointer.x / 6 + 2 : this.scene.game.input.mousePointer.x / 6 - this.tooltipBg.width - 2, this.scene.game.input.mousePointer.y / 6 + 2);
+      const reverse =
+        this.scene.game.input.mousePointer.x >=
+        this.scene.game.canvas.width - this.tooltipBg.width * 6 - 12;
+      this.tooltipContainer.setPosition(
+        !reverse
+          ? this.scene.game.input.mousePointer.x / 6 + 2
+          : this.scene.game.input.mousePointer.x / 6 - this.tooltipBg.width - 2,
+        this.scene.game.input.mousePointer.y / 6 + 2
+      );
     }
   }
 
   clearText(): void {
     const handler = this.getHandler();
     if (handler instanceof MessageUiHandler) {
-      (handler as MessageUiHandler).clearText();
+      handler.clearText();
     } else {
       this.getMessageHandler().clearText();
     }
@@ -392,7 +452,7 @@ export default class UI extends Phaser.GameObjects.Container {
   }
 
   fadeOut(duration: integer): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (this.overlayActive) {
         return resolve();
       }
@@ -410,7 +470,7 @@ export default class UI extends Phaser.GameObjects.Container {
   }
 
   fadeIn(duration: integer): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (!this.overlayActive) {
         return resolve();
       }
@@ -428,8 +488,14 @@ export default class UI extends Phaser.GameObjects.Container {
     });
   }
 
-  private setModeInternal(mode: Mode, clear: boolean, forceTransition: boolean, chainMode: boolean, args: any[]): Promise<void> {
-    return new Promise(resolve => {
+  private setModeInternal(
+    mode: Mode,
+    clear: boolean,
+    forceTransition: boolean,
+    chainMode: boolean,
+    args: any[]
+  ): Promise<void> {
+    return new Promise((resolve) => {
       if (this.mode === mode && !forceTransition) {
         resolve();
         return;
@@ -451,9 +517,13 @@ export default class UI extends Phaser.GameObjects.Container {
         }
         resolve();
       };
-      if (((!chainMode && ((transitionModes.indexOf(this.mode) > -1 || transitionModes.indexOf(mode) > -1)
-        && (noTransitionModes.indexOf(this.mode) === -1 && noTransitionModes.indexOf(mode) === -1)))
-        || (chainMode && noTransitionModes.indexOf(mode) === -1))) {
+      if (
+        (!chainMode &&
+          (transitionModes.indexOf(this.mode) > -1 || transitionModes.indexOf(mode) > -1) &&
+          noTransitionModes.indexOf(this.mode) === -1 &&
+          noTransitionModes.indexOf(mode) === -1) ||
+        (chainMode && noTransitionModes.indexOf(mode) === -1)
+      ) {
         this.fadeOut(250).then(() => {
           this.scene.time.delayedCall(100, () => {
             doSetMode();
@@ -487,8 +557,8 @@ export default class UI extends Phaser.GameObjects.Container {
   }
 
   revertMode(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      if (!this?.modeChain?.length) {
+    return new Promise<boolean>((resolve) => {
+      if (!this.modeChain.length) {
         return resolve(false);
       }
 
@@ -518,11 +588,13 @@ export default class UI extends Phaser.GameObjects.Container {
   }
 
   revertModes(): Promise<void> {
-    return new Promise<void>(resolve => {
-      if (!this?.modeChain?.length) {
+    return new Promise<void>((resolve) => {
+      if (!this.modeChain.length) {
         return resolve();
       }
-      this.revertMode().then(success => Utils.executeIf(success, this.revertModes).then(() => resolve()));
+      this.revertMode().then((success) =>
+        Utils.executeIf(success, this.revertModes).then(() => resolve())
+      );
     });
   }
 }

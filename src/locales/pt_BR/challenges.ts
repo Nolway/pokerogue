@@ -1,9 +1,9 @@
 import { SimpleTranslationEntries } from "#app/plugins/i18n";
 
 export const challenges: SimpleTranslationEntries = {
-  "title": "Desafios",
-  "start": "Iniciar",
-  "illegalEvolution": "{{pokemon}} não pode ser escolhido\nnesse desafio!",
+  title: "Desafios",
+  start: "Iniciar",
+  illegalEvolution: "{{pokemon}} não pode ser escolhido\nnesse desafio!",
   "singleGeneration.name": "Geração Única",
   "singleGeneration.value.0": "Desligado",
   "singleGeneration.desc.0": "Você só pode user Pokémon de uma única geração.",
@@ -63,5 +63,5 @@ export const challenges: SimpleTranslationEntries = {
   "singleType.value.17": "Sombrio",
   "singleType.desc.17": "Você só pode user Pokémon do tipo Sombrio.",
   "singleType.value.18": "Fada",
-  "singleType.desc.18": "Você só pode user Pokémon do tipo Fada.",
+  "singleType.desc.18": "Você só pode user Pokémon do tipo Fada."
 } as const;

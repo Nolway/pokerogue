@@ -1,9 +1,9 @@
 import { SimpleTranslationEntries } from "#app/plugins/i18n";
 
 export const challenges: SimpleTranslationEntries = {
-  "title": "適用挑戰條件",
-  "points": "Bad Ideas",
-  "confirm_start": "要執行這些挑戰嗎？",
+  title: "適用挑戰條件",
+  points: "Bad Ideas",
+  confirm_start: "要執行這些挑戰嗎？",
   "singleGeneration.name": "單一世代",
   "singleGeneration.value.0": "關閉",
   "singleGeneration.desc.0": "你只能使用所選世代的寶可夢",
@@ -63,5 +63,5 @@ export const challenges: SimpleTranslationEntries = {
   "singleType.value.17": "惡",
   "singleType.desc.17": "你只能使用惡屬性的寶可夢",
   "singleType.value.18": "妖精",
-  "singleType.desc.18": "你只能使用妖精屬性的寶可夢",
+  "singleType.desc.18": "你只能使用妖精屬性的寶可夢"
 } as const;

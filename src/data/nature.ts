@@ -1,8 +1,8 @@
-import { Stat, getStatName } from "./pokemon-stat";
+import i18next from "i18next";
 import * as Utils from "../utils";
 import { TextStyle, getBBCodeFrag } from "../ui/text";
+import { Stat, getStatName } from "./pokemon-stat";
 import { UiTheme } from "#enums/ui-theme";
-import i18next from "i18next";
 
 export enum Nature {
   HARDY,
@@ -32,14 +32,20 @@ export enum Nature {
   QUIRKY
 }
 
-export function getNatureName(nature: Nature, includeStatEffects: boolean = false, forStarterSelect: boolean = false, ignoreBBCode: boolean = false, uiTheme: UiTheme = UiTheme.DEFAULT): string {
+export function getNatureName(
+  nature: Nature,
+  includeStatEffects: boolean = false,
+  forStarterSelect: boolean = false,
+  ignoreBBCode: boolean = false,
+  uiTheme: UiTheme = UiTheme.DEFAULT
+): string {
   let ret = Utils.toReadableString(Nature[nature]);
   //Translating nature
   if (i18next.exists("nature:" + ret)) {
-    ret = i18next.t("nature:" + ret as any);
+    ret = i18next.t(("nature:" + ret) as any);
   }
   if (includeStatEffects) {
-    const stats = Utils.getEnumValues(Stat).slice(1);
+    const stats = Object.values(Stat).slice(1);
     let increasedStat: Stat = null;
     let decreasedStat: Stat = null;
     for (const stat of stats) {
@@ -51,7 +57,9 @@ export function getNatureName(nature: Nature, includeStatEffects: boolean = fals
       }
     }
     const textStyle = forStarterSelect ? TextStyle.SUMMARY_ALT : TextStyle.WINDOW;
-    const getTextFrag = !ignoreBBCode ? (text: string, style: TextStyle) => getBBCodeFrag(text, style, uiTheme) : (text: string, style: TextStyle) => text;
+    const getTextFrag = !ignoreBBCode
+      ? (text: string, style: TextStyle) => getBBCodeFrag(text, style, uiTheme)
+      : (text: string, style: TextStyle) => text;
     if (increasedStat && decreasedStat) {
       ret = `${getTextFrag(`${ret}${!forStarterSelect ? "\n" : " "}(`, textStyle)}${getTextFrag(`+${getStatName(increasedStat, true)}`, TextStyle.SUMMARY_PINK)}${getTextFrag("/", textStyle)}${getTextFrag(`-${getStatName(decreasedStat, true)}`, TextStyle.SUMMARY_BLUE)}${getTextFrag(")", textStyle)}`;
     } else {

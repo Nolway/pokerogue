@@ -1,4 +1,5 @@
 import SoundFade from "phaser3-rex-plugins/plugins/soundfade";
+import i18next from "i18next";
 import { Phase } from "./phase";
 import BattleScene from "./battle-scene";
 import { SpeciesFormEvolution } from "./data/pokemon-evolutions";
@@ -9,7 +10,6 @@ import { LearnMovePhase } from "./phases";
 import { cos, sin } from "./field/anims";
 import { PlayerPokemon } from "./field/pokemon";
 import { getTypeRgb } from "./data/type";
-import i18next from "i18next";
 
 export class EvolutionPhase extends Phase {
   protected pokemon: PlayerPokemon;
@@ -27,7 +27,12 @@ export class EvolutionPhase extends Phase {
   protected pokemonEvoSprite: Phaser.GameObjects.Sprite;
   protected pokemonEvoTintSprite: Phaser.GameObjects.Sprite;
 
-  constructor(scene: BattleScene, pokemon: PlayerPokemon, evolution: SpeciesFormEvolution, lastLevel: integer) {
+  constructor(
+    scene: BattleScene,
+    pokemon: PlayerPokemon,
+    evolution: SpeciesFormEvolution | undefined,
+    lastLevel: integer
+  ) {
     super(scene);
 
     this.pokemon = pokemon;
@@ -47,7 +52,6 @@ export class EvolutionPhase extends Phase {
     super.start();
 
     this.setMode().then(() => {
-
       if (!this.validate()) {
         return this.end();
       }
@@ -68,14 +72,28 @@ export class EvolutionPhase extends Phase {
       this.evolutionBg.setVisible(false);
       this.evolutionContainer.add(this.evolutionBg);
 
-      this.evolutionBgOverlay = this.scene.add.rectangle(0, 0, this.scene.game.canvas.width / 6, this.scene.game.canvas.height / 6, 0x262626);
+      this.evolutionBgOverlay = this.scene.add.rectangle(
+        0,
+        0,
+        this.scene.game.canvas.width / 6,
+        this.scene.game.canvas.height / 6,
+        0x262626
+      );
       this.evolutionBgOverlay.setOrigin(0, 0);
       this.evolutionBgOverlay.setAlpha(0);
       this.evolutionContainer.add(this.evolutionBgOverlay);
 
       const getPokemonSprite = () => {
-        const ret = this.scene.addPokemonSprite(this.pokemon, this.evolutionBaseBg.displayWidth / 2, this.evolutionBaseBg.displayHeight / 2, "pkmn__sub");
-        ret.setPipeline(this.scene.spritePipeline, { tone: [ 0.0, 0.0, 0.0, 0.0 ], ignoreTimeTint: true });
+        const ret = this.scene.addPokemonSprite(
+          this.pokemon,
+          this.evolutionBaseBg.displayWidth / 2,
+          this.evolutionBaseBg.displayHeight / 2,
+          "pkmn__sub"
+        );
+        ret.setPipeline(this.scene.spritePipeline, {
+          tone: [0.0, 0.0, 0.0, 0.0],
+          ignoreTimeTint: true
+        });
         return ret;
       };
 
@@ -85,25 +103,40 @@ export class EvolutionPhase extends Phase {
       this.evolutionContainer.add((this.pokemonEvoTintSprite = getPokemonSprite()));
 
       this.pokemonTintSprite.setAlpha(0);
-      this.pokemonTintSprite.setTintFill(0xFFFFFF);
+      this.pokemonTintSprite.setTintFill(0xffffff);
       this.pokemonEvoSprite.setVisible(false);
       this.pokemonEvoTintSprite.setVisible(false);
-      this.pokemonEvoTintSprite.setTintFill(0xFFFFFF);
+      this.pokemonEvoTintSprite.setTintFill(0xffffff);
 
-      this.evolutionOverlay = this.scene.add.rectangle(0, -this.scene.game.canvas.height / 6, this.scene.game.canvas.width / 6, (this.scene.game.canvas.height / 6) - 48, 0xFFFFFF);
+      this.evolutionOverlay = this.scene.add.rectangle(
+        0,
+        -this.scene.game.canvas.height / 6,
+        this.scene.game.canvas.width / 6,
+        this.scene.game.canvas.height / 6 - 48,
+        0xffffff
+      );
       this.evolutionOverlay.setOrigin(0, 0);
       this.evolutionOverlay.setAlpha(0);
       this.scene.ui.add(this.evolutionOverlay);
 
-      [ this.pokemonSprite, this.pokemonTintSprite, this.pokemonEvoSprite, this.pokemonEvoTintSprite ].map(sprite => {
+      [
+        this.pokemonSprite,
+        this.pokemonTintSprite,
+        this.pokemonEvoSprite,
+        this.pokemonEvoTintSprite
+      ].map((sprite) => {
         sprite.play(this.pokemon.getSpriteKey(true));
-        sprite.setPipeline(this.scene.spritePipeline, { tone: [ 0.0, 0.0, 0.0, 0.0 ], hasShadow: false, teraColor: getTypeRgb(this.pokemon.getTeraType()) });
+        sprite.setPipeline(this.scene.spritePipeline, {
+          tone: [0.0, 0.0, 0.0, 0.0],
+          hasShadow: false,
+          teraColor: getTypeRgb(this.pokemon.getTeraType())
+        });
         sprite.setPipelineData("ignoreTimeTint", true);
         sprite.setPipelineData("spriteKey", this.pokemon.getSpriteKey());
         sprite.setPipelineData("shiny", this.pokemon.shiny);
         sprite.setPipelineData("variant", this.pokemon.variant);
-        [ "spriteColors", "fusionSpriteColors" ].map(k => {
-          if (this.pokemon.summonData?.speciesForm) {
+        ["spriteColors", "fusionSpriteColors"].map((k) => {
+          if (this.pokemon.summonData.speciesForm) {
             k += "Base";
           }
           sprite.pipelineData[k] = this.pokemon.getSprite().pipelineData[k];
@@ -118,164 +151,217 @@ export class EvolutionPhase extends Phase {
     const evolutionHandler = this.scene.ui.getHandler() as EvolutionSceneHandler;
     const preName = this.pokemon.name;
 
-    this.scene.ui.showText(i18next.t("menu:evolving", { pokemonName: preName }), null, () => {
-      this.pokemon.cry();
+    this.scene.ui.showText(
+      i18next.t("menu:evolving", { pokemonName: preName }),
+      null,
+      () => {
+        this.pokemon.cry();
 
-      this.pokemon.getPossibleEvolution(this.evolution).then(evolvedPokemon => {
-
-        [ this.pokemonEvoSprite, this.pokemonEvoTintSprite ].map(sprite => {
-          sprite.play(evolvedPokemon.getSpriteKey(true));
-          sprite.setPipelineData("ignoreTimeTint", true);
-          sprite.setPipelineData("spriteKey", evolvedPokemon.getSpriteKey());
-          sprite.setPipelineData("shiny", evolvedPokemon.shiny);
-          sprite.setPipelineData("variant", evolvedPokemon.variant);
-          [ "spriteColors", "fusionSpriteColors" ].map(k => {
-            if (evolvedPokemon.summonData?.speciesForm) {
-              k += "Base";
-            }
-            sprite.pipelineData[k] = evolvedPokemon.getSprite().pipelineData[k];
+        this.pokemon.getPossibleEvolution(this.evolution).then((evolvedPokemon) => {
+          [this.pokemonEvoSprite, this.pokemonEvoTintSprite].map((sprite) => {
+            sprite.play(evolvedPokemon.getSpriteKey(true));
+            sprite.setPipelineData("ignoreTimeTint", true);
+            sprite.setPipelineData("spriteKey", evolvedPokemon.getSpriteKey());
+            sprite.setPipelineData("shiny", evolvedPokemon.shiny);
+            sprite.setPipelineData("variant", evolvedPokemon.variant);
+            ["spriteColors", "fusionSpriteColors"].map((k) => {
+              if (evolvedPokemon.summonData.speciesForm) {
+                k += "Base";
+              }
+              sprite.pipelineData[k] = evolvedPokemon.getSprite().pipelineData[k];
+            });
           });
-        });
 
-        this.scene.time.delayedCall(1000, () => {
-          const evolutionBgm = this.scene.playSoundWithoutBgm("evolution");
-          this.scene.tweens.add({
-            targets: this.evolutionBgOverlay,
-            alpha: 1,
-            delay: 500,
-            duration: 1500,
-            ease: "Sine.easeOut",
-            onComplete: () => {
-              this.scene.time.delayedCall(1000, () => {
-                this.scene.tweens.add({
-                  targets: this.evolutionBgOverlay,
-                  alpha: 0,
-                  duration: 250
+          this.scene.time.delayedCall(1000, () => {
+            const evolutionBgm = this.scene.playSoundWithoutBgm("evolution");
+            this.scene.tweens.add({
+              targets: this.evolutionBgOverlay,
+              alpha: 1,
+              delay: 500,
+              duration: 1500,
+              ease: "Sine.easeOut",
+              onComplete: () => {
+                this.scene.time.delayedCall(1000, () => {
+                  this.scene.tweens.add({
+                    targets: this.evolutionBgOverlay,
+                    alpha: 0,
+                    duration: 250
+                  });
+                  this.evolutionBg.setVisible(true);
+                  this.evolutionBg.play();
                 });
-                this.evolutionBg.setVisible(true);
-                this.evolutionBg.play();
-              });
-              this.scene.playSound("charge");
-              this.doSpiralUpward();
-              this.scene.tweens.addCounter({
-                from: 0,
-                to: 1,
-                duration: 2000,
-                onUpdate: t => {
-                  this.pokemonTintSprite.setAlpha(t.getValue());
-                },
-                onComplete: () => {
-                  this.pokemonSprite.setVisible(false);
-                  this.scene.time.delayedCall(1100, () => {
-                    this.scene.playSound("beam");
-                    this.doArcDownward();
-                    this.scene.time.delayedCall(1500, () => {
-                      this.pokemonEvoTintSprite.setScale(0.25);
-                      this.pokemonEvoTintSprite.setVisible(true);
-                      evolutionHandler.canCancel = true;
-                      this.doCycle(1).then(success => {
-                        if (!success) {
-
-                          this.pokemonSprite.setVisible(true);
-                          this.pokemonTintSprite.setScale(1);
-                          this.scene.tweens.add({
-                            targets: [ this.evolutionBg, this.pokemonTintSprite, this.pokemonEvoSprite, this.pokemonEvoTintSprite ],
-                            alpha: 0,
-                            duration: 250,
-                            onComplete: () => {
-                              this.evolutionBg.setVisible(false);
-                            }
-                          });
-
-                          SoundFade.fadeOut(this.scene, evolutionBgm, 100);
-
-                          this.scene.unshiftPhase(new EndEvolutionPhase(this.scene));
-
-                          this.scene.ui.showText(i18next.t("menu:stoppedEvolving", { pokemonName: preName }), null, () => {
-                            this.scene.ui.showText(i18next.t("menu:pauseEvolutionsQuestion", { pokemonName: preName }), null, () => {
-                              const end = () => {
-                                this.scene.ui.showText(null, 0);
-                                this.scene.playBgm();
-                                evolvedPokemon.destroy();
-                                this.end();
-                              };
-                              this.scene.ui.setOverlayMode(Mode.CONFIRM, () => {
-                                this.scene.ui.revertMode();
-                                this.pokemon.pauseEvolutions = true;
-                                this.scene.ui.showText(i18next.t("menu:evolutionsPaused", { pokemonName: preName }), null, end, 3000);
-                              }, () => {
-                                this.scene.ui.revertMode();
-                                this.scene.time.delayedCall(3000, end);
-                              });
+                this.scene.playSound("charge");
+                this.doSpiralUpward();
+                this.scene.tweens.addCounter({
+                  from: 0,
+                  to: 1,
+                  duration: 2000,
+                  onUpdate: (t) => {
+                    this.pokemonTintSprite.setAlpha(t.getValue());
+                  },
+                  onComplete: () => {
+                    this.pokemonSprite.setVisible(false);
+                    this.scene.time.delayedCall(1100, () => {
+                      this.scene.playSound("beam");
+                      this.doArcDownward();
+                      this.scene.time.delayedCall(1500, () => {
+                        this.pokemonEvoTintSprite.setScale(0.25);
+                        this.pokemonEvoTintSprite.setVisible(true);
+                        evolutionHandler.canCancel = true;
+                        this.doCycle(1).then((success) => {
+                          if (!success) {
+                            this.pokemonSprite.setVisible(true);
+                            this.pokemonTintSprite.setScale(1);
+                            this.scene.tweens.add({
+                              targets: [
+                                this.evolutionBg,
+                                this.pokemonTintSprite,
+                                this.pokemonEvoSprite,
+                                this.pokemonEvoTintSprite
+                              ],
+                              alpha: 0,
+                              duration: 250,
+                              onComplete: () => {
+                                this.evolutionBg.setVisible(false);
+                              }
                             });
-                          }, null, true);
-                          return;
-                        }
 
-                        this.scene.playSound("sparkle");
-                        this.pokemonEvoSprite.setVisible(true);
-                        this.doCircleInward();
-                        this.scene.time.delayedCall(900, () => {
-                          evolutionHandler.canCancel = false;
+                            SoundFade.fadeOut(this.scene, evolutionBgm, 100);
 
-                          this.pokemon.evolve(this.evolution).then(() => {
-                            const levelMoves = this.pokemon.getLevelMoves(this.lastLevel + 1, true);
-                            for (const lm of levelMoves) {
-                              this.scene.unshiftPhase(new LearnMovePhase(this.scene, this.scene.getParty().indexOf(this.pokemon), lm[1]));
-                            }
                             this.scene.unshiftPhase(new EndEvolutionPhase(this.scene));
 
-                            this.scene.playSound("shine");
-                            this.doSpray();
-                            this.scene.tweens.add({
-                              targets: this.evolutionOverlay,
-                              alpha: 1,
-                              duration: 250,
-                              easing: "Sine.easeIn",
-                              onComplete: () => {
-                                this.evolutionBgOverlay.setAlpha(1);
-                                this.evolutionBg.setVisible(false);
-                                this.scene.tweens.add({
-                                  targets: [ this.evolutionOverlay, this.pokemonEvoTintSprite ],
-                                  alpha: 0,
-                                  duration: 2000,
-                                  delay: 150,
-                                  easing: "Sine.easeIn",
-                                  onComplete: () => {
-                                    this.scene.tweens.add({
-                                      targets: this.evolutionBgOverlay,
-                                      alpha: 0,
-                                      duration: 250,
-                                      onComplete: () => {
-                                        SoundFade.fadeOut(this.scene, evolutionBgm, 100);
-                                        this.scene.time.delayedCall(250, () => {
-                                          this.pokemon.cry();
-                                          this.scene.time.delayedCall(1250, () => {
-                                            this.scene.playSoundWithoutBgm("evolution_fanfare");
-
-                                            evolvedPokemon.destroy();
-                                            this.scene.ui.showText(i18next.t("menu:evolutionDone", { pokemonName: preName, evolvedPokemonName: this.pokemon.name }), null, () => this.end(), null, true, Utils.fixedInt(4000));
-                                            this.scene.time.delayedCall(Utils.fixedInt(4250), () => this.scene.playBgm());
-                                          });
-                                        });
+                            this.scene.ui.showText(
+                              i18next.t("menu:stoppedEvolving", { pokemonName: preName }),
+                              null,
+                              () => {
+                                this.scene.ui.showText(
+                                  i18next.t("menu:pauseEvolutionsQuestion", {
+                                    pokemonName: preName
+                                  }),
+                                  null,
+                                  () => {
+                                    const end = () => {
+                                      this.scene.ui.showText(null, 0);
+                                      this.scene.playBgm();
+                                      evolvedPokemon.destroy();
+                                      this.end();
+                                    };
+                                    this.scene.ui.setOverlayMode(
+                                      Mode.CONFIRM,
+                                      () => {
+                                        this.scene.ui.revertMode();
+                                        this.pokemon.pauseEvolutions = true;
+                                        this.scene.ui.showText(
+                                          i18next.t("menu:evolutionsPaused", {
+                                            pokemonName: preName
+                                          }),
+                                          null,
+                                          end,
+                                          3000
+                                        );
+                                      },
+                                      () => {
+                                        this.scene.ui.revertMode();
+                                        this.scene.time.delayedCall(3000, end);
                                       }
-                                    });
+                                    );
                                   }
-                                });
+                                );
+                              },
+                              null,
+                              true
+                            );
+                            return;
+                          }
+
+                          this.scene.playSound("sparkle");
+                          this.pokemonEvoSprite.setVisible(true);
+                          this.doCircleInward();
+                          this.scene.time.delayedCall(900, () => {
+                            evolutionHandler.canCancel = false;
+
+                            this.pokemon.evolve(this.evolution).then(() => {
+                              const levelMoves = this.pokemon.getLevelMoves(
+                                this.lastLevel + 1,
+                                true
+                              );
+                              for (const lm of levelMoves) {
+                                this.scene.unshiftPhase(
+                                  new LearnMovePhase(
+                                    this.scene,
+                                    this.scene.getParty().indexOf(this.pokemon),
+                                    lm[1]
+                                  )
+                                );
                               }
+                              this.scene.unshiftPhase(new EndEvolutionPhase(this.scene));
+
+                              this.scene.playSound("shine");
+                              this.doSpray();
+                              this.scene.tweens.add({
+                                targets: this.evolutionOverlay,
+                                alpha: 1,
+                                duration: 250,
+                                easing: "Sine.easeIn",
+                                onComplete: () => {
+                                  this.evolutionBgOverlay.setAlpha(1);
+                                  this.evolutionBg.setVisible(false);
+                                  this.scene.tweens.add({
+                                    targets: [this.evolutionOverlay, this.pokemonEvoTintSprite],
+                                    alpha: 0,
+                                    duration: 2000,
+                                    delay: 150,
+                                    easing: "Sine.easeIn",
+                                    onComplete: () => {
+                                      this.scene.tweens.add({
+                                        targets: this.evolutionBgOverlay,
+                                        alpha: 0,
+                                        duration: 250,
+                                        onComplete: () => {
+                                          SoundFade.fadeOut(this.scene, evolutionBgm, 100);
+                                          this.scene.time.delayedCall(250, () => {
+                                            this.pokemon.cry();
+                                            this.scene.time.delayedCall(1250, () => {
+                                              this.scene.playSoundWithoutBgm("evolution_fanfare");
+
+                                              evolvedPokemon.destroy();
+                                              this.scene.ui.showText(
+                                                i18next.t("menu:evolutionDone", {
+                                                  pokemonName: preName,
+                                                  evolvedPokemonName: this.pokemon.name
+                                                }),
+                                                null,
+                                                () => this.end(),
+                                                null,
+                                                true,
+                                                Utils.fixedInt(4000)
+                                              );
+                                              this.scene.time.delayedCall(
+                                                Utils.fixedInt(4250),
+                                                () => this.scene.playBgm()
+                                              );
+                                            });
+                                          });
+                                        }
+                                      });
+                                    }
+                                  });
+                                }
+                              });
                             });
                           });
                         });
                       });
                     });
-                  });
-                }
-              });
-            }
+                  }
+                });
+              }
+            });
           });
         });
-      });
-    }, 1000);
+      },
+      1000
+    );
   }
 
   doSpiralUpward() {
@@ -317,7 +403,7 @@ export class EvolutionPhase extends Phase {
   }
 
   doCycle(l: number, lastCycle: integer = 15): Promise<boolean> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const evolutionHandler = this.scene.ui.getHandler() as EvolutionSceneHandler;
       const isLastCycle = l === lastCycle;
       this.scene.tweens.add({
@@ -338,7 +424,7 @@ export class EvolutionPhase extends Phase {
             return resolve(false);
           }
           if (l < lastCycle) {
-            this.doCycle(l + 0.5, lastCycle).then(success => resolve(success));
+            this.doCycle(l + 0.5, lastCycle).then((success) => resolve(success));
           } else {
             this.pokemonTintSprite.setVisible(false);
             resolve(true);
@@ -409,7 +495,7 @@ export class EvolutionPhase extends Phase {
         particle.setPosition(initialX, 88 - (f * f) / 80);
         particle.y += sin(trigIndex, amp) / 4;
         particle.x += cos(trigIndex, amp);
-        particle.setScale(1 - (f / 80));
+        particle.setScale(1 - f / 80);
         trigIndex += 4;
         if (f & 1) {
           amp--;
@@ -516,7 +602,7 @@ export class EvolutionPhase extends Phase {
         particle.setPosition(initialX + (speed * f) / 3, initialY + yOffset);
         particle.y += -sin(trigIndex, amp);
         if (f > 108) {
-          particle.setScale((1 - (f - 108) / 20));
+          particle.setScale(1 - (f - 108) / 20);
         }
         trigIndex++;
         f++;
@@ -531,7 +617,6 @@ export class EvolutionPhase extends Phase {
 }
 
 export class EndEvolutionPhase extends Phase {
-
   constructor(scene: BattleScene) {
     super(scene);
   }

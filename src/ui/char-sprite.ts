@@ -10,11 +10,11 @@ export default class CharSprite extends Phaser.GameObjects.Container {
   public shown: boolean;
 
   constructor(scene: BattleScene) {
-    super(scene, (scene.game.canvas.width / 6) + 32, -42);
+    super(scene, scene.game.canvas.width / 6 + 32, -42);
   }
 
   setup(): void {
-    [ this.sprite, this.transitionSprite ] = new Array(2).fill(null).map(() => {
+    [this.sprite, this.transitionSprite] = new Array(2).fill(null).map(() => {
       const ret = this.scene.add.sprite(0, 0, "", "");
       ret.setOrigin(0.5, 1);
       this.add(ret);
@@ -28,7 +28,7 @@ export default class CharSprite extends Phaser.GameObjects.Container {
   }
 
   showCharacter(key: string, variant: string): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (!key.startsWith("c_")) {
         key = `c_${key}`;
       }
@@ -49,7 +49,7 @@ export default class CharSprite extends Phaser.GameObjects.Container {
 
       this.scene.tweens.add({
         targets: this,
-        x: (this.scene.game.canvas.width / 6) - 102,
+        x: this.scene.game.canvas.width / 6 - 102,
         duration: 750,
         ease: "Cubic.easeOut",
         onComplete: () => {
@@ -66,7 +66,7 @@ export default class CharSprite extends Phaser.GameObjects.Container {
   }
 
   setVariant(variant: string): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       (this.scene as BattleScene).fieldUI.bringToTop(this);
 
       this.transitionSprite.setTexture(this.key, variant);
@@ -88,14 +88,14 @@ export default class CharSprite extends Phaser.GameObjects.Container {
   }
 
   hide(): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (!this.shown) {
         return resolve();
       }
 
       this.scene.tweens.add({
         targets: this,
-        x: (this.scene.game.canvas.width / 6) + 32,
+        x: this.scene.game.canvas.width / 6 + 32,
         duration: 750,
         ease: "Cubic.easeIn",
         onComplete: () => {

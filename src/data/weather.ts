@@ -1,13 +1,13 @@
-import { Biome } from "#enums/biome";
+import i18next from "i18next";
 import { getPokemonMessage, getPokemonNameWithAffix } from "../messages";
 import Pokemon from "../field/pokemon";
-import { Type } from "./type";
-import Move, { AttackMove } from "./move";
 import * as Utils from "../utils";
 import BattleScene from "../battle-scene";
+import { Type } from "./type";
+import Move, { AttackMove } from "./move";
 import { SuppressWeatherEffectAbAttr } from "./ability";
 import { TerrainType } from "./terrain";
-import i18next from "i18next";
+import { Biome } from "#enums/biome";
 
 export enum WeatherType {
   NONE,
@@ -114,11 +114,18 @@ export class Weather {
     const field = scene.getField(true);
 
     for (const pokemon of field) {
-      let suppressWeatherEffectAbAttr = pokemon.getAbility().getAttrs(SuppressWeatherEffectAbAttr)[0];
+      let suppressWeatherEffectAbAttr = pokemon
+        .getAbility()
+        .getAttrs(SuppressWeatherEffectAbAttr)[0];
       if (!suppressWeatherEffectAbAttr) {
-        suppressWeatherEffectAbAttr = pokemon.hasPassive() ? pokemon.getPassiveAbility().getAttrs(SuppressWeatherEffectAbAttr)[0] : null;
+        suppressWeatherEffectAbAttr = pokemon.hasPassive()
+          ? pokemon.getPassiveAbility().getAttrs(SuppressWeatherEffectAbAttr)[0]
+          : null;
       }
-      if (suppressWeatherEffectAbAttr && (!this.isImmutable() || suppressWeatherEffectAbAttr.affectsImmutable)) {
+      if (
+        suppressWeatherEffectAbAttr &&
+        (!this.isImmutable() || suppressWeatherEffectAbAttr.affectsImmutable)
+      ) {
         return true;
       }
     }
@@ -180,9 +187,13 @@ export function getWeatherLapseMessage(weatherType: WeatherType): string {
 export function getWeatherDamageMessage(weatherType: WeatherType, pokemon: Pokemon): string {
   switch (weatherType) {
   case WeatherType.SANDSTORM:
-    return i18next.t("weather:sandstormDamageMessage", {pokemonNameWithAffix: getPokemonNameWithAffix(pokemon)});
+    return i18next.t("weather:sandstormDamageMessage", {
+      pokemonNameWithAffix: getPokemonNameWithAffix(pokemon)
+    });
   case WeatherType.HAIL:
-    return i18next.t("weather:hailDamageMessage", {pokemonNameWithAffix: getPokemonNameWithAffix(pokemon)});
+    return i18next.t("weather:hailDamageMessage", {
+      pokemonNameWithAffix: getPokemonNameWithAffix(pokemon)
+    });
   }
 
   return null;
@@ -243,7 +254,10 @@ export function getTerrainBlockMessage(pokemon: Pokemon, terrainType: TerrainTyp
   if (terrainType === TerrainType.MISTY) {
     return getPokemonMessage(pokemon, " surrounds itself with a protective mist!");
   }
-  return getPokemonMessage(pokemon, ` is protected by the ${Utils.toReadableString(TerrainType[terrainType])} Terrain!`);
+  return getPokemonMessage(
+    pokemon,
+    ` is protected by the ${Utils.toReadableString(TerrainType[terrainType])} Terrain!`
+  );
 }
 
 interface WeatherPoolEntry {
@@ -251,14 +265,14 @@ interface WeatherPoolEntry {
   weight: integer;
 }
 
-export function getRandomWeatherType(arena: any /* Importing from arena causes a circular dependency */): WeatherType {
+export function getRandomWeatherType(
+  arena: any /* Importing from arena causes a circular dependency */
+): WeatherType {
   let weatherPool: WeatherPoolEntry[] = [];
   const hasSun = arena.getTimeOfDay() < 2;
   switch (arena.biomeType) {
   case Biome.GRASS:
-    weatherPool = [
-      { weatherType: WeatherType.NONE, weight: 7 }
-    ];
+    weatherPool = [{ weatherType: WeatherType.NONE, weight: 7 }];
     if (hasSun) {
       weatherPool.push({ weatherType: WeatherType.SUNNY, weight: 3 });
     }
@@ -266,7 +280,7 @@ export function getRandomWeatherType(arena: any /* Importing from arena causes a
   case Biome.TALL_GRASS:
     weatherPool = [
       { weatherType: WeatherType.NONE, weight: 8 },
-      { weatherType: WeatherType.RAIN, weight: 5 },
+      { weatherType: WeatherType.RAIN, weight: 5 }
     ];
     if (hasSun) {
       weatherPool.push({ weatherType: WeatherType.SUNNY, weight: 8 });
@@ -308,9 +322,7 @@ export function getRandomWeatherType(arena: any /* Importing from arena causes a
     ];
     break;
   case Biome.SEABED:
-    weatherPool = [
-      { weatherType: WeatherType.RAIN, weight: 1 }
-    ];
+    weatherPool = [{ weatherType: WeatherType.RAIN, weight: 1 }];
     break;
   case Biome.BADLANDS:
     weatherPool = [
@@ -322,9 +334,7 @@ export function getRandomWeatherType(arena: any /* Importing from arena causes a
     }
     break;
   case Biome.DESERT:
-    weatherPool = [
-      { weatherType: WeatherType.SANDSTORM, weight: 2 }
-    ];
+    weatherPool = [{ weatherType: WeatherType.SANDSTORM, weight: 2 }];
     if (hasSun) {
       weatherPool.push({ weatherType: WeatherType.SUNNY, weight: 2 });
     }
@@ -337,16 +347,12 @@ export function getRandomWeatherType(arena: any /* Importing from arena causes a
     ];
     break;
   case Biome.MEADOW:
-    weatherPool = [
-      { weatherType: WeatherType.NONE, weight: 2 }
-    ];
+    weatherPool = [{ weatherType: WeatherType.NONE, weight: 2 }];
     if (hasSun) {
       weatherPool.push({ weatherType: WeatherType.SUNNY, weight: 2 });
     }
   case Biome.VOLCANO:
-    weatherPool = [
-      { weatherType: hasSun ? WeatherType.SUNNY : WeatherType.NONE, weight: 1 }
-    ];
+    weatherPool = [{ weatherType: hasSun ? WeatherType.SUNNY : WeatherType.NONE, weight: 1 }];
     break;
   case Biome.GRAVEYARD:
     weatherPool = [
@@ -369,7 +375,7 @@ export function getRandomWeatherType(arena: any /* Importing from arena causes a
   case Biome.ISLAND:
     weatherPool = [
       { weatherType: WeatherType.NONE, weight: 5 },
-      { weatherType: WeatherType.RAIN, weight: 1 },
+      { weatherType: WeatherType.RAIN, weight: 1 }
     ];
     if (hasSun) {
       weatherPool.push({ weatherType: WeatherType.SUNNY, weight: 2 });
@@ -379,7 +385,7 @@ export function getRandomWeatherType(arena: any /* Importing from arena causes a
 
   if (weatherPool.length > 1) {
     let totalWeight = 0;
-    weatherPool.forEach(w => totalWeight += w.weight);
+    weatherPool.forEach((w) => (totalWeight += w.weight));
 
     const rand = Utils.randSeedInt(totalWeight);
     let w = 0;
@@ -391,7 +397,5 @@ export function getRandomWeatherType(arena: any /* Importing from arena causes a
     }
   }
 
-  return weatherPool.length
-    ? weatherPool[0].weatherType
-    : WeatherType.NONE;
+  return weatherPool.length ? weatherPool[0].weatherType : WeatherType.NONE;
 }

@@ -1,5 +1,5 @@
-import {SettingGamepad} from "../../system/settings/settings-gamepad";
-import {Button} from "#enums/buttons";
+import { SettingGamepad } from "../../system/settings/settings-gamepad";
+import { Button } from "#enums/buttons";
 
 /**
  * 081f-e401 - UnlicensedSNES
@@ -7,7 +7,7 @@ import {Button} from "#enums/buttons";
 const pad_unlicensedSNES = {
   padID: "081f-e401",
   padType: "xbox",
-  deviceMapping : {
+  deviceMapping: {
     RC_S: 2,
     RC_E: 1,
     RC_W: 3,
@@ -33,7 +33,7 @@ const pad_unlicensedSNES = {
     LC_N: "UP.png",
     LC_S: "DOWN.png",
     LC_W: "LEFT.png",
-    LC_E: "RIGHT.png",
+    LC_E: "RIGHT.png"
   },
   settings: {
     [SettingGamepad.Button_Up]: Button.UP,
@@ -46,7 +46,7 @@ const pad_unlicensedSNES = {
     [SettingGamepad.Button_Cycle_Variant]: Button.V,
     [SettingGamepad.Button_Menu]: Button.MENU,
     [SettingGamepad.Button_Stats]: Button.STATS,
-    [SettingGamepad.Button_Cycle_Form]:  Button.CYCLE_FORM,
+    [SettingGamepad.Button_Cycle_Form]: Button.CYCLE_FORM,
     [SettingGamepad.Button_Cycle_Shiny]: Button.CYCLE_SHINY,
     [SettingGamepad.Button_Cycle_Gender]: Button.CYCLE_GENDER,
     [SettingGamepad.Button_Cycle_Ability]: Button.CYCLE_ABILITY,
@@ -70,7 +70,7 @@ const pad_unlicensedSNES = {
     RT: -1,
     LS: -1,
     RS: -1
-  },
+  }
 };
 
 export default pad_unlicensedSNES;

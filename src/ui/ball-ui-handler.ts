@@ -6,7 +6,7 @@ import { Command } from "./command-ui-handler";
 import { Mode } from "./ui";
 import UiHandler from "./ui-handler";
 import { addWindow } from "./ui-theme";
-import {Button} from "#enums/buttons";
+import { Button } from "#enums/buttons";
 
 export default class BallUiHandler extends UiHandler {
   private pokeballSelectContainer: Phaser.GameObjects.Container;
@@ -22,7 +22,10 @@ export default class BallUiHandler extends UiHandler {
   setup() {
     const ui = this.getUi();
 
-    this.pokeballSelectContainer = this.scene.add.container((this.scene.game.canvas.width / 6) - 115, -49);
+    this.pokeballSelectContainer = this.scene.add.container(
+      this.scene.game.canvas.width / 6 - 115,
+      -49
+    );
     this.pokeballSelectContainer.setVisible(false);
     ui.add(this.pokeballSelectContainer);
 
@@ -36,7 +39,10 @@ export default class BallUiHandler extends UiHandler {
       optionsTextContent += `${getPokeballName(pb)}\n`;
     }
     optionsTextContent += "Cancel";
-    const optionsText = addTextObject(this.scene, 0, 0, optionsTextContent, TextStyle.WINDOW, { align: "right", maxLines: 6 });
+    const optionsText = addTextObject(this.scene, 0, 0, optionsTextContent, TextStyle.WINDOW, {
+      align: "right",
+      maxLines: 6
+    });
     optionsText.setOrigin(0, 0);
     optionsText.setPositionRelative(this.pokeballSelectBg, 42, 9);
     optionsText.setLineSpacing(12);
@@ -103,7 +109,11 @@ export default class BallUiHandler extends UiHandler {
   }
 
   updateCounts() {
-    this.countsText.setText(Object.values(this.scene.pokeballCounts).map(c => `x${c}`).join("\n"));
+    this.countsText.setText(
+      Object.values(this.scene.pokeballCounts)
+        .map((c) => `x${c}`)
+        .join("\n")
+    );
   }
 
   setCursor(cursor: integer): boolean {

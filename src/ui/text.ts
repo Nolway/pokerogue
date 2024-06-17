@@ -1,8 +1,8 @@
 import BBCodeText from "phaser3-rex-plugins/plugins/gameobjects/tagtext/bbcodetext/BBCodeText";
 import InputText from "phaser3-rex-plugins/plugins/inputtext";
+import Phaser from "phaser";
 import BattleScene from "../battle-scene";
 import { ModifierTier } from "../modifier/modifier-tier";
-import Phaser from "phaser";
 import { EggTier } from "#enums/egg-type";
 import { UiTheme } from "#enums/ui-theme";
 
@@ -36,8 +36,19 @@ export enum TextStyle {
   MOVE_PP_EMPTY
 }
 
-export function addTextObject(scene: Phaser.Scene, x: number, y: number, content: string, style: TextStyle, extraStyleOptions?: Phaser.Types.GameObjects.Text.TextStyle): Phaser.GameObjects.Text {
-  const [ scale, styleOptions, shadowColor, shadowXpos, shadowYpos ] = getTextStyleOptions(style, (scene as BattleScene).uiTheme, extraStyleOptions);
+export function addTextObject(
+  scene: Phaser.Scene,
+  x: number,
+  y: number,
+  content: string,
+  style: TextStyle,
+  extraStyleOptions?: Phaser.Types.GameObjects.Text.TextStyle
+): Phaser.GameObjects.Text {
+  const [scale, styleOptions, shadowColor, shadowXpos, shadowYpos] = getTextStyleOptions(
+    style,
+    (scene as BattleScene).uiTheme,
+    extraStyleOptions
+  );
 
   const ret = scene.add.text(x, y, content, styleOptions);
   ret.setScale(scale);
@@ -49,8 +60,17 @@ export function addTextObject(scene: Phaser.Scene, x: number, y: number, content
   return ret;
 }
 
-export function setTextStyle(obj: Phaser.GameObjects.Text, scene: Phaser.Scene, style: TextStyle, extraStyleOptions?: Phaser.Types.GameObjects.Text.TextStyle) {
-  const [ scale, styleOptions, shadowColor, shadowXpos, shadowYpos ] = getTextStyleOptions(style, (scene as BattleScene).uiTheme, extraStyleOptions);
+export function setTextStyle(
+  obj: Phaser.GameObjects.Text,
+  scene: Phaser.Scene,
+  style: TextStyle,
+  extraStyleOptions?: Phaser.Types.GameObjects.Text.TextStyle
+) {
+  const [scale, styleOptions, shadowColor, shadowXpos, shadowYpos] = getTextStyleOptions(
+    style,
+    (scene as BattleScene).uiTheme,
+    extraStyleOptions
+  );
   obj.setScale(scale);
   obj.setShadow(shadowXpos, shadowYpos, shadowColor);
   if (!(styleOptions as Phaser.Types.GameObjects.Text.TextStyle).lineSpacing) {
@@ -58,8 +78,19 @@ export function setTextStyle(obj: Phaser.GameObjects.Text, scene: Phaser.Scene, 
   }
 }
 
-export function addBBCodeTextObject(scene: Phaser.Scene, x: number, y: number, content: string, style: TextStyle, extraStyleOptions?: Phaser.Types.GameObjects.Text.TextStyle): BBCodeText {
-  const [ scale, styleOptions, shadowColor, shadowXpos, shadowYpos ] = getTextStyleOptions(style, (scene as BattleScene).uiTheme, extraStyleOptions);
+export function addBBCodeTextObject(
+  scene: Phaser.Scene,
+  x: number,
+  y: number,
+  content: string,
+  style: TextStyle,
+  extraStyleOptions?: Phaser.Types.GameObjects.Text.TextStyle
+): BBCodeText {
+  const [scale, styleOptions, shadowColor, shadowXpos, shadowYpos] = getTextStyleOptions(
+    style,
+    (scene as BattleScene).uiTheme,
+    extraStyleOptions
+  );
 
   const ret = new BBCodeText(scene, x, y, content, styleOptions as BBCodeText.TextStyle);
   scene.add.existing(ret);
@@ -72,8 +103,20 @@ export function addBBCodeTextObject(scene: Phaser.Scene, x: number, y: number, c
   return ret;
 }
 
-export function addTextInputObject(scene: Phaser.Scene, x: number, y: number, width: number, height: number, style: TextStyle, extraStyleOptions?: InputText.IConfig): InputText {
-  const [ scale, styleOptions ] = getTextStyleOptions(style, (scene as BattleScene).uiTheme, extraStyleOptions);
+export function addTextInputObject(
+  scene: Phaser.Scene,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  style: TextStyle,
+  extraStyleOptions?: InputText.IConfig
+): InputText {
+  const [scale, styleOptions] = getTextStyleOptions(
+    style,
+    (scene as BattleScene).uiTheme,
+    extraStyleOptions
+  );
 
   const ret = new InputText(scene, x, y, width, height, styleOptions as InputText.IConfig);
   scene.add.existing(ret);
@@ -82,7 +125,11 @@ export function addTextInputObject(scene: Phaser.Scene, x: number, y: number, wi
   return ret;
 }
 
-function getTextStyleOptions(style: TextStyle, uiTheme: UiTheme, extraStyleOptions?: Phaser.Types.GameObjects.Text.TextStyle): [ number, Phaser.Types.GameObjects.Text.TextStyle | InputText.IConfig, string, number, number ] {
+function getTextStyleOptions(
+  style: TextStyle,
+  uiTheme: UiTheme,
+  extraStyleOptions?: Phaser.Types.GameObjects.Text.TextStyle
+): [number, Phaser.Types.GameObjects.Text.TextStyle | InputText.IConfig, string, number, number] {
   let shadowXpos = 4;
   let shadowYpos = 5;
   const scale = 0.1666666667;
@@ -146,20 +193,30 @@ function getTextStyleOptions(style: TextStyle, uiTheme: UiTheme, extraStyleOptio
 
   if (extraStyleOptions) {
     if (extraStyleOptions.fontSize) {
-      const sizeRatio = parseInt(extraStyleOptions.fontSize.toString().slice(0, -2)) / parseInt(styleOptions.fontSize.toString().slice(0, -2));
+      const sizeRatio =
+        parseInt(extraStyleOptions.fontSize.toString().slice(0, -2)) /
+        parseInt(styleOptions.fontSize.toString().slice(0, -2));
       shadowXpos *= sizeRatio;
     }
     styleOptions = Object.assign(styleOptions, extraStyleOptions);
   }
 
-  return [ scale, styleOptions, shadowColor, shadowXpos, shadowYpos ];
+  return [scale, styleOptions, shadowColor, shadowXpos, shadowYpos];
 }
 
-export function getBBCodeFrag(content: string, textStyle: TextStyle, uiTheme: UiTheme = UiTheme.DEFAULT): string {
+export function getBBCodeFrag(
+  content: string,
+  textStyle: TextStyle,
+  uiTheme: UiTheme = UiTheme.DEFAULT
+): string {
   return `[color=${getTextColor(textStyle, false, uiTheme)}][shadow=${getTextColor(textStyle, true, uiTheme)}]${content}`;
 }
 
-export function getTextColor(textStyle: TextStyle, shadow?: boolean, uiTheme: UiTheme = UiTheme.DEFAULT): string {
+export function getTextColor(
+  textStyle: TextStyle,
+  shadow?: boolean,
+  uiTheme: UiTheme = UiTheme.DEFAULT
+): string {
   switch (textStyle) {
   case TextStyle.MESSAGE:
     return !shadow ? "#f8f8f8" : "#6b5a73";

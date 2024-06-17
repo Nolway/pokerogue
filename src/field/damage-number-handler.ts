@@ -1,7 +1,7 @@
 import { TextStyle, addTextObject } from "../ui/text";
-import Pokemon, { DamageResult, HitResult } from "./pokemon";
 import * as Utils from "../utils";
 import { BattlerIndex } from "../battle";
+import Pokemon, { DamageResult, HitResult } from "./pokemon";
 
 export default class DamageNumberHandler {
   private damageNumbers: Map<BattlerIndex, Phaser.GameObjects.Text[]>;
@@ -10,36 +10,47 @@ export default class DamageNumberHandler {
     this.damageNumbers = new Map();
   }
 
-  add(target: Pokemon, amount: integer, result: DamageResult | HitResult.HEAL = HitResult.EFFECTIVE, critical: boolean = false): void {
+  add(
+    target: Pokemon,
+    amount: integer,
+    result: DamageResult | HitResult.HEAL = HitResult.EFFECTIVE,
+    critical: boolean = false
+  ): void {
     const scene = target.scene;
 
-    if (!scene?.damageNumbersMode) {
+    if (!scene.damageNumbersMode) {
       return;
     }
 
     const battlerIndex = target.getBattlerIndex();
     const baseScale = target.getSpriteScale() / 6;
-    const damageNumber = addTextObject(scene, target.x, -(scene.game.canvas.height / 6) + target.y - target.getSprite().height / 2, Utils.formatStat(amount, true), TextStyle.SUMMARY);
+    const damageNumber = addTextObject(
+      scene,
+      target.x,
+      -(scene.game.canvas.height / 6) + target.y - target.getSprite().height / 2,
+      Utils.formatStat(amount, true),
+      TextStyle.SUMMARY
+    );
     damageNumber.setOrigin(0.5, 1);
     damageNumber.setScale(baseScale);
 
-    let [ textColor, shadowColor ] = [ null, null ];
+    let [textColor, shadowColor] = [null, null];
 
     switch (result) {
     case HitResult.SUPER_EFFECTIVE:
-      [ textColor, shadowColor ] = [ "#f8d030", "#b8a038" ];
+      [textColor, shadowColor] = ["#f8d030", "#b8a038"];
       break;
     case HitResult.NOT_VERY_EFFECTIVE:
-      [ textColor, shadowColor ] = [ "#f08030", "#c03028" ];
+      [textColor, shadowColor] = ["#f08030", "#c03028"];
       break;
     case HitResult.ONE_HIT_KO:
-      [ textColor, shadowColor ] = [ "#a040a0", "#483850" ];
+      [textColor, shadowColor] = ["#a040a0", "#483850"];
       break;
     case HitResult.HEAL:
-      [ textColor, shadowColor ] = [ "#78c850", "#588040" ];
+      [textColor, shadowColor] = ["#78c850", "#588040"];
       break;
     default:
-      [ textColor, shadowColor ] = [ "#ffffff", "#636363" ];
+      [textColor, shadowColor] = ["#ffffff", "#636363"];
       break;
     }
 
@@ -82,7 +93,9 @@ export default class DamageNumberHandler {
         alpha: 0,
         ease: "Sine.easeIn",
         onComplete: () => {
-          this.damageNumbers.get(battlerIndex).splice(this.damageNumbers.get(battlerIndex).indexOf(damageNumber), 1);
+          this.damageNumbers
+            .get(battlerIndex)
+            .splice(this.damageNumbers.get(battlerIndex).indexOf(damageNumber), 1);
           damageNumber.destroy(true);
         }
       });
@@ -166,7 +179,9 @@ export default class DamageNumberHandler {
           delay: Utils.fixedInt(500),
           alpha: 0,
           onComplete: () => {
-            this.damageNumbers.get(battlerIndex).splice(this.damageNumbers.get(battlerIndex).indexOf(damageNumber), 1);
+            this.damageNumbers
+              .get(battlerIndex)
+              .splice(this.damageNumbers.get(battlerIndex).indexOf(damageNumber), 1);
             damageNumber.destroy(true);
           }
         }

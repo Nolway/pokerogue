@@ -1,5 +1,5 @@
 import { ArenaTagSide } from "#app/data/arena-tag.js";
-import { ArenaTagType } from "#enums/arena-tag-type";
+import { ArenaTagType } from "#app/enums/arena-tag-type";
 import { TerrainType } from "#app/data/terrain.js";
 import { WeatherType } from "#app/data/weather.js";
 
@@ -13,7 +13,7 @@ export enum ArenaEventType {
   /** Triggers when a {@linkcode ArenaTagType} is added */
   TAG_ADDED = "onTagAdded",
   /** Triggers when a {@linkcode ArenaTagType} is removed */
-  TAG_REMOVED = "onTagRemoved",
+  TAG_REMOVED = "onTagRemoved"
 }
 
 /**
@@ -32,7 +32,7 @@ export class ArenaEvent extends Event {
 /**
  * Container class for {@linkcode ArenaEventType.WEATHER_CHANGED} events
  * @extends ArenaEvent
-*/
+ */
 export class WeatherChangedEvent extends ArenaEvent {
   /** The {@linkcode WeatherType} being overridden */
   public oldWeatherType: WeatherType;
@@ -48,7 +48,7 @@ export class WeatherChangedEvent extends ArenaEvent {
 /**
  * Container class for {@linkcode ArenaEventType.TERRAIN_CHANGED} events
  * @extends ArenaEvent
-*/
+ */
 export class TerrainChangedEvent extends ArenaEvent {
   /** The {@linkcode TerrainType} being overridden */
   public oldTerrainType: TerrainType;
@@ -65,7 +65,7 @@ export class TerrainChangedEvent extends ArenaEvent {
 /**
  * Container class for {@linkcode ArenaEventType.TAG_ADDED} events
  * @extends ArenaEvent
-*/
+ */
 export class TagAddedEvent extends ArenaEvent {
   /** The {@linkcode ArenaTagType} being added */
   public arenaTagType: ArenaTagType;
@@ -81,7 +81,7 @@ export class TagAddedEvent extends ArenaEvent {
 /**
  * Container class for {@linkcode ArenaEventType.TAG_REMOVED} events
  * @extends ArenaEvent
-*/
+ */
 export class TagRemovedEvent extends ArenaEvent {
   /** The {@linkcode ArenaTagType} being removed */
   public arenaTagType: ArenaTagType;

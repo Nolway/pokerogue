@@ -1,4 +1,5 @@
-import {Device} from "#enums/devices";
+import { InterfaceConfig } from "#app/inputs-controller.js";
+import { Device } from "#enums/devices";
 
 /**
  * Retrieves the key associated with the specified keycode from the mapping.
@@ -7,8 +8,8 @@ import {Device} from "#enums/devices";
  * @param keycode - The keycode to search for.
  * @returns The key associated with the specified keycode.
  */
-export function getKeyWithKeycode(config, keycode) {
-  return Object.keys(config.deviceMapping).find(key => config.deviceMapping[key] === keycode);
+export function getKeyWithKeycode(config: InterfaceConfig, keycode: number) {
+  return Object.keys(config.deviceMapping).find((key) => config.deviceMapping[key] === keycode);
 }
 
 /**
@@ -18,7 +19,7 @@ export function getKeyWithKeycode(config, keycode) {
  * @param keycode - The keycode to search for.
  * @returns The setting name associated with the specified keycode.
  */
-export function getSettingNameWithKeycode(config, keycode) {
+export function getSettingNameWithKeycode(config: InterfaceConfig, keycode: number) {
   const key = getKeyWithKeycode(config, keycode);
   return config.custom[key];
 }
@@ -30,7 +31,7 @@ export function getSettingNameWithKeycode(config, keycode) {
  * @param keycode - The keycode to search for.
  * @returns The icon associated with the specified keycode.
  */
-export function getIconWithKeycode(config, keycode) {
+export function getIconWithKeycode(config: InterfaceConfig, keycode: number) {
   const key = getKeyWithKeycode(config, keycode);
   return config.icons[key];
 }
@@ -42,7 +43,7 @@ export function getIconWithKeycode(config, keycode) {
  * @param keycode - The keycode to search for.
  * @returns The button associated with the specified keycode.
  */
-export function getButtonWithKeycode(config, keycode) {
+export function getButtonWithKeycode(config: InterfaceConfig, keycode: number) {
   const settingName = getSettingNameWithKeycode(config, keycode);
   return config.settings[settingName];
 }
@@ -54,8 +55,8 @@ export function getButtonWithKeycode(config, keycode) {
  * @param settingName - The setting name to search for.
  * @returns The key associated with the specified setting name.
  */
-export function getKeyWithSettingName(config, settingName) {
-  return Object.keys(config.custom).find(key => config.custom[key] === settingName);
+export function getKeyWithSettingName(config: InterfaceConfig, settingName) {
+  return Object.keys(config.custom).find((key) => config.custom[key] === settingName);
 }
 
 /**
@@ -65,7 +66,7 @@ export function getKeyWithSettingName(config, settingName) {
  * @param key - The key to search for.
  * @returns The setting name associated with the specified key.
  */
-export function getSettingNameWithKey(config, key) {
+export function getSettingNameWithKey(config: InterfaceConfig, key: string) {
   return config.custom[key];
 }
 
@@ -76,7 +77,7 @@ export function getSettingNameWithKey(config, key) {
  * @param key - The key to search for.
  * @returns The icon associated with the specified key.
  */
-export function getIconWithKey(config, key) {
+export function getIconWithKey(config: InterfaceConfig, key: string) {
   return config.icons[key];
 }
 
@@ -87,7 +88,7 @@ export function getIconWithKey(config, key) {
  * @param settingName - The setting name to search for.
  * @returns The icon associated with the specified setting name.
  */
-export function getIconWithSettingName(config, settingName) {
+export function getIconWithSettingName(config: InterfaceConfig, settingName) {
   const key = getKeyWithSettingName(config, settingName);
   return getIconWithKey(config, key);
 }
@@ -113,9 +114,12 @@ export function getIconForLatestInput(configs, source, devices, settingName) {
   return icon;
 }
 
-export function assign(config, settingNameTarget, keycode): boolean {
+export function assign(config: InterfaceConfig, settingNameTarget, keycode: number): boolean {
   // first, we need to check if this keycode is already used on another settingName
-  if (!canIAssignThisKey(config, getKeyWithKeycode(config, keycode)) || !canIOverrideThisSetting(config, settingNameTarget)) {
+  if (
+    !canIAssignThisKey(config, getKeyWithKeycode(config, keycode)) ||
+    !canIOverrideThisSetting(config, settingNameTarget)
+  ) {
     return false;
   }
   const previousSettingName = getSettingNameWithKeycode(config, keycode);
@@ -134,7 +138,7 @@ export function assign(config, settingNameTarget, keycode): boolean {
   return true;
 }
 
-export function swap(config, settingNameTarget, keycode) {
+export function swap(config: InterfaceConfig, settingNameTarget, keycode: number) {
   // only for gamepad
   if (config.padType === "keyboard") {
     return false;
@@ -156,7 +160,7 @@ export function swap(config, settingNameTarget, keycode) {
  * @param config - The configuration object containing custom settings.
  * @param settingName - The setting name to delete.
  */
-export function deleteBind(config, settingName) {
+export function deleteBind(config: InterfaceConfig, settingName) {
   const key = getKeyWithSettingName(config, settingName);
   if (config.blacklist.includes(key)) {
     return false;
@@ -165,7 +169,7 @@ export function deleteBind(config, settingName) {
   return true;
 }
 
-export function canIAssignThisKey(config, key) {
+export function canIAssignThisKey(config: InterfaceConfig, key) {
   const settingName = getSettingNameWithKey(config, key);
   if (config.blacklist?.includes(key)) {
     return false;
@@ -173,36 +177,17 @@ export function canIAssignThisKey(config, key) {
   if (settingName === -1) {
     return true;
   }
-  // if (isTheLatestBind(config, settingName)) {
-  //   return false;
-  // }
   return true;
 }
 
-export function canIOverrideThisSetting(config, settingName) {
+export function canIOverrideThisSetting(config: InterfaceConfig, settingName) {
   const key = getKeyWithSettingName(config, settingName);
-  // || isTheLatestBind(config, settingName) no longer needed since action and cancel are protected
   if (config.blacklist?.includes(key)) {
     return false;
   }
   return true;
 }
 
-export function canIDeleteThisKey(config, key) {
+export function canIDeleteThisKey(config: InterfaceConfig, key) {
   return canIAssignThisKey(config, key);
 }
-
-// export function isTheLatestBind(config, settingName) {
-//   if (config.padType !== "keyboard") {
-//     return false;
-//   }
-//   const isAlt = settingName.includes("ALT_");
-//   let altSettingName;
-//   if (isAlt) {
-//     altSettingName = settingName.split("ALT_").splice(1)[0];
-//   } else {
-//     altSettingName = `ALT_${settingName}`;
-//   }
-//   const secondButton = getKeyWithSettingName(config, altSettingName);
-//   return secondButton === undefined;
-// }
