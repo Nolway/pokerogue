@@ -219,6 +219,7 @@ declare module "i18next" {
       pokemon: SimpleTranslationEntries;
       pokemonInfo: PokemonInfoTranslationEntries;
       pokemonInfoContainer: SimpleTranslationEntries;
+      pokemonSummary: SimpleTranslationEntries;
       saveSlotSelectUiHandler: SimpleTranslationEntries;
       splashMessages: SimpleTranslationEntries;
       starterSelectUiHandler: SimpleTranslationEntries;
