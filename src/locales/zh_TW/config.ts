@@ -39,6 +39,7 @@ import { tutorial } from "./tutorial";
 import { voucher } from "./voucher";
 import { weather } from "./weather";
 import { partyUiHandler } from "./party-ui-handler";
+import { pokemonSummary } from "./pokemon-summary";
 
 export const zhTwConfig = {
   ability: ability,
@@ -73,6 +74,7 @@ export const zhTwConfig = {
   pokemon: pokemon,
   pokemonInfo: pokemonInfo,
   pokemonInfoContainer: pokemonInfoContainer,
+  pokemonSummary: pokemonSummary,
   saveSlotSelectUiHandler: saveSlotSelectUiHandler,
   splashMessages: splashMessages,
   starterSelectUiHandler: starterSelectUiHandler,
